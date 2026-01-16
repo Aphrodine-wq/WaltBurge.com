@@ -12,6 +12,25 @@ const getProjectImage = (id: string, fileName: string = 'cover.jpg') => {
     return `/assets/projects/${id}/${fileName}`;
 };
 
+const getGradientForProject = (id: string) => {
+  const gradients = [
+    'bg-gradient-to-br from-blue-600 to-indigo-900',
+    'bg-gradient-to-br from-emerald-600 to-teal-900',
+    'bg-gradient-to-br from-orange-600 to-red-900',
+    'bg-gradient-to-br from-purple-600 to-fuchsia-900',
+    'bg-gradient-to-br from-pink-600 to-rose-900',
+    'bg-gradient-to-br from-cyan-600 to-blue-900',
+    'bg-gradient-to-br from-violet-600 to-purple-900',
+    'bg-gradient-to-br from-amber-600 to-orange-900',
+  ];
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % gradients.length;
+  return gradients[index];
+};
+
 export const projects: Project[] = [
   {
     id: 'g-rump',
@@ -252,33 +271,14 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
   return (
     <div className="h-full w-full overflow-hidden relative bg-brand-surface/20 group/image">
-       {/* Loading State */}
-       {!isLoaded && !hasError && (
-        <div 
-            className="absolute inset-0 z-10 bg-brand-base flex items-center justify-center transition-opacity duration-500"
-        >
-            <div className="absolute inset-0" style={{
-                backgroundImage: 'linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)',
-                backgroundSize: '20px 20px',
-                opacity: 0.2
-            }}></div>
-            <div className="relative z-10 flex flex-col items-center gap-2">
-                <div className="w-8 h-8 rounded-full border-2 border-brand-accent/30 border-t-brand-accent animate-spin"></div>
-                <span className="text-[10px] font-mono text-brand-accent/50 animate-pulse">LOADING_ASSET</span>
-            </div>
-        </div>
-       )}
-
-       {/* Error State / Placeholder */}
+       {/* Fallback Gradient (Visible on Error) */}
        {hasError && (
-        <div className="absolute inset-0 z-10 bg-brand-base flex items-center justify-center">
-             <div className="flex flex-col items-center gap-3 text-brand-secondary/50">
-                 <div className="p-4 rounded-full bg-brand-surface border border-brand-border">
+        <div 
+            className={`absolute inset-0 z-10 ${getGradientForProject(project.id)} flex items-center justify-center`}
+        >
+             <div className="flex flex-col items-center gap-3 text-white/50 mix-blend-overlay opacity-50">
+                 <div className="p-4 rounded-full border border-white/20">
                     <ImageIcon size={32} />
-                 </div>
-                 <div className="text-center">
-                    <p className="text-xs font-mono uppercase tracking-widest">Asset Not Found</p>
-                    <p className="text-[10px] font-mono opacity-50 mt-1">/assets/projects/{project.id}/cover.jpg</p>
                  </div>
              </div>
         </div>
@@ -296,7 +296,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
             setHasError(true);
             setIsLoaded(true);
         }}
-        className={`w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'}`}
+        className={`w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'} ${hasError ? 'hidden' : ''}`}
       />
       
       {/* Category Badge - Top Right */}
