@@ -156,7 +156,7 @@ function App() {
         <Hero isLightMode={isLightMode} onOpenChat={() => setIsChatOpen(true)} />
         
         <section id={SectionId.ABOUT} className="py-16 md:py-32 px-4 md:px-6 bg-brand-surface relative transition-colors duration-300 overflow-hidden">
-            {/* Decorative Background Elements for Detail */}
+            {/* Decorative Background Elements for Detail - Variable Based */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-black/5 to-transparent pointer-events-none"></div>
             <div className="absolute bottom-0 left-10 w-64 h-64 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
@@ -206,7 +206,7 @@ function App() {
                             
                             <div className="flex gap-4 md:gap-6 group">
                                 <div className="hidden md:flex flex-col items-center">
-                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-accent font-bold font-mono text-sm group-hover:bg-brand-accent group-hover:text-black transition-colors">01</div>
+                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-accent font-bold font-mono text-sm group-hover:bg-brand-accent group-hover:text-brand-black transition-colors">01</div>
                                     <div className="w-px h-full bg-brand-primary/10 my-2 group-hover:bg-brand-accent/50 transition-colors"></div>
                                 </div>
                                 <div>
@@ -219,7 +219,7 @@ function App() {
 
                             <div className="flex gap-4 md:gap-6 group">
                                 <div className="hidden md:flex flex-col items-center">
-                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-purple font-bold font-mono text-sm group-hover:bg-brand-purple group-hover:text-black transition-colors">02</div>
+                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-purple font-bold font-mono text-sm group-hover:bg-brand-purple group-hover:text-brand-black transition-colors">02</div>
                                     <div className="w-px h-full bg-brand-primary/10 my-2 group-hover:bg-brand-purple/50 transition-colors"></div>
                                 </div>
                                 <div>
@@ -232,7 +232,7 @@ function App() {
 
                             <div className="flex gap-4 md:gap-6 group">
                                 <div className="hidden md:flex flex-col items-center">
-                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-green-400 font-bold font-mono text-sm group-hover:bg-green-400 group-hover:text-black transition-colors">03</div>
+                                    <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-green-400 font-bold font-mono text-sm group-hover:bg-green-400 group-hover:text-brand-black transition-colors">03</div>
                                 </div>
                                 <div>
                                     <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">Creative Engineering</h3>

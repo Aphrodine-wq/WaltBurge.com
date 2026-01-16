@@ -24,7 +24,7 @@ const FloatingIcons = React.memo(({ isLightMode }: { isLightMode: boolean }) => 
             {icons.map((item, index) => (
                 <div
                     key={index}
-                    className={`absolute animate-float pointer-events-auto transition-all duration-500 hover:opacity-100 hover:text-brand-accent hover:text-glow scale-[1.0] md:scale-[1.5] hover:scale-[1.2] md:hover:scale-[1.7] ${isLightMode ? 'text-black opacity-10' : 'text-brand-primary/5 opacity-10'}`}
+                    className="absolute animate-float pointer-events-auto transition-all duration-500 hover:opacity-100 hover:text-brand-accent hover:text-glow scale-[1.0] md:scale-[1.5] hover:scale-[1.2] md:hover:scale-[1.7] text-brand-primary/5 opacity-10"
                     style={{
                         top: item.y,
                         left: item.x,
@@ -49,7 +49,6 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   // Smooth Parallax Effect with Lerp
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-       // Normalize coordinates to -1 to 1 range
        const { innerWidth, innerHeight } = window;
        targetRef.current = { 
          x: (e.clientX / innerWidth - 0.5) * 2,
@@ -58,7 +57,6 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
     };
 
     const animate = () => {
-      // Lerp (Linear Interpolation) for smooth lag
       mouseRef.current.x += (targetRef.current.x - mouseRef.current.x) * 0.05;
       mouseRef.current.y += (targetRef.current.y - mouseRef.current.y) * 0.05;
 
@@ -72,9 +70,8 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
          });
       }
 
-      // Grid Tilt Effect
       if (gridRef.current) {
-         const tiltX = mouseRef.current.y * 5; // Tilt based on Y
+         const tiltX = mouseRef.current.y * 5;
          const tiltY = mouseRef.current.x * 5;
          gridRef.current.style.transform = `perspective(1000px) rotateX(${60 + tiltX}deg) rotateY(${tiltY}deg) scale(2)`;
       }
@@ -95,7 +92,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: false }); // Optimize for no transparency on canvas background
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
     let width = canvas.width = window.innerWidth;
@@ -132,11 +129,15 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       
-      const particleColor = isLightMode ? 'rgba(0, 0, 0, 0.7)' : 'rgba(34, 211, 238, 0.6)';
-      const lineBaseColor = isLightMode ? '0, 0, 0' : '34, 211, 238';
-      const maxLineOpacity = isLightMode ? 0.2 : 0.15; 
+      // Use getComputedStyle to read current CSS variables for canvas colors
+      const computedStyle = getComputedStyle(document.body);
+      const isLight = document.documentElement.classList.contains('light-mode');
+      
+      // Manually match the variable logic for canvas since it can't use CSS vars directly
+      const particleColor = isLight ? 'rgba(0, 0, 0, 0.7)' : 'rgba(34, 211, 238, 0.6)';
+      const lineBaseColor = isLight ? '0, 0, 0' : '34, 211, 238';
+      const maxLineOpacity = isLight ? 0.2 : 0.15; 
 
-      // Mouse interaction position (mapped from smoothed refs)
       const mouseX = (mouseRef.current.x / 2 + 0.5) * width;
       const mouseY = (mouseRef.current.y / 2 + 0.5) * height;
 
@@ -221,7 +222,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   };
 
   return (
-    <section id={SectionId.HERO} className={`relative h-screen w-full flex items-center justify-center overflow-hidden perspective-container transition-colors duration-500 text-center ${isLightMode ? 'bg-white text-black' : 'bg-brand-black text-brand-primary'}`}>
+    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black perspective-container transition-colors duration-500 text-center">
       
       {/* Dynamic Grid Background */}
       <div 
@@ -229,8 +230,8 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         className="absolute inset-0 w-full h-[150%] -top-[25%] opacity-10 pointer-events-none z-0"
         style={{
             backgroundImage: `
-                linear-gradient(to right, rgba(${isLightMode ? '0,0,0' : '34, 211, 238'}, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(${isLightMode ? '0,0,0' : '34, 211, 238'}, 0.08) 1px, transparent 1px)
+                linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px),
+                linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px',
             transform: 'perspective(1000px) rotateX(60deg) scale(2)',
@@ -244,15 +245,15 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
          
          {/* Layer 1: Deep Atmosphere */}
          <div className="parallax-layer absolute inset-0" data-speed="-0.5">
-            <div className={`absolute inset-0 bg-radial-fade transition-opacity duration-700 ${isLightMode ? 'opacity-0' : 'opacity-30'}`}></div>
-            <div className={`absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] transition-colors duration-700 ${isLightMode ? 'bg-black/5 opacity-0' : ''}`} />
-            <div className={`absolute bottom-[10%] right-[5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-brand-purple/5 rounded-full blur-[80px] md:blur-[100px] transition-opacity duration-700 ${isLightMode ? 'opacity-0' : ''}`} />
+            <div className="absolute inset-0 bg-radial-fade transition-opacity duration-700 opacity-30"></div>
+            <div className="absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] transition-colors duration-700" />
+            <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-brand-purple/5 rounded-full blur-[80px] md:blur-[100px] transition-opacity duration-700" />
          </div>
 
          {/* Layer 2: Geometric Shapes */}
          <div className="parallax-layer absolute inset-0" data-speed="1.0">
-            <div className={`absolute top-[15%] left-[10%] w-48 h-48 md:w-64 md:h-64 border rounded-full transition-colors duration-700 ${isLightMode ? 'border-black/5' : 'border-brand-accent/5'}`} />
-            <div className={`absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] border rounded-full border-dashed animate-[spin_60s_linear_infinite] transition-colors duration-700 ${isLightMode ? 'border-black/5' : 'border-brand-purple/5'}`} />
+            <div className="absolute top-[15%] left-[10%] w-48 h-48 md:w-64 md:h-64 border border-brand-accent/5 rounded-full transition-colors duration-700" />
+            <div className="absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] border border-brand-purple/5 rounded-full border-dashed animate-[spin_60s_linear_infinite] transition-colors duration-700" />
          </div>
 
          {/* Layer 3: Floating Icons */}
@@ -262,7 +263,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       </div>
 
       {/* Gradient Fade at Bottom */}
-      <div className={`absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t to-transparent z-20 transition-colors duration-700 ${isLightMode ? 'from-white' : 'from-brand-black'}`}></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-brand-black to-transparent z-20 transition-colors duration-700"></div>
 
       {/* Interactive Network Canvas */}
       <canvas 
@@ -274,44 +275,44 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       <div className="relative z-30 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center">
         
         {/* Status Badge */}
-        <div className={`animate-slide-up opacity-0 [animation-delay:0.1s] mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-colors duration-500 ${isLightMode ? 'bg-black/5 border-black/10 text-black' : 'bg-brand-accent/5 border-brand-accent/30 text-brand-accent'}`}>
+        <div className="animate-slide-up opacity-0 [animation-delay:0.1s] mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/5 text-brand-accent backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-colors duration-500">
             <div className="relative flex h-2 w-2">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isLightMode ? 'bg-black' : 'bg-brand-accent'}`}></span>
-              <span className={`relative inline-flex rounded-full h-2 w-2 ${isLightMode ? 'bg-black' : 'bg-brand-accent'}`}></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
             </div>
             <span className="text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase font-bold">System Online</span>
         </div>
 
         {/* Main Title - Mobile Optimized Size */}
-        <h1 className={`animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500 ${isLightMode ? 'text-black' : 'text-brand-primary'}`}>
+        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
           WALT<span className="text-brand-accent">.</span>BURGE
         </h1>
         
         {/* Role Subtitles */}
-        <div className={`animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 font-mono text-xs md:text-base border-y py-4 md:py-6 w-full max-w-5xl backdrop-blur-sm text-center transition-colors duration-500 ${isLightMode ? 'bg-white/80 border-black/10 text-gray-700' : 'bg-brand-black/20 border-brand-primary/5 text-brand-secondary'}`}>
+        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-black/20 backdrop-blur-sm text-center transition-colors duration-500">
             <div className="flex items-center gap-2">
-                <Terminal size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
+                <Terminal size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Systems Engineer</span>
             </div>
-            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
             <div className="flex items-center gap-2">
-                <Brain size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
+                <Brain size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">AI Engineering</span>
             </div>
-            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
             <div className="flex items-center gap-2">
-                <Cpu size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
+                <Cpu size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Language Designer</span>
             </div>
-            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
             <div className="flex items-center gap-2">
-                <Box size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
+                <Box size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Game Developer</span>
             </div>
         </div>
         
         {/* Description */}
-        <p className={`animate-slide-up opacity-0 [animation-delay:0.7s] max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500 ${isLightMode ? 'text-gray-600' : 'text-brand-secondary'}`}>
+        <p className="animate-slide-up opacity-0 [animation-delay:0.7s] text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500">
           Architecting high-performance digital ecosystems. 
           <br className="hidden md:block" />
           Merging bare-metal efficiency with AI intelligence.
@@ -322,19 +323,11 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
           
           <button 
             onClick={scrollToProjects}
-            className={`group relative px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm overflow-hidden min-w-[200px] w-full sm:w-auto shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:scale-[1.02] active:scale-[0.98] ${
-                isLightMode 
-                ? 'bg-black text-white border border-black hover:bg-gray-900' 
-                : 'bg-brand-black border border-brand-accent text-brand-primary hover:bg-brand-accent/10'
-            }`}
+            className="group relative px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm overflow-hidden min-w-[200px] w-full sm:w-auto shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:scale-[1.02] active:scale-[0.98] bg-brand-black border border-brand-accent text-brand-primary hover:bg-brand-accent/10"
           >
-            {/* Corner Markers - Hidden in light mode for cleaner look */}
-            {!isLightMode && (
-                <>
-                <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-brand-accent"></div>
-                </>
-            )}
+            {/* Corner Markers */}
+            <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-brand-accent"></div>
             
             <div className="relative z-10 flex items-center justify-center gap-2">
                <Database size={16} /> 
@@ -345,11 +338,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
           
            <button 
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            className={`group px-8 py-4 bg-transparent border font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm min-w-[200px] w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center ${
-                isLightMode 
-                ? 'border-black/20 text-black hover:bg-black hover:text-white' 
-                : 'border-brand-secondary/30 text-brand-secondary hover:border-brand-primary hover:text-brand-primary hover:bg-white/5'
-            }`}
+            className="group px-8 py-4 bg-transparent border border-brand-secondary/30 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm min-w-[200px] w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center text-brand-secondary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5"
           >
             Contact System
           </button>
@@ -360,7 +349,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer z-40" 
         onClick={scrollToProjects}
       >
-        <span className={`text-[10px] font-mono uppercase tracking-widest ${isLightMode ? 'text-black' : 'text-brand-secondary'}`}>Scroll</span>
+        <span className="text-[10px] font-mono uppercase tracking-widest text-brand-secondary">Scroll</span>
         <ArrowDown size={16} className="text-brand-accent" />
       </div>
     </section>

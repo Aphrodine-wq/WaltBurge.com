@@ -206,7 +206,7 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
   const size = 16;
   const baseClass = "transition-colors duration-300";
   // If active, use brand accent color, otherwise gray-500. Group hover always triggers accent.
-  const colorClass = isActive ? "text-brand-accent" : "text-gray-500 group-hover/icon:text-brand-accent";
+  const colorClass = isActive ? "text-brand-accent" : "text-brand-secondary group-hover/icon:text-brand-accent";
 
   // Brand Logos via SVG
   if (tag === 'React') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#61DAFB]`}><svg width={size} height={size} viewBox="-10.5 -9.45 21 18.9" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="0" cy="0" r="2" fill="currentColor"/><g stroke="currentColor" strokeWidth="1" fill="none"><ellipse rx="10" ry="4.5"/><ellipse rx="10" ry="4.5" transform="rotate(60)"/><ellipse rx="10" ry="4.5" transform="rotate(120)"/></g></svg></div>;
@@ -218,7 +218,7 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
   // Custom stylized text for C family
   const customTextClass = isActive 
     ? "bg-brand-accent/20 border-brand-accent text-brand-accent" 
-    : "bg-gray-800 text-brand-secondary border-gray-700 group-hover/icon:text-brand-accent group-hover/icon:border-brand-accent/50";
+    : "bg-brand-surface text-brand-secondary border-brand-border group-hover/icon:text-brand-accent group-hover/icon:border-brand-accent/50";
     
   if (tag === 'C++') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C++</div>;
   if (tag === 'C') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C</div>;
@@ -255,8 +255,8 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="h-full w-full overflow-hidden relative bg-brand-dark group/image">
-       {/* Loading State - System Scanner Effect */}
+    <div className="h-full w-full overflow-hidden relative bg-brand-surface group/image">
+       {/* Loading State */}
        {!isLoaded && !hasError && (
         <div 
             className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center transition-opacity duration-500"
@@ -277,7 +277,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
        {hasError && (
         <div className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center">
              <div className="flex flex-col items-center gap-3 text-brand-secondary/50">
-                 <div className="p-4 rounded-full bg-white/5">
+                 <div className="p-4 rounded-full bg-brand-surface border border-brand-border">
                     <ImageIcon size={32} />
                  </div>
                  <div className="text-center">
@@ -305,13 +305,13 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
       
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-         <span className="bg-brand-black/90 backdrop-blur-md border border-white/10 text-brand-primary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
+         <span className="bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-brand-primary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
             <CategoryIcon category={project.category} />
             {project.category}
          </span>
          
          {project.status && (
-            <span className={`bg-brand-black/90 backdrop-blur-md border border-white/10 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg ${
+            <span className={`bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg ${
                 project.status === 'Live' ? 'text-green-400' : 
                 project.status === 'Beta' ? 'text-brand-accent' :
                 project.status === 'Archived' ? 'text-gray-400' : 'text-brand-purple'
@@ -329,7 +329,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
       {/* Year Badge - Top Left */}
       {project.year && (
         <div className="absolute top-4 left-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 delay-75">
-             <span className="bg-brand-black/90 backdrop-blur-md border border-white/10 text-brand-secondary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
+             <span className="bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-brand-secondary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
                 <Calendar size={12} />
                 {project.year}
              </span>
@@ -358,7 +358,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
   const clearFilter = () => onFilterChange(null);
 
   return (
-    <section id={SectionId.PROJECTS} className="py-16 md:py-32 px-4 bg-brand-dark relative border-t border-brand-border/30 transition-colors duration-300">
+    <section id={SectionId.PROJECTS} className="py-16 md:py-32 px-4 bg-brand-dark relative border-t border-brand-border transition-colors duration-300">
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-6">
@@ -369,7 +369,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <div className="h-1 w-20 bg-brand-accent rounded-full"></div>
           </div>
           <div className="hidden md:block">
-             <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-black/50 backdrop-blur-sm">
+             <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-brand-success animate-pulse"></span>
                 ALL SYSTEMS OPERATIONAL
              </div>
@@ -397,7 +397,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <div 
                 key={project.id} 
                 onClick={() => onProjectClick?.(project)}
-                className="group/card relative rounded-2xl overflow-hidden bg-brand-black border border-white/5 hover:border-brand-accent/30 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-accent/5 cursor-pointer h-[450px]"
+                className="group/card relative rounded-2xl overflow-hidden bg-brand-surface border border-brand-border hover:border-brand-accent/30 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-accent/5 cursor-pointer h-[450px]"
             >
               
               {/* Image Container - Full Height */}
@@ -406,7 +406,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               </div>
 
               {/* Content Overlay - Positioned at bottom */}
-              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black via-black/90 to-transparent z-20 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
+              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-brand-black via-brand-black/90 to-transparent z-20 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
                 <div className="mb-4">
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover/card:text-brand-accent transition-colors">
                     {project.title}
@@ -439,7 +439,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
         </div>
         
         {filteredProjects.length === 0 && (
-            <div className="py-20 text-center border border-dashed border-gray-800 rounded-xl">
+            <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
                 <p className="text-brand-secondary font-mono">No projects found with filter "{activeFilter}".</p>
                 <button onClick={clearFilter} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider">Clear Filter</button>
             </div>
