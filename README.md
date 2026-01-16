@@ -4,6 +4,9 @@
 
 # Run and deploy your AI Studio app
 
+[![Vercel Deploy](https://deploy.vercel.app/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FAphrodine-wq%2FWaltBurge.com)
+[![Deployment Status](https://github.com/Aphrodine-wq/WaltBurge.com/actions/workflows/deploy.yml/badge.svg)](https://github.com/Aphrodine-wq/WaltBurge.com/actions)
+
 This contains everything you need to run your app locally.
 
 View your app in AI Studio: https://ai.studio/apps/drive/14aMHvYk2cugpxIYaBCLu8XaPnnVWXCcK
