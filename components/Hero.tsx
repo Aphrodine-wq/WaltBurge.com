@@ -221,7 +221,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   };
 
   return (
-    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black perspective-container transition-colors duration-500 text-center">
+    <section id={SectionId.HERO} className={`relative h-screen w-full flex items-center justify-center overflow-hidden perspective-container transition-colors duration-500 text-center ${isLightMode ? 'bg-white text-black' : 'bg-brand-black text-brand-primary'}`}>
       
       {/* Dynamic Grid Background */}
       <div 
@@ -245,7 +245,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
          {/* Layer 1: Deep Atmosphere */}
          <div className="parallax-layer absolute inset-0" data-speed="-0.5">
             <div className={`absolute inset-0 bg-radial-fade transition-opacity duration-700 ${isLightMode ? 'opacity-0' : 'opacity-30'}`}></div>
-            <div className={`absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] transition-colors duration-700 ${isLightMode ? 'bg-black/5' : ''}`} />
+            <div className={`absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] transition-colors duration-700 ${isLightMode ? 'bg-black/5 opacity-0' : ''}`} />
             <div className={`absolute bottom-[10%] right-[5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-brand-purple/5 rounded-full blur-[80px] md:blur-[100px] transition-opacity duration-700 ${isLightMode ? 'opacity-0' : ''}`} />
          </div>
 
@@ -283,35 +283,35 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         </div>
 
         {/* Main Title - Mobile Optimized Size */}
-        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
+        <h1 className={`animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500 ${isLightMode ? 'text-black' : 'text-brand-primary'}`}>
           WALT<span className="text-brand-accent">.</span>BURGE
         </h1>
         
         {/* Role Subtitles */}
-        <div className={`animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y py-4 md:py-6 w-full max-w-5xl backdrop-blur-sm text-center transition-colors duration-500 ${isLightMode ? 'bg-white/80 border-black/10' : 'bg-brand-black/20 border-brand-primary/5'}`}>
+        <div className={`animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 font-mono text-xs md:text-base border-y py-4 md:py-6 w-full max-w-5xl backdrop-blur-sm text-center transition-colors duration-500 ${isLightMode ? 'bg-white/80 border-black/10 text-gray-700' : 'bg-brand-black/20 border-brand-primary/5 text-brand-secondary'}`}>
             <div className="flex items-center gap-2">
-                <Terminal size={14} className="md:w-4 md:h-4 text-brand-secondary" />
+                <Terminal size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
                 <span className="tracking-widest uppercase">Systems Engineer</span>
             </div>
             <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
-                <Brain size={14} className="md:w-4 md:h-4 text-brand-secondary" />
+                <Brain size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
                 <span className="tracking-widest uppercase">AI Engineering</span>
             </div>
             <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
-                <Cpu size={14} className="md:w-4 md:h-4 text-brand-secondary" />
+                <Cpu size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
                 <span className="tracking-widest uppercase">Language Designer</span>
             </div>
             <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
-                <Box size={14} className="md:w-4 md:h-4 text-brand-secondary" />
+                <Box size={14} className={`md:w-4 md:h-4 ${isLightMode ? 'text-black' : 'text-brand-secondary'}`} />
                 <span className="tracking-widest uppercase">Game Developer</span>
             </div>
         </div>
         
         {/* Description */}
-        <p className="animate-slide-up opacity-0 [animation-delay:0.7s] text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500">
+        <p className={`animate-slide-up opacity-0 [animation-delay:0.7s] max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500 ${isLightMode ? 'text-gray-600' : 'text-brand-secondary'}`}>
           Architecting high-performance digital ecosystems. 
           <br className="hidden md:block" />
           Merging bare-metal efficiency with AI intelligence.
@@ -360,7 +360,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer z-40" 
         onClick={scrollToProjects}
       >
-        <span className="text-[10px] font-mono uppercase tracking-widest text-brand-secondary">Scroll</span>
+        <span className={`text-[10px] font-mono uppercase tracking-widest ${isLightMode ? 'text-black' : 'text-brand-secondary'}`}>Scroll</span>
         <ArrowDown size={16} className="text-brand-accent" />
       </div>
     </section>
