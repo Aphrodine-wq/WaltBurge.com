@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Hero } from './components/Hero';
 import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
 import { ChatWidget } from './components/ChatWidget';
 import { Contact } from './components/Contact';
 import { ProjectDetail } from './components/ProjectDetail';
-import { Code2, Sun, Moon, Menu, X } from 'lucide-react';
+import { Code2, Menu, X } from 'lucide-react';
 import { SectionId, Project } from './types';
 
 interface NavbarProps {
-  isLightMode: boolean;
-  toggleTheme: () => void;
+  // Removed isLightMode props
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isLightMode, toggleTheme }) => {
+const Navbar: React.FC<NavbarProps> = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollTo = (id: string) => {
@@ -49,14 +48,6 @@ const Navbar: React.FC<NavbarProps> = ({ isLightMode, toggleTheme }) => {
               ))}
             </div>
             
-            <button 
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-brand-secondary hover:text-brand-accent hover:bg-brand-primary/5 transition-colors"
-              aria-label="Toggle Theme"
-            >
-              {isLightMode ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-
             <button 
               onClick={() => scrollTo(SectionId.CONTACT)}
               className="hidden md:block px-5 py-2.5 text-xs font-bold uppercase tracking-widest bg-brand-primary text-brand-black hover:bg-brand-accent transition-colors rounded-sm"
@@ -102,23 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLightMode, toggleTheme }) => {
 function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
-  const [isLightMode, setIsLightMode] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-
-  const toggleTheme = () => {
-    setIsLightMode(!isLightMode);
-  };
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isLightMode) {
-      root.classList.add('light-mode');
-      root.style.colorScheme = 'light';
-    } else {
-      root.classList.remove('light-mode');
-      root.style.colorScheme = 'dark';
-    }
-  }, [isLightMode]);
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
@@ -151,13 +126,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
-      <Navbar isLightMode={isLightMode} toggleTheme={toggleTheme} />
+      <Navbar />
       <main>
-        <Hero isLightMode={isLightMode} onOpenChat={() => setIsChatOpen(true)} />
+        <Hero onOpenChat={() => setIsChatOpen(true)} />
         
         <section id={SectionId.ABOUT} className="py-16 md:py-32 px-4 md:px-6 bg-brand-surface relative transition-colors duration-300 overflow-hidden">
             {/* Decorative Background Elements for Detail - Variable Based */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-black/5 to-transparent pointer-events-none"></div>
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-base/5 to-transparent pointer-events-none"></div>
             <div className="absolute bottom-0 left-10 w-64 h-64 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
             <div className="max-w-6xl mx-auto relative z-10">

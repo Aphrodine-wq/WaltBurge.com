@@ -1,83 +1,90 @@
-import React, { useState } from 'react';
-import { Mail, Github, Twitter, Linkedin, Send, Radio, Shield, Globe, MapPin, CheckCircle2, Loader2 } from 'lucide-react';
+import React from 'react';
+import { Mail, Github, ArrowUpRight, Copy } from 'lucide-react';
 import { SectionId } from '../types';
 
 export const Contact: React.FC = () => {
-  const [formState, setFormState] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [copied, setCopied] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormState('sending');
-    // Simulate network delay
-    setTimeout(() => {
-      setFormState('sent');
-      setTimeout(() => setFormState('idle'), 3000);
-    }, 2000);
+  const copyEmail = () => {
+    navigator.clipboard.writeText('contact@waltburge.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const socialLinks = [
-    { Icon: Github, href: "https://github.com/Aphrodine-wq", label: "Github", active: true },
-    { Icon: Twitter, href: "#", label: "Twitter", active: false },
-    { Icon: Linkedin, href: "#", label: "LinkedIn", active: false }
-  ];
-
   return (
-    <section id={SectionId.CONTACT} className="py-20 md:py-32 bg-brand-base relative overflow-hidden transition-colors duration-300">
+    <section id={SectionId.CONTACT} className="py-20 md:py-32 bg-brand-base relative overflow-hidden">
       
       {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-0 right-0 w-full h-full opacity-20 pointer-events-none">
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[150px]"></div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         
-        <div className="inline-flex items-center justify-center p-3 mb-8 rounded-2xl bg-brand-surface border border-brand-border shadow-lg">
-           <Mail size={32} className="text-brand-accent" />
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
+            
+            {/* Left Column: Heading */}
+            <div>
+                <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block flex items-center gap-2">
+                    <span className="w-8 h-px bg-brand-accent"></span>
+                    04. Initialize Connection
+                </span>
+                <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter mb-8 leading-[0.9]">
+                  Let's <br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-secondary/50">Build The</span> <br/>
+                  Future.
+                </h2>
+                <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
+                    Open for high-impact engineering roles and technical consulting. 
+                    If you're building something that requires bare-metal efficiency or agentic intelligence, let's talk.
+                </p>
+            </div>
+
+            {/* Right Column: Links */}
+            <div className="flex flex-col gap-8 md:pt-10">
+                
+                {/* Email Link */}
+                <div className="group relative">
+                    <div className="flex items-baseline justify-between border-b border-brand-border pb-4 group-hover:border-brand-accent transition-colors duration-500">
+                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest">Email Protocol</span>
+                        <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
+                    </div>
+                    <div className="pt-4 flex items-center justify-between">
+                         <a href="mailto:contact@waltburge.com" className="text-2xl md:text-3xl font-bold text-brand-primary group-hover:text-brand-accent transition-colors">
+                            contact@waltburge.com
+                         </a>
+                         <button 
+                            onClick={copyEmail}
+                            className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
+                            title="Copy to clipboard"
+                        >
+                            {copied ? <span className="text-xs font-mono text-green-400">COPIED</span> : <Copy size={18} />}
+                         </button>
+                    </div>
+                </div>
+
+                {/* GitHub Link */}
+                <div className="group relative">
+                    <div className="flex items-baseline justify-between border-b border-brand-border pb-4 group-hover:border-brand-accent transition-colors duration-500">
+                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest">Source Control</span>
+                        <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
+                    </div>
+                    <div className="pt-4">
+                         <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="text-2xl md:text-3xl font-bold text-brand-primary group-hover:text-brand-accent transition-colors flex items-center gap-4">
+                            github.com/Aphrodine-wq
+                            <Github size={24} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                         </a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6">
-          Initialize <span className="text-brand-accent">Connection</span>
-        </h2>
-        
-        <p className="text-brand-secondary text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-          Ready to architect the next generation of digital systems? 
-          <br/>Transmission channels are open.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <a 
-                href="mailto:contact@waltburge.com" 
-                className="group p-8 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/5 flex flex-col items-center gap-4"
-            >
-                <div className="w-12 h-12 rounded-full bg-brand-base flex items-center justify-center group-hover:bg-brand-accent group-hover:text-brand-base transition-colors duration-300">
-                    <Mail size={20} />
-                </div>
-                <div>
-                    <h3 className="text-lg font-bold text-brand-primary mb-1">Email Protocol</h3>
-                    <p className="text-sm text-brand-secondary font-mono">contact@waltburge.com</p>
-                </div>
-            </a>
-
-            <a 
-                href="https://github.com/Aphrodine-wq" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group p-8 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/5 flex flex-col items-center gap-4"
-            >
-                <div className="w-12 h-12 rounded-full bg-brand-base flex items-center justify-center group-hover:bg-brand-accent group-hover:text-brand-base transition-colors duration-300">
-                    <Github size={20} />
-                </div>
-                <div>
-                    <h3 className="text-lg font-bold text-brand-primary mb-1">Source Control</h3>
-                    <p className="text-sm text-brand-secondary font-mono">github.com/Aphrodine-wq</p>
-                </div>
-            </a>
-        </div>
-
-        <div className="mt-20 pt-8 border-t border-brand-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-brand-secondary uppercase tracking-widest">
+        <div className="mt-24 pt-8 border-t border-brand-border/30 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-brand-secondary uppercase tracking-widest">
             <span>© 2024 Walt Burge Systems. All rights reserved.</span>
             <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                 System Operational
             </div>
         </div>

@@ -3,11 +3,10 @@ import { ArrowDown, ChevronRight, Cpu, Terminal, Database, Cloud, Code2, Globe, 
 import { SectionId } from '../types';
 
 interface HeroProps {
-  isLightMode: boolean;
   onOpenChat?: () => void;
 }
 
-const FloatingIcons = React.memo(({ isLightMode }: { isLightMode: boolean }) => {
+const FloatingIcons = React.memo(() => {
     const icons = [
         { Icon: Cpu, delay: '0s', x: '10%', y: '20%' },
         { Icon: Terminal, delay: '2s', x: '80%', y: '15%' },
@@ -38,7 +37,7 @@ const FloatingIcons = React.memo(({ isLightMode }: { isLightMode: boolean }) => 
     );
 });
 
-export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }) => {
+export const Hero: React.FC<HeroProps> = React.memo(({ onOpenChat }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -129,14 +128,9 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       
-      // Use getComputedStyle to read current CSS variables for canvas colors
-      const computedStyle = getComputedStyle(document.body);
-      const isLight = document.documentElement.classList.contains('light-mode');
-      
-      // Manually match the variable logic for canvas since it can't use CSS vars directly
-      const particleColor = isLight ? 'rgba(0, 0, 0, 0.7)' : 'rgba(34, 211, 238, 0.6)';
-      const lineBaseColor = isLight ? '0, 0, 0' : '34, 211, 238';
-      const maxLineOpacity = isLight ? 0.2 : 0.15; 
+      const particleColor = 'rgba(34, 211, 238, 0.6)';
+      const lineBaseColor = '34, 211, 238';
+      const maxLineOpacity = 0.15; 
 
       const mouseX = (mouseRef.current.x / 2 + 0.5) * width;
       const mouseY = (mouseRef.current.y / 2 + 0.5) * height;
@@ -215,7 +209,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
     };
-  }, [isLightMode]);
+  }, []);
 
   const scrollToProjects = () => {
     document.getElementById(SectionId.PROJECTS)?.scrollIntoView({ behavior: 'smooth' });
@@ -258,7 +252,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
 
          {/* Layer 3: Floating Icons */}
          <div className="parallax-layer absolute inset-0" data-speed="1.5">
-            <FloatingIcons isLightMode={isLightMode} />
+            <FloatingIcons />
          </div>
       </div>
 
@@ -268,7 +262,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       {/* Interactive Network Canvas */}
       <canvas 
         ref={canvasRef} 
-        className={`absolute top-0 left-0 w-full h-full z-10 pointer-events-none transition-all duration-700 ${isLightMode ? '' : 'mix-blend-screen'}`}
+        className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none transition-all duration-700 mix-blend-screen"
       />
       
       {/* Foreground Content */}
@@ -338,7 +332,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
           
            <button 
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            className="group px-8 py-4 bg-transparent border border-brand-secondary/30 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm min-w-[200px] w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center text-brand-secondary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5"
+            className="group px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm min-w-[200px] w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center bg-white text-black border-none hover:bg-gray-200"
           >
             Contact System
           </button>
