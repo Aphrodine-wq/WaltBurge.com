@@ -222,7 +222,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   };
 
   return (
-    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black perspective-container transition-colors duration-500 text-center">
+    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-base perspective-container transition-colors duration-500 text-center">
       
       {/* Dynamic Grid Background */}
       <div 
@@ -263,7 +263,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       </div>
 
       {/* Gradient Fade at Bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-brand-black to-transparent z-20 transition-colors duration-700"></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-brand-base to-transparent z-20 transition-colors duration-700"></div>
 
       {/* Interactive Network Canvas */}
       <canvas 
@@ -289,7 +289,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         </h1>
         
         {/* Role Subtitles */}
-        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-black/20 backdrop-blur-sm text-center transition-colors duration-500">
+        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-base/20 backdrop-blur-sm text-center transition-colors duration-500">
             <div className="flex items-center gap-2">
                 <Terminal size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Systems Engineer</span>
@@ -323,7 +323,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
           
           <button 
             onClick={scrollToProjects}
-            className="group relative px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm overflow-hidden min-w-[200px] w-full sm:w-auto shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:scale-[1.02] active:scale-[0.98] bg-brand-black border border-brand-accent text-brand-primary hover:bg-brand-accent/10"
+            className="group relative px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm overflow-hidden min-w-[200px] w-full sm:w-auto shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:scale-[1.02] active:scale-[0.98] bg-brand-base border border-brand-accent text-brand-primary hover:bg-brand-accent/10"
           >
             {/* Corner Markers */}
             <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>

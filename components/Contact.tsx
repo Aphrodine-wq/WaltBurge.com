@@ -22,157 +22,67 @@ export const Contact: React.FC = () => {
   ];
 
   return (
-    <footer id={SectionId.CONTACT} className="relative bg-brand-black border-t border-brand-border overflow-hidden transition-colors duration-300">
+    <section id={SectionId.CONTACT} className="py-20 md:py-32 bg-brand-base relative overflow-hidden transition-colors duration-300">
       
-      {/* Background Grid & Decor */}
-      <div className="absolute inset-0 bg-brand-black opacity-90 z-0"></div>
-      <div className="absolute inset-0 opacity-10 pointer-events-none z-0" 
-           style={{
-             backgroundImage: 'linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)',
-             backgroundSize: '40px 40px'
-           }}
-      ></div>
-      
-      {/* Central Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-accent/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[120px]"></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
         
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
-          
-          {/* Left Column: Info */}
-          <div className="space-y-8 md:space-y-12">
-            <div>
-              <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-4 md:mb-6">
-                Get in <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">
-                  Touch.
-                </span>
-              </h2>
-              <p className="text-brand-secondary text-base md:text-lg font-light leading-relaxed max-w-md">
-                I'm always open to discussing product design work, partnership opportunities, or technical consulting.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-                <div className="flex items-center gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-brand-surface border border-brand-primary/10 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
-                        <Mail className="text-brand-secondary group-hover:text-brand-accent transition-colors" />
-                    </div>
-                    <div>
-                        <div className="text-xs text-brand-secondary font-mono uppercase tracking-wider">Email</div>
-                        <a href="mailto:contact@waltburge.com" className="text-brand-primary font-bold hover:text-brand-accent transition-colors">contact@waltburge.com</a>
-                    </div>
-                </div>
-                
-                <div className="flex items-center gap-4 group">
-                    <div className="w-12 h-12 rounded-xl bg-brand-surface border border-brand-primary/10 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
-                        <MapPin className="text-brand-secondary group-hover:text-brand-accent transition-colors" />
-                    </div>
-                    <div>
-                        <div className="text-xs text-brand-secondary font-mono uppercase tracking-wider">Location</div>
-                        <div className="text-brand-primary font-bold">Remote / Global</div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="flex gap-4">
-                 {socialLinks.map(({ Icon, href, label, active }) => (
-                    <a 
-                        key={label}
-                        href={href} 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                            active 
-                            ? "border-brand-primary/10 bg-brand-surface/50 text-brand-secondary hover:bg-brand-surface hover:border-brand-accent/50 hover:text-brand-accent hover:scale-110 shadow-lg hover:shadow-brand-accent/10" 
-                            : "border-brand-primary/5 text-brand-secondary/30 cursor-not-allowed bg-transparent"
-                        }`}
-                        aria-label={label}
-                        title={active ? `Visit ${label}` : `${label} (Coming Soon)`}
-                        onClick={(e) => !active && e.preventDefault()}
-                    >
-                       <Icon size={20} />
-                    </a>
-                  ))}
-            </div>
-          </div>
-
-          {/* Right Column: Business Form */}
-          <div className="bg-brand-surface/50 backdrop-blur-xl border border-brand-primary/10 rounded-2xl p-6 md:p-10 relative overflow-hidden group hover:border-brand-primary/20 transition-colors duration-500">
-            
-            <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 relative z-10">
-                <h3 className="text-xl font-bold text-brand-primary mb-4 md:mb-6 flex items-center gap-2">
-                    Send a Message
-                </h3>
-
-                <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-                    <div className="space-y-2 group/input">
-                        <label className="text-xs font-mono uppercase text-brand-secondary ml-1 group-focus-within/input:text-brand-accent transition-colors duration-300">Name</label>
-                        <input 
-                            required
-                            type="text" 
-                            className="w-full bg-brand-surface/50 border border-brand-primary/10 rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:border-brand-accent focus:bg-brand-surface focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all duration-300 placeholder-brand-secondary/30 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500/50"
-                            placeholder="Your Name"
-                        />
-                    </div>
-                    <div className="space-y-2 group/input">
-                        <label className="text-xs font-mono uppercase text-brand-secondary ml-1 group-focus-within/input:text-brand-accent transition-colors duration-300">Email</label>
-                        <input 
-                            required
-                            type="email" 
-                            className="w-full bg-brand-surface/50 border border-brand-primary/10 rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:border-brand-accent focus:bg-brand-surface focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all duration-300 placeholder-brand-secondary/30 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500/50"
-                            placeholder="john@example.com"
-                        />
-                    </div>
-                </div>
-
-                <div className="space-y-2 group/input">
-                    <label className="text-xs font-mono uppercase text-brand-secondary ml-1 group-focus-within/input:text-brand-accent transition-colors duration-300">Message</label>
-                    <textarea 
-                        required
-                        rows={4}
-                        className="w-full bg-brand-surface/50 border border-brand-primary/10 rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:border-brand-accent focus:bg-brand-surface focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all duration-300 placeholder-brand-secondary/30 resize-none invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500/50"
-                        placeholder="How can I help you?"
-                    ></textarea>
-                </div>
-
-                <button 
-                    type="submit" 
-                    disabled={formState !== 'idle'}
-                    className={`w-full py-4 rounded-lg font-bold text-sm uppercase tracking-widest transition-all duration-500 flex items-center justify-center gap-3 overflow-hidden ${
-                        formState === 'sent' 
-                        ? 'bg-brand-success text-brand-black shadow-[0_0_15px_rgba(74,222,128,0.3)]' 
-                        : 'bg-brand-primary hover:bg-brand-accent text-brand-black hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]'
-                    }`}
-                >
-                    <div className={`flex items-center gap-2 transition-all duration-300 transform ${formState === 'sent' ? 'scale-110' : ''}`}>
-                        {formState === 'idle' && (
-                            <>Send Message <Send size={16} className="transition-transform group-hover:translate-x-1" /></>
-                        )}
-                        {formState === 'sending' && (
-                            <>Sending <Loader2 size={16} className="animate-spin" /></>
-                        )}
-                        {formState === 'sent' && (
-                            <>Message Sent <CheckCircle2 size={18} className="animate-bounce" /></>
-                        )}
-                    </div>
-                </button>
-            </form>
-          </div>
-
+        <div className="inline-flex items-center justify-center p-3 mb-8 rounded-2xl bg-brand-surface border border-brand-border shadow-lg">
+           <Mail size={32} className="text-brand-accent" />
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-brand-border mt-16 md:mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-brand-secondary uppercase tracking-widest text-center md:text-left">
-            <p>&copy; {new Date().getFullYear()} Walt Burge. All rights reserved.</p>
-            <div className="flex gap-6">
-                <a href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-brand-primary transition-colors">Terms of Service</a>
+        <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6">
+          Initialize <span className="text-brand-accent">Connection</span>
+        </h2>
+        
+        <p className="text-brand-secondary text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+          Ready to architect the next generation of digital systems? 
+          <br/>Transmission channels are open.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <a 
+                href="mailto:contact@waltburge.com" 
+                className="group p-8 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/5 flex flex-col items-center gap-4"
+            >
+                <div className="w-12 h-12 rounded-full bg-brand-base flex items-center justify-center group-hover:bg-brand-accent group-hover:text-brand-base transition-colors duration-300">
+                    <Mail size={20} />
+                </div>
+                <div>
+                    <h3 className="text-lg font-bold text-brand-primary mb-1">Email Protocol</h3>
+                    <p className="text-sm text-brand-secondary font-mono">contact@waltburge.com</p>
+                </div>
+            </a>
+
+            <a 
+                href="https://github.com/Aphrodine-wq" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group p-8 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/5 flex flex-col items-center gap-4"
+            >
+                <div className="w-12 h-12 rounded-full bg-brand-base flex items-center justify-center group-hover:bg-brand-accent group-hover:text-brand-base transition-colors duration-300">
+                    <Github size={20} />
+                </div>
+                <div>
+                    <h3 className="text-lg font-bold text-brand-primary mb-1">Source Control</h3>
+                    <p className="text-sm text-brand-secondary font-mono">github.com/Aphrodine-wq</p>
+                </div>
+            </a>
+        </div>
+
+        <div className="mt-20 pt-8 border-t border-brand-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-brand-secondary uppercase tracking-widest">
+            <span>© 2024 Walt Burge Systems. All rights reserved.</span>
+            <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                System Operational
             </div>
         </div>
 
       </div>
-    </footer>
+    </section>
   );
 };

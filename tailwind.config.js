@@ -15,7 +15,7 @@ export default {
       },
       colors: {
         brand: {
-          black: 'rgb(var(--bg-primary) / <alpha-value>)',
+          base: 'rgb(var(--bg-primary) / <alpha-value>)',
           dark: 'rgb(var(--bg-secondary) / <alpha-value>)',
           surface: 'rgb(var(--bg-surface) / <alpha-value>)',
           border: 'rgb(var(--border-color) / <alpha-value>)',

@@ -259,7 +259,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
        {/* Loading State */}
        {!isLoaded && !hasError && (
         <div 
-            className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center transition-opacity duration-500"
+            className="absolute inset-0 z-10 bg-brand-base flex items-center justify-center transition-opacity duration-500"
         >
             <div className="absolute inset-0" style={{
                 backgroundImage: 'linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)',
@@ -275,7 +275,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
        {/* Error State / Placeholder */}
        {hasError && (
-        <div className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center">
+        <div className="absolute inset-0 z-10 bg-brand-base flex items-center justify-center">
              <div className="flex flex-col items-center gap-3 text-brand-secondary/50">
                  <div className="p-4 rounded-full bg-brand-surface border border-brand-border">
                     <ImageIcon size={32} />
@@ -289,7 +289,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
        )}
 
        {/* Overlay Gradient */}
-       <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-transparent opacity-80 z-10 group-hover/card:opacity-60 transition-opacity duration-500"></div>
+       <div className="absolute inset-0 bg-gradient-to-t from-brand-base via-brand-base/20 to-transparent opacity-80 z-10 group-hover/card:opacity-60 transition-opacity duration-500"></div>
        
        <img 
         src={project.imageUrl} 
@@ -305,13 +305,13 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
       
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-         <span className="bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-brand-primary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
+         <span className="bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-brand-primary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
             <CategoryIcon category={project.category} />
             {project.category}
          </span>
          
          {project.status && (
-            <span className={`bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg ${
+            <span className={`bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg ${
                 project.status === 'Live' ? 'text-green-400' : 
                 project.status === 'Beta' ? 'text-brand-accent' :
                 project.status === 'Archived' ? 'text-gray-400' : 'text-brand-purple'
@@ -329,7 +329,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
       {/* Year Badge - Top Left */}
       {project.year && (
         <div className="absolute top-4 left-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 delay-75">
-             <span className="bg-brand-black/90 backdrop-blur-md border border-brand-border/20 text-brand-secondary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
+             <span className="bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-brand-secondary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
                 <Calendar size={12} />
                 {project.year}
              </span>
@@ -406,7 +406,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               </div>
 
               {/* Content Overlay - Positioned at bottom */}
-              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-brand-black via-brand-black/90 to-transparent z-20 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
+              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-brand-base via-brand-base/90 to-transparent z-20 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
                 <div className="mb-4">
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover/card:text-brand-accent transition-colors">
                     {project.title}

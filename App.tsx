@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLightMode, toggleTheme }) => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-black/80 backdrop-blur-md border-b border-brand-border">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-base/80 backdrop-blur-md border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
           <div 
             onClick={() => scrollTo(SectionId.HERO)}
@@ -77,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLightMode, toggleTheme }) => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-brand-black/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-fade-in flex flex-col items-center gap-8">
+        <div className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-fade-in flex flex-col items-center gap-8">
            {['ABOUT', 'PROJECTS', 'SKILLS'].map((item) => (
                 <button 
                     key={item}
@@ -138,7 +138,7 @@ function App() {
 
   if (selectedProject) {
     return (
-      <div className="min-h-screen bg-brand-black text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
+      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
          <ProjectDetail 
             project={selectedProject} 
             onBack={handleBackToHome} 
@@ -150,7 +150,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-black text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
+    <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
       <Navbar isLightMode={isLightMode} toggleTheme={toggleTheme} />
       <main>
         <Hero isLightMode={isLightMode} onOpenChat={() => setIsChatOpen(true)} />
@@ -177,11 +177,11 @@ function App() {
                         
                         {/* Quick Stats Grid */}
                         <div className="grid grid-cols-2 gap-4 mt-8">
-                            <div className="p-4 md:p-5 bg-brand-dark/50 backdrop-blur-sm rounded-xl border border-brand-primary/5 hover:border-brand-accent/20 transition-all group">
+                            <div className="p-4 md:p-5 bg-brand-base/50 backdrop-blur-sm rounded-xl border border-brand-primary/5 hover:border-brand-accent/20 transition-all group">
                                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1 group-hover:text-brand-accent transition-colors">5+</div>
                                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Years Experience</div>
                             </div>
-                            <div className="p-4 md:p-5 bg-brand-dark/50 backdrop-blur-sm rounded-xl border border-brand-primary/5 hover:border-brand-accent/20 transition-all group">
+                            <div className="p-4 md:p-5 bg-brand-base/50 backdrop-blur-sm rounded-xl border border-brand-primary/5 hover:border-brand-accent/20 transition-all group">
                                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1 group-hover:text-brand-purple transition-colors">12+</div>
                                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Shipped Projects</div>
                             </div>
