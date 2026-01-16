@@ -6,9 +6,15 @@ import {
   Image as ImageIcon, X, Filter, Calendar, Circle
 } from 'lucide-react';
 
+// --- Image Handling Helper ---
+const getProjectImage = (id: string, fileName: string = 'cover.jpg') => {
+    // In a real build, Vite handles public assets directly
+    return `/assets/projects/${id}/${fileName}`;
+};
+
 export const projects: Project[] = [
   {
-    id: '1',
+    id: 'g-rump',
     title: 'G-Rump Coding Language',
     category: 'Systems',
     description: 'A custom high-performance compiled language designed for systems programming.',
@@ -23,18 +29,14 @@ export const projects: Project[] = [
     ],
     techStack: ['C++', 'LLVM', 'Assembly', 'Compiler Design'],
     tags: ['performance', 'memory-safety', 'multithreading'],
-    imageUrl: 'https://picsum.photos/seed/grump/800/600',
-    images: [
-        'https://picsum.photos/seed/grump/1920/1080',
-        'https://picsum.photos/seed/code1/1920/1080',
-        'https://picsum.photos/seed/arch/1920/1080'
-    ],
+    imageUrl: getProjectImage('g-rump'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump',
     status: 'Beta',
     year: '2024'
   },
   {
-    id: '2',
+    id: 'g-rump-ide',
     title: 'G-Rump IDE',
     category: 'Tools',
     description: 'A fully integrated development environment built specifically for G-Rump.',
@@ -49,18 +51,14 @@ export const projects: Project[] = [
     ],
     techStack: ['C#', 'WPF', 'LSP', 'Win32'],
     tags: ['dx', 'visualizer', 'productivity'],
-    imageUrl: 'https://picsum.photos/seed/grumpide/800/600',
-    images: [
-        'https://picsum.photos/seed/grumpide/1920/1080',
-        'https://picsum.photos/seed/ide-ui/1920/1080',
-        'https://picsum.photos/seed/darkmode/1920/1080'
-    ],
+    imageUrl: getProjectImage('g-rump-ide'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump-ide',
     status: 'Live',
     year: '2024'
   },
   {
-    id: '3',
+    id: 'reaper',
     title: 'Reaper',
     category: 'Game Dev',
     description: 'A high-fidelity iOS application featuring custom Metal rendering pipelines.',
@@ -75,18 +73,14 @@ export const projects: Project[] = [
     ],
     techStack: ['Swift', 'Metal API', 'iOS SDK', 'UIKit'],
     tags: ['rendering', 'optimization', 'touch-input'],
-    imageUrl: 'https://picsum.photos/seed/reaper/800/600',
-    images: [
-        'https://picsum.photos/seed/reaper/1920/1080',
-        'https://picsum.photos/seed/gameplay/1920/1080',
-        'https://picsum.photos/seed/shaders/1920/1080'
-    ],
+    imageUrl: getProjectImage('reaper'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/reaper-engine',
     status: 'Live',
     year: '2023'
   },
   {
-    id: '4',
+    id: 'clipsync',
     title: 'ClipSync',
     category: 'Tools',
     description: 'A seamless clipboard synchronization utility connecting Windows and mobile.',
@@ -101,17 +95,14 @@ export const projects: Project[] = [
     ],
     techStack: ['C#', '.NET Core', 'Encryption'],
     tags: ['security', 'p2p', 'workflow'],
-    imageUrl: 'https://picsum.photos/seed/clipsync/800/600',
-    images: [
-        'https://picsum.photos/seed/clipsync/1920/1080',
-        'https://picsum.photos/seed/desktop/1920/1080'
-    ],
+    imageUrl: getProjectImage('clipsync'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/clipsync',
     status: 'Archived',
     year: '2022'
   },
   {
-    id: '5',
+    id: 'ftwos',
     title: 'FTWOS',
     category: 'Systems',
     description: 'Experimental operating system architecture focused on real-time task scheduling.',
@@ -126,17 +117,14 @@ export const projects: Project[] = [
     ],
     techStack: ['C', 'Assembly', 'Kernel', 'Bootloader'],
     tags: ['kernel', 'experimental', 'bare-metal'],
-    imageUrl: 'https://picsum.photos/seed/ftwos/800/600',
-    images: [
-        'https://picsum.photos/seed/ftwos/1920/1080',
-        'https://picsum.photos/seed/terminal/1920/1080'
-    ],
+    imageUrl: getProjectImage('ftwos'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/ftwos',
     status: 'Concept',
     year: '2021'
   },
   {
-    id: '6',
+    id: 'icongen',
     title: 'IconGEN',
     category: 'Tools',
     description: 'Automated asset generation tool using heuristic algorithms.',
@@ -151,17 +139,14 @@ export const projects: Project[] = [
     ],
     techStack: ['Python', 'AI Heuristics', 'CLI'],
     tags: ['automation', 'generative', 'asset-pipeline'],
-    imageUrl: 'https://picsum.photos/seed/icongen/800/600',
-    images: [
-        'https://picsum.photos/seed/icongen/1920/1080',
-        'https://picsum.photos/seed/cli/1920/1080'
-    ],
+    imageUrl: getProjectImage('icongen'),
+    images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/icongen',
     status: 'Live',
     year: '2023'
   },
   {
-    id: '7',
+    id: 'olemiss365',
     title: 'OleMiss365',
     category: 'Web',
     description: 'Web portal architecture designed for high-traffic community engagement.',
@@ -176,18 +161,15 @@ export const projects: Project[] = [
     ],
     techStack: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
     tags: ['scalable', 'social', 'full-stack'],
-    imageUrl: 'https://picsum.photos/seed/olemiss/800/600',
-    images: [
-        'https://picsum.photos/seed/olemiss/1920/1080',
-        'https://picsum.photos/seed/students/1920/1080'
-    ],
+    imageUrl: getProjectImage('olemiss365'),
+    images: [],
     link: 'https://olemiss.edu',
     repositoryUrl: 'https://github.com/Aphrodine-wq/olemiss365',
     status: 'Live',
     year: '2022'
   },
   {
-    id: '8',
+    id: 'oxford-outdoor',
     title: 'Oxford Outdoor Living',
     category: 'Web',
     description: 'High-end commercial web presence featuring interactive product galleries.',
@@ -202,12 +184,8 @@ export const projects: Project[] = [
     ],
     techStack: ['TypeScript', 'Next.js', 'Tailwind', 'WebGL'],
     tags: ['ui/ux', 'responsive', 'commercial'],
-    imageUrl: 'https://picsum.photos/seed/outdoor/800/600',
-    images: [
-        'https://picsum.photos/seed/outdoor/1920/1080',
-        'https://picsum.photos/seed/patio/1920/1080',
-        'https://picsum.photos/seed/kitchen/1920/1080'
-    ],
+    imageUrl: getProjectImage('oxford-outdoor'),
+    images: [],
     link: 'https://oxfordoutdoorliving.com',
     status: 'Live',
     year: '2023'
@@ -274,23 +252,41 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
 
 const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   return (
     <div className="h-full w-full overflow-hidden relative bg-brand-dark group/image">
        {/* Loading State - System Scanner Effect */}
-       <div 
-         className={`absolute inset-0 z-10 bg-brand-black flex items-center justify-center transition-opacity duration-1000 ${isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-       >
-          <div className="absolute inset-0" style={{
-              backgroundImage: 'linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)',
-              backgroundSize: '20px 20px',
-              opacity: 0.2
-          }}></div>
-          <div className="relative z-10 flex flex-col items-center gap-2">
-            <div className="w-8 h-8 rounded-full border-2 border-brand-accent/30 border-t-brand-accent animate-spin"></div>
-            <span className="text-[10px] font-mono text-brand-accent/50 animate-pulse">LOADING_ASSET</span>
-          </div>
-       </div>
+       {!isLoaded && !hasError && (
+        <div 
+            className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center transition-opacity duration-500"
+        >
+            <div className="absolute inset-0" style={{
+                backgroundImage: 'linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)',
+                backgroundSize: '20px 20px',
+                opacity: 0.2
+            }}></div>
+            <div className="relative z-10 flex flex-col items-center gap-2">
+                <div className="w-8 h-8 rounded-full border-2 border-brand-accent/30 border-t-brand-accent animate-spin"></div>
+                <span className="text-[10px] font-mono text-brand-accent/50 animate-pulse">LOADING_ASSET</span>
+            </div>
+        </div>
+       )}
+
+       {/* Error State / Placeholder */}
+       {hasError && (
+        <div className="absolute inset-0 z-10 bg-brand-black flex items-center justify-center">
+             <div className="flex flex-col items-center gap-3 text-brand-secondary/50">
+                 <div className="p-4 rounded-full bg-white/5">
+                    <ImageIcon size={32} />
+                 </div>
+                 <div className="text-center">
+                    <p className="text-xs font-mono uppercase tracking-widest">Asset Not Found</p>
+                    <p className="text-[10px] font-mono opacity-50 mt-1">/assets/projects/{project.id}/cover.jpg</p>
+                 </div>
+             </div>
+        </div>
+       )}
 
        {/* Overlay Gradient */}
        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-transparent opacity-80 z-10 group-hover/card:opacity-60 transition-opacity duration-500"></div>
@@ -300,6 +296,10 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
         alt={project.title} 
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
+        onError={() => {
+            setHasError(true);
+            setIsLoaded(true);
+        }}
         className={`w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'}`}
       />
       

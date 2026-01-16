@@ -113,8 +113,10 @@ function App() {
     const root = document.documentElement;
     if (isLightMode) {
       root.classList.add('light-mode');
+      root.style.colorScheme = 'light';
     } else {
       root.classList.remove('light-mode');
+      root.style.colorScheme = 'dark';
     }
   }, [isLightMode]);
 

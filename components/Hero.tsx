@@ -42,34 +42,53 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const targetRef = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number>(0);
 
-  // Mouse Parallax Effect
+  // Smooth Parallax Effect with Lerp
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-       mouseRef.current = { x: e.clientX, y: e.clientY };
-
-       if (!parallaxRef.current) return;
-       
+       // Normalize coordinates to -1 to 1 range
        const { innerWidth, innerHeight } = window;
-       const x = (e.clientX / innerWidth - 0.5) * 20; // Base range
-       const y = (e.clientY / innerHeight - 0.5) * 20;
-       
-       const layers = parallaxRef.current.querySelectorAll('.parallax-layer');
-       layers.forEach((layer) => {
-          const speed = parseFloat((layer as HTMLElement).dataset.speed || '1');
-          (layer as HTMLElement).style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-       });
+       targetRef.current = { 
+         x: (e.clientX / innerWidth - 0.5) * 2,
+         y: (e.clientY / innerHeight - 0.5) * 2
+       };
+    };
 
-       // Grid Tilt Effect
-       if (gridRef.current) {
-         const tiltX = (e.clientY / innerHeight - 0.5) * 5; // Tilt based on Y
-         gridRef.current.style.transform = `perspective(1000px) rotateX(${60 + tiltX}deg) scale(2)`;
-       }
+    const animate = () => {
+      // Lerp (Linear Interpolation) for smooth lag
+      mouseRef.current.x += (targetRef.current.x - mouseRef.current.x) * 0.05;
+      mouseRef.current.y += (targetRef.current.y - mouseRef.current.y) * 0.05;
+
+      if (parallaxRef.current) {
+         const layers = parallaxRef.current.querySelectorAll('.parallax-layer');
+         layers.forEach((layer) => {
+            const speed = parseFloat((layer as HTMLElement).dataset.speed || '1');
+            const x = mouseRef.current.x * 20 * speed;
+            const y = mouseRef.current.y * 20 * speed;
+            (layer as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
+         });
+      }
+
+      // Grid Tilt Effect
+      if (gridRef.current) {
+         const tiltX = mouseRef.current.y * 5; // Tilt based on Y
+         const tiltY = mouseRef.current.x * 5;
+         gridRef.current.style.transform = `perspective(1000px) rotateX(${60 + tiltX}deg) rotateY(${tiltY}deg) scale(2)`;
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    animate();
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   // Canvas Network Animation
@@ -117,10 +136,14 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       const lineBaseColor = isLightMode ? '0, 0, 0' : '34, 211, 238';
       const maxLineOpacity = isLightMode ? 0.2 : 0.15; 
 
+      // Mouse interaction position (mapped from smoothed refs)
+      const mouseX = (mouseRef.current.x / 2 + 0.5) * width;
+      const mouseY = (mouseRef.current.y / 2 + 0.5) * height;
+
       for (let i = 0; i < nodes.length; i++) {
           const node = nodes[i];
-          const dx = mouseRef.current.x - node.x;
-          const dy = mouseRef.current.y - node.y;
+          const dx = mouseX - node.x;
+          const dy = mouseY - node.y;
           const distSq = dx * dx + dy * dy;
           const interactionRadius = 250;
           const interactionRadiusSq = interactionRadius * interactionRadius;
@@ -198,7 +221,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
   };
 
   return (
-    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black perspective-container transition-colors duration-300 text-center">
+    <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black perspective-container transition-colors duration-500 text-center">
       
       {/* Dynamic Grid Background */}
       <div 
@@ -211,7 +234,8 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
             `,
             backgroundSize: '50px 50px',
             transform: 'perspective(1000px) rotateX(60deg) scale(2)',
-            transformOrigin: 'center center'
+            transformOrigin: 'center center',
+            transition: 'opacity 0.5s ease'
         }}
       ></div>
 
@@ -219,38 +243,38 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
       <div ref={parallaxRef} className="absolute inset-0 w-full h-full pointer-events-none z-0">
          
          {/* Layer 1: Deep Atmosphere */}
-         <div className="parallax-layer absolute inset-0" data-speed="-1">
-            <div className={`absolute inset-0 bg-radial-fade ${isLightMode ? 'opacity-0' : 'opacity-30'}`}></div>
-            <div className={`absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] ${isLightMode ? 'bg-black/5' : ''}`} />
-            <div className={`absolute bottom-[10%] right-[5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-brand-purple/5 rounded-full blur-[80px] md:blur-[100px] ${isLightMode ? 'opacity-0' : ''}`} />
+         <div className="parallax-layer absolute inset-0" data-speed="-0.5">
+            <div className={`absolute inset-0 bg-radial-fade transition-opacity duration-700 ${isLightMode ? 'opacity-0' : 'opacity-30'}`}></div>
+            <div className={`absolute top-[20%] -left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-brand-accent/5 rounded-full blur-[80px] md:blur-[120px] transition-colors duration-700 ${isLightMode ? 'bg-black/5' : ''}`} />
+            <div className={`absolute bottom-[10%] right-[5%] w-[400px] h-[400px] md:w-[600px] md:h-[600px] bg-brand-purple/5 rounded-full blur-[80px] md:blur-[100px] transition-opacity duration-700 ${isLightMode ? 'opacity-0' : ''}`} />
          </div>
 
          {/* Layer 2: Geometric Shapes */}
-         <div className="parallax-layer absolute inset-0" data-speed="1.5">
-            <div className={`absolute top-[15%] left-[10%] w-48 h-48 md:w-64 md:h-64 border rounded-full ${isLightMode ? 'border-black/5' : 'border-brand-accent/5'}`} />
-            <div className={`absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] border rounded-full border-dashed animate-[spin_60s_linear_infinite] ${isLightMode ? 'border-black/5' : 'border-brand-purple/5'}`} />
+         <div className="parallax-layer absolute inset-0" data-speed="1.0">
+            <div className={`absolute top-[15%] left-[10%] w-48 h-48 md:w-64 md:h-64 border rounded-full transition-colors duration-700 ${isLightMode ? 'border-black/5' : 'border-brand-accent/5'}`} />
+            <div className={`absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] border rounded-full border-dashed animate-[spin_60s_linear_infinite] transition-colors duration-700 ${isLightMode ? 'border-black/5' : 'border-brand-purple/5'}`} />
          </div>
 
          {/* Layer 3: Floating Icons */}
-         <div className="parallax-layer absolute inset-0" data-speed="3">
+         <div className="parallax-layer absolute inset-0" data-speed="1.5">
             <FloatingIcons isLightMode={isLightMode} />
          </div>
       </div>
 
       {/* Gradient Fade at Bottom */}
-      <div className={`absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t to-transparent z-20 ${isLightMode ? 'from-white' : 'from-brand-black'}`}></div>
+      <div className={`absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t to-transparent z-20 transition-colors duration-700 ${isLightMode ? 'from-white' : 'from-brand-black'}`}></div>
 
       {/* Interactive Network Canvas */}
       <canvas 
         ref={canvasRef} 
-        className={`absolute top-0 left-0 w-full h-full z-10 pointer-events-none ${isLightMode ? '' : 'mix-blend-screen'}`}
+        className={`absolute top-0 left-0 w-full h-full z-10 pointer-events-none transition-all duration-700 ${isLightMode ? '' : 'mix-blend-screen'}`}
       />
       
       {/* Foreground Content */}
       <div className="relative z-30 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center">
         
         {/* Status Badge */}
-        <div className={`animate-slide-up opacity-0 [animation-delay:0.1s] mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] ${isLightMode ? 'bg-black/5 border-black/10 text-black' : 'bg-brand-accent/5 border-brand-accent/30 text-brand-accent'}`}>
+        <div className={`animate-slide-up opacity-0 [animation-delay:0.1s] mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-colors duration-500 ${isLightMode ? 'bg-black/5 border-black/10 text-black' : 'bg-brand-accent/5 border-brand-accent/30 text-brand-accent'}`}>
             <div className="relative flex h-2 w-2">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isLightMode ? 'bg-black' : 'bg-brand-accent'}`}></span>
               <span className={`relative inline-flex rounded-full h-2 w-2 ${isLightMode ? 'bg-black' : 'bg-brand-accent'}`}></span>
@@ -259,27 +283,27 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         </div>
 
         {/* Main Title - Mobile Optimized Size */}
-        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center">
+        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
           WALT<span className="text-brand-accent">.</span>BURGE
         </h1>
         
         {/* Role Subtitles */}
-        <div className={`animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y py-4 md:py-6 w-full max-w-5xl backdrop-blur-sm text-center transition-colors duration-300 ${isLightMode ? 'bg-white/80 border-black/10' : 'bg-brand-black/20 border-brand-primary/5'}`}>
+        <div className={`animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y py-4 md:py-6 w-full max-w-5xl backdrop-blur-sm text-center transition-colors duration-500 ${isLightMode ? 'bg-white/80 border-black/10' : 'bg-brand-black/20 border-brand-primary/5'}`}>
             <div className="flex items-center gap-2">
                 <Terminal size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Systems Engineer</span>
             </div>
-            <span className={`hidden md:block w-px h-4 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
                 <Brain size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">AI Engineering</span>
             </div>
-            <span className={`hidden md:block w-px h-4 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
                 <Cpu size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Language Designer</span>
             </div>
-            <span className={`hidden md:block w-px h-4 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
+            <span className={`hidden md:block w-px h-4 transition-colors duration-500 ${isLightMode ? 'bg-black/20' : 'bg-gray-700'}`}></span>
             <div className="flex items-center gap-2">
                 <Box size={14} className="md:w-4 md:h-4 text-brand-secondary" />
                 <span className="tracking-widest uppercase">Game Developer</span>
@@ -287,7 +311,7 @@ export const Hero: React.FC<HeroProps> = React.memo(({ isLightMode, onOpenChat }
         </div>
         
         {/* Description */}
-        <p className="animate-slide-up opacity-0 [animation-delay:0.7s] text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4">
+        <p className="animate-slide-up opacity-0 [animation-delay:0.7s] text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500">
           Architecting high-performance digital ecosystems. 
           <br className="hidden md:block" />
           Merging bare-metal efficiency with AI intelligence.
