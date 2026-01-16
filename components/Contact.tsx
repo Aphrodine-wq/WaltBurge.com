@@ -44,18 +44,18 @@ export const Contact: React.FC = () => {
             <div className="flex flex-col gap-8 md:pt-10">
                 
                 {/* Email Link */}
-                <div className="group relative">
-                    <div className="flex items-baseline justify-between border-b border-brand-border pb-4 group-hover:border-brand-accent transition-colors duration-500">
-                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest">Email Protocol</span>
+                <div className="group relative p-6 rounded-2xl border border-brand-border bg-brand-dark/30 hover:border-brand-accent/50 hover:bg-brand-dark/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all duration-500">
+                    <div className="flex items-baseline justify-between border-b border-brand-border/50 pb-4 group-hover:border-brand-accent/30 transition-colors duration-500">
+                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest group-hover:text-brand-accent transition-colors">Email Protocol</span>
                         <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
                     </div>
                     <div className="pt-4 flex items-center justify-between">
-                         <a href="mailto:contact@waltburge.com" className="text-2xl md:text-3xl font-bold text-brand-primary group-hover:text-brand-accent transition-colors">
+                         <a href="mailto:contact@waltburge.com" className="text-xl md:text-2xl font-bold text-brand-primary group-hover:text-white transition-colors">
                             contact@waltburge.com
                          </a>
                          <button 
                             onClick={copyEmail}
-                            className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
+                            className="p-2 text-brand-secondary hover:text-brand-primary hover:bg-brand-primary/10 rounded-full transition-all"
                             title="Copy to clipboard"
                         >
                             {copied ? <span className="text-xs font-mono text-green-400">COPIED</span> : <Copy size={18} />}
@@ -64,13 +64,13 @@ export const Contact: React.FC = () => {
                 </div>
 
                 {/* GitHub Link */}
-                <div className="group relative">
-                    <div className="flex items-baseline justify-between border-b border-brand-border pb-4 group-hover:border-brand-accent transition-colors duration-500">
-                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest">Source Control</span>
+                <div className="group relative p-6 rounded-2xl border border-brand-border bg-brand-dark/30 hover:border-brand-accent/50 hover:bg-brand-dark/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all duration-500">
+                    <div className="flex items-baseline justify-between border-b border-brand-border/50 pb-4 group-hover:border-brand-accent/30 transition-colors duration-500">
+                        <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest group-hover:text-brand-accent transition-colors">Source Control</span>
                         <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
                     </div>
                     <div className="pt-4">
-                         <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="text-2xl md:text-3xl font-bold text-brand-primary group-hover:text-brand-accent transition-colors flex items-center gap-4">
+                         <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="text-xl md:text-2xl font-bold text-brand-primary group-hover:text-white transition-colors flex items-center gap-4">
                             github.com/Aphrodine-wq
                             <Github size={24} className="opacity-50 group-hover:opacity-100 transition-opacity" />
                          </a>

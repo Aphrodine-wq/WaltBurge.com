@@ -54,9 +54,10 @@ body {
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--border-color));
   border-radius: 3px;
+  transition: background 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--text-secondary));
+  background: rgb(var(--accent-color));
 }
 
 .glass-panel {
