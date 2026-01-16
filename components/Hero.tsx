@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown, ChevronRight, Cpu, Terminal, Database, Cloud, Code2, Globe, Server, Box, Brain } from 'lucide-react';
+import { Button } from './ui/button';
 import { SectionId } from '../types';
-
-interface HeroProps {
-  onOpenChat?: () => void;
-}
 
 const FloatingIcons = React.memo(() => {
     const icons = [
@@ -37,7 +34,7 @@ const FloatingIcons = React.memo(() => {
     );
 });
 
-export const Hero: React.FC<HeroProps> = React.memo(({ onOpenChat }) => {
+export const Hero: React.FC = React.memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -314,28 +311,26 @@ export const Hero: React.FC<HeroProps> = React.memo(({ onOpenChat }) => {
 
         {/* Action Buttons */}
         <div className="animate-slide-up opacity-0 [animation-delay:0.9s] flex flex-col sm:flex-row gap-4 md:gap-6 w-full justify-center items-center">
-          
-          <button 
+          <Button
             onClick={scrollToProjects}
-            className="group relative px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm overflow-hidden min-w-[200px] w-full sm:w-auto shadow-[0_0_15px_rgba(34,211,238,0.1)] hover:shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:scale-[1.02] active:scale-[0.98] bg-brand-base border border-brand-accent text-brand-primary hover:bg-brand-accent/10"
+            variant="outline"
+            className="relative min-w-[200px] w-full sm:w-auto overflow-hidden group"
           >
-            {/* Corner Markers */}
-            <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>
-            <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-brand-accent"></div>
-            
-            <div className="relative z-10 flex items-center justify-center gap-2">
-               <Database size={16} /> 
-               <span>View Projects</span>
-               <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </div>
-          </button>
-          
-           <button 
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.0),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.0),transparent_55%)] group-hover:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.35),transparent_55%)] transition-colors duration-500" />
+            <div className="absolute -inset-[1px] opacity-0 group-hover:opacity-100 animate-orbit-glow" />
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              <Database size={16} />
+              <span>View Projects</span>
+              <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Button>
+          <Button
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            className="group px-8 py-4 font-bold text-xs md:text-sm uppercase tracking-[0.15em] transition-all duration-300 rounded-sm min-w-[200px] w-full sm:w-auto hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center bg-white text-black border-none hover:bg-gray-200"
+            variant="default"
+            className="min-w-[200px] w-full sm:w-auto"
           >
             Contact System
-          </button>
+          </Button>
         </div>
       </div>
 

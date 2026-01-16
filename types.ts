@@ -18,13 +18,6 @@ export interface Project {
   year?: string;
 }
 
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'model';
-  text: string;
-  isError?: boolean;
-}
-
 export enum SectionId {
   HERO = 'hero',
   ABOUT = 'about',

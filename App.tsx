@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Hero } from './components/Hero';
-import { Projects } from './components/Projects';
-import { Skills } from './components/Skills';
-import { ChatWidget } from './components/ChatWidget';
 import { Contact } from './components/Contact';
-import { ProjectDetail } from './components/ProjectDetail';
 import { Code2, Menu, X } from 'lucide-react';
+import { Button } from './components/ui/button';
 import { SectionId, Project } from './types';
+
+const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
+const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
+const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
 
 interface NavbarProps {
   // Removed isLightMode props
@@ -48,12 +49,14 @@ const Navbar: React.FC<NavbarProps> = () => {
               ))}
             </div>
             
-            <button 
+            <Button 
               onClick={() => scrollTo(SectionId.CONTACT)}
-              className="hidden md:block px-5 py-2.5 text-xs font-bold uppercase tracking-widest bg-brand-primary text-brand-black hover:bg-brand-accent transition-colors rounded-sm"
+              variant="default"
+              size="sm"
+              className="hidden md:inline-flex"
             >
               Contact
-            </button>
+            </Button>
 
             {/* Mobile Menu Toggle */}
             <button 
@@ -78,12 +81,13 @@ const Navbar: React.FC<NavbarProps> = () => {
                   {item}
                 </button>
             ))}
-            <button 
+            <Button 
               onClick={() => scrollTo(SectionId.CONTACT)}
-              className="mt-4 px-8 py-4 w-full max-w-xs text-sm font-bold uppercase tracking-widest bg-brand-primary text-brand-black hover:bg-brand-accent transition-colors rounded-sm"
+              variant="default"
+              className="mt-4 w-full max-w-xs text-sm"
             >
               Contact System
-            </button>
+            </Button>
         </div>
       )}
     </>
@@ -93,7 +97,6 @@ const Navbar: React.FC<NavbarProps> = () => {
 function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
-  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
@@ -114,12 +117,13 @@ function App() {
   if (selectedProject) {
     return (
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
-         <ProjectDetail 
-            project={selectedProject} 
-            onBack={handleBackToHome} 
-            onTechClick={handleTechClickFromDetail}
-         />
-         <ChatWidget isOpen={isChatOpen} onToggle={() => setIsChatOpen(!isChatOpen)} />
+         <Suspense fallback={null}>
+           <ProjectDetail 
+              project={selectedProject} 
+              onBack={handleBackToHome} 
+              onTechClick={handleTechClickFromDetail}
+           />
+         </Suspense>
       </div>
     );
   }
@@ -128,7 +132,7 @@ function App() {
     <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
       <Navbar />
       <main>
-        <Hero onOpenChat={() => setIsChatOpen(true)} />
+        <Hero />
         
         <section id={SectionId.ABOUT} className="py-16 md:py-32 px-4 md:px-6 bg-brand-surface relative transition-colors duration-300 overflow-hidden">
             {/* Decorative Background Elements for Detail - Variable Based */}
@@ -234,15 +238,18 @@ function App() {
             </div>
         </section>
 
-        <Projects 
-            onProjectClick={handleProjectClick} 
-            activeFilter={activeTechFilter}
-            onFilterChange={setActiveTechFilter}
-        />
-        <Skills />
+        <Suspense fallback={null}>
+          <Projects 
+              onProjectClick={handleProjectClick} 
+              activeFilter={activeTechFilter}
+              onFilterChange={setActiveTechFilter}
+          />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Skills />
+        </Suspense>
       </main>
       <Contact />
-      <ChatWidget isOpen={isChatOpen} onToggle={() => setIsChatOpen(!isChatOpen)} />
     </div>
   );
 }
