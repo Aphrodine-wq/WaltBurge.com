@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionId } from '../types';
-import { 
-  Cpu, Globe, Database, Bot, Terminal, Code2, Cloud, Github, 
-  Link, Zap, Brain, Box, Wind, MousePointer2, Sparkles, Monitor, 
+import {
+  Cpu, Globe, Database, Bot, Terminal, Code2, Cloud, Github,
+  Link, Zap, Brain, Box, Wind, MousePointer2, Sparkles, Monitor,
   FileCode, Layers, Rocket, MessageSquare, Table, Sigma, FileSearch,
   Palette, Network, Image as ImageIcon, Key, AppWindow, Command,
-  Smartphone, ScanFace, Activity, Server, Layout, Lock
+  Smartphone, ScanFace, Activity, Server, Layout, Lock, Search, X, Filter
 } from 'lucide-react';
 
 interface Skill {
@@ -270,6 +270,9 @@ const getSkillIcon = (name: string) => {
 
 export const Skills: React.FC = React.memo(() => {
   const [isVisible, setIsVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -290,23 +293,56 @@ export const Skills: React.FC = React.memo(() => {
     return () => observer.disconnect();
   }, []);
 
+  // Filter categories based on search query and selected category
+  const filteredCategories = useMemo(() => {
+    let filtered = skillCategories;
+
+    if (selectedCategory) {
+      filtered = filtered.filter(cat => cat.name === selectedCategory);
+    }
+
+    if (searchQuery) {
+      filtered = filtered
+        .map(cat => ({
+          ...cat,
+          skills: cat.skills.filter(skill =>
+            skill.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        }))
+        .filter(cat => cat.skills.length > 0);
+    }
+
+    return filtered;
+  }, [searchQuery, selectedCategory]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
+        staggerChildren: 0.08,
+        delayChildren: 0.1
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        type: 'spring',
+        stiffness: 100,
+        damping: 15
+      }
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      transition: { duration: 0.3 }
     }
   };
 
@@ -322,7 +358,7 @@ export const Skills: React.FC = React.memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-20 text-center md:text-left"
+          className="mb-8 md:mb-12 text-center md:text-left"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-brand-primary">
             Technical Proficiency
@@ -330,19 +366,106 @@ export const Skills: React.FC = React.memo(() => {
           <div className="w-20 h-1 bg-brand-accent/50 rounded-full mx-auto md:mx-0"></div>
         </motion.div>
 
+        {/* Search and Filter Controls */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8 md:mb-12 space-y-4"
         >
-          {skillCategories.map((cat, idx) => (
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-secondary/50" />
+            <input
+              type="text"
+              placeholder="Search skills..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-12 py-3 bg-brand-dark/50 border border-brand-primary/10 rounded-xl text-brand-primary placeholder:text-brand-secondary/50 focus:outline-none focus:border-brand-accent/50 focus:ring-2 focus:ring-brand-accent/20 transition-all"
+            />
+            {searchQuery && (
+              <motion.button
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setSearchQuery('')}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-secondary/50 hover:text-brand-accent transition-colors"
+              >
+                <X size={18} />
+              </motion.button>
+            )}
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedCategory(null)}
+              className={`px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all ${
+                selectedCategory === null
+                  ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+                  : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
+              }`}
+            >
+              All Skills
+            </motion.button>
+            {skillCategories.map((cat) => (
+              <motion.button
+                key={cat.name}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory(cat.name === selectedCategory ? null : cat.name)}
+                className={`px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-2 ${
+                  selectedCategory === cat.name
+                    ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+                    : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
+                }`}
+              >
+                <span className="text-base">{cat.icon}</span>
+                {cat.name}
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Results Count */}
+          {(searchQuery || selectedCategory) && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-sm text-brand-secondary/70 font-mono"
+            >
+              Found {filteredCategories.reduce((acc, cat) => acc + cat.skills.length, 0)} skills
+              {selectedCategory && ` in ${selectedCategory}`}
+              {searchQuery && ` matching "${searchQuery}"`}
+            </motion.p>
+          )}
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedCategory + searchQuery}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          >
+            {filteredCategories.map((cat, idx) => (
             <motion.div
               key={cat.name}
               variants={cardVariants}
-              whileHover={{ scale: 1.02, borderColor: 'rgba(34, 211, 238, 0.3)' }}
-              className="p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] group/card relative overflow-hidden"
+              whileHover={{
+                scale: 1.03,
+                borderColor: 'rgba(34, 211, 238, 0.3)',
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{
+                scale: 0.98,
+                transition: { duration: 0.1, type: 'spring', stiffness: 400 }
+              }}
+              className="p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] active:shadow-[0_0_40px_rgba(34,211,238,0.15)] group/card relative overflow-hidden cursor-pointer"
             >
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -364,33 +487,72 @@ export const Skills: React.FC = React.memo(() => {
               {cat.type === 'bar' ? (
                   <div className="space-y-6 mt-auto">
                     {cat.skills.map((skill, sIdx) => (
-                      <div key={skill.name} className="group/skill">
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                        transition={{
+                          delay: (idx * 0.1) + (sIdx * 0.05),
+                          duration: 0.4,
+                          type: 'spring',
+                          stiffness: 100
+                        }}
+                        whileHover={{ x: 5 }}
+                        className="group/skill"
+                      >
                         <div className="flex justify-between mb-2">
                           <div className="flex items-center gap-2">
                             {getSkillIcon(skill.name) && (
-                                <span className="text-brand-primary/80 group-hover/skill:scale-110 transition-transform">{getSkillIcon(skill.name)}</span>
+                                <motion.span
+                                  whileHover={{ scale: 1.2, rotate: 5 }}
+                                  className="text-brand-primary/80 group-hover/skill:scale-110 transition-transform"
+                                >
+                                  {getSkillIcon(skill.name)}
+                                </motion.span>
                             )}
-                            <span className="text-xs font-mono text-brand-secondary/70 uppercase tracking-wider group-hover/skill:text-brand-primary transition-colors">{skill.name}</span>
+                            <span className="text-xs font-mono text-brand-secondary/70 uppercase tracking-wider group-hover/skill:text-brand-primary transition-colors select-none">{skill.name}</span>
                           </div>
-                          <span className="text-xs font-mono text-brand-secondary group-hover/skill:text-brand-accent transition-colors">{skill.level}%</span>
+                          <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={isVisible ? { opacity: 1 } : {}}
+                            transition={{ delay: (idx * 0.1) + (sIdx * 0.05) + 0.3 }}
+                            className="text-xs font-mono text-brand-secondary group-hover/skill:text-brand-accent transition-colors tabular-nums"
+                          >
+                            {skill.level}%
+                          </motion.span>
                         </div>
                         {/* Segmented Bar with Animation */}
-                        <div className="flex gap-1 h-1.5">
+                        <div className="flex gap-1 h-2 group-hover/skill:h-2.5 transition-all">
                             {[...Array(10)].map((_, i) => (
-                                <div 
-                                    key={i} 
-                                    className={`flex-1 rounded-sm transition-all duration-500 ease-out delay-[${(idx * 100) + (sIdx * 50) + (i * 30)}ms] ${
-                                        isVisible && (i * 10) < (skill.level || 0)
-                                        ? (idx % 3 === 0 ? 'bg-brand-accent' : idx % 3 === 1 ? 'bg-brand-purple' : 'bg-green-400') 
-                                        : 'bg-brand-black opacity-20'
-                                    }`}
-                                    style={{
-                                        opacity: isVisible && (i * 10) < (skill.level || 0) ? 1 : 0.2
+                                <motion.div
+                                    key={i}
+                                    initial={{ scaleX: 0, opacity: 0 }}
+                                    animate={isVisible && (i * 10) < (skill.level || 0) ? {
+                                      scaleX: 1,
+                                      opacity: 1
+                                    } : {
+                                      scaleX: 1,
+                                      opacity: 0.15
                                     }}
-                                ></div>
+                                    transition={{
+                                      delay: (idx * 0.05) + (sIdx * 0.03) + (i * 0.02),
+                                      duration: 0.4,
+                                      type: 'spring',
+                                      stiffness: 200
+                                    }}
+                                    whileHover={{
+                                      scaleY: 1.3,
+                                      transition: { duration: 0.2 }
+                                    }}
+                                    className={`flex-1 rounded-sm origin-left ${
+                                        isVisible && (i * 10) < (skill.level || 0)
+                                        ? (idx % 3 === 0 ? 'bg-brand-accent shadow-[0_0_8px_rgba(34,211,238,0.4)]' : idx % 3 === 1 ? 'bg-brand-purple shadow-[0_0_8px_rgba(168,85,247,0.4)]' : 'bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.4)]')
+                                        : 'bg-brand-black/50'
+                                    }`}
+                                ></motion.div>
                             ))}
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
               ) : (
@@ -398,21 +560,66 @@ export const Skills: React.FC = React.memo(() => {
                     {cat.skills.map((skill, sIdx) => {
                         const icon = getSkillIcon(skill.name);
                         return (
-                            <span 
-                                key={skill.name} 
-                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-black border border-brand-primary/10 text-xs font-mono font-bold text-brand-secondary hover:text-brand-primary hover:border-brand-accent/50 transition-all cursor-default hover:scale-105 duration-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
-                                style={{ transitionDelay: `${(idx * 100) + (sIdx * 30)}ms` }}
+                            <motion.span
+                                key={skill.name}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                                transition={{
+                                  delay: (idx * 0.05) + (sIdx * 0.02),
+                                  duration: 0.3,
+                                  type: 'spring',
+                                  stiffness: 200
+                                }}
+                                whileHover={{
+                                  scale: 1.1,
+                                  y: -2,
+                                  transition: { duration: 0.2 }
+                                }}
+                                whileTap={{
+                                  scale: 0.95,
+                                  transition: { duration: 0.1 }
+                                }}
+                                onHoverStart={() => setHoveredSkill(skill.name)}
+                                onHoverEnd={() => setHoveredSkill(null)}
+                                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-brand-black border border-brand-primary/10 text-xs font-mono font-bold text-brand-secondary hover:text-brand-primary hover:border-brand-accent/50 hover:bg-brand-accent/5 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)] active:shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all cursor-pointer select-none`}
                             >
-                                {icon && <span className="opacity-80 scale-90">{icon}</span>}
+                                {icon && <span className="opacity-80 scale-90 transition-transform group-hover:scale-100">{icon}</span>}
                                 {skill.name}
-                            </span>
+                            </motion.span>
                         );
                     })}
                   </div>
               )}
             </motion.div>
           ))}
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Empty State */}
+        {filteredCategories.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-16 md:py-24"
+          >
+            <FileSearch size={48} className="mx-auto mb-4 text-brand-secondary/30" />
+            <h3 className="text-xl font-bold text-brand-secondary mb-2">No skills found</h3>
+            <p className="text-brand-secondary/70 mb-6">
+              Try adjusting your search or filter criteria
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory(null);
+              }}
+              className="px-6 py-3 bg-brand-accent text-brand-base rounded-lg font-mono font-bold hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all"
+            >
+              Clear Filters
+            </motion.button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
