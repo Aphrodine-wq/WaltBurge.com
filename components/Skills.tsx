@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { SectionId } from '../types';
 import { 
   Cpu, Globe, Database, Bot, Terminal, Code2, Cloud, Github, 
@@ -289,26 +290,59 @@ export const Skills: React.FC = React.memo(() => {
     return () => observer.disconnect();
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
-    <section ref={sectionRef} id={SectionId.SKILLS} className="py-16 md:py-32 px-4 md:px-6 bg-brand-surface relative overflow-hidden transition-colors duration-300">
-      
+    <section ref={sectionRef} id={SectionId.SKILLS} className="py-20 md:py-32 px-4 md:px-6 bg-brand-surface relative overflow-hidden transition-colors duration-300">
+
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-black/10 to-transparent pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="mb-12 md:mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 md:mb-20 text-center md:text-left"
+        >
           <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-brand-primary">
             Technical Proficiency
           </h2>
-          <div className="w-20 h-1 bg-brand-accent/50 rounded-full"></div>
-        </div>
+          <div className="w-20 h-1 bg-brand-accent/50 rounded-full mx-auto md:mx-0"></div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+        >
           {skillCategories.map((cat, idx) => (
-            <div 
-              key={cat.name} 
-              className={`p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 hover:border-brand-accent/30 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] group/card relative overflow-hidden ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: `${idx * 100}ms` }}
+            <motion.div
+              key={cat.name}
+              variants={cardVariants}
+              whileHover={{ scale: 1.02, borderColor: 'rgba(34, 211, 238, 0.3)' }}
+              className="p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] group/card relative overflow-hidden"
             >
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -376,9 +410,9 @@ export const Skills: React.FC = React.memo(() => {
                     })}
                   </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

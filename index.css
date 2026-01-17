@@ -25,12 +25,16 @@
   --bg-primary: 3 3 3;       /* #030303 - Deepest Black */
   --bg-secondary: 10 10 10;  /* #0a0a0a - Secondary Black */
   --bg-surface: 18 18 18;    /* #121212 - Surface Gray */
-  
+
   --text-primary: 235 235 235;   /* #ebebeb - Off-White */
   --text-secondary: 156 163 175; /* #9ca3af - Muted Gray */
-  
+
   --border-color: 42 42 42;      /* #2a2a2a */
   --accent-color: 34 211 238;    /* #22d3ee - Cyan */
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

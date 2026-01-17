@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { Project, SectionId } from '../types';
 import { Badge } from './ui/badge';
 import { Skeleton } from './ui/skeleton';
@@ -367,16 +368,41 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
 
   const clearFilter = () => onFilterChange(null);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
-    <section id={SectionId.PROJECTS} className="py-16 md:py-32 px-4 bg-brand-base relative border-t border-brand-border/10 transition-colors duration-300">
-      
+    <section id={SectionId.PROJECTS} className="py-20 md:py-32 px-4 md:px-6 bg-brand-base relative border-t border-brand-border/10 transition-colors duration-300">
+
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-20 gap-6 text-center md:text-left"
+        >
           <div className="space-y-4">
             <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter">
               Selected Works
             </h2>
-            <div className="h-1 w-20 bg-brand-accent rounded-full"></div>
+            <div className="h-1 w-20 bg-brand-accent rounded-full mx-auto md:mx-0"></div>
           </div>
           <div className="hidden md:block">
              <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50 backdrop-blur-sm">
@@ -384,7 +410,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
                 ALL SYSTEMS OPERATIONAL
              </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Active Filter Indicator */}
         {activeFilter && (
@@ -402,12 +428,20 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-          {filteredProjects.map((project) => (
-            <div 
-                key={project.id} 
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0"
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div
+                key={project.id}
+                variants={cardVariants}
+                whileHover={{ scale: 1.02, zIndex: 10 }}
                 onClick={() => onProjectClick?.(project)}
-                className="group/card relative overflow-hidden bg-brand-base hover:z-10 transition-all duration-500 cursor-pointer h-[380px] md:h-[450px]"
+                className="group/card relative overflow-hidden bg-brand-base transition-all duration-500 cursor-pointer h-[380px] md:h-[450px]"
             >
               
               {/* Image Container - Full Height - Seamless */}
@@ -451,9 +485,9 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
                     </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
         
         {filteredProjects.length === 0 && (
             <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
