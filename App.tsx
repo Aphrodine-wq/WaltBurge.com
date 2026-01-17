@@ -76,12 +76,13 @@ const Navbar: React.FC<NavbarProps> = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-fade-in flex flex-col items-center gap-8">
-           {['ABOUT', 'PROJECTS', 'SKILLS'].map((item) => (
+        <div className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-in slide-in-from-right-full duration-300 flex flex-col items-center gap-8">
+           {['ABOUT', 'PROJECTS', 'SKILLS'].map((item, index) => (
                 <button 
                     key={item}
                     onClick={() => scrollTo(item.toLowerCase())} 
-                    className="text-2xl font-black text-brand-primary hover:text-brand-accent transition-colors tracking-tighter uppercase"
+                    className="text-3xl font-black text-brand-primary hover:text-brand-accent transition-colors tracking-tighter uppercase animate-in slide-in-from-bottom-4 fade-in fill-mode-forwards opacity-0"
+                    style={{ animationDelay: `${index * 100 + 150}ms` }}
                 >
                   {item}
                 </button>
@@ -89,7 +90,8 @@ const Navbar: React.FC<NavbarProps> = () => {
             <Button 
               onClick={() => scrollTo(SectionId.CONTACT)}
               variant="default"
-              className="mt-4 w-full max-w-xs text-sm"
+              className="mt-4 w-full max-w-xs text-lg py-6 animate-in slide-in-from-bottom-4 fade-in fill-mode-forwards opacity-0"
+              style={{ animationDelay: '450ms' }}
             >
               Contact System
             </Button>

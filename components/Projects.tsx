@@ -407,7 +407,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <div 
                 key={project.id} 
                 onClick={() => onProjectClick?.(project)}
-                className="group/card relative overflow-hidden bg-brand-base hover:z-10 transition-all duration-500 cursor-pointer h-[450px]"
+                className="group/card relative overflow-hidden bg-brand-base hover:z-10 transition-all duration-500 cursor-pointer h-[380px] md:h-[450px]"
             >
               
               {/* Image Container - Full Height - Seamless */}

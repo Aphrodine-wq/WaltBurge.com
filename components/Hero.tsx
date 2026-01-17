@@ -103,7 +103,10 @@ export const Hero: React.FC = React.memo(() => {
     }
 
     const nodes: Node[] = [];
-    const nodeCount = Math.min(Math.floor(width * height / 12000), 80); 
+    // Mobile optimization: significantly reduce node count density
+    const density = window.innerWidth < 768 ? 25000 : 12000;
+    const maxNodes = window.innerWidth < 768 ? 30 : 80;
+    const nodeCount = Math.min(Math.floor(width * height / density), maxNodes);
 
     const initNodes = (count: number) => {
         nodes.length = 0;
@@ -306,7 +309,7 @@ export const Hero: React.FC = React.memo(() => {
         </div>
 
         {/* Main Title - Mobile Optimized Size */}
-        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-4xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[1.1] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
+        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[0.95] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
           WALT<span className="text-brand-accent">.</span>BURGE
         </h1>
         

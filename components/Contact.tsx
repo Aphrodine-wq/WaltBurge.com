@@ -21,7 +21,7 @@ export const Contact: React.FC = () => {
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         
-        <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-24 items-start">
             
             {/* Left Column: Heading */}
             <div>
