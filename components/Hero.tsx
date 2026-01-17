@@ -37,7 +37,14 @@ const FloatingIcons = React.memo(() => {
                         scale: 1.3,
                         color: 'rgb(34, 211, 238)'
                     }}
-                    className="absolute pointer-events-auto transition-colors duration-300 scale-[1.0] md:scale-[1.5] text-brand-primary/5"
+                    whileTap={{
+                        opacity: 1,
+                        scale: 1.5,
+                        rotate: 180,
+                        color: 'rgb(34, 211, 238)',
+                        transition: { duration: 0.3, type: 'spring', stiffness: 300 }
+                    }}
+                    className="absolute pointer-events-auto transition-colors duration-300 scale-[1.0] md:scale-[1.5] text-brand-primary/5 cursor-pointer active:cursor-grabbing"
                     style={{
                         top: item.y,
                         left: item.x,
@@ -58,14 +65,37 @@ export const Hero: React.FC = React.memo(() => {
   const targetRef = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
 
-  // Smooth Parallax Effect with Lerp
+  // Smooth Parallax Effect with Lerp - Mouse and Touch Support
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
        const { innerWidth, innerHeight } = window;
-       targetRef.current = { 
+       targetRef.current = {
          x: (e.clientX / innerWidth - 0.5) * 2,
          y: (e.clientY / innerHeight - 0.5) * 2
        };
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+       if (e.touches.length > 0) {
+         const touch = e.touches[0];
+         const { innerWidth, innerHeight } = window;
+         targetRef.current = {
+           x: (touch.clientX / innerWidth - 0.5) * 2,
+           y: (touch.clientY / innerHeight - 0.5) * 2
+         };
+       }
+    };
+
+    // Device orientation for mobile tilt effect
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.beta !== null && e.gamma !== null && window.innerWidth < 768) {
+        // Map device tilt to parallax movement
+        // beta: front-to-back tilt (-180 to 180), gamma: left-to-right tilt (-90 to 90)
+        targetRef.current = {
+          x: Math.max(-1, Math.min(1, e.gamma / 45)), // Normalize to -1 to 1
+          y: Math.max(-1, Math.min(1, (e.beta - 45) / 45)) // Center around 45 degrees
+        };
+      }
     };
 
     const animate = () => {
@@ -92,15 +122,26 @@ export const Hero: React.FC = React.memo(() => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    // Request device orientation permission on iOS 13+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      // Permission will be requested on first user interaction
+    } else if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+
     animate();
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('deviceorientation', handleOrientation);
       cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
-  // Canvas Network Animation
+  // Canvas Network Animation with Touch Support
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -123,6 +164,26 @@ export const Hero: React.FC = React.memo(() => {
     const density = window.innerWidth < 768 ? 25000 : 12000;
     const maxNodes = window.innerWidth < 768 ? 30 : 80;
     const nodeCount = Math.min(Math.floor(width * height / density), maxNodes);
+
+    // Touch tracking for canvas interaction
+    let touchActive = false;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchActive = true;
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const x = (touch.clientX - rect.left) * (width / rect.width);
+        const y = (touch.clientY - rect.top) * (height / rect.height);
+        targetRef.current = {
+          x: (x / width - 0.5) * 2,
+          y: (y / height - 0.5) * 2
+        };
+      }
+    };
+
+    const handleTouchEnd = () => {
+      touchActive = false;
+    };
 
     const initNodes = (count: number) => {
         nodes.length = 0;
@@ -217,13 +278,22 @@ export const Hero: React.FC = React.memo(() => {
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      initNodes(Math.min(Math.floor(width * height / 12000), 80));
+      const newDensity = window.innerWidth < 768 ? 25000 : 12000;
+      const newMaxNodes = window.innerWidth < 768 ? 30 : 80;
+      initNodes(Math.min(Math.floor(width * height / newDensity), newMaxNodes));
     };
 
     window.addEventListener('resize', handleResize);
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+    canvas.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+      canvas.removeEventListener('touchcancel', handleTouchEnd);
     };
   }, []);
 
@@ -372,32 +442,38 @@ export const Hero: React.FC = React.memo(() => {
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{
+              scale: 0.92,
+              transition: { duration: 0.1, type: 'spring', stiffness: 400, damping: 17 }
+            }}
             className="w-full sm:w-auto"
           >
             <Button
               onClick={scrollToProjects}
               variant="outline"
-              className="relative min-w-[200px] w-full sm:w-auto overflow-hidden group"
+              className="relative min-w-[200px] w-full sm:w-auto overflow-hidden group active:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
             >
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.0),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.0),transparent_55%)] group-hover:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.35),transparent_55%)] transition-colors duration-500" />
-              <div className="absolute -inset-[1px] opacity-0 group-hover:opacity-100 animate-orbit-glow" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.0),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.0),transparent_55%)] group-hover:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.35),transparent_55%)] group-active:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.5),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.5),transparent_55%)] transition-colors duration-500" />
+              <div className="absolute -inset-[1px] opacity-0 group-hover:opacity-100 group-active:opacity-100 animate-orbit-glow" />
               <span className="relative z-10 flex items-center justify-center gap-2">
                 <Database size={16} />
                 <span>View Projects</span>
-                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <ChevronRight size={16} className="group-hover:translate-x-1 group-active:translate-x-2 transition-transform" />
               </span>
             </Button>
           </motion.div>
           <motion.div
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{
+              scale: 0.92,
+              transition: { duration: 0.1, type: 'spring', stiffness: 400, damping: 17 }
+            }}
             className="w-full sm:w-auto"
           >
             <Button
               onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
               variant="default"
-              className="min-w-[200px] w-full sm:w-auto"
+              className="min-w-[200px] w-full sm:w-auto active:shadow-[0_0_25px_rgba(34,211,238,0.6)] active:bg-brand-accent/90 transition-all"
             >
               Contact System
             </Button>
@@ -413,7 +489,13 @@ export const Hero: React.FC = React.memo(() => {
           y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
         }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity cursor-pointer z-40"
+        whileTap={{
+          scale: 0.9,
+          opacity: 1,
+          y: 5,
+          transition: { duration: 0.1, type: 'spring', stiffness: 400 }
+        }}
+        className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity cursor-pointer z-40 active:text-brand-accent"
         onClick={scrollToProjects}
       >
         <span className="text-[10px] font-mono uppercase tracking-widest text-brand-secondary">Scroll</span>
