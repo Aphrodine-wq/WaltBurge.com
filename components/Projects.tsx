@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Project, SectionId } from '../types';
+import { Badge } from './ui/badge';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { 
   ExternalLink, Github, Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
   Binary, Box, Cloud, Code2, Command, Cpu, Database, FileCode, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
@@ -301,34 +303,34 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
       
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-         <span className="bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-brand-primary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
+         <Badge variant="secondary" className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5">
             <CategoryIcon category={project.category} />
-            {project.category}
-         </span>
+            <span className="ml-2">{project.category}</span>
+         </Badge>
          
          {project.status && (
-            <span className={`bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg ${
-                project.status === 'Live' ? 'text-green-400' : 
-                project.status === 'Beta' ? 'text-brand-accent' :
-                project.status === 'Archived' ? 'text-gray-400' : 'text-brand-purple'
+            <Badge variant="outline" className={`bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 ${
+                project.status === 'Live' ? 'text-green-400 border-green-400/20' : 
+                project.status === 'Beta' ? 'text-brand-accent border-brand-accent/20' :
+                project.status === 'Archived' ? 'text-gray-400 border-gray-400/20' : 'text-brand-purple border-brand-purple/20'
             }`}>
-               <span className={`w-1.5 h-1.5 rounded-full ${
+               <span className={`w-1.5 h-1.5 rounded-full mr-2 ${
                   project.status === 'Live' ? 'bg-green-400 animate-pulse' : 
                   project.status === 'Beta' ? 'bg-brand-accent animate-pulse' :
                   project.status === 'Archived' ? 'bg-gray-400' : 'bg-brand-purple'
                }`}></span>
                {project.status}
-            </span>
+            </Badge>
          )}
       </div>
 
       {/* Year Badge - Top Left */}
       {project.year && (
         <div className="absolute top-4 left-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 delay-75">
-             <span className="bg-brand-base/90 backdrop-blur-md border border-brand-border/20 text-brand-secondary text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2 uppercase tracking-wide shadow-lg">
-                <Calendar size={12} />
+             <Badge variant="secondary" className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 text-brand-secondary">
+                <Calendar size={12} className="mr-2" />
                 {project.year}
-             </span>
+             </Badge>
         </div>
       )}
     </div>
@@ -416,9 +418,16 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
                 <div className="space-y-4 h-0 opacity-0 group-hover/card:h-auto group-hover/card:opacity-100 transition-all duration-500 delay-75 overflow-hidden">
                     <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
                         {project.techStack.slice(0, 5).map((tech) => (
-                            <div key={tech} className="p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition-colors group/icon" title={tech}>
-                                <TechIcon tag={tech} isActive={true} />
-                            </div>
+                            <Tooltip key={tech}>
+                                <TooltipTrigger>
+                                    <div className="p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition-colors group/icon cursor-help">
+                                        <TechIcon tag={tech} isActive={true} />
+                                    </div>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <p>{tech}</p>
+                                </TooltipContent>
+                            </Tooltip>
                         ))}
                         {project.techStack.length > 5 && (
                             <span className="text-[10px] font-mono font-bold px-2 py-1 bg-white/5 rounded text-gray-500 flex items-center">+{project.techStack.length - 5}</span>

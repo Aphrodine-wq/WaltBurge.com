@@ -3,6 +3,7 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { ScrollProgress } from './components/ScrollProgress';
+import { TooltipProvider } from './components/ui/tooltip';
 import { Code2, Menu, X } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { SectionId, Project } from './types';
@@ -118,8 +119,9 @@ function App() {
 
   if (selectedProject) {
     return (
-      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
-         <Suspense fallback={null}>
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
+           <Suspense fallback={null}>
            <ProjectDetail 
               project={selectedProject} 
               onBack={handleBackToHome} 
@@ -127,12 +129,14 @@ function App() {
            />
          </Suspense>
       </div>
-    );
-  }
+    </TooltipProvider>
+  );
+}
 
   return (
-    <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
-      <ScrollProgress />
+    <TooltipProvider>
+      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
+        <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
@@ -151,7 +155,8 @@ function App() {
         </Suspense>
       </main>
       <Contact />
-    </div>
+      </div>
+    </TooltipProvider>
   );
 }
 
