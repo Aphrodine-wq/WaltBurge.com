@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Project, SectionId } from '../types';
 import { Badge } from './ui/badge';
+import { Skeleton } from './ui/skeleton';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import { 
   ExternalLink, Github, Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
@@ -273,6 +274,17 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
   return (
     <div className="h-full w-full overflow-hidden relative bg-brand-surface/20 group/image">
+       
+       {/* Skeleton Loader */}
+       {!isLoaded && !hasError && (
+         <div className="absolute inset-0 z-20">
+            <Skeleton className="w-full h-full bg-brand-surface/80" />
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin"></div>
+            </div>
+         </div>
+       )}
+
        {/* Fallback Gradient (Visible on Error) */}
        {hasError && (
         <div 

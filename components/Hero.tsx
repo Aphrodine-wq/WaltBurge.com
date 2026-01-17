@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ChevronRight, Cpu, Terminal, Database, Cloud, Code2, Globe, Server, Box, Brain } from 'lucide-react';
 import { Button } from './ui/button';
 import { SectionId } from '../types';
@@ -212,6 +212,37 @@ export const Hero: React.FC = React.memo(() => {
     document.getElementById(SectionId.PROJECTS)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Typewriter Logic
+  const roles = ["Systems Engineer", "AI Engineering", "Language Designer", "Game Developer"];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+        const fullText = roles[currentRoleIndex];
+        
+        if (isDeleting) {
+            setDisplayedText(fullText.substring(0, displayedText.length - 1));
+            setTypingSpeed(50);
+        } else {
+            setDisplayedText(fullText.substring(0, displayedText.length + 1));
+            setTypingSpeed(150);
+        }
+
+        if (!isDeleting && displayedText === fullText) {
+            setTimeout(() => setIsDeleting(true), 2000);
+        } else if (isDeleting && displayedText === "") {
+            setIsDeleting(false);
+            setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [displayedText, isDeleting, currentRoleIndex, typingSpeed]);
+
   return (
     <section id={SectionId.HERO} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-base perspective-container transition-colors duration-500 text-center">
       
@@ -279,27 +310,11 @@ export const Hero: React.FC = React.memo(() => {
           WALT<span className="text-brand-accent">.</span>BURGE
         </h1>
         
-        {/* Role Subtitles */}
-        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex flex-col md:flex-row items-center justify-center gap-3 md:gap-8 mb-8 md:mb-12 text-brand-secondary font-mono text-xs md:text-base border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-base/20 backdrop-blur-sm text-center transition-colors duration-500">
-            <div className="flex items-center gap-2">
-                <Terminal size={14} className="md:w-4 md:h-4 text-brand-secondary" />
-                <span className="tracking-widest uppercase">Systems Engineer</span>
-            </div>
-            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
-            <div className="flex items-center gap-2">
-                <Brain size={14} className="md:w-4 md:h-4 text-brand-secondary" />
-                <span className="tracking-widest uppercase">AI Engineering</span>
-            </div>
-            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
-            <div className="flex items-center gap-2">
-                <Cpu size={14} className="md:w-4 md:h-4 text-brand-secondary" />
-                <span className="tracking-widest uppercase">Language Designer</span>
-            </div>
-            <span className="hidden md:block w-px h-4 bg-brand-border transition-colors duration-500"></span>
-            <div className="flex items-center gap-2">
-                <Box size={14} className="md:w-4 md:h-4 text-brand-secondary" />
-                <span className="tracking-widest uppercase">Game Developer</span>
-            </div>
+        {/* Role Subtitles - Typewriter Effect */}
+        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex items-center justify-center h-12 mb-8 md:mb-12 text-brand-secondary font-mono text-xl md:text-2xl border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-base/20 backdrop-blur-sm text-center transition-colors duration-500">
+            <span className="text-brand-accent mr-2">{'>'}</span>
+            <span className="tracking-widest uppercase">{displayedText}</span>
+            <span className="animate-pulse ml-1 w-2 h-6 bg-brand-accent block"></span>
         </div>
         
         {/* Description */}

@@ -307,15 +307,18 @@ export const Skills: React.FC = React.memo(() => {
           {skillCategories.map((cat, idx) => (
             <div 
               key={cat.name} 
-              className={`p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 hover:border-brand-primary/20 transition-all duration-500 flex flex-col hover:shadow-lg hover:shadow-brand-accent/5 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              className={`p-6 md:p-8 rounded-2xl bg-brand-dark/50 border border-brand-primary/5 hover:border-brand-accent/30 transition-all duration-500 flex flex-col hover:shadow-[0_0_30px_rgba(34,211,238,0.05)] group/card relative overflow-hidden ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 rounded-xl bg-brand-primary/5 border border-brand-primary/5 group-hover:border-brand-accent/50 transition-colors">
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+              <div className="flex items-center gap-4 mb-6 relative z-10">
+                <div className="p-3 rounded-xl bg-brand-primary/5 border border-brand-primary/5 group-hover/card:border-brand-accent/50 group-hover/card:text-brand-accent transition-colors duration-300">
                   {cat.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-brand-primary group-hover:text-brand-accent transition-colors">
+                  <h3 className="text-lg font-bold text-brand-primary group-hover/card:text-brand-accent transition-colors">
                     {cat.name}
                   </h3>
                   <p className="text-xs text-brand-secondary mt-1 max-w-xs font-light">

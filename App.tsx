@@ -2,6 +2,8 @@ import React, { useState, lazy, Suspense } from 'react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
+import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
 import { TooltipProvider } from './components/ui/tooltip';
 import { Code2, Menu, X } from 'lucide-react';
@@ -155,6 +157,8 @@ function App() {
         </Suspense>
       </main>
       <Contact />
+      <Footer />
+      <BackToTop />
       </div>
     </TooltipProvider>
   );
