@@ -1,4 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
@@ -75,28 +76,46 @@ const Navbar: React.FC<NavbarProps> = () => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-in slide-in-from-right-full duration-300 flex flex-col items-center gap-8">
-           {['ABOUT', 'PROJECTS', 'SKILLS'].map((item, index) => (
-                <button 
-                    key={item}
-                    onClick={() => scrollTo(item.toLowerCase())} 
-                    className="text-3xl font-black text-brand-primary hover:text-brand-accent transition-colors tracking-tighter uppercase animate-in slide-in-from-bottom-4 fade-in fill-mode-forwards opacity-0"
-                    style={{ animationDelay: `${index * 100 + 150}ms` }}
-                >
-                  {item}
-                </button>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col items-center justify-center gap-8"
+          >
+            {['ABOUT', 'PROJECTS', 'SKILLS'].map((item, index) => (
+              <motion.button
+                key={item}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.15 }}
+                whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollTo(item.toLowerCase())}
+                className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
+              >
+                {item}
+              </motion.button>
             ))}
-            <Button 
-              onClick={() => scrollTo(SectionId.CONTACT)}
-              variant="default"
-              className="mt-4 w-full max-w-xs text-lg py-6 animate-in slide-in-from-bottom-4 fade-in fill-mode-forwards opacity-0"
-              style={{ animationDelay: '450ms' }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="w-full max-w-xs"
             >
-              Contact System
-            </Button>
-        </div>
-      )}
+              <Button
+                onClick={() => scrollTo(SectionId.CONTACT)}
+                variant="default"
+                className="mt-4 w-full text-lg py-6"
+              >
+                Contact System
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

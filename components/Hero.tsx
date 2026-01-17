@@ -1,34 +1,50 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowDown, ChevronRight, Cpu, Terminal, Database, Cloud, Code2, Globe, Server, Box, Brain } from 'lucide-react';
 import { Button } from './ui/button';
 import { SectionId } from '../types';
 
 const FloatingIcons = React.memo(() => {
     const icons = [
-        { Icon: Cpu, delay: '0s', x: '10%', y: '20%' },
-        { Icon: Terminal, delay: '2s', x: '80%', y: '15%' },
-        { Icon: Database, delay: '4s', x: '20%', y: '70%' },
-        { Icon: Cloud, delay: '1s', x: '75%', y: '65%' },
-        { Icon: Code2, delay: '3s', x: '15%', y: '40%' },
-        { Icon: Globe, delay: '5s', x: '85%', y: '35%' },
-        { Icon: Server, delay: '2.5s', x: '60%', y: '85%' },
-        { Icon: Box, delay: '0.5s', x: '35%', y: '15%' },
+        { Icon: Cpu, delay: 0, x: '10%', y: '20%' },
+        { Icon: Terminal, delay: 0.2, x: '80%', y: '15%' },
+        { Icon: Database, delay: 0.4, x: '20%', y: '70%' },
+        { Icon: Cloud, delay: 0.1, x: '75%', y: '65%' },
+        { Icon: Code2, delay: 0.3, x: '15%', y: '40%' },
+        { Icon: Globe, delay: 0.5, x: '85%', y: '35%' },
+        { Icon: Server, delay: 0.25, x: '60%', y: '85%' },
+        { Icon: Box, delay: 0.05, x: '35%', y: '15%' },
     ];
 
     return (
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
             {icons.map((item, index) => (
-                <div
+                <motion.div
                     key={index}
-                    className="absolute animate-float pointer-events-auto transition-all duration-500 hover:opacity-100 hover:text-brand-accent hover:text-glow scale-[1.0] md:scale-[1.5] hover:scale-[1.2] md:hover:scale-[1.7] text-brand-primary/5 opacity-10"
+                    initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                    animate={{
+                        opacity: [0.1, 0.15, 0.1],
+                        scale: [1, 1.1, 1],
+                        y: [0, -20, 0]
+                    }}
+                    transition={{
+                        opacity: { duration: 6, repeat: Infinity, delay: item.delay },
+                        scale: { duration: 6, repeat: Infinity, delay: item.delay },
+                        y: { duration: 6, repeat: Infinity, delay: item.delay }
+                    }}
+                    whileHover={{
+                        opacity: 1,
+                        scale: 1.3,
+                        color: 'rgb(34, 211, 238)'
+                    }}
+                    className="absolute pointer-events-auto transition-colors duration-300 scale-[1.0] md:scale-[1.5] text-brand-primary/5"
                     style={{
                         top: item.y,
                         left: item.x,
-                        animationDelay: item.delay,
                     }}
                 >
                     <item.Icon size={48} className="md:w-16 md:h-16" />
-                </div>
+                </motion.div>
             ))}
         </div>
     );
@@ -297,68 +313,112 @@ export const Hero: React.FC = React.memo(() => {
       />
       
       {/* Foreground Content */}
-      <div className="relative z-30 text-center px-4 max-w-6xl mx-auto flex flex-col items-center justify-center">
-        
+      <div className="relative z-30 text-center px-4 sm:px-6 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen">
+
         {/* Status Badge */}
-        <div className="animate-slide-up opacity-0 [animation-delay:0.1s] mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/5 text-brand-accent backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-colors duration-500">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-6 md:mb-10 inline-flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border border-brand-accent/30 bg-brand-accent/5 text-brand-accent backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-colors duration-500"
+        >
             <div className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
             </div>
             <span className="text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase font-bold">System Online</span>
-        </div>
+        </motion.div>
 
         {/* Main Title - Mobile Optimized Size */}
-        <h1 className="animate-slide-up opacity-0 [animation-delay:0.3s] text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[0.95] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[0.95] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500"
+        >
           WALT<span className="text-brand-accent">.</span>BURGE
-        </h1>
-        
+        </motion.h1>
+
         {/* Role Subtitles - Typewriter Effect */}
-        <div className="animate-slide-up opacity-0 [animation-delay:0.5s] flex items-center justify-center h-12 mb-8 md:mb-12 text-brand-secondary font-mono text-xl md:text-2xl border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-base/20 backdrop-blur-sm text-center transition-colors duration-500">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex items-center justify-center h-12 sm:h-14 mb-8 md:mb-12 text-brand-secondary font-mono text-lg sm:text-xl md:text-2xl border-y border-brand-primary/5 py-4 md:py-6 w-full max-w-5xl bg-brand-base/20 backdrop-blur-sm text-center transition-colors duration-500 px-4"
+        >
             <span className="text-brand-accent mr-2">{'>'}</span>
             <span className="tracking-widest uppercase">{displayedText}</span>
             <span className="animate-pulse ml-1 w-2 h-6 bg-brand-accent block"></span>
-        </div>
-        
+        </motion.div>
+
         {/* Description */}
-        <p className="animate-slide-up opacity-0 [animation-delay:0.7s] text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-4 transition-colors duration-500">
-          Architecting high-performance digital ecosystems. 
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-10 md:mb-14 font-light text-center px-2 sm:px-4 transition-colors duration-500"
+        >
+          Architecting high-performance digital ecosystems.
           <br className="hidden md:block" />
           Merging bare-metal efficiency with AI intelligence.
-        </p>
+        </motion.p>
 
         {/* Action Buttons */}
-        <div className="animate-slide-up opacity-0 [animation-delay:0.9s] flex flex-col sm:flex-row gap-4 md:gap-6 w-full justify-center items-center">
-          <Button
-            onClick={scrollToProjects}
-            variant="outline"
-            className="relative min-w-[200px] w-full sm:w-auto overflow-hidden group"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="flex flex-col sm:flex-row gap-4 md:gap-6 w-full max-w-md sm:max-w-none justify-center items-stretch sm:items-center px-2"
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full sm:w-auto"
           >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.0),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.0),transparent_55%)] group-hover:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.35),transparent_55%)] transition-colors duration-500" />
-            <div className="absolute -inset-[1px] opacity-0 group-hover:opacity-100 animate-orbit-glow" />
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              <Database size={16} />
-              <span>View Projects</span>
-              <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </span>
-          </Button>
-          <Button
-            onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            variant="default"
-            className="min-w-[200px] w-full sm:w-auto"
+            <Button
+              onClick={scrollToProjects}
+              variant="outline"
+              className="relative min-w-[200px] w-full sm:w-auto overflow-hidden group"
+            >
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.0),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.0),transparent_55%)] group-hover:bg-[radial-gradient(circle_at_0%_0%,rgba(34,211,238,0.35),transparent_55%),radial-gradient(circle_at_100%_100%,rgba(34,211,238,0.35),transparent_55%)] transition-colors duration-500" />
+              <div className="absolute -inset-[1px] opacity-0 group-hover:opacity-100 animate-orbit-glow" />
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <Database size={16} />
+                <span>View Projects</span>
+                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Button>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full sm:w-auto"
           >
-            Contact System
-          </Button>
-        </div>
+            <Button
+              onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
+              variant="default"
+              className="min-w-[200px] w-full sm:w-auto"
+            >
+              Contact System
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
 
-      <div 
-        className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-pointer z-40" 
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5, y: [0, 10, 0] }}
+        transition={{
+          opacity: { delay: 1.2, duration: 0.6 },
+          y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+        }}
+        whileHover={{ opacity: 1, scale: 1.1 }}
+        className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity cursor-pointer z-40"
         onClick={scrollToProjects}
       >
         <span className="text-[10px] font-mono uppercase tracking-widest text-brand-secondary">Scroll</span>
         <ArrowDown size={16} className="text-brand-accent" />
-      </div>
+      </motion.div>
     </section>
   );
 });
