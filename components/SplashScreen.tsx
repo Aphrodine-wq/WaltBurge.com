@@ -30,7 +30,7 @@ export const SplashScreen: React.FC<{ onComplete: () => void }> = ({ onComplete 
                         initial={{ y: 50, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="font-display text-4xl md:text-6xl text-brand-primary"
+                        className="font-display text-4xl md:text-6xl text-brand-accent"
                     >
                         Walt Burge
                     </motion.h1>

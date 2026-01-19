@@ -4,10 +4,10 @@ import { Sun, Moon, Sparkles, TreeDeciduous } from 'lucide-react';
 
 export const DarkModeToggle: React.FC = () => {
     const themes = ['default', 'light', 'midnight', 'forest'];
-    const [theme, setTheme] = useState('default');
+    const [theme, setTheme] = useState('midnight');
 
     useEffect(() => {
-        const saved = localStorage.getItem('theme') || 'default';
+        const saved = localStorage.getItem('theme') || 'midnight';
         setTheme(saved);
         applyTheme(saved);
     }, []);
