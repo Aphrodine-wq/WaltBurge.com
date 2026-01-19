@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
-import { Timeline } from './components/Timeline';
 import { ThoughtLeadership } from './components/ThoughtLeadership';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -11,6 +10,8 @@ import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
 import { DarkModeToggle } from './components/DarkModeToggle';
 import { CustomCursor } from './components/CustomCursor';
+import { ArtisticNav } from './components/ArtisticNav';
+import { Marketplace } from './components/Marketplace';
 import { TooltipProvider } from './components/ui/tooltip';
 import { Code2, Menu, X } from 'lucide-react';
 import { Button } from './components/ui/button';
@@ -20,11 +21,7 @@ const Projects = lazy(() => import('./components/Projects').then(module => ({ de
 const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
 const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
 
-interface NavbarProps {
-  // Removed isLightMode props
-}
-
-const Navbar: React.FC<NavbarProps> = () => {
+const MobileBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollTo = (id: string, offset = 0) => {
@@ -41,107 +38,75 @@ const Navbar: React.FC<NavbarProps> = () => {
     });
   };
 
-  const navItems = ['ABOUT', 'EXPERTISE', 'PROJECTS', 'JOURNEY'];
+  const navItems = ['STORE', 'ABOUT', 'EXPERTISE', 'PROJECTS'];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-base/80 backdrop-blur-md border-b border-brand-border transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-          <div
-            onClick={() => scrollTo(SectionId.HERO)}
-            className="flex items-center gap-2 cursor-pointer group"
-          >
-            <div className="w-8 h-8 rounded-lg bg-brand-primary/5 flex items-center justify-center border border-brand-primary/10 group-hover:border-brand-accent/50 transition-colors">
-              <Code2 size={18} className="text-brand-accent" />
-            </div>
-            <span className="font-bold text-lg tracking-tight text-brand-primary">WB<span className="text-brand-accent">.SYSTEMS</span></span>
+      <nav className="fixed top-0 left-0 w-full z-50 md:hidden bg-brand-base/80 backdrop-blur-md border-b border-brand-border h-16 flex items-center justify-between px-6 transition-all duration-300">
+        <div
+          onClick={() => scrollTo(SectionId.HERO)}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <div className="w-8 h-8 rounded-lg bg-brand-primary/5 flex items-center justify-center border border-brand-primary/10">
+            <Code2 size={18} className="text-brand-accent" />
           </div>
-
-          <div className="flex items-center gap-4 md:gap-8">
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item.toLowerCase())}
-                  className="text-xs font-bold text-brand-secondary hover:text-brand-accent transition-colors tracking-widest uppercase relative group"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
-                </button>
-              ))}
-            </div>
-
-            <div className="hidden md:block w-px h-6 bg-brand-border" />
-
-            <div className="hidden md:block">
-              <DarkModeToggle />
-            </div>
-
-            <Button
-              onClick={() => scrollTo(SectionId.CONTACT)}
-              variant="default"
-              size="sm"
-              className="hidden md:inline-flex bg-brand-accent text-brand-base hover:bg-brand-accent/90"
-            >
-              Contact
-            </Button>
-
-            {/* Mobile Menu Toggle */}
-            <div className="md:hidden flex items-center gap-4">
-              <DarkModeToggle />
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
-              >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
+          <span className="font-bold text-lg tracking-tight text-brand-primary">WB<span className="text-brand-accent">.SYS</span></span>
         </div>
-      </nav>
+
+        <div className="flex items-center gap-4">
+          <DarkModeToggle />
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav >
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col items-center justify-center gap-8"
-          >
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item}
+        {
+          isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col items-center justify-center gap-8"
+            >
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.15 }}
+                  whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item === 'STORE' ? 'marketplace' : item.toLowerCase())}
+                  className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
+                >
+                  {item}
+                </motion.button>
+              ))}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.15 }}
-                whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item.toLowerCase())}
-                className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
+                transition={{ delay: 0.45 }}
+                className="w-full max-w-xs"
               >
-                {item}
-              </motion.button>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45 }}
-              className="w-full max-w-xs"
-            >
-              <Button
-                onClick={() => scrollTo(SectionId.CONTACT)}
-                variant="default"
-                className="mt-4 w-full text-lg py-6 bg-brand-accent text-brand-base"
-              >
-                Contact System
-              </Button>
+                <Button
+                  onClick={() => scrollTo(SectionId.CONTACT)}
+                  variant="default"
+                  className="mt-4 w-full text-lg py-6 bg-brand-accent text-brand-base"
+                >
+                  Contact System
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )
+        }
+      </AnimatePresence >
     </>
   );
 };
@@ -188,7 +153,13 @@ function App() {
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans cursor-none-on-desktop">
         <CustomCursor />
         <ScrollProgress />
-        <Navbar />
+        {/* Navigation */}
+        <MobileBar />
+        <ArtisticNav />
+        <div className="hidden md:block fixed top-6 right-6 z-50">
+          <DarkModeToggle />
+        </div>
+        <div className="film-grain" />
         <main>
           <Hero />
           <About />
@@ -202,7 +173,7 @@ function App() {
             />
           </Suspense>
 
-          <Timeline />
+          <Marketplace />
           <ThoughtLeadership />
         </main>
         <Contact />

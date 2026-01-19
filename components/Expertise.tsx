@@ -9,60 +9,60 @@ const expertiseAreas = [
         title: 'AI & Machine Learning',
         description: 'Architecting agentic workflows, RAG pipelines, and context-aware AI systems. Optimizing inference latency and designing robust AI components.',
         skills: ['LLM Integration', 'RAG Systems', 'Agentic Workflows', 'Model Optimization'],
-        color: 'from-brand-accent to-cyan-400',
-        borderColor: 'border-brand-accent/30',
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
         hoverBorder: 'group-hover:border-brand-accent',
-        glowColor: 'shadow-brand-accent/20'
+        glowColor: 'shadow-brand-accent/10'
     },
     {
         icon: Database,
         title: 'Data Engineering',
         description: 'Building scalable data pipelines, distributed systems, and high-performance databases. Expertise in data modeling and ETL optimization.',
         skills: ['Pipeline Architecture', 'Distributed Systems', 'Data Modeling', 'ETL Optimization'],
-        color: 'from-brand-purple to-purple-400',
-        borderColor: 'border-brand-purple/30',
-        hoverBorder: 'group-hover:border-brand-purple',
-        glowColor: 'shadow-brand-purple/20'
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
+        hoverBorder: 'group-hover:border-brand-accent',
+        glowColor: 'shadow-brand-accent/10'
     },
     {
         icon: Cloud,
         title: 'Enterprise Architecture',
         description: 'Designing resilient, scalable cloud infrastructure. Microservices, containerization, and orchestration at enterprise scale.',
         skills: ['Cloud Infrastructure', 'Microservices', 'Kubernetes', 'System Design'],
-        color: 'from-brand-gold to-yellow-400',
-        borderColor: 'border-brand-gold/30',
-        hoverBorder: 'group-hover:border-brand-gold',
-        glowColor: 'shadow-brand-gold/20'
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
+        hoverBorder: 'group-hover:border-brand-accent',
+        glowColor: 'shadow-brand-accent/10'
     },
     {
         icon: Cpu,
         title: 'Systems Programming',
         description: 'Low-level optimization from kernel to application. Custom language design, OS development, and performance engineering.',
         skills: ['Language Design', 'OS Development', 'Memory Management', 'Performance Tuning'],
-        color: 'from-green-400 to-emerald-500',
-        borderColor: 'border-green-400/30',
-        hoverBorder: 'group-hover:border-green-400',
-        glowColor: 'shadow-green-400/20'
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
+        hoverBorder: 'group-hover:border-brand-accent',
+        glowColor: 'shadow-brand-accent/10'
     },
     {
         icon: Network,
         title: 'Full-Stack Development',
         description: 'End-to-end application development with modern frameworks. React, Next.js, Node.js, and real-time systems.',
         skills: ['React/Next.js', 'Node.js', 'TypeScript', 'Real-time Systems'],
-        color: 'from-blue-400 to-indigo-500',
-        borderColor: 'border-blue-400/30',
-        hoverBorder: 'group-hover:border-blue-400',
-        glowColor: 'shadow-blue-400/20'
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
+        hoverBorder: 'group-hover:border-brand-accent',
+        glowColor: 'shadow-brand-accent/10'
     },
     {
         icon: Zap,
         title: 'Game Development',
         description: 'High-performance game engines, custom renderers, and interactive experiences. Unreal Engine and Metal expertise.',
         skills: ['Unreal Engine', 'Custom Renderers', 'Physics Systems', 'Real-time Graphics'],
-        color: 'from-orange-400 to-red-500',
-        borderColor: 'border-orange-400/30',
-        hoverBorder: 'group-hover:border-orange-400',
-        glowColor: 'shadow-orange-400/20'
+        color: 'text-brand-accent',
+        borderColor: 'border-brand-accent/20',
+        hoverBorder: 'group-hover:border-brand-accent',
+        glowColor: 'shadow-brand-accent/10'
     }
 ];
 
@@ -126,8 +126,8 @@ export const Expertise: React.FC = () => {
                         02. Expertise
                         <span className="inline-block w-8 h-px bg-brand-accent ml-3" />
                     </span>
-                    <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6">
-                        Domain <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">Mastery</span>
+                    <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 uppercase">
+                        Domain <span className="text-brand-accent">Mastery</span>
                     </h2>
                     <p className="text-lg text-brand-secondary max-w-2xl mx-auto">
                         Deep expertise across the full technology stack, from bare metal to AI
@@ -151,21 +151,20 @@ export const Expertise: React.FC = () => {
                             className={`group relative p-6 md:p-8 rounded-2xl border ${area.borderColor} ${area.hoverBorder} bg-brand-surface/50 backdrop-blur-sm transition-all duration-500 cursor-default overflow-hidden hover:shadow-2xl ${area.glowColor}`}
                         >
                             {/* Gradient overlay on hover */}
-                            <motion.div
-                                className={`absolute inset-0 bg-gradient-to-br ${area.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                            />
+                            <div className="absolute inset-0 bg-brand-surface opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
 
                             {/* Icon */}
                             <motion.div
                                 whileHover={{ rotate: 360, scale: 1.1 }}
                                 transition={{ duration: 0.6, type: 'spring' }}
-                                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${area.color} p-3 mb-5 relative z-10 shadow-lg`}
+                                className={`w-14 h-14 rounded-xl bg-brand-surface border border-brand-border p-3 mb-5 relative z-10 shadow-sm flex items-center justify-center group-hover:border-brand-accent/50 transition-colors`}
                             >
-                                <area.icon className="w-full h-full text-white" />
+                                <area.icon className={`w-8 h-8 ${area.color}`} />
                             </motion.div>
 
                             {/* Content */}
-                            <h3 className="text-xl md:text-2xl font-bold text-brand-primary mb-3 relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-primary group-hover:to-brand-accent transition-all duration-300">
+                            {/* Content */}
+                            <h3 className="text-xl md:text-2xl font-bold text-brand-primary mb-3 relative z-10 transition-colors duration-300 group-hover:text-brand-accent">
                                 {area.title}
                             </h3>
                             <p className="text-sm md:text-base text-brand-secondary leading-relaxed mb-5 relative z-10">

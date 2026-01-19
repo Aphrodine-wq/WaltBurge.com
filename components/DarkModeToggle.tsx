@@ -3,82 +3,68 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 
 export const DarkModeToggle: React.FC = () => {
-    const [isDark, setIsDark] = useState(true); // Default to dark mode
+    const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
-        // Check localStorage for saved preference
         const saved = localStorage.getItem('theme');
-        if (saved) {
-            setIsDark(saved === 'dark');
-        }
+        const isDarkSaved = saved === 'dark';
+        setIsDark(isDarkSaved);
+        if (isDarkSaved) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
     }, []);
 
     const toggleTheme = () => {
         const newTheme = !isDark;
         setIsDark(newTheme);
         localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-
-        // Add class to document for theme switching
-        if (newTheme) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
+        document.documentElement.classList.toggle('dark');
     };
 
     return (
         <motion.button
             onClick={toggleTheme}
-            className="relative w-14 h-7 rounded-full bg-brand-surface border border-brand-border flex items-center justify-between px-1 cursor-pointer transition-colors hover:border-brand-accent/50"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="group relative w-12 h-12 flex items-center justify-center p-0"
+            whileHover={{ scale: 1.1, rotateY: 180 }}
+            whileTap={{ scale: 0.9, rotateZ: 45 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             aria-label="Toggle dark mode"
         >
-            {/* Background slider */}
-            <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-accent/20 to-brand-purple/20"
-                initial={false}
-                animate={{
-                    opacity: isDark ? 1 : 0.5
-                }}
-                transition={{ duration: 0.3 }}
-            />
+            {/* Outer Ring */}
+            <div className="absolute inset-0 rounded-full border border-brand-border group-hover:border-brand-accent transition-colors duration-500" />
 
-            {/* Icons */}
-            <div className="relative z-10 flex items-center justify-between w-full px-0.5">
-                <motion.div
-                    animate={{
-                        opacity: isDark ? 0.4 : 1,
-                        scale: isDark ? 0.8 : 1
-                    }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <Sun size={14} className="text-yellow-400" />
-                </motion.div>
-                <motion.div
-                    animate={{
-                        opacity: isDark ? 1 : 0.4,
-                        scale: isDark ? 1 : 0.8
-                    }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <Moon size={14} className="text-brand-accent" />
-                </motion.div>
-            </div>
-
-            {/* Sliding indicator */}
+            {/* Inner Rotating Sphere */}
             <motion.div
-                className="absolute w-5 h-5 rounded-full bg-brand-primary shadow-lg"
-                initial={false}
                 animate={{
-                    x: isDark ? 28 : 2
+                    rotateY: isDark ? 180 : 0,
+                    backgroundColor: isDark ? 'rgb(var(--bg-surface))' : 'rgb(var(--bg-primary))'
                 }}
-                transition={{
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 30
-                }}
-            />
+                className="w-8 h-8 rounded-full flex items-center justify-center shadow-inner relative overflow-hidden"
+            >
+                <AnimatePresence mode="wait">
+                    {isDark ? (
+                        <motion.div
+                            key="moon"
+                            initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.5, y: -10 }}
+                        >
+                            <Moon size={16} className="text-brand-accent fill-brand-accent/20" />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="sun"
+                            initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.5, y: -10 }}
+                        >
+                            <Sun size={16} className="text-amber-500 fill-amber-500/20" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.div>
+
+            {/* Aura */}
+            <div className={`absolute inset-[-10px] rounded-full opacity-0 group-hover:opacity-10 blur-xl transition-all duration-700 ${isDark ? 'bg-brand-accent' : 'bg-amber-500'}`} />
         </motion.button>
     );
 };

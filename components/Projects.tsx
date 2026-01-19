@@ -4,7 +4,7 @@ import { Project, SectionId } from '../types';
 import { Badge } from './ui/badge';
 import { Skeleton } from './ui/skeleton';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
-import { 
+import {
   ExternalLink, Github, Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
   Binary, Box, Cloud, Code2, Command, Cpu, Database, FileCode, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
   Image as ImageIcon, X, Filter, Calendar, Circle
@@ -12,8 +12,8 @@ import {
 
 // --- Image Handling Helper ---
 const getProjectImage = (id: string, fileName: string = 'cover.jpg') => {
-    // In a real build, Vite handles public assets directly
-    return `/assets/projects/${id}/${fileName}`;
+  // In a real build, Vite handles public assets directly
+  return `/assets/projects/${id}/${fileName}`;
 };
 
 const getGradientForProject = (id: string) => {
@@ -125,6 +125,27 @@ export const projects: Project[] = [
     year: '2023'
   },
   {
+    id: 'cloudgen',
+    title: 'CloudGEN',
+    category: 'Tools',
+    description: 'AI-driven infrastructure-as-code generator for enterprise cloud environments.',
+    fullDescription: 'CloudGEN revolutionizes cloud provisioning by using generative AI to convert natural language architecture descriptions into fully compliant Terraform and CloudFormation code. It analyzes best practices, security policies, and cost constraints to generate production-ready infrastructure.',
+    challenge: 'Manual infrastructure coding is slow, error-prone, and requires deep domain expertise. Existing templates are often rigid and do not adapt to specific enterprise compliance needs.',
+    solution: 'Developed a fine-tuned LLM specialized in IaC logic, integrated with a Go-based validation engine. The system parses requirements, generates resource graphs, and output validated Terraform code. It includes a "Cost-Preview" feature that estimates monthly spend before deployment.',
+    features: [
+      'Natural Language to Terraform/CloudFormation',
+      'Real-time Cost Estimation & Forecasting',
+      'Security Policy Compliance Checks (Sentinel/OPA)',
+      'Multi-Cloud Support (AWS, Azure, GCP)'
+    ],
+    techStack: ['Go', 'Terraform', 'AWS', 'Python', 'AI'],
+    tags: ['devops', 'generative-ai', 'infrastructure'],
+    imageUrl: getProjectImage('cloudgen'),
+    images: [],
+    status: 'Beta',
+    year: '2025'
+  },
+  {
     id: 'fairtradeworker',
     title: 'FairTradeWorker.com',
     category: 'Web',
@@ -165,16 +186,16 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
   const baseClass = "transition-colors duration-300";
   const colorClass = isActive ? "text-brand-accent" : "text-brand-secondary group-hover/icon:text-brand-accent";
 
-  if (tag === 'React') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#61DAFB]`}><svg width={size} height={size} viewBox="-10.5 -9.45 21 18.9" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="0" cy="0" r="2" fill="currentColor"/><g stroke="currentColor" strokeWidth="1" fill="none"><ellipse rx="10" ry="4.5"/><ellipse rx="10" ry="4.5" transform="rotate(60)"/><ellipse rx="10" ry="4.5" transform="rotate(120)"/></g></svg></div>;
-  if (tag === 'Next.js') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-brand-primary`}><svg width={size} height={size} viewBox="0 0 180 180" fill="currentColor"><mask height="180" id="mask0_next" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style={{maskType:'alpha'}}><circle cx="90" cy="90" fill="black" r="90"/></mask><g mask="url(#mask0_next)"><circle cx="90" cy="90" data-circle="true" fill="black" r="90" stroke="currentColor" strokeWidth="6"/><path d="M149.508 157.527C151.508 158.527 153.508 155.527 155.508 153.527L118.508 102.527H123.508V73.5266H107.508V126.527L74.5082 73.5266H58.5082V126.527H74.5082V88.5266L116.508 154.527C124.508 163.527 137.508 165.527 149.508 157.527Z" fill="currentColor"/></g></svg></div>;
-  if (tag === 'TypeScript') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#3178C6]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zM17.376 17.55c.706.77 1.576 1.166 2.58 1.166 1.485 0 2.37-.87 2.37-2.19v-.06c0-1.5-.96-2.1-2.55-2.73l-.84-.33c-1.02-.42-1.38-.81-1.38-1.56v-.06c0-.81.69-1.38 1.74-1.38 1.05 0 1.74.54 2.01 1.44l1.62-.69c-.54-1.53-1.89-2.34-3.63-2.34-1.95 0-3.33 1.2-3.33 2.91v.06c0 1.53.96 2.1 2.58 2.76l.81.33c1.08.45 1.38.87 1.38 1.62v.06c0 .99-.81 1.59-1.89 1.59-1.23 0-2.07-.63-2.37-1.68l-1.65.69c.045.02.585 1.106 2.535 2.006zM8.7 12.63l1.8 1.05v-5.43h2.4v9.6h-2.4v-2.79l-1.89-1.08v3.87h-2.4v-9.6h2.49v4.38z"/></svg></div>;
-  if (tag === 'Tailwind') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#38B2AC]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89-2.288-1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/></svg></div>;
-  if (tag === 'Python') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#3776AB]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-1.23.05-1.08.14-.93.24-.8.32-.68.37-.58.42-.46.44-.37.45-.28.45-.19.41-.12.39-.06.35-.03.29-.01h4.25zM12 9c.13 0 .26.02.39.08.36.15.6.5.6.89 0 .38-.25.74-.61.89-.13.06-.26.08-.39.08s-.26-.02-.39-.08c-.36-.15-.6-.5-.6-.89 0-.38.25-.74.61-.89.13-.06.26-.08.39-.08z"/></svg></div>;
+  if (tag === 'React') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#61DAFB]`}><svg width={size} height={size} viewBox="-10.5 -9.45 21 18.9" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="0" cy="0" r="2" fill="currentColor" /><g stroke="currentColor" strokeWidth="1" fill="none"><ellipse rx="10" ry="4.5" /><ellipse rx="10" ry="4.5" transform="rotate(60)" /><ellipse rx="10" ry="4.5" transform="rotate(120)" /></g></svg></div>;
+  if (tag === 'Next.js') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-brand-primary`}><svg width={size} height={size} viewBox="0 0 180 180" fill="currentColor"><mask height="180" id="mask0_next" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style={{ maskType: 'alpha' }}><circle cx="90" cy="90" fill="black" r="90" /></mask><g mask="url(#mask0_next)"><circle cx="90" cy="90" data-circle="true" fill="black" r="90" stroke="currentColor" strokeWidth="6" /><path d="M149.508 157.527C151.508 158.527 153.508 155.527 155.508 153.527L118.508 102.527H123.508V73.5266H107.508V126.527L74.5082 73.5266H58.5082V126.527H74.5082V88.5266L116.508 154.527C124.508 163.527 137.508 165.527 149.508 157.527Z" fill="currentColor" /></g></svg></div>;
+  if (tag === 'TypeScript') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#3178C6]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0H1.125zM17.376 17.55c.706.77 1.576 1.166 2.58 1.166 1.485 0 2.37-.87 2.37-2.19v-.06c0-1.5-.96-2.1-2.55-2.73l-.84-.33c-1.02-.42-1.38-.81-1.38-1.56v-.06c0-.81.69-1.38 1.74-1.38 1.05 0 1.74.54 2.01 1.44l1.62-.69c-.54-1.53-1.89-2.34-3.63-2.34-1.95 0-3.33 1.2-3.33 2.91v.06c0 1.53.96 2.1 2.58 2.76l.81.33c1.08.45 1.38.87 1.38 1.62v.06c0 .99-.81 1.59-1.89 1.59-1.23 0-2.07-.63-2.37-1.68l-1.65.69c.045.02.585 1.106 2.535 2.006zM8.7 12.63l1.8 1.05v-5.43h2.4v9.6h-2.4v-2.79l-1.89-1.08v3.87h-2.4v-9.6h2.49v4.38z" /></svg></div>;
+  if (tag === 'Tailwind') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#38B2AC]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89-2.288-1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z" /></svg></div>;
+  if (tag === 'Python') return <div className={`${isActive ? 'grayscale-0' : 'grayscale'} group-hover/icon:grayscale-0 transition-all text-[#3776AB]`}><svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-1.23.05-1.08.14-.93.24-.8.32-.68.37-.58.42-.46.44-.37.45-.28.45-.19.41-.12.39-.06.35-.03.29-.01h4.25zM12 9c.13 0 .26.02.39.08.36.15.6.5.6.89 0 .38-.25.74-.61.89-.13.06-.26.08-.39.08s-.26-.02-.39-.08c-.36-.15-.6-.5-.6-.89 0-.38.25-.74.61-.89.13-.06.26-.08.39-.08z" /></svg></div>;
 
-  const customTextClass = isActive 
-    ? "bg-brand-accent/20 border-brand-accent text-brand-accent" 
+  const customTextClass = isActive
+    ? "bg-brand-accent/20 border-brand-accent text-brand-accent"
     : "bg-brand-surface text-brand-secondary border-brand-border group-hover/icon:text-brand-accent group-hover/icon:border-brand-accent/50";
-    
+
   if (tag === 'C++') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C++</div>;
   if (tag === 'C') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C</div>;
   if (tag === 'C#') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C#</div>;
@@ -210,75 +231,73 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
   return (
     <div className="h-full w-full overflow-hidden relative bg-brand-surface/20 group/image">
-       
-       {/* Skeleton Loader */}
-       {!isLoaded && !hasError && (
-         <div className="absolute inset-0 z-20">
-            <Skeleton className="w-full h-full bg-brand-surface/80" />
-            <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin"></div>
-            </div>
-         </div>
-       )}
 
-       {/* Fallback Gradient (Visible on Error) */}
-       {hasError && (
-        <div 
-            className={`absolute inset-0 z-10 ${getGradientForProject(project.id)} flex items-center justify-center`}
-        >
-             <div className="flex flex-col items-center gap-3 text-white/50 mix-blend-overlay opacity-50">
-                 <div className="p-4 rounded-full border border-white/20">
-                    <ImageIcon size={32} />
-                 </div>
-             </div>
+      {/* Skeleton Loader */}
+      {!isLoaded && !hasError && (
+        <div className="absolute inset-0 z-20">
+          <Skeleton className="w-full h-full bg-brand-surface/80" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin"></div>
+          </div>
         </div>
-       )}
+      )}
 
-       {/* Overlay Gradient */}
-       <div className="absolute inset-0 bg-gradient-to-t from-brand-base via-brand-base/20 to-transparent opacity-80 z-10 group-hover/card:opacity-60 transition-opacity duration-500"></div>
-       
-       <img 
-        src={project.imageUrl} 
-        alt={project.title} 
+      {/* Fallback Gradient (Visible on Error) */}
+      {hasError && (
+        <div
+          className={`absolute inset-0 z-10 ${getGradientForProject(project.id)} flex items-center justify-center`}
+        >
+          <div className="flex flex-col items-center gap-3 text-white/50 mix-blend-overlay opacity-50">
+            <div className="p-4 rounded-full border border-white/20">
+              <ImageIcon size={32} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Soft Hover Reveal - No hard masks */}
+      <div className="absolute inset-0 bg-[#0f0518]/20 transition-colors duration-500 group-hover/card:bg-transparent"></div>
+
+      <img
+        src={project.imageUrl}
+        alt={project.title}
         loading="lazy"
         onLoad={() => setIsLoaded(true)}
         onError={() => {
-            setHasError(true);
-            setIsLoaded(true);
+          setHasError(true);
+          setIsLoaded(true);
         }}
         className={`w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'} ${hasError ? 'hidden' : ''}`}
       />
-      
+
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-         <Badge variant="secondary" className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5">
-            <CategoryIcon category={project.category} />
-            <span className="ml-2">{project.category}</span>
-         </Badge>
-         
-         {project.status && (
-            <Badge variant="outline" className={`bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 ${
-                project.status === 'Live' ? 'text-green-400 border-green-400/20' : 
-                project.status === 'Beta' ? 'text-brand-accent border-brand-accent/20' :
-                project.status === 'Archived' ? 'text-gray-400 border-gray-400/20' : 'text-brand-purple border-brand-purple/20'
+        <Badge className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5">
+          <CategoryIcon category={project.category} />
+          <span className="ml-2">{project.category}</span>
+        </Badge>
+
+        {project.status && (
+          <Badge className={`bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 ${project.status === 'Live' ? 'text-green-400 border-green-400/20' :
+            project.status === 'Beta' ? 'text-brand-accent border-brand-accent/20' :
+              project.status === 'Archived' ? 'text-gray-400 border-gray-400/20' : 'text-brand-purple border-brand-purple/20'
             }`}>
-               <span className={`w-1.5 h-1.5 rounded-full mr-2 ${
-                  project.status === 'Live' ? 'bg-green-400 animate-pulse' : 
-                  project.status === 'Beta' ? 'bg-brand-accent animate-pulse' :
-                  project.status === 'Archived' ? 'bg-gray-400' : 'bg-brand-purple'
-               }`}></span>
-               {project.status}
-            </Badge>
-         )}
+            <span className={`w-1.5 h-1.5 rounded-full mr-2 ${project.status === 'Live' ? 'bg-green-400 animate-pulse' :
+              project.status === 'Beta' ? 'bg-brand-accent animate-pulse' :
+                project.status === 'Archived' ? 'bg-gray-400' : 'bg-brand-purple'
+              }`}></span>
+            {project.status}
+          </Badge>
+        )}
       </div>
 
       {/* Year Badge - Top Left */}
       {project.year && (
         <div className="absolute top-4 left-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 delay-75">
-             <Badge variant="secondary" className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 text-brand-secondary">
-                <Calendar size={12} className="mr-2" />
-                {project.year}
-             </Badge>
+          <Badge className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 text-brand-secondary">
+            <Calendar size={12} className="mr-2" />
+            {project.year}
+          </Badge>
         </div>
       )}
     </div>
@@ -286,15 +305,15 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 });
 
 interface ProjectsProps {
-    onProjectClick?: (project: Project) => void;
-    activeFilter: string | null;
-    onFilterChange: (filter: string | null) => void;
+  onProjectClick?: (project: Project) => void;
+  activeFilter: string | null;
+  onFilterChange: (filter: string | null) => void;
 }
 
 export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, activeFilter, onFilterChange }) => {
 
-  const filteredProjects = useMemo(() => activeFilter 
-    ? projects.filter(project => project.techStack.includes(activeFilter)) 
+  const filteredProjects = useMemo(() => activeFilter
+    ? projects.filter(project => project.techStack.includes(activeFilter))
     : projects, [activeFilter]);
 
   const toggleFilter = (tech: string) => {
@@ -340,27 +359,27 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <div className="h-1 w-20 bg-brand-accent rounded-full mx-auto md:mx-0"></div>
           </div>
           <div className="hidden md:block">
-             <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-brand-success animate-pulse"></span>
-                ALL SYSTEMS OPERATIONAL
-             </div>
+            <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-brand-success animate-pulse"></span>
+              ALL SYSTEMS OPERATIONAL
+            </div>
           </div>
         </motion.div>
 
         {/* Active Filter Indicator */}
         {activeFilter && (
-            <div className="flex items-center gap-3 mb-8 animate-fade-in">
-                <div className="flex items-center gap-2 text-sm text-brand-accent">
-                    <Filter size={16} />
-                    <span className="font-mono uppercase tracking-wider">Filtered by:</span>
-                </div>
-                <button 
-                    onClick={clearFilter}
-                    className="flex items-center gap-2 px-3 py-1 bg-brand-accent/10 text-brand-accent rounded-full border border-brand-accent/20 hover:bg-brand-accent/20 transition-colors text-xs font-bold uppercase tracking-wide"
-                >
-                    {activeFilter} <X size={14} />
-                </button>
+          <div className="flex items-center gap-3 mb-8 animate-fade-in">
+            <div className="flex items-center gap-2 text-sm text-brand-accent">
+              <Filter size={16} />
+              <span className="font-mono uppercase tracking-wider">Filtered by:</span>
             </div>
+            <button
+              onClick={clearFilter}
+              className="flex items-center gap-2 px-3 py-1 bg-brand-accent/10 text-brand-accent rounded-full border border-brand-accent/20 hover:bg-brand-accent/20 transition-colors text-xs font-bold uppercase tracking-wide"
+            >
+              {activeFilter} <X size={14} />
+            </button>
+          </div>
         )}
 
         <motion.div
@@ -372,63 +391,63 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
         >
           {filteredProjects.map((project, index) => (
             <motion.div
-                key={project.id}
-                variants={cardVariants}
-                whileHover={{ scale: 1.02, zIndex: 10 }}
-                onClick={() => onProjectClick?.(project)}
-                className="group/card relative overflow-hidden bg-brand-base transition-all duration-500 cursor-pointer h-[380px] md:h-[450px]"
+              key={project.id}
+              variants={cardVariants}
+              whileHover={{ y: -10, scale: 1.01 }}
+              onClick={() => onProjectClick?.(project)}
+              className="group/card relative bg-[#1c0f2a] rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(45,212,191,0.15)] transition-all duration-700 border border-white/5"
             >
-              
-              {/* Image Container - Full Height - Seamless */}
-              <div className="absolute inset-0 h-full w-full opacity-80 group-hover/card:opacity-100 transition-opacity duration-500">
+              {/* Image Container - Full Bleed */}
+              <div className="relative h-[280px] w-full overflow-hidden">
                 <ProjectCardImage project={project} />
+
+                {/* Dreamy Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1c0f2a] via-[#1c0f2a]/20 to-transparent opacity-80" />
+
+                {/* Category Floating Pill */}
+                <div className="absolute top-6 right-6">
+                  <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-xs font-sans tracking-wider text-white border border-white/10">
+                    {project.category}
+                  </span>
+                </div>
               </div>
 
-              {/* Content Overlay - Positioned at bottom */}
-              <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-brand-base via-brand-base/90 to-transparent z-20 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
-                <div className="mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover/card:text-brand-accent transition-colors">
+              {/* Content Panel - Soft & Spacious */}
+              <div className="p-8 relative z-10">
+                <div className="flex justify-between items-baseline mb-4">
+                  <h3 className="text-2xl font-serif text-white/95 leading-tight">
                     {project.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed font-light line-clamp-2 mb-4 group-hover/card:text-gray-300">
-                    {project.description}
-                    </p>
+                  </h3>
+                  <span className="text-aurora-teal/60 text-xs font-sans tracking-wide">
+                    {project.year}
+                  </span>
                 </div>
-                
-                {/* Tech Stack - Reveal on hover */}
-                <div className="space-y-4 h-0 opacity-0 group-hover/card:h-auto group-hover/card:opacity-100 transition-all duration-500 delay-75 overflow-hidden">
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
-                        {project.techStack.slice(0, 5).map((tech) => (
-                            <Tooltip key={tech}>
-                                <TooltipTrigger>
-                                    <div className="p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition-colors group/icon cursor-help">
-                                        <TechIcon tag={tech} isActive={true} />
-                                    </div>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{tech}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        ))}
-                        {project.techStack.length > 5 && (
-                            <span className="text-[10px] font-mono font-bold px-2 py-1 bg-white/5 rounded text-gray-500 flex items-center">+{project.techStack.length - 5}</span>
-                        )}
-                    </div>
-                    
-                    <div className="flex items-center text-brand-accent text-xs font-bold uppercase tracking-widest gap-2">
-                        View Case Study <ArrowRight size={14} />
-                    </div>
+
+                <p className="text-[#a78bfa] text-sm leading-relaxed font-sans mb-8 line-clamp-2">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack - Minimal Pills */}
+                <div className="flex flex-wrap gap-2">
+                  {project.techStack.slice(0, 3).map((tech) => (
+                    <span key={tech} className="px-3 py-1 rounded-full bg-aurora-purple/10 text-[10px] text-aurora-purple tracking-wide font-sans border border-aurora-purple/10">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
+
+              {/* Hover Glow Effect */}
+              <div className="absolute inset-0 border-2 border-aurora-teal/0 rounded-[2rem] group-hover/card:border-aurora-teal/20 transition-all duration-700 pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>
-        
+
         {filteredProjects.length === 0 && (
-            <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
-                <p className="text-brand-secondary font-mono">No projects found with filter "{activeFilter}".</p>
-                <button onClick={clearFilter} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider">Clear Filter</button>
-            </div>
+          <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
+            <p className="text-brand-secondary font-mono">No projects found with filter "{activeFilter}".</p>
+            <button onClick={clearFilter} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider">Clear Filter</button>
+          </div>
         )}
       </div>
     </section>
