@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    /* Space Indigo Palette */
-    --bg-deep: 42 50 75;
-    /* #2A324B - Space Indigo */
-    --bg-nebula: 28 34 53;
-    /* #1C2235 - Deep Indigo */
-    --text-glow: 255 237 223;
-    /* #FFEDDF - Linen */
+    /* Two-Tone Palette: Onyx & Jungle */
+    --bg-deep: 18 19 15;
+    /* #12130F - Onyx */
+    --bg-nebula: 18 19 15;
+    /* #12130F - Onyx (Flat) */
+    --text-glow: 91 146 121;
+    /* #5B9279 - Jungle Green */
 
-    /* Accents */
-    --aurora-teal: 165 64 45;
-    /* #A5402D - Reddish Brown (Primary Accent) */
-    --aurora-purple: 92 107 137;
-    /* #5C6B89 - Muted Slate (Secondary) */
-    --aurora-pink: 255 237 223;
-    /* #FFEDDF - Linen (Highlight) */
+    /* Accents - All Jungle Green */
+    --aurora-teal: 91 146 121;
+    /* #5B9279 */
+    --aurora-purple: 91 146 121;
+    /* #5B9279 */
+    --aurora-pink: 91 146 121;
+    /* #5B9279 */
 
     /* Semantic mapping */
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
-    --bg-surface: 58 68 88;
-    /* Lighter Indigo for surface */
+    --bg-surface: 18 19 15;
+    /* Keep surface flat Onyx or maybe slight opacity if needed, sticking to strict */
 
     --text-primary: var(--text-glow);
-    --text-secondary: 165 64 45;
-    /* Reddish Brown */
+    --text-secondary: 91 146 121;
+    /* Jungle Green */
 
     --accent-color: var(--aurora-teal);
-    --border-color: 255 237 223;
-    /* Linen used with low opacity */
+    --border-color: 91 146 121;
+    /* Jungle Green for borders */
   }
 
   body {
