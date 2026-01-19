@@ -7,17 +7,20 @@ export const DarkModeToggle: React.FC = () => {
 
     useEffect(() => {
         const saved = localStorage.getItem('theme');
-        const isDarkSaved = saved === 'dark';
-        setIsDark(isDarkSaved);
-        if (isDarkSaved) document.documentElement.classList.add('dark');
-        else document.documentElement.classList.remove('dark');
+        // Default is dark (Onyx). If saved is 'light', add light class.
+        const isLight = saved === 'light';
+        setIsDark(!isLight);
+        if (isLight) document.documentElement.classList.add('light');
+        else document.documentElement.classList.remove('light');
     }, []);
 
     const toggleTheme = () => {
-        const newTheme = !isDark;
-        setIsDark(newTheme);
-        localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-        document.documentElement.classList.toggle('dark');
+        const newIsDark = !isDark;
+        setIsDark(newIsDark);
+        localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+
+        if (!newIsDark) document.documentElement.classList.add('light');
+        else document.documentElement.classList.remove('light');
     };
 
     return (

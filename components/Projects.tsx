@@ -11,9 +11,13 @@ import {
 } from 'lucide-react';
 
 // --- Image Handling Helper ---
-const getProjectImage = (id: string, fileName: string = 'cover.jpg') => {
-  // In a real build, Vite handles public assets directly
-  return `/assets/projects/${id}/${fileName}`;
+const getProjectImage = (id: string) => {
+  // Map IDs to specific files found in public/assets/projects
+  switch (id) {
+    case 'clipsync': return '/assets/projects/clipsync/Clipsync.png';
+    // Add other known mappings or fallback to default structure if you had verified them
+    default: return `/assets/projects/${id}/cover.jpg`;
+  }
 };
 
 const getGradientForProject = (id: string) => {

@@ -48,8 +48,8 @@ export const Hero: React.FC = () => {
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-6xl md:text-8xl lg:text-9xl text-white/90 leading-[0.9] tracking-tight mb-8"
+          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-6xl md:text-8xl lg:text-9xl text-white/90 leading-[0.9] tracking-tight mb-8 drop-shadow-2xl"
         >
           <span className="block">Walt</span>
           <span className="block italic text-white/60">Burge</span>
@@ -59,7 +59,7 @@ export const Hero: React.FC = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
           className="font-sans text-lg md:text-xl text-white/50 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
         >
           Forging nebulous ideas into solid digital matter.

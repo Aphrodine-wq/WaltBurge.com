@@ -6,35 +6,54 @@
 
 @layer base {
   :root {
-    /* Two-Tone Palette: Onyx & Jungle */
+    /* Default: Dark Mode (Strict Onyx & Jungle) */
     --bg-deep: 18 19 15;
-    /* #12130F - Onyx */
+    /* Onyx #12130F */
     --bg-nebula: 18 19 15;
-    /* #12130F - Onyx (Flat) */
+    --bg-surface: 18 19 15;
+
     --text-glow: 91 146 121;
-    /* #5B9279 - Jungle Green */
+    /* Jungle Green #5B9279 */
+    --text-primary: 91 146 121;
+    --text-secondary: 91 146 121;
 
-    /* Accents - All Jungle Green */
+    --accent-color: 91 146 121;
+    --border-color: 91 146 121;
+
+    /* Accents */
     --aurora-teal: 91 146 121;
-    /* #5B9279 */
     --aurora-purple: 91 146 121;
-    /* #5B9279 */
     --aurora-pink: 91 146 121;
-    /* #5B9279 */
 
-    /* Semantic mapping */
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
-    --bg-surface: 18 19 15;
-    /* Keep surface flat Onyx or maybe slight opacity if needed, sticking to strict */
+  }
 
-    --text-primary: var(--text-glow);
-    --text-secondary: 91 146 121;
-    /* Jungle Green */
+  /* Inverse Mode: Light (Paper & Onyx) */
+  :root[class~="light"] {
+    --bg-deep: 240 242 240;
+    /* Paper #F0F2F0 */
+    --bg-nebula: 255 255 255;
+    /* White */
+    --bg-surface: 240 242 240;
 
-    --accent-color: var(--aurora-teal);
-    --border-color: 91 146 121;
-    /* Jungle Green for borders */
+    --text-glow: 18 19 15;
+    /* Onyx #12130F */
+    --text-primary: 18 19 15;
+    --text-secondary: 60 65 60;
+    /* Darker Gray for contrast */
+
+    --accent-color: 91 146 121;
+    /* Keep Jungle Green as Accent */
+    --border-color: 18 19 15;
+    /* Onyx Borders */
+
+    --aurora-teal: 91 146 121;
+    --aurora-purple: 91 146 121;
+    --aurora-pink: 91 146 121;
+
+    --bg-primary: var(--bg-deep);
+    --bg-secondary: var(--bg-nebula);
   }
 
   body {
@@ -78,13 +97,13 @@
   }
 
   .glass-prism {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(40px) saturate(150%);
+    -webkit-backdrop-filter: blur(40px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow:
-      0 4px 30px rgba(0, 0, 0, 0.1),
-      inset 0 0 20px rgba(255, 255, 255, 0.05);
+      0 8px 32px rgba(0, 0, 0, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
   }
 
   .liquid-border {

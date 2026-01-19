@@ -26,10 +26,10 @@ export const ArtisticNav: React.FC = () => {
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] flex justify-center">
             {/* The Floating Prism */}
             <motion.div
-                className="glass-prism rounded-full px-6 py-4 flex items-center gap-4 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:scale-105"
+                className="glass-prism rounded-full px-8 py-5 flex items-center gap-6 transition-all duration-500 hover:shadow-[0_0_60px_rgba(var(--aurora-teal),0.2)] hover:scale-[1.02] border border-white/10"
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
                 {navItems.map((item, idx) => (
                     <NavItem

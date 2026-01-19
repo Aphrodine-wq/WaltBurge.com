@@ -32,11 +32,12 @@ const skillCategories: SkillCategory[] = [
       { name: 'LLM Integration', level: 95 },
       { name: 'RAG Architecture', level: 90 },
       { name: 'Prompt Engineering', level: 98 },
-      { name: 'AI Agents', level: 88 },
+      { name: 'AI Agents (CrewAI/AutoGPT)', level: 92 },
+      { name: 'Function Calling', level: 88 },
+      { name: 'Vector Embeddings', level: 85 },
       { name: 'Fine-Tuning', level: 85 },
       { name: 'Computer Vision', level: 82 },
       { name: 'TensorFlow / PyTorch', level: 80 },
-      { name: 'Reinforcement Learning', level: 75 },
     ]
   },
   {
@@ -60,7 +61,25 @@ const skillCategories: SkillCategory[] = [
       { name: 'Ollama' },
       { name: 'Hugging Face' },
       { name: 'Groq API' },
-      { name: 'LangChain' }
+      { name: 'OpenAI API' },
+      { name: 'Anthropic API' },
+      { name: 'Google Gemini' },
+      { name: 'Pinecone' },
+      { name: 'ChromaDB' },
+      { name: 'LlamaIndex' },
+      { name: 'Pandas' },
+      { name: 'NumPy' },
+      { name: 'Weights & Biases' },
+      { name: 'Midjourney' },
+      { name: 'Stable Diffusion' },
+      { name: 'Stable Audio' },
+      { name: 'Whisper' },
+      { name: 'LM Studio' },
+      { name: 'Ollama' },
+      { name: 'Hugging Face' },
+      { name: 'Groq API' },
+      { name: 'LangChain' },
+      { name: 'CrewAI' }
     ]
   },
   {
@@ -408,8 +427,8 @@ export const Skills: React.FC = React.memo(() => {
               whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all ${selectedCategory === null
-                  ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
-                  : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
+                ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+                : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
                 }`}
             >
               All Skills
@@ -421,8 +440,8 @@ export const Skills: React.FC = React.memo(() => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(cat.name === selectedCategory ? null : cat.name)}
                 className={`px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-2 ${selectedCategory === cat.name
-                    ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
-                    : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
+                  ? 'bg-brand-accent text-brand-base shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+                  : 'bg-brand-dark/50 border border-brand-primary/10 text-brand-secondary hover:border-brand-accent/30 hover:text-brand-primary'
                   }`}
               >
                 <span className="text-base">{cat.icon}</span>
@@ -547,8 +566,8 @@ export const Skills: React.FC = React.memo(() => {
                                 transition: { duration: 0.2 }
                               }}
                               className={`flex-1 rounded-sm origin-left ${isVisible && (i * 10) < (skill.level || 0)
-                                  ? 'bg-brand-accent shadow-[0_0_8px_rgba(91,146,121,0.4)]'
-                                  : 'bg-brand-secondary/10'
+                                ? 'bg-brand-accent shadow-[0_0_8px_rgba(91,146,121,0.4)]'
+                                : 'bg-brand-secondary/10'
                                 }`}
                             ></motion.div>
                           ))}
