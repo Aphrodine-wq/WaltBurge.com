@@ -22,10 +22,15 @@ export default {
           accent: 'rgb(var(--accent-color) / <alpha-value>)',
           gold: 'rgb(var(--gold-accent) / <alpha-value>)',
           copper: 'rgb(var(--copper-accent) / <alpha-value>)',
-          purple: 'rgb(var(--purple-accent) / <alpha-value>)', 
+          purple: 'rgb(var(--purple-accent) / <alpha-value>)',
           success: '#4ade80',
           primary: 'rgb(var(--text-primary) / <alpha-value>)',
           secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+        },
+        aurora: {
+          teal: 'rgb(var(--aurora-teal) / <alpha-value>)',
+          purple: 'rgb(var(--aurora-purple) / <alpha-value>)',
+          pink: 'rgb(var(--aurora-pink) / <alpha-value>)',
         },
         navy: {
           50: '#f0f4f8',

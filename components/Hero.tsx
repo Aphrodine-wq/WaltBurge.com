@@ -22,16 +22,15 @@ export const Hero: React.FC = () => {
       id={SectionId.HERO}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* 1. Background: The Ember Flow */}
-      <div className="absolute inset-0 bg-[#360A14] z-0">
-        {/* Ember Mesh 1: Sandy Brown */}
-        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,theme(colors.aurora-teal/0.1),transparent_70%)] blur-[120px] animate-aurora mix-blend-screen" />
+      <div className="absolute inset-0 bg-[#2A324B] z-0">
+        {/* Mesh 1: Reddish Brown Accent */}
+        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.1),transparent_70%)] blur-[120px] animate-aurora mix-blend-screen" />
 
-        {/* Ember Mesh 2: Blue Slate/Deep Warmth */}
-        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,theme(colors.aurora-purple/0.15),transparent_70%)] blur-[120px] animate-float-dream mix-blend-screen" />
+        {/* Mesh 2: Muted Slate Depth */}
+        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-purple)/0.15),transparent_70%)] blur-[120px] animate-float-dream mix-blend-screen" />
 
-        {/* Ember Mesh 3: Center Warm Glow */}
-        <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vw] bg-[radial-gradient(circle_at_center,rgba(247,147,76,0.05),transparent_60%)] blur-[100px] animate-pulse-slow" />
+        {/* Mesh 3: Center Warm Glow (Linen/Reddish) */}
+        <div className="absolute top-[30%] left-[20%] w-[60vw] h-[60vw] bg-[radial-gradient(circle_at_center,rgba(165,64,45,0.05),transparent_60%)] blur-[100px] animate-pulse-slow" />
       </div>
 
       <motion.div
@@ -100,8 +99,8 @@ export const Hero: React.FC = () => {
 
       {/* Floating Ambient Elements */}
       <motion.div style={{ y: y2 }} className="absolute inset-0 pointer-events-none z-0">
-        <FloatingOrb x="10%" y="20%" size={200} color="rgba(79, 99, 103, 0.1)" delay={0} />
-        <FloatingOrb x="80%" y="60%" size={300} color="rgba(247, 147, 76, 0.08)" delay={2} />
+        <FloatingOrb x="10%" y="20%" size={200} color="rgba(92, 107, 137, 0.1)" delay={0} />
+        <FloatingOrb x="80%" y="60%" size={300} color="rgba(165, 64, 45, 0.08)" delay={2} />
       </motion.div>
 
       {/* Scroll Hint */}

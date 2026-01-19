@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    /* Retro Earth Palette */
-    --bg-deep: 54 10 20;
-    /* #360A14 - Rich Mahogany */
-    --bg-nebula: 42 8 16;
-    /* #2A0810 - Darker Mahogany */
-    --text-glow: 238 245 219;
-    /* #EEF5DB - Beige */
+    /* Space Indigo Palette */
+    --bg-deep: 42 50 75;
+    /* #2A324B - Space Indigo */
+    --bg-nebula: 28 34 53;
+    /* #1C2235 - Deep Indigo */
+    --text-glow: 255 237 223;
+    /* #FFEDDF - Linen */
 
-    /* Ember Accents */
-    --aurora-teal: 247 147 76;
-    /* #F7934C - Sandy Brown */
-    --aurora-purple: 79 99 103;
-    /* #4F6367 - Blue Slate */
-    --aurora-pink: 214 90 49;
-    /* #D65A31 - Burnt Orange */
+    /* Accents */
+    --aurora-teal: 165 64 45;
+    /* #A5402D - Reddish Brown (Primary Accent) */
+    --aurora-purple: 92 107 137;
+    /* #5C6B89 - Muted Slate (Secondary) */
+    --aurora-pink: 255 237 223;
+    /* #FFEDDF - Linen (Highlight) */
 
     /* Semantic mapping */
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
-    --bg-surface: 79 99 103;
-    /* Blue Slate primarily for surface contrast */
+    --bg-surface: 58 68 88;
+    /* Lighter Indigo for surface */
 
     --text-primary: var(--text-glow);
-    --text-secondary: 247 147 76;
-    /* Sandy Brown */
+    --text-secondary: 165 64 45;
+    /* Reddish Brown */
 
     --accent-color: var(--aurora-teal);
-    --border-color: 238 245 219;
-    /* Beige used with low opacity */
+    --border-color: 255 237 223;
+    /* Linen used with low opacity */
   }
 
   body {
