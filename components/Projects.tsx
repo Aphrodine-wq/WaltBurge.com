@@ -59,50 +59,6 @@ export const projects: Project[] = [
     year: '2024'
   },
   {
-    id: 'g-rump-ide',
-    title: 'G-Rump IDE',
-    category: 'Tools',
-    description: 'A fully integrated development environment built specifically for G-Rump.',
-    fullDescription: 'To support the adoption of G-Rump, a robust toolchain was necessary. The G-Rump IDE is a native Windows application providing a complete development lifecycle environment, from writing code to debugging binaries.',
-    challenge: 'Generic text editors lacked the understanding of G-Rump\'s specific syntax and memory ownership rules, making development slow and error-prone.',
-    solution: 'I built a custom Language Server Protocol (LSP) integration within a high-performance WPF shell. The IDE features a real-time Abstract Syntax Tree (AST) visualizer that helps developers understand how their code is being parsed and optimized by the compiler.',
-    features: [
-      'Custom Syntax Highlighting & Intelligent Autocomplete',
-      'Real-time AST (Abstract Syntax Tree) Visualizer',
-      'Integrated Debugger with Register View',
-      'Direct Compiler Linking'
-    ],
-    techStack: ['C#', 'WPF', 'LSP', 'Win32'],
-    tags: ['dx', 'visualizer', 'productivity'],
-    imageUrl: getProjectImage('g-rump-ide'),
-    images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump-ide',
-    status: 'Live',
-    year: '2024'
-  },
-  {
-    id: 'reaper',
-    title: 'Reaper',
-    category: 'Game Dev',
-    description: 'A high-fidelity iOS application featuring custom Metal rendering pipelines.',
-    fullDescription: 'Reaper is a mobile action game that pushes the limits of mobile graphics. By bypassing standard game engines and writing a custom renderer using the Metal API, Reaper achieves console-quality visuals on mobile devices.',
-    challenge: 'Achieving 60 FPS with dynamic lighting and shadow casting on mobile hardware while managing battery life and thermal throttling.',
-    solution: 'Developed a custom rendering engine using Swift and Metal. Implemented tile-based deferred rendering to handle multiple light sources efficiently. Created a custom entity-component system (ECS) to manage game state with minimal memory overhead.',
-    features: [
-      'Custom Metal Rendering Engine',
-      'Tile-Based Deferred Lighting',
-      'Custom Entity-Component System (ECS)',
-      'Optimized Touch Input Latency'
-    ],
-    techStack: ['Swift', 'Metal API', 'iOS SDK', 'UIKit'],
-    tags: ['rendering', 'optimization', 'touch-input'],
-    imageUrl: getProjectImage('reaper'),
-    images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/reaper-engine',
-    status: 'Live',
-    year: '2023'
-  },
-  {
     id: 'clipsync',
     title: 'ClipSync',
     category: 'Tools',
@@ -169,49 +125,28 @@ export const projects: Project[] = [
     year: '2023'
   },
   {
-    id: 'olemiss365',
-    title: 'OleMiss365',
+    id: 'fairtradeworker',
+    title: 'FairTradeWorker.com',
     category: 'Web',
-    description: 'Web portal architecture designed for high-traffic community engagement.',
-    fullDescription: 'OleMiss365 is a centralized hub for community events, news, and student interaction. It handles high concurrent user loads during major university events.',
-    challenge: 'Scaling to handle traffic spikes during game days and enrollment periods while maintaining sub-second response times.',
-    solution: 'Designed a serverless architecture using AWS Lambda and API Gateway. Implemented aggressive caching strategies with Redis and a Content Delivery Network (CDN) for static assets. The frontend is a highly optimized React application.',
+    description: 'Professional platform connecting workers with fair trade opportunities and ethical employment.',
+    fullDescription: 'FairTradeWorker.com is a comprehensive web platform designed to bridge the gap between ethical employers and workers seeking fair compensation and working conditions. The platform emphasizes transparency, worker rights, and sustainable employment practices.',
+    challenge: 'Creating a trustworthy marketplace that validates both employers and workers while maintaining privacy, security, and scalability across diverse geographic regions with varying labor laws.',
+    solution: 'Built a modern full-stack application using React and Node.js with robust authentication, verification systems, and real-time communication. Implemented geolocation-based job matching, secure payment processing, and a comprehensive review system to ensure accountability and transparency.',
     features: [
-      'Serverless Auto-Scaling Architecture',
-      'Real-Time Event Feeds',
-      'Secure Student Authentication (SSO)',
-      'High-Performance CDN Caching'
+      'Verified Employer & Worker Profiles',
+      'Real-Time Job Matching Algorithm',
+      'Secure Payment Escrow System',
+      'Multi-Language Support & Localization',
+      'Transparent Review & Rating System'
     ],
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-    tags: ['scalable', 'social', 'full-stack'],
-    imageUrl: getProjectImage('olemiss365'),
+    techStack: ['React', 'Node.js', 'PostgreSQL', 'TypeScript'],
+    tags: ['social-impact', 'full-stack', 'marketplace'],
+    imageUrl: getProjectImage('fairtradeworker'),
     images: [],
-    link: 'https://olemiss.edu',
-    repositoryUrl: 'https://github.com/Aphrodine-wq/olemiss365',
+    link: 'https://fairtradeworker.com',
+    repositoryUrl: 'https://github.com/Aphrodine-wq/fairtradeworker',
     status: 'Live',
-    year: '2022'
-  },
-  {
-    id: 'oxford-outdoor',
-    title: 'Oxford Outdoor Living',
-    category: 'Web',
-    description: 'High-end commercial web presence featuring interactive product galleries.',
-    fullDescription: 'A luxury commercial website designed to showcase high-end outdoor living products, including kitchens, patios, and landscapes. The platform serves as a digital showroom, allowing potential clients to visualize premium materials in their own space.',
-    challenge: 'Translating the physical quality of luxury materials (granite, marble, teak) into a digital experience without compromising load speeds or user experience on mobile devices.',
-    solution: 'Utilized Next.js for server-side rendering to ensure fast initial loads despite heavy media assets. Implemented a custom WebGL image carousel that simulates 3D depth. Used a headless CMS to allow the client to easily update product inventory without touching code.',
-    features: [
-      'Next.js Server-Side Rendering (SSR)',
-      'Custom WebGL Product Viewers',
-      'Sanity.io Headless CMS Integration',
-      'Advanced SEO & Analytics'
-    ],
-    techStack: ['TypeScript', 'Next.js', 'Tailwind', 'WebGL'],
-    tags: ['ui/ux', 'responsive', 'commercial'],
-    imageUrl: getProjectImage('oxford-outdoor'),
-    images: [],
-    link: 'https://oxfordoutdoorliving.com',
-    status: 'Live',
-    year: '2023'
+    year: '2024'
   }
 ];
 
