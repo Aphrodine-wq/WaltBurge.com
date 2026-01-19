@@ -2,10 +2,15 @@ import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
+import { Expertise } from './components/Expertise';
+import { Timeline } from './components/Timeline';
+import { ThoughtLeadership } from './components/ThoughtLeadership';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
+import { DarkModeToggle } from './components/DarkModeToggle';
+import { CustomCursor } from './components/CustomCursor';
 import { TooltipProvider } from './components/ui/tooltip';
 import { Code2, Menu, X } from 'lucide-react';
 import { Button } from './components/ui/button';
@@ -22,16 +27,27 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, offset = 0) => {
     setIsMobileMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
   };
+
+  const navItems = ['ABOUT', 'EXPERTISE', 'PROJECTS', 'JOURNEY'];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-base/80 backdrop-blur-md border-b border-brand-border">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-brand-base/80 backdrop-blur-md border-b border-brand-border transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-          <div 
+          <div
             onClick={() => scrollTo(SectionId.HERO)}
             className="flex items-center gap-2 cursor-pointer group"
           >
@@ -41,36 +57,46 @@ const Navbar: React.FC<NavbarProps> = () => {
             <span className="font-bold text-lg tracking-tight text-brand-primary">WB<span className="text-brand-accent">.SYSTEMS</span></span>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-10">
+          <div className="flex items-center gap-4 md:gap-8">
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-10">
-              {['ABOUT', 'PROJECTS', 'SKILLS'].map((item) => (
-                <button 
-                    key={item}
-                    onClick={() => scrollTo(item.toLowerCase())} 
-                    className="text-xs font-bold text-brand-secondary hover:text-brand-primary transition-colors tracking-widest uppercase"
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item.toLowerCase())}
+                  className="text-xs font-bold text-brand-secondary hover:text-brand-accent transition-colors tracking-widest uppercase relative group"
                 >
                   {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full" />
                 </button>
               ))}
             </div>
-            
-            <Button 
+
+            <div className="hidden md:block w-px h-6 bg-brand-border" />
+
+            <div className="hidden md:block">
+              <DarkModeToggle />
+            </div>
+
+            <Button
               onClick={() => scrollTo(SectionId.CONTACT)}
               variant="default"
               size="sm"
-              className="hidden md:inline-flex"
+              className="hidden md:inline-flex bg-brand-accent text-brand-base hover:bg-brand-accent/90"
             >
               Contact
             </Button>
 
             {/* Mobile Menu Toggle */}
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-brand-secondary hover:text-brand-primary transition-colors"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="md:hidden flex items-center gap-4">
+              <DarkModeToggle />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -85,7 +111,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col items-center justify-center gap-8"
           >
-            {['ABOUT', 'PROJECTS', 'SKILLS'].map((item, index) => (
+            {navItems.map((item, index) => (
               <motion.button
                 key={item}
                 initial={{ opacity: 0, y: 20 }}
@@ -93,7 +119,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                 transition={{ delay: index * 0.1 + 0.15 }}
                 whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollTo(item.toLowerCase())}
+                onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item.toLowerCase())}
                 className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
               >
                 {item}
@@ -108,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               <Button
                 onClick={() => scrollTo(SectionId.CONTACT)}
                 variant="default"
-                className="mt-4 w-full text-lg py-6"
+                className="mt-4 w-full text-lg py-6 bg-brand-accent text-brand-base"
               >
                 Contact System
               </Button>
@@ -143,43 +169,45 @@ function App() {
   if (selectedProject) {
     return (
       <TooltipProvider>
-        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
-           <Suspense fallback={null}>
-           <ProjectDetail 
-              project={selectedProject} 
-              onBack={handleBackToHome} 
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans">
+          <CustomCursor />
+          <Suspense fallback={null}>
+            <ProjectDetail
+              project={selectedProject}
+              onBack={handleBackToHome}
               onTechClick={handleTechClickFromDetail}
-           />
-         </Suspense>
-      </div>
-    </TooltipProvider>
-  );
-}
+            />
+          </Suspense>
+        </div>
+      </TooltipProvider>
+    );
+  }
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300">
+      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans cursor-none-on-desktop">
+        <CustomCursor />
         <ScrollProgress />
-      <Navbar />
-      <main>
-        <Hero />
-        
-        <About />
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Expertise />
 
-        <Suspense fallback={null}>
-          <Projects 
-              onProjectClick={handleProjectClick} 
+          <Suspense fallback={null}>
+            <Projects
+              onProjectClick={handleProjectClick}
               activeFilter={activeTechFilter}
               onFilterChange={setActiveTechFilter}
-          />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Skills />
-        </Suspense>
-      </main>
-      <Contact />
-      <Footer />
-      <BackToTop />
+            />
+          </Suspense>
+
+          <Timeline />
+          <ThoughtLeadership />
+        </main>
+        <Contact />
+        <Footer />
+        <BackToTop />
       </div>
     </TooltipProvider>
   );

@@ -5,65 +5,65 @@ import { Button } from './ui/button';
 import { SectionId } from '../types';
 
 const FloatingIcons = React.memo(() => {
-    const icons = [
-        { Icon: Cpu, delay: 0, x: '10%', y: '20%', size: 48, rotation: 0 },
-        { Icon: Terminal, delay: 0.2, x: '80%', y: '15%', size: 52, rotation: 45 },
-        { Icon: Database, delay: 0.4, x: '20%', y: '70%', size: 44, rotation: 90 },
-        { Icon: Cloud, delay: 0.1, x: '75%', y: '65%', size: 56, rotation: 135 },
-        { Icon: Code2, delay: 0.3, x: '15%', y: '40%', size: 48, rotation: 180 },
-        { Icon: Globe, delay: 0.5, x: '85%', y: '35%', size: 50, rotation: 225 },
-        { Icon: Server, delay: 0.25, x: '60%', y: '85%', size: 46, rotation: 270 },
-        { Icon: Box, delay: 0.05, x: '35%', y: '15%', size: 54, rotation: 315 },
-        { Icon: Zap, delay: 0.35, x: '5%', y: '55%', size: 42, rotation: 60 },
-        { Icon: Layers, delay: 0.15, x: '90%', y: '80%', size: 48, rotation: 120 },
-        { Icon: Network, delay: 0.45, x: '50%', y: '10%', size: 50, rotation: 180 },
-        { Icon: Activity, delay: 0.28, x: '92%', y: '50%', size: 44, rotation: 240 },
-    ];
+  const icons = [
+    { Icon: Cpu, delay: 0, x: '10%', y: '20%', size: 48, rotation: 0 },
+    { Icon: Terminal, delay: 0.2, x: '80%', y: '15%', size: 52, rotation: 45 },
+    { Icon: Database, delay: 0.4, x: '20%', y: '70%', size: 44, rotation: 90 },
+    { Icon: Cloud, delay: 0.1, x: '75%', y: '65%', size: 56, rotation: 135 },
+    { Icon: Code2, delay: 0.3, x: '15%', y: '40%', size: 48, rotation: 180 },
+    { Icon: Globe, delay: 0.5, x: '85%', y: '35%', size: 50, rotation: 225 },
+    { Icon: Server, delay: 0.25, x: '60%', y: '85%', size: 46, rotation: 270 },
+    { Icon: Box, delay: 0.05, x: '35%', y: '15%', size: 54, rotation: 315 },
+    { Icon: Zap, delay: 0.35, x: '5%', y: '55%', size: 42, rotation: 60 },
+    { Icon: Layers, delay: 0.15, x: '90%', y: '80%', size: 48, rotation: 120 },
+    { Icon: Network, delay: 0.45, x: '50%', y: '10%', size: 50, rotation: 180 },
+    { Icon: Activity, delay: 0.28, x: '92%', y: '50%', size: 44, rotation: 240 },
+  ];
 
-    return (
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            {icons.map((item, index) => (
-                <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.3, rotate: 0, y: 20 }}
-                    animate={{
-                        opacity: [0.08, 0.18, 0.08],
-                        scale: [1, 1.15, 1],
-                        rotate: [item.rotation, item.rotation + 15, item.rotation],
-                        y: [0, -25, 0]
-                    }}
-                    transition={{
-                        opacity: { duration: 7 + index * 0.3, repeat: Infinity, delay: item.delay },
-                        scale: { duration: 7 + index * 0.3, repeat: Infinity, delay: item.delay },
-                        rotate: { duration: 8 + index * 0.4, repeat: Infinity, delay: item.delay },
-                        y: { duration: 6 + index * 0.2, repeat: Infinity, delay: item.delay }
-                    }}
-                    whileHover={{
-                        opacity: 1,
-                        scale: 1.4,
-                        rotate: item.rotation + 180,
-                        color: 'rgb(34, 211, 238)',
-                        filter: 'drop-shadow(0 0 15px rgba(34, 211, 238, 0.8))'
-                    }}
-                    whileTap={{
-                        opacity: 1,
-                        scale: 1.6,
-                        rotate: item.rotation + 360,
-                        color: 'rgb(34, 211, 238)',
-                        filter: 'drop-shadow(0 0 25px rgba(34, 211, 238, 1))',
-                        transition: { duration: 0.4, type: 'spring', stiffness: 400, damping: 15 }
-                    }}
-                    className="absolute pointer-events-auto transition-all duration-300 scale-[1.0] md:scale-[1.5] text-brand-primary/5 cursor-pointer active:cursor-grabbing"
-                    style={{
-                        top: item.y,
-                        left: item.x,
-                    }}
-                >
-                    <item.Icon size={item.size} className="md:w-16 md:h-16" />
-                </motion.div>
-            ))}
-        </div>
-    );
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {icons.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 0.3, rotate: 0, y: 20 }}
+          animate={{
+            opacity: [0.08, 0.18, 0.08],
+            scale: [1, 1.15, 1],
+            rotate: [item.rotation, item.rotation + 15, item.rotation],
+            y: [0, -25, 0]
+          }}
+          transition={{
+            opacity: { duration: 7 + index * 0.3, repeat: Infinity, delay: item.delay },
+            scale: { duration: 7 + index * 0.3, repeat: Infinity, delay: item.delay },
+            rotate: { duration: 8 + index * 0.4, repeat: Infinity, delay: item.delay },
+            y: { duration: 6 + index * 0.2, repeat: Infinity, delay: item.delay }
+          }}
+          whileHover={{
+            opacity: 1,
+            scale: 1.4,
+            rotate: item.rotation + 180,
+            color: 'rgb(34, 211, 238)',
+            filter: 'drop-shadow(0 0 15px rgba(34, 211, 238, 0.8))'
+          }}
+          whileTap={{
+            opacity: 1,
+            scale: 1.6,
+            rotate: item.rotation + 360,
+            color: 'rgb(34, 211, 238)',
+            filter: 'drop-shadow(0 0 25px rgba(34, 211, 238, 1))',
+            transition: { duration: 0.4, type: 'spring', stiffness: 400, damping: 15 }
+          }}
+          className="absolute pointer-events-auto transition-all duration-300 scale-[1.0] md:scale-[1.5] text-brand-primary/5 cursor-pointer active:cursor-grabbing"
+          style={{
+            top: item.y,
+            left: item.x,
+          }}
+        >
+          <item.Icon size={item.size} className="md:w-16 md:h-16" />
+        </motion.div>
+      ))}
+    </div>
+  );
 });
 
 // Touch Ripple Effect Component
@@ -135,24 +135,24 @@ export const Hero: React.FC = React.memo(() => {
   // Smooth Parallax Effect with Lerp - Mouse and Touch Support
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-       const { innerWidth, innerHeight } = window;
-       const newX = (e.clientX / innerWidth - 0.5) * 2;
-       const newY = (e.clientY / innerHeight - 0.5) * 2;
-       targetRef.current = { x: newX, y: newY };
-       mouseX.set(e.clientX);
-       mouseY.set(e.clientY);
+      const { innerWidth, innerHeight } = window;
+      const newX = (e.clientX / innerWidth - 0.5) * 2;
+      const newY = (e.clientY / innerHeight - 0.5) * 2;
+      targetRef.current = { x: newX, y: newY };
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-       if (e.touches.length > 0) {
-         const touch = e.touches[0];
-         const { innerWidth, innerHeight } = window;
-         const newX = (touch.clientX / innerWidth - 0.5) * 2;
-         const newY = (touch.clientY / innerHeight - 0.5) * 2;
-         targetRef.current = { x: newX, y: newY };
-         mouseX.set(touch.clientX);
-         mouseY.set(touch.clientY);
-       }
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const { innerWidth, innerHeight } = window;
+        const newX = (touch.clientX / innerWidth - 0.5) * 2;
+        const newY = (touch.clientY / innerHeight - 0.5) * 2;
+        targetRef.current = { x: newX, y: newY };
+        mouseX.set(touch.clientX);
+        mouseY.set(touch.clientY);
+      }
     };
 
     // Device orientation for mobile tilt effect
@@ -170,19 +170,19 @@ export const Hero: React.FC = React.memo(() => {
       mouseRef.current.y += (targetRef.current.y - mouseRef.current.y) * 0.08;
 
       if (parallaxRef.current) {
-         const layers = parallaxRef.current.querySelectorAll('.parallax-layer');
-         layers.forEach((layer) => {
-            const speed = parseFloat((layer as HTMLElement).dataset.speed || '1');
-            const x = mouseRef.current.x * 30 * speed;
-            const y = mouseRef.current.y * 30 * speed;
-            (layer as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
-         });
+        const layers = parallaxRef.current.querySelectorAll('.parallax-layer');
+        layers.forEach((layer) => {
+          const speed = parseFloat((layer as HTMLElement).dataset.speed || '1');
+          const x = mouseRef.current.x * 30 * speed;
+          const y = mouseRef.current.y * 30 * speed;
+          (layer as HTMLElement).style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        });
       }
 
       if (gridRef.current) {
-         const tiltX = mouseRef.current.y * 8;
-         const tiltY = mouseRef.current.x * 8;
-         gridRef.current.style.transform = `perspective(1000px) rotateX(${60 + tiltX}deg) rotateY(${tiltY}deg) scale(2.2)`;
+        const tiltX = mouseRef.current.y * 8;
+        const tiltY = mouseRef.current.x * 8;
+        gridRef.current.style.transform = `perspective(1000px) rotateX(${60 + tiltX}deg) rotateY(${tiltY}deg) scale(2.2)`;
       }
 
       rafRef.current = requestAnimationFrame(animate);
@@ -228,14 +228,14 @@ export const Hero: React.FC = React.memo(() => {
     let height = canvas.height = window.innerHeight;
 
     interface Node {
-        x: number;
-        y: number;
-        vx: number;
-        vy: number;
-        radius: number;
-        color: string;
-        glowIntensity: number;
-        type: 'primary' | 'secondary' | 'accent';
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      color: string;
+      glowIntensity: number;
+      type: 'primary' | 'secondary' | 'accent';
     }
 
     const nodes: Node[] = [];
@@ -276,20 +276,20 @@ export const Hero: React.FC = React.memo(() => {
     };
 
     const initNodes = (count: number) => {
-        nodes.length = 0;
-        for (let i = 0; i < count; i++) {
-            const type = Math.random() < 0.7 ? 'primary' : (Math.random() < 0.8 ? 'secondary' : 'accent');
-            nodes.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.6,
-                vy: (Math.random() - 0.5) * 0.6,
-                radius: type === 'accent' ? Math.random() * 3 + 2 : (type === 'secondary' ? Math.random() * 2 + 1.5 : Math.random() * 1.5 + 1),
-                color: type === 'accent' ? 'rgba(34, 211, 238, 1)' : (type === 'secondary' ? 'rgba(168, 85, 247, 0.8)' : 'rgba(34, 211, 238, 0.6)'),
-                glowIntensity: Math.random() * 0.5 + 0.5,
-                type
-            });
-        }
+      nodes.length = 0;
+      for (let i = 0; i < count; i++) {
+        const type = Math.random() < 0.7 ? 'primary' : (Math.random() < 0.8 ? 'secondary' : 'accent');
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: type === 'accent' ? Math.random() * 3 + 2 : (type === 'secondary' ? Math.random() * 2 + 1.5 : Math.random() * 1.5 + 1),
+          color: type === 'accent' ? 'rgba(34, 211, 238, 1)' : (type === 'secondary' ? 'rgba(168, 85, 247, 0.8)' : 'rgba(34, 211, 238, 0.6)'),
+          glowIntensity: Math.random() * 0.5 + 0.5,
+          type
+        });
+      }
     }
 
     initNodes(nodeCount);
@@ -309,125 +309,125 @@ export const Hero: React.FC = React.memo(() => {
 
       // Apply forces to nodes
       for (let i = 0; i < nodes.length; i++) {
-          const node = nodes[i];
+        const node = nodes[i];
 
-          // Mouse interaction
-          const dx = mouseX - node.x;
-          const dy = mouseY - node.y;
-          const distSq = dx * dx + dy * dy;
-          const interactionRadius = 300;
-          const interactionRadiusSq = interactionRadius * interactionRadius;
+        // Mouse interaction
+        const dx = mouseX - node.x;
+        const dy = mouseY - node.y;
+        const distSq = dx * dx + dy * dy;
+        const interactionRadius = 300;
+        const interactionRadiusSq = interactionRadius * interactionRadius;
 
-          if (distSq < interactionRadiusSq) {
-             const dist = Math.sqrt(distSq);
-             const force = (interactionRadius - dist) / interactionRadius;
-             node.vx -= (dx / dist) * force * 1.2;
-             node.vy -= (dy / dist) * force * 1.2;
-          }
+        if (distSq < interactionRadiusSq) {
+          const dist = Math.sqrt(distSq);
+          const force = (interactionRadius - dist) / interactionRadius;
+          node.vx -= (dx / dist) * force * 1.2;
+          node.vy -= (dy / dist) * force * 1.2;
+        }
 
-          // Touch interaction (multi-touch support)
-          if (touchActive && touchPoints.length > 0) {
-            touchPoints.forEach(touch => {
-              const tdx = touch.x - node.x;
-              const tdy = touch.y - node.y;
-              const tdistSq = tdx * tdx + tdy * tdy;
-              const touchRadius = 350;
-              const touchRadiusSq = touchRadius * touchRadius;
+        // Touch interaction (multi-touch support)
+        if (touchActive && touchPoints.length > 0) {
+          touchPoints.forEach(touch => {
+            const tdx = touch.x - node.x;
+            const tdy = touch.y - node.y;
+            const tdistSq = tdx * tdx + tdy * tdy;
+            const touchRadius = 350;
+            const touchRadiusSq = touchRadius * touchRadius;
 
-              if (tdistSq < touchRadiusSq) {
-                const tdist = Math.sqrt(tdistSq);
-                const tforce = (touchRadius - tdist) / touchRadius * touch.intensity;
-                node.vx -= (tdx / tdist) * tforce * 2;
-                node.vy -= (tdy / tdist) * tforce * 2;
-              }
-            });
-          }
+            if (tdistSq < touchRadiusSq) {
+              const tdist = Math.sqrt(tdistSq);
+              const tforce = (touchRadius - tdist) / touchRadius * touch.intensity;
+              node.vx -= (tdx / tdist) * tforce * 2;
+              node.vy -= (tdy / tdist) * tforce * 2;
+            }
+          });
+        }
 
-          // Add orbital behavior for accent nodes
-          if (node.type === 'accent') {
-            node.vx += Math.sin(time + i * 0.1) * 0.02;
-            node.vy += Math.cos(time + i * 0.1) * 0.02;
-          }
+        // Add orbital behavior for accent nodes
+        if (node.type === 'accent') {
+          node.vx += Math.sin(time + i * 0.1) * 0.02;
+          node.vy += Math.cos(time + i * 0.1) * 0.02;
+        }
 
-          // Velocity damping
-          node.vx *= 0.95;
-          node.vy *= 0.95;
+        // Velocity damping
+        node.vx *= 0.95;
+        node.vy *= 0.95;
 
-          // Add subtle noise to prevent stagnation
-          if (Math.abs(node.vx) < 0.15) node.vx += (Math.random() - 0.5) * 0.08;
-          if (Math.abs(node.vy) < 0.15) node.vy += (Math.random() - 0.5) * 0.08;
+        // Add subtle noise to prevent stagnation
+        if (Math.abs(node.vx) < 0.15) node.vx += (Math.random() - 0.5) * 0.08;
+        if (Math.abs(node.vy) < 0.15) node.vy += (Math.random() - 0.5) * 0.08;
 
-          node.x += node.vx;
-          node.y += node.vy;
+        node.x += node.vx;
+        node.y += node.vy;
 
-          // Bounce off edges with energy retention
-          if (node.x < 0 || node.x > width) node.vx *= -0.9;
-          if (node.y < 0 || node.y > height) node.vy *= -0.9;
-          node.x = Math.max(0, Math.min(width, node.x));
-          node.y = Math.max(0, Math.min(height, node.y));
+        // Bounce off edges with energy retention
+        if (node.x < 0 || node.x > width) node.vx *= -0.9;
+        if (node.y < 0 || node.y > height) node.vy *= -0.9;
+        node.x = Math.max(0, Math.min(width, node.x));
+        node.y = Math.max(0, Math.min(height, node.y));
       }
 
       // Draw connections first (behind particles)
       ctx.lineWidth = 0.8;
       for (let i = 0; i < nodes.length; i++) {
-          const nodeA = nodes[i];
-          for (let j = i + 1; j < nodes.length; j++) {
-              const nodeB = nodes[j];
-              const dx = nodeA.x - nodeB.x;
-              const dy = nodeA.y - nodeB.y;
+        const nodeA = nodes[i];
+        for (let j = i + 1; j < nodes.length; j++) {
+          const nodeB = nodes[j];
+          const dx = nodeA.x - nodeB.x;
+          const dy = nodeA.y - nodeB.y;
 
-              if (Math.abs(dx) > 120 || Math.abs(dy) > 120) continue;
+          if (Math.abs(dx) > 120 || Math.abs(dy) > 120) continue;
 
-              const distSq = dx*dx + dy*dy;
-              if (distSq < 14400) {
-                  const dist = Math.sqrt(distSq);
-                  const opacity = maxLineOpacity * (1 - dist / 120);
+          const distSq = dx * dx + dy * dy;
+          if (distSq < 14400) {
+            const dist = Math.sqrt(distSq);
+            const opacity = maxLineOpacity * (1 - dist / 120);
 
-                  // Special connection for accent nodes
-                  if (nodeA.type === 'accent' || nodeB.type === 'accent') {
-                    ctx.strokeStyle = `rgba(${lineBaseColor}, ${opacity * 1.5})`;
-                    ctx.lineWidth = 1.2;
-                  } else {
-                    ctx.strokeStyle = `rgba(${lineBaseColor}, ${opacity})`;
-                    ctx.lineWidth = 0.8;
-                  }
+            // Special connection for accent nodes
+            if (nodeA.type === 'accent' || nodeB.type === 'accent') {
+              ctx.strokeStyle = `rgba(${lineBaseColor}, ${opacity * 1.5})`;
+              ctx.lineWidth = 1.2;
+            } else {
+              ctx.strokeStyle = `rgba(${lineBaseColor}, ${opacity})`;
+              ctx.lineWidth = 0.8;
+            }
 
-                  ctx.beginPath();
-                  ctx.moveTo(nodeA.x, nodeA.y);
-                  ctx.lineTo(nodeB.x, nodeB.y);
-                  ctx.stroke();
-              }
+            ctx.beginPath();
+            ctx.moveTo(nodeA.x, nodeA.y);
+            ctx.lineTo(nodeB.x, nodeB.y);
+            ctx.stroke();
           }
+        }
       }
 
       // Draw particles with glow
       for (let i = 0; i < nodes.length; i++) {
-          const node = nodes[i];
+        const node = nodes[i];
 
-          // Glow effect
-          if (node.type === 'accent' || node.type === 'secondary') {
-            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 4);
-            gradient.addColorStop(0, node.color);
-            gradient.addColorStop(1, 'rgba(34, 211, 238, 0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, node.radius * 4 * node.glowIntensity, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Particle
-          ctx.fillStyle = node.color;
+        // Glow effect
+        if (node.type === 'accent' || node.type === 'secondary') {
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 4);
+          gradient.addColorStop(0, node.color);
+          gradient.addColorStop(1, 'rgba(34, 211, 238, 0)');
+          ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, node.radius * 4 * node.glowIntensity, 0, Math.PI * 2);
           ctx.fill();
+        }
 
-          // Extra glow for accent nodes
-          if (node.type === 'accent') {
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = 'rgba(34, 211, 238, 0.8)';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-          }
+        // Particle
+        ctx.fillStyle = node.color;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Extra glow for accent nodes
+        if (node.type === 'accent') {
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = 'rgba(34, 211, 238, 0.8)';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
       }
 
       animationFrameId = requestAnimationFrame(draw);
@@ -472,22 +472,22 @@ export const Hero: React.FC = React.memo(() => {
 
   useEffect(() => {
     const handleTyping = () => {
-        const fullText = roles[currentRoleIndex];
+      const fullText = roles[currentRoleIndex];
 
-        if (isDeleting) {
-            setDisplayedText(fullText.substring(0, displayedText.length - 1));
-            setTypingSpeed(50);
-        } else {
-            setDisplayedText(fullText.substring(0, displayedText.length + 1));
-            setTypingSpeed(150);
-        }
+      if (isDeleting) {
+        setDisplayedText(fullText.substring(0, displayedText.length - 1));
+        setTypingSpeed(50);
+      } else {
+        setDisplayedText(fullText.substring(0, displayedText.length + 1));
+        setTypingSpeed(150);
+      }
 
-        if (!isDeleting && displayedText === fullText) {
-            setTimeout(() => setIsDeleting(true), 2000);
-        } else if (isDeleting && displayedText === "") {
-            setIsDeleting(false);
-            setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        }
+      if (!isDeleting && displayedText === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && displayedText === "") {
+        setIsDeleting(false);
+        setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+      }
     };
 
     const timer = setTimeout(handleTyping, typingSpeed);
@@ -557,43 +557,43 @@ export const Hero: React.FC = React.memo(() => {
         ref={gridRef}
         className="absolute inset-0 w-full h-[150%] -top-[25%] opacity-[0.15] pointer-events-none z-0"
         style={{
-            backgroundImage: `
+          backgroundImage: `
                 linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px),
                 linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)
             `,
-            backgroundSize: '40px 40px',
-            transform: 'perspective(1000px) rotateX(60deg) scale(2.2)',
-            transformOrigin: 'center center',
-            transition: 'opacity 0.5s ease'
+          backgroundSize: '40px 40px',
+          transform: 'perspective(1000px) rotateX(60deg) scale(2.2)',
+          transformOrigin: 'center center',
+          transition: 'opacity 0.5s ease'
         }}
       ></div>
 
       {/* Background Parallax Layers */}
       <div ref={parallaxRef} className="absolute inset-0 w-full h-full pointer-events-none z-0">
 
-         {/* Layer 1: Deep Atmosphere */}
-         <div className="parallax-layer absolute inset-0" data-speed="-0.6">
-            <div className="absolute inset-0 bg-radial-fade transition-opacity duration-700 opacity-40"></div>
-            <div className="absolute top-[15%] -left-[5%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-brand-accent/8 rounded-full blur-[100px] md:blur-[150px] transition-colors duration-700 animate-pulse" style={{ animationDuration: '4s' }} />
-            <div className="absolute bottom-[5%] right-[0%] w-[450px] h-[450px] md:w-[700px] md:h-[700px] bg-brand-purple/8 rounded-full blur-[100px] md:blur-[130px] transition-opacity duration-700 animate-pulse" style={{ animationDuration: '5s' }} />
-            <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-cyan-500/5 rounded-full blur-[80px] md:blur-[120px] transition-opacity duration-700" />
-         </div>
+        {/* Layer 1: Deep Atmosphere */}
+        <div className="parallax-layer absolute inset-0" data-speed="-0.6">
+          <div className="absolute inset-0 bg-radial-fade transition-opacity duration-700 opacity-40"></div>
+          <div className="absolute top-[15%] -left-[5%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-brand-accent/8 rounded-full blur-[100px] md:blur-[150px] transition-colors duration-700 animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute bottom-[5%] right-[0%] w-[450px] h-[450px] md:w-[700px] md:h-[700px] bg-brand-purple/8 rounded-full blur-[100px] md:blur-[130px] transition-opacity duration-700 animate-pulse" style={{ animationDuration: '5s' }} />
+          <div className="absolute top-[40%] left-[50%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-cyan-500/5 rounded-full blur-[80px] md:blur-[120px] transition-opacity duration-700" />
+        </div>
 
-         {/* Layer 2: Geometric Shapes */}
-         <div className="parallax-layer absolute inset-0" data-speed="0.8">
-            <div className="absolute top-[15%] left-[10%] w-48 h-48 md:w-72 md:h-72 border border-brand-accent/8 rounded-full transition-colors duration-700" />
-            <div className="absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[550px] md:h-[550px] border-2 border-brand-purple/8 rounded-full border-dashed animate-[spin_80s_linear_infinite] transition-colors duration-700" />
-            <div className="absolute top-[25%] right-[25%] w-[200px] h-[200px] md:w-[350px] md:h-[350px] border border-cyan-400/5 rounded-full border-dotted animate-[spin_100s_linear_infinite_reverse] transition-colors duration-700" />
+        {/* Layer 2: Geometric Shapes */}
+        <div className="parallax-layer absolute inset-0" data-speed="0.8">
+          <div className="absolute top-[15%] left-[10%] w-48 h-48 md:w-72 md:h-72 border border-brand-accent/8 rounded-full transition-colors duration-700" />
+          <div className="absolute top-[50%] right-[10%] w-[300px] h-[300px] md:w-[550px] md:h-[550px] border-2 border-brand-purple/8 rounded-full border-dashed animate-[spin_80s_linear_infinite] transition-colors duration-700" />
+          <div className="absolute top-[25%] right-[25%] w-[200px] h-[200px] md:w-[350px] md:h-[350px] border border-cyan-400/5 rounded-full border-dotted animate-[spin_100s_linear_infinite_reverse] transition-colors duration-700" />
 
-            {/* Hexagon shapes */}
-            <div className="absolute top-[60%] left-[15%] w-32 h-32 md:w-48 md:h-48 border border-brand-accent/6 rotate-45 transition-colors duration-700" />
-            <div className="absolute top-[35%] left-[70%] w-24 h-24 md:w-36 md:h-36 border border-brand-purple/6 rotate-12 transition-colors duration-700" />
-         </div>
+          {/* Hexagon shapes */}
+          <div className="absolute top-[60%] left-[15%] w-32 h-32 md:w-48 md:h-48 border border-brand-accent/6 rotate-45 transition-colors duration-700" />
+          <div className="absolute top-[35%] left-[70%] w-24 h-24 md:w-36 md:h-36 border border-brand-purple/6 rotate-12 transition-colors duration-700" />
+        </div>
 
-         {/* Layer 3: Floating Icons */}
-         <div className="parallax-layer absolute inset-0" data-speed="1.2">
-            <FloatingIcons />
-         </div>
+        {/* Layer 3: Floating Icons */}
+        <div className="parallax-layer absolute inset-0" data-speed="1.2">
+          <FloatingIcons />
+        </div>
       </div>
 
       {/* Gradient Fade at Bottom */}
@@ -613,62 +613,58 @@ export const Hero: React.FC = React.memo(() => {
       {/* Foreground Content */}
       <div className="relative z-30 text-center px-4 sm:px-6 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-screen">
 
+        {/* Profile Image with Parallax */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+          className="mb-8 md:mb-10 relative z-40"
+        >
+          <div className="w-32 h-32 md:w-48 md:h-48 relative">
+            <img
+              src="/assets/professional_headshot.webp"
+              alt="Walt Burge"
+              className="w-full h-full object-cover rounded-full border-2 border-brand-accent/50 shadow-[0_0_30px_rgba(34,211,238,0.3)]"
+            />
+            <div className="absolute inset-0 rounded-full border-2 border-brand-accent/20 animate-[spin_10s_linear_infinite]" />
+            <div className="absolute -inset-2 rounded-full border border-brand-purple/20 animate-[spin_15s_linear_infinite_reverse]" />
+          </div>
+        </motion.div>
+
         {/* Status Badge */}
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.1, type: 'spring', stiffness: 200 }}
-          className="mb-8 md:mb-12 inline-flex items-center justify-center gap-3 px-5 py-2 rounded-full border-2 border-brand-accent/40 bg-gradient-to-r from-brand-accent/10 via-brand-accent/5 to-brand-purple/10 text-brand-accent backdrop-blur-md shadow-[0_0_30px_rgba(34,211,238,0.2)] transition-all duration-500 hover:shadow-[0_0_40px_rgba(34,211,238,0.4)] hover:scale-105"
+          transition={{ duration: 0.7, delay: 0.3, type: 'spring', stiffness: 200 }}
+          className="mb-6 md:mb-8 inline-flex items-center justify-center gap-3 px-5 py-2 rounded-full border border-brand-accent/30 bg-brand-surface/50 backdrop-blur-md shadow-[0_0_20px_rgba(34,211,238,0.1)] transition-all duration-500 hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] hover:border-brand-accent/50 group"
         >
-            <div className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-accent shadow-[0_0_10px_rgba(34,211,238,0.8)]"></span>
-            </div>
-            <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] uppercase font-bold">System Online</span>
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="w-3 h-3"
-            >
-              <Activity size={12} />
-            </motion.div>
+          <div className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-success opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-success shadow-[0_0_10px_rgba(74,222,128,0.5)]"></span>
+          </div>
+          <span className="text-[10px] md:text-xs font-mono tracking-[0.25em] uppercase font-bold text-brand-primary group-hover:text-brand-accent transition-colors">System Online</span>
         </motion.div>
 
-        {/* Main Title - Mobile Optimized Size */}
+        {/* Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.3, type: 'spring', stiffness: 150 }}
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-brand-primary mb-6 md:mb-8 leading-[0.95] md:leading-[0.9] relative z-30 select-none text-center transition-colors duration-500"
-          style={{
-            textShadow: '0 0 40px rgba(34, 211, 238, 0.15), 0 0 80px rgba(34, 211, 238, 0.1)'
-          }}
+          transition={{ duration: 0.9, delay: 0.4, type: 'spring', stiffness: 150 }}
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-brand-primary mb-6 leading-[0.95] md:leading-[0.9] relative z-30 select-none text-center"
         >
-          WALT<span className="text-brand-accent drop-shadow-[0_0_20px_rgba(34,211,238,0.8)]">.</span>BURGE
+          WALT<span className="text-brand-accent drop-shadow-[0_0_20px_rgba(34,211,238,0.5)]">.</span>BURGE
         </motion.h1>
 
-        {/* Decorative Line */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="w-32 md:w-48 h-[2px] bg-gradient-to-r from-transparent via-brand-accent to-transparent mb-8 md:mb-10 shadow-[0_0_10px_rgba(34,211,238,0.5)]"
-        />
-
-        {/* Role Subtitles - Typewriter Effect */}
+        {/* Dynamic Tagline */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.6, type: 'spring' }}
-          className="flex items-center justify-center min-h-[60px] sm:min-h-[70px] mb-10 md:mb-14 text-brand-secondary font-mono text-lg sm:text-xl md:text-2xl border border-brand-accent/20 rounded-lg py-4 md:py-6 px-6 md:px-8 w-full max-w-3xl bg-gradient-to-r from-brand-base/40 via-brand-base/60 to-brand-base/40 backdrop-blur-md text-center transition-all duration-500 shadow-[0_0_20px_rgba(34,211,238,0.1)] hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] hover:border-brand-accent/40"
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="flex items-center justify-center min-h-[50px] mb-8 md:mb-12 font-mono text-base sm:text-lg md:text-xl text-brand-gold/90"
         >
-            <span className="text-brand-accent mr-3 text-2xl">{'>'}</span>
-            <span className="tracking-[0.2em] uppercase font-bold">{displayedText}</span>
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-              className="ml-2 w-[3px] h-6 md:h-7 bg-brand-accent block shadow-[0_0_10px_rgba(34,211,238,0.8)]"
-            />
+          <span className="mr-3 text-brand-accent">{'>'}</span>
+          <span className="tracking-[0.1em] uppercase font-bold">{displayedText}</span>
+          <span className="animate-pulse ml-2 w-2 h-5 bg-brand-accent block" />
         </motion.div>
 
         {/* Description */}
@@ -676,14 +672,11 @@ export const Hero: React.FC = React.memo(() => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="text-brand-secondary max-w-2xl mx-auto text-base md:text-xl leading-relaxed mb-12 md:mb-16 font-light text-center px-2 sm:px-4 transition-colors duration-500"
-          style={{
-            textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
-          }}
+          className="text-brand-secondary max-w-3xl mx-auto text-lg md:text-2xl leading-relaxed mb-12 font-light text-center px-4"
         >
-          Architecting high-performance digital ecosystems.
+          Architecting <span className="text-brand-primary font-medium">Scalable Solutions</span> for Enterprise Innovation.
           <br className="hidden md:block" />
-          <span className="text-brand-accent/80">Merging bare-metal efficiency with AI intelligence.</span>
+          <span className="text-brand-secondary/80 text-base md:text-xl mt-2 block">Transforming complex data into strategic advantage.</span>
         </motion.p>
 
         {/* Action Buttons */}
