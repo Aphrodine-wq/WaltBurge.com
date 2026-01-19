@@ -15,6 +15,9 @@ const getProjectImage = (id: string) => {
   // Map IDs to specific files found in public/assets/projects
   switch (id) {
     case 'clipsync': return '/assets/projects/clipsync/Clipsync.png';
+    case 'g-rump': return '/assets/projects/g-rump/Screenshot (309).png';
+    case 'ftwos': return '/assets/projects/ftwos/Screenshot (304).png';
+    case 'icongen': return '/assets/projects/icongen/Screenshot (319).png';
     // Add other known mappings or fallback to default structure if you had verified them
     default: return `/assets/projects/${id}/cover.jpg`;
   }
