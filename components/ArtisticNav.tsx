@@ -86,7 +86,7 @@ const NavItem = ({ item, idx, hoveredIdx, setHoveredIdx, onClick }: any) => {
                         initial={{ opacity: 0, y: 10, scale: 0.8 }}
                         animate={{ opacity: 1, y: 5, scale: 1 }}
                         exit={{ opacity: 0, y: 0, scale: 0.8 }}
-                        className="absolute top-full mt-2 text-[10px] font-serif tracking-widest text-[#d8b4fe] whitespace-nowrap"
+                        className="absolute top-full mt-2 text-[10px] font-serif tracking-widest text-brand-accent whitespace-nowrap"
                     >
                         {item.label}
                     </motion.span>

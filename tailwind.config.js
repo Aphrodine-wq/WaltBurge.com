@@ -16,34 +16,15 @@ export default {
       colors: {
         brand: {
           base: 'rgb(var(--bg-primary) / <alpha-value>)',
-          dark: 'rgb(var(--bg-secondary) / <alpha-value>)',
           surface: 'rgb(var(--bg-surface) / <alpha-value>)',
-          border: 'rgb(var(--border-color) / <alpha-value>)',
           accent: 'rgb(var(--accent-color) / <alpha-value>)',
-          gold: 'rgb(var(--gold-accent) / <alpha-value>)',
-          copper: 'rgb(var(--copper-accent) / <alpha-value>)',
-          purple: 'rgb(var(--purple-accent) / <alpha-value>)',
-          success: '#4ade80',
-          primary: 'rgb(var(--text-primary) / <alpha-value>)',
           secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+          border: 'rgb(var(--border-color) / <alpha-value>)',
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
         },
         aurora: {
           teal: 'rgb(var(--aurora-teal) / <alpha-value>)',
-          purple: 'rgb(var(--aurora-purple) / <alpha-value>)',
-          pink: 'rgb(var(--aurora-pink) / <alpha-value>)',
         },
-        navy: {
-          50: '#f0f4f8',
-          100: '#d9e2ec',
-          200: '#bcccdc',
-          300: '#9fb3c8',
-          400: '#829ab1',
-          500: '#627d98',
-          600: '#486581',
-          700: '#334e68',
-          800: '#243b53',
-          900: '#0a1628',
-        }
       },
       backgroundImage: {
         'grid-pattern': "linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)",
