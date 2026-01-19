@@ -6,34 +6,35 @@
 
 @layer base {
   :root {
-    /* Deep Space Palette */
-    --bg-deep: 15 5 24;
-    /* #0f0518 - Void Violet */
-    --bg-nebula: 24 11 40;
-    /* #180b28 - Lighter Violet */
-    --text-glow: 240 230 255;
-    /* #f0e6ff - Pale Starlight */
+    /* Retro Earth Palette */
+    --bg-deep: 54 10 20;
+    /* #360A14 - Rich Mahogany */
+    --bg-nebula: 42 8 16;
+    /* #2A0810 - Darker Mahogany */
+    --text-glow: 238 245 219;
+    /* #EEF5DB - Beige */
 
-    /* Aurora Accents */
-    --aurora-teal: 45 212 191;
-    /* #2dd4bf */
-    --aurora-purple: 192 132 252;
-    /* #c084fc */
-    --aurora-pink: 244 114 182;
-    /* #f472b6 */
+    /* Ember Accents */
+    --aurora-teal: 247 147 76;
+    /* #F7934C - Sandy Brown */
+    --aurora-purple: 79 99 103;
+    /* #4F6367 - Blue Slate */
+    --aurora-pink: 214 90 49;
+    /* #D65A31 - Burnt Orange */
 
     /* Semantic mapping */
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
-    --bg-surface: 30 15 50;
+    --bg-surface: 79 99 103;
+    /* Blue Slate primarily for surface contrast */
 
     --text-primary: var(--text-glow);
-    --text-secondary: 167 139 250;
-    /* #a78bfa */
+    --text-secondary: 247 147 76;
+    /* Sandy Brown */
 
     --accent-color: var(--aurora-teal);
-    --border-color: 255 255 255;
-    /* Used with low opacity */
+    --border-color: 238 245 219;
+    /* Beige used with low opacity */
   }
 
   body {
