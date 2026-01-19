@@ -20,6 +20,7 @@ import { SectionId, Project } from './types';
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
 const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
 const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
+import { SplashScreen } from './components/SplashScreen';
 
 const MobileBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -112,6 +113,7 @@ const MobileBar: React.FC = () => {
 };
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
@@ -151,34 +153,42 @@ function App() {
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans cursor-none-on-desktop">
-        <CustomCursor />
-        <ScrollProgress />
-        {/* Navigation */}
-        <MobileBar />
-        <ArtisticNav />
-        <div className="hidden md:block fixed top-6 right-6 z-50">
-          <DarkModeToggle />
-        </div>
-        <div className="film-grain" />
-        <main>
-          <Hero />
-          <About />
-          <Expertise />
+        <AnimatePresence mode="wait">
+          {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
+        </AnimatePresence>
 
-          <Suspense fallback={null}>
-            <Projects
-              onProjectClick={handleProjectClick}
-              activeFilter={activeTechFilter}
-              onFilterChange={setActiveTechFilter}
-            />
-          </Suspense>
+        {!showSplash && (
+          <>
+            <CustomCursor />
+            <ScrollProgress />
+            {/* Navigation */}
+            <MobileBar />
+            <ArtisticNav />
+            <div className="hidden md:block fixed top-6 right-6 z-50">
+              <DarkModeToggle />
+            </div>
+            <div className="film-grain" />
+            <main>
+              <Hero />
+              <About />
+              <Expertise />
 
-          <Marketplace />
-          <ThoughtLeadership />
-        </main>
-        <Contact />
-        <Footer />
-        <BackToTop />
+              <Suspense fallback={null}>
+                <Projects
+                  onProjectClick={handleProjectClick}
+                  activeFilter={activeTechFilter}
+                  onFilterChange={setActiveTechFilter}
+                />
+              </Suspense>
+
+              <Marketplace />
+              <ThoughtLeadership />
+            </main>
+            <Contact />
+            <Footer />
+            <BackToTop />
+          </>
+        )}
       </div>
     </TooltipProvider>
   );

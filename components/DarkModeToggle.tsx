@@ -1,73 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Sparkles, TreeDeciduous } from 'lucide-react';
 
 export const DarkModeToggle: React.FC = () => {
-    const [isDark, setIsDark] = useState(false);
+    const themes = ['default', 'light', 'midnight', 'forest'];
+    const [theme, setTheme] = useState('default');
 
     useEffect(() => {
-        const saved = localStorage.getItem('theme');
-        // Default is dark (Onyx). If saved is 'light', add light class.
-        const isLight = saved === 'light';
-        setIsDark(!isLight);
-        if (isLight) document.documentElement.classList.add('light');
-        else document.documentElement.classList.remove('light');
+        const saved = localStorage.getItem('theme') || 'default';
+        setTheme(saved);
+        applyTheme(saved);
     }, []);
 
-    const toggleTheme = () => {
-        const newIsDark = !isDark;
-        setIsDark(newIsDark);
-        localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+    const applyTheme = (t: string) => {
+        const root = document.documentElement;
+        // Remove all theme attributes first to be safe, or just set data-theme
+        root.removeAttribute('data-theme');
+        root.classList.remove('light'); // Clean up legacy class
 
-        if (!newIsDark) document.documentElement.classList.add('light');
-        else document.documentElement.classList.remove('light');
+        if (t !== 'default') {
+            root.setAttribute('data-theme', t);
+            if (t === 'light') root.classList.add('light'); // Keep backwards compat if needed, but data-theme is better
+        }
+    };
+
+    const cycleTheme = () => {
+        const currentIndex = themes.indexOf(theme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const nextTheme = themes[nextIndex];
+
+        setTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        applyTheme(nextTheme);
+    };
+
+    const getIcon = () => {
+        switch (theme) {
+            case 'light': return <Sun size={16} className="text-amber-500 fill-amber-500/20" />;
+            case 'midnight': return <Moon size={16} className="text-blue-400 fill-blue-400/20" />;
+            case 'forest': return <TreeDeciduous size={16} className="text-emerald-400 fill-emerald-400/20" />;
+            default: return <Sparkles size={16} className="text-brand-accent fill-brand-accent/20" />; // Onyx
+        }
     };
 
     return (
         <motion.button
-            onClick={toggleTheme}
+            onClick={cycleTheme}
             className="group relative w-12 h-12 flex items-center justify-center p-0"
             whileHover={{ scale: 1.1, rotateY: 180 }}
             whileTap={{ scale: 0.9, rotateZ: 45 }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            aria-label="Toggle dark mode"
+            aria-label="Cycle theme"
         >
             {/* Outer Ring */}
             <div className="absolute inset-0 rounded-full border border-brand-border group-hover:border-brand-accent transition-colors duration-500" />
 
             {/* Inner Rotating Sphere */}
             <motion.div
-                animate={{
-                    rotateY: isDark ? 180 : 0,
-                    backgroundColor: isDark ? 'rgb(var(--bg-surface))' : 'rgb(var(--bg-primary))'
-                }}
-                className="w-8 h-8 rounded-full flex items-center justify-center shadow-inner relative overflow-hidden"
+                key={theme}
+                initial={{ rotateY: -180, opacity: 0 }}
+                animate={{ rotateY: 0, opacity: 1 }}
+                className="w-8 h-8 rounded-full flex items-center justify-center shadow-inner relative overflow-hidden bg-brand-base"
             >
-                <AnimatePresence mode="wait">
-                    {isDark ? (
-                        <motion.div
-                            key="moon"
-                            initial={{ opacity: 0, scale: 0.5, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.5, y: -10 }}
-                        >
-                            <Moon size={16} className="text-brand-accent fill-brand-accent/20" />
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="sun"
-                            initial={{ opacity: 0, scale: 0.5, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.5, y: -10 }}
-                        >
-                            <Sun size={16} className="text-amber-500 fill-amber-500/20" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {getIcon()}
             </motion.div>
 
             {/* Aura */}
-            <div className={`absolute inset-[-10px] rounded-full opacity-0 group-hover:opacity-10 blur-xl transition-all duration-700 ${isDark ? 'bg-brand-accent' : 'bg-amber-500'}`} />
+            <div className={`absolute inset-[-10px] rounded-full opacity-0 group-hover:opacity-10 blur-xl transition-all duration-700 bg-brand-accent`} />
         </motion.button>
     );
 };

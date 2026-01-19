@@ -20,9 +20,9 @@ export const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HERO}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-primary transition-colors duration-500"
     >
-      <div className="absolute inset-0 bg-[#12130F] z-0">
+      <div className="absolute inset-0 z-0">
         {/* Mesh 1: Jungle Green Accent */}
         <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.1),transparent_70%)] blur-[120px] animate-aurora mix-blend-screen" />
 
@@ -39,7 +39,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="font-sans text-[11px] tracking-[0.4em] text-aurora-teal uppercase mb-8 glow-text"
+          className="font-sans text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8 glow-text"
         >
           Architectural Systems
         </motion.span>
@@ -49,7 +49,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-6xl md:text-8xl lg:text-9xl text-white/90 leading-[0.9] tracking-tight mb-8 drop-shadow-2xl"
+          className="font-display text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.9] tracking-tight mb-8 drop-shadow-2xl"
         >
           <span className="block">Walt</span>
           <span className="block italic text-white/60">Burge</span>
