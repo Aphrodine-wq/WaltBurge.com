@@ -426,8 +426,8 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               </div>
 
               {/* Content Panel - Overlaid on image */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end relative z-10">
-                <div className="flex justify-between items-baseline mb-3">
+              <div className="absolute inset-0 p-8 flex flex-col justify-center items-center relative z-10">
+                <div className="flex justify-between items-baseline mb-3 w-full">
                   <h3 className="text-2xl font-serif text-white leading-tight">
                     {project.title}
                   </h3>
@@ -436,12 +436,12 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
                   </span>
                 </div>
 
-                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2">
+                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2 text-center">
                   {project.description}
                 </p>
 
                 {/* Tech Stack - Minimal Pills */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 justify-center">
                   {project.techStack.slice(0, 3).map((tech) => (
                     <span key={tech} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-[10px] text-white tracking-wide font-sans border border-white/20">
                       {tech}
