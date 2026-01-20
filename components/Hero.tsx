@@ -20,14 +20,14 @@ export const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HERO}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-primary transition-colors duration-500"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base transition-colors duration-500"
     >
       <div className="absolute inset-0 z-0">
         {/* Mesh 1: Jungle Green Accent */}
-        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.08),transparent_70%)] blur-[80px] animate-aurora mix-blend-screen" />
+        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.15),transparent_70%)] blur-[80px] animate-aurora mix-blend-screen" />
 
         {/* Mesh 2: Jungle Green Depth */}
-        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.12),transparent_70%)] blur-[80px] animate-float-dream mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-pink)/0.15),transparent_70%)] blur-[80px] animate-float-dream mix-blend-screen" />
       </div>
 
       <motion.div
@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
           className="font-display text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.9] tracking-tight mb-8 drop-shadow-2xl"
         >
           <span className="block">Walt</span>
-          <span className="block italic text-white/60">Burge</span>
+          <span className="block italic text-brand-accent opacity-90">Burge</span>
         </motion.h1>
 
         {/* Subtitle: Liquid Text */}
@@ -60,7 +60,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-          className="font-sans text-lg md:text-xl text-white/50 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
+          className="font-sans text-lg md:text-xl text-brand-primary/80 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
         >
           Forging nebulous ideas into solid digital matter.
           Specializing in high-fidelity interfaces and deep-system architecture.
@@ -78,7 +78,7 @@ export const Hero: React.FC = () => {
             className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full transition-all duration-500 hover:scale-105"
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-aurora-teal/20 to-aurora-purple/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
-            <span className="relative z-10 font-sans text-sm tracking-widest uppercase text-white group-hover:text-aurora-teal transition-colors">
+            <span className="relative z-10 font-sans text-sm tracking-widest uppercase text-brand-primary group-hover:text-aurora-teal transition-colors">
               View Portfolio
             </span>
           </button>
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
             className="group relative px-8 py-4 rounded-full transition-all duration-500 hover:tracking-widest"
           >
-            <span className="font-sans text-sm tracking-widest uppercase text-white/60 group-hover:text-white transition-colors border-b border-transparent group-hover:border-white/40 pb-1">
+            <span className="font-sans text-sm tracking-widest uppercase text-brand-primary/60 group-hover:text-brand-primary transition-colors border-b border-transparent group-hover:border-brand-primary/40 pb-1">
               Contact Me
             </span>
           </button>

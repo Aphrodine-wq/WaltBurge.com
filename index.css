@@ -9,66 +9,45 @@
     /* Default: Retro Earth Theme */
     /* Primary: Rich Mahogany */
     --bg-deep: 54 10 20;
-    
+
     /* Secondary/Nebula: Blue Slate */
     --bg-nebula: 79 99 103;
-    
+
     /* Surface: Rich Mahogany */
     --bg-surface: 54 10 20;
 
     /* Text Glow: Sandy Brown */
     --text-glow: 247 147 76;
-    
+
     /* Text Primary: Beige */
     --text-primary: 238 245 219;
-    
+
     /* Text Secondary: Blue Slate */
     --text-secondary: 79 99 103;
 
     /* Accent: Sandy Brown */
     --accent-color: 247 147 76;
-    
+
     /* Border: Blue Slate */
     --border-color: 79 99 103;
 
     /* Accents */
-    --aurora-teal: 79 99 103;    /* Blue Slate */
-    --aurora-purple: 54 10 20;   /* Rich Mahogany */
-    --aurora-pink: 247 147 76;   /* Sandy Brown */
+    --aurora-teal: 79 99 103;
+    /* Blue Slate */
+    --aurora-purple: 54 10 20;
+    /* Rich Mahogany */
+    --aurora-pink: 247 147 76;
+    /* Sandy Brown */
 
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
   }
 
-  /* Inverse Mode: Light (Paper & Onyx) */
-  :root[class~="light"] {
-    --bg-deep: 240 242 240;
-    /* Paper #F0F2F0 */
-    --bg-nebula: 255 255 255;
-    /* White */
-    --bg-surface: 240 242 240;
 
-    --text-glow: 18 19 15;
-    /* Onyx #12130F */
-    --text-primary: 18 19 15;
-    --text-secondary: 60 65 60;
-    /* Darker Gray for contrast */
-
-    --accent-color: 91 146 121;
-    /* Keep Jungle Green as Accent */
-    --border-color: 18 19 15;
-    /* Onyx Borders */
-
-    --aurora-teal: 91 146 121;
-    --aurora-purple: 91 146 121;
-    --aurora-pink: 91 146 121;
-
-    --bg-primary: var(--bg-deep);
-    --bg-secondary: var(--bg-nebula);
-  }
 
   /* Accessibility: Respect prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
