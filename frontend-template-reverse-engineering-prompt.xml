@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reverse-engineering-prompt>
+  <metadata>
+    <title>Frontend Template Reverse Engineering Prompt</title>
+    <version>1.0</version>
+    <purpose>
+      Extract and document a reusable template structure from an existing frontend application
+    </purpose>
+    <target-output>
+      A comprehensive template specification that can be used to scaffold similar projects
+    </target-output>
+  </metadata>
+
+  <analysis-phases>
+    <!-- Phase 1: Technology Stack Identification -->
+    <phase id="1" name="technology-stack-analysis">
+      <description>
+        Identify and document all technologies, frameworks, and libraries used
+      </description>
+      <extraction-points>
+        <point category="framework">
+          <query>What is the primary frontend framework?</query>
+          <look-for>
+            <file>package.json</file>
+            <indicators>
+              <indicator>react</indicator>
+              <indicator>vue</indicator>
+              <indicator>angular</indicator>
+              <indicator>svelte</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>framework-name</item>
+            <item>framework-version</item>
+            <item>framework-features-used</item>
+          </extract>
+        </point>
+
+        <point category="build-tooling">
+          <query>What build tool and bundler is used?</query>
+          <look-for>
+            <file>vite.config.*</file>
+            <file>webpack.config.*</file>
+            <file>rollup.config.*</file>
+            <file>package.json scripts</file>
+          </look-for>
+          <extract>
+            <item>build-tool-name</item>
+            <item>build-tool-version</item>
+            <item>build-tool-configuration</item>
+            <item>development-server-settings</item>
+            <item>build-optimizations</item>
+          </extract>
+        </point>
+
+        <point category="language">
+          <query>What programming language and type system?</query>
+          <look-for>
+            <file>tsconfig.json</file>
+            <file>jsconfig.json</file>
+          </look-for>
+          <extract>
+            <item>language (JavaScript/TypeScript)</item>
+            <item>language-version</item>
+            <item>compiler-options</item>
+            <item>module-system</item>
+            <item>path-aliases</item>
+          </extract>
+        </point>
+
+        <point category="styling">
+          <query>What styling approach and tools?</query>
+          <look-for>
+            <file>tailwind.config.*</file>
+            <file>postcss.config.*</file>
+            <file>*.css files</file>
+            <file>styled-components/emotion imports</file>
+          </look-for>
+          <extract>
+            <item>styling-approach (utility-first, CSS-in-JS, CSS modules, etc.)</item>
+            <item>css-framework-name</item>
+            <item>css-framework-version</item>
+            <item>custom-theme-configuration</item>
+            <item>css-variables-usage</item>
+            <item>animation-libraries</item>
+          </extract>
+        </point>
+
+        <point category="ui-libraries">
+          <query>What UI component libraries or design systems?</query>
+          <look-for>
+            <directory>components/ui/</directory>
+            <file>package.json</file>
+            <indicators>
+              <indicator>@radix-ui</indicator>
+              <indicator>@mui</indicator>
+              <indicator>@chakra-ui</indicator>
+              <indicator>antd</indicator>
+              <indicator>shadcn</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>ui-library-name</item>
+            <item>ui-components-used</item>
+            <item>customization-patterns</item>
+            <item>accessibility-features</item>
+          </extract>
+        </point>
+
+        <point category="animation">
+          <query>What animation libraries and patterns?</query>
+          <look-for>
+            <indicators>
+              <indicator>framer-motion</indicator>
+              <indicator>react-spring</indicator>
+              <indicator>gsap</indicator>
+              <indicator>@keyframes</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>animation-library</item>
+            <item>animation-patterns</item>
+            <item>scroll-animations</item>
+            <item>transition-systems</item>
+            <item>custom-animations</item>
+          </extract>
+        </point>
+
+        <point category="routing">
+          <query>What routing solution?</query>
+          <look-for>
+            <indicators>
+              <indicator>react-router</indicator>
+              <indicator>next/router</indicator>
+              <indicator>vue-router</indicator>
+              <indicator>custom scroll-based navigation</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>routing-library</item>
+            <item>routing-pattern</item>
+            <item>navigation-structure</item>
+            <item>route-guards-or-middleware</item>
+          </extract>
+        </point>
+
+        <point category="state-management">
+          <query>What state management solution?</query>
+          <look-for>
+            <indicators>
+              <indicator>redux</indicator>
+              <indicator>zustand</indicator>
+              <indicator>mobx</indicator>
+              <indicator>recoil</indicator>
+              <indicator>Context API</indicator>
+              <indicator>useState/useReducer</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>state-management-library</item>
+            <item>state-organization-pattern</item>
+            <item>global-vs-local-state</item>
+            <item>state-persistence</item>
+          </extract>
+        </point>
+
+        <point category="data-fetching">
+          <query>What data fetching and API integration patterns?</query>
+          <look-for>
+            <indicators>
+              <indicator>axios</indicator>
+              <indicator>react-query</indicator>
+              <indicator>swr</indicator>
+              <indicator>fetch API</indicator>
+              <indicator>graphql</indicator>
+            </indicators>
+          </look-for>
+          <extract>
+            <item>data-fetching-library</item>
+            <item>api-client-configuration</item>
+            <item>caching-strategy</item>
+            <item>error-handling-patterns</item>
+          </extract>
+        </point>
+
+        <point category="utilities">
+          <query>What utility libraries and helper functions?</query>
+          <look-for>
+            <directory>lib/</directory>
+            <directory>utils/</directory>
+            <file>package.json</file>
+          </look-for>
+          <extract>
+            <item>utility-libraries (lodash, date-fns, clsx, etc.)</item>
+            <item>custom-utility-functions</item>
+            <item>helper-patterns</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 2: Project Structure Analysis -->
+    <phase id="2" name="project-structure-analysis">
+      <description>
+        Map out the directory structure and organizational patterns
+      </description>
+      <extraction-points>
+        <point category="directory-structure">
+          <query>What is the high-level directory organization?</query>
+          <extract>
+            <item>
+              <name>root-directories</name>
+              <pattern>List all top-level directories</pattern>
+            </item>
+            <item>
+              <name>components-organization</name>
+              <pattern>How are components organized? (by feature, by type, flat, etc.)</pattern>
+            </item>
+            <item>
+              <name>assets-organization</name>
+              <pattern>Where are static assets stored?</pattern>
+            </item>
+            <item>
+              <name>configuration-files</name>
+              <pattern>List all configuration files at root</pattern>
+            </item>
+          </extract>
+        </point>
+
+        <point category="file-naming">
+          <query>What file naming conventions are used?</query>
+          <extract>
+            <item>component-naming (PascalCase, kebab-case, etc.)</item>
+            <item>file-extensions (.tsx, .jsx, .ts, .js)</item>
+            <item>test-file-patterns</item>
+            <item>style-file-patterns</item>
+          </extract>
+        </point>
+
+        <point category="entry-points">
+          <query>What are the application entry points?</query>
+          <extract>
+            <item>html-entry (index.html location and structure)</item>
+            <item>javascript-entry (main.tsx, index.tsx, etc.)</item>
+            <item>css-entry (global styles)</item>
+            <item>app-root-component</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 3: Component Architecture -->
+    <phase id="3" name="component-architecture-analysis">
+      <description>
+        Analyze component patterns, hierarchy, and composition strategies
+      </description>
+      <extraction-points>
+        <point category="component-types">
+          <query>What types of components exist?</query>
+          <extract>
+            <item>
+              <name>page-components</name>
+              <description>Top-level page or view components</description>
+              <identify-by>Largest components, main sections</identify-by>
+            </item>
+            <item>
+              <name>layout-components</name>
+              <description>Structural components (Header, Footer, Sidebar, etc.)</description>
+              <identify-by>Wrapping components, persistent UI elements</identify-by>
+            </item>
+            <item>
+              <name>feature-components</name>
+              <description>Business logic components</description>
+              <identify-by>Domain-specific functionality</identify-by>
+            </item>
+            <item>
+              <name>ui-components</name>
+              <description>Reusable, presentational components</description>
+              <identify-by>Generic, design-system components</identify-by>
+            </item>
+            <item>
+              <name>utility-components</name>
+              <description>Non-visual components (ErrorBoundary, Providers, etc.)</description>
+              <identify-by>Infrastructure components</identify-by>
+            </item>
+          </extract>
+        </point>
+
+        <point category="component-patterns">
+          <query>What component design patterns are used?</query>
+          <extract>
+            <item>compound-components</item>
+            <item>render-props</item>
+            <item>higher-order-components</item>
+            <item>custom-hooks</item>
+            <item>slot-pattern</item>
+            <item>controlled-vs-uncontrolled</item>
+          </extract>
+        </point>
+
+        <point category="component-structure">
+          <query>What is the typical component file structure?</query>
+          <extract>
+            <item>
+              <name>component-anatomy</name>
+              <structure>
+                <section>imports</section>
+                <section>types/interfaces</section>
+                <section>constants</section>
+                <section>helper-functions</section>
+                <section>main-component</section>
+                <section>sub-components</section>
+                <section>exports</section>
+              </structure>
+            </item>
+          </extract>
+        </point>
+
+        <point category="props-patterns">
+          <query>How are props structured and typed?</query>
+          <extract>
+            <item>prop-interface-naming</item>
+            <item>common-prop-patterns</item>
+            <item>prop-spreading-usage</item>
+            <item>default-props-pattern</item>
+            <item>children-patterns</item>
+          </extract>
+        </point>
+
+        <point category="composition">
+          <query>How are components composed together?</query>
+          <extract>
+            <item>component-hierarchy-depth</item>
+            <item>composition-vs-inheritance</item>
+            <item>slot-based-composition</item>
+            <item>wrapper-components</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 4: Styling System -->
+    <phase id="4" name="styling-system-analysis">
+      <description>
+        Extract the complete styling system and design tokens
+      </description>
+      <extraction-points>
+        <point category="design-tokens">
+          <query>What design tokens and variables are defined?</query>
+          <look-for>
+            <file>tailwind.config.js</file>
+            <file>index.css (CSS variables)</file>
+            <file>theme.ts</file>
+          </look-for>
+          <extract>
+            <token-category name="colors">
+              <extract>color-palette</extract>
+              <extract>semantic-colors (primary, secondary, accent, etc.)</extract>
+              <extract>state-colors (error, warning, success, etc.)</extract>
+              <extract>text-colors</extract>
+              <extract>background-colors</extract>
+              <extract>border-colors</extract>
+            </token-category>
+            <token-category name="typography">
+              <extract>font-families</extract>
+              <extract>font-sizes</extract>
+              <extract>font-weights</extract>
+              <extract>line-heights</extract>
+              <extract>letter-spacing</extract>
+            </token-category>
+            <token-category name="spacing">
+              <extract>spacing-scale</extract>
+              <extract>padding-utilities</extract>
+              <extract>margin-utilities</extract>
+              <extract>gap-utilities</extract>
+            </token-category>
+            <token-category name="sizing">
+              <extract>width-scale</extract>
+              <extract>height-scale</extract>
+              <extract>breakpoints</extract>
+              <extract>container-sizes</extract>
+            </token-category>
+            <token-category name="effects">
+              <extract>border-radius</extract>
+              <extract>shadows</extract>
+              <extract>opacity-scale</extract>
+              <extract>z-index-scale</extract>
+              <extract>backdrop-blur</extract>
+            </token-category>
+            <token-category name="animations">
+              <extract>animation-durations</extract>
+              <extract>animation-timings</extract>
+              <extract>custom-keyframes</extract>
+              <extract>transition-presets</extract>
+            </token-category>
+          </extract>
+        </point>
+
+        <point category="component-styling">
+          <query>How are components styled?</query>
+          <extract>
+            <item>inline-styles-usage</item>
+            <item>utility-classes-usage</item>
+            <item>conditional-styling-patterns</item>
+            <item>variant-systems (CVA, etc.)</item>
+            <item>responsive-patterns</item>
+          </extract>
+        </point>
+
+        <point category="global-styles">
+          <query>What global styles are applied?</query>
+          <extract>
+            <item>css-reset-or-normalize</item>
+            <item>base-styles</item>
+            <item>global-utilities</item>
+            <item>custom-global-classes</item>
+          </extract>
+        </point>
+
+        <point category="theming">
+          <query>Is there a theming system?</query>
+          <extract>
+            <item>theme-switching-mechanism</item>
+            <item>theme-variables</item>
+            <item>dark-mode-implementation</item>
+            <item>theme-persistence</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 5: Type System -->
+    <phase id="5" name="type-system-analysis">
+      <description>
+        Extract TypeScript types, interfaces, and type patterns
+      </description>
+      <extraction-points>
+        <point category="domain-types">
+          <query>What are the core domain types?</query>
+          <look-for>
+            <file>types.ts</file>
+            <file>types/*.ts</file>
+            <file>*.types.ts</file>
+          </look-for>
+          <extract>
+            <item>entity-types</item>
+            <item>value-objects</item>
+            <item>enums</item>
+            <item>union-types</item>
+            <item>type-aliases</item>
+          </extract>
+        </point>
+
+        <point category="component-types">
+          <query>How are component props typed?</query>
+          <extract>
+            <item>prop-interface-patterns</item>
+            <item>generic-component-types</item>
+            <item>event-handler-types</item>
+            <item>ref-types</item>
+            <item>children-types</item>
+          </extract>
+        </point>
+
+        <point category="utility-types">
+          <query>What utility types are used?</query>
+          <extract>
+            <item>custom-utility-types</item>
+            <item>mapped-types</item>
+            <item>conditional-types</item>
+            <item>type-guards</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 6: State Management Patterns -->
+    <phase id="6" name="state-management-analysis">
+      <description>
+        Analyze state management patterns and data flow
+      </description>
+      <extraction-points>
+        <point category="state-organization">
+          <query>How is state organized?</query>
+          <extract>
+            <item>global-state-location</item>
+            <item>local-state-patterns</item>
+            <item>derived-state-patterns</item>
+            <item>state-initialization</item>
+          </extract>
+        </point>
+
+        <point category="state-updates">
+          <query>How is state updated?</query>
+          <extract>
+            <item>update-patterns (setState, dispatch, etc.)</item>
+            <item>immutability-patterns</item>
+            <item>batch-updates</item>
+            <item>optimistic-updates</item>
+          </extract>
+        </point>
+
+        <point category="state-persistence">
+          <query>Is state persisted?</query>
+          <extract>
+            <item>localStorage-usage</item>
+            <item>sessionStorage-usage</item>
+            <item>persistence-libraries</item>
+            <item>sync-mechanisms</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 7: Performance Patterns -->
+    <phase id="7" name="performance-patterns-analysis">
+      <description>
+        Identify performance optimization techniques
+      </description>
+      <extraction-points>
+        <point category="code-splitting">
+          <query>How is code splitting implemented?</query>
+          <extract>
+            <item>lazy-loading-patterns</item>
+            <item>dynamic-imports</item>
+            <item>route-based-splitting</item>
+            <item>component-based-splitting</item>
+          </extract>
+        </point>
+
+        <point category="memoization">
+          <query>What memoization strategies are used?</query>
+          <extract>
+            <item>React.memo-usage</item>
+            <item>useMemo-patterns</item>
+            <item>useCallback-patterns</item>
+            <item>memoization-selectors</item>
+          </extract>
+        </point>
+
+        <point category="rendering-optimization">
+          <query>How is rendering optimized?</query>
+          <extract>
+            <item>virtualization (react-window, etc.)</item>
+            <item>suspense-boundaries</item>
+            <item>skeleton-loaders</item>
+            <item>progressive-enhancement</item>
+          </extract>
+        </point>
+
+        <point category="asset-optimization">
+          <query>How are assets optimized?</query>
+          <extract>
+            <item>image-optimization</item>
+            <item>font-loading-strategy</item>
+            <item>icon-strategy</item>
+            <item>bundle-size-optimization</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 8: Animation Patterns -->
+    <phase id="8" name="animation-patterns-analysis">
+      <description>
+        Extract animation patterns and motion design system
+      </description>
+      <extraction-points>
+        <point category="animation-types">
+          <query>What types of animations are used?</query>
+          <extract>
+            <item>enter-exit-animations</item>
+            <item>scroll-triggered-animations</item>
+            <item>hover-interactions</item>
+            <item>loading-animations</item>
+            <item>transition-animations</item>
+            <item>gesture-animations</item>
+          </extract>
+        </point>
+
+        <point category="animation-configuration">
+          <query>How are animations configured?</query>
+          <extract>
+            <item>animation-variants</item>
+            <item>spring-configurations</item>
+            <item>easing-functions</item>
+            <item>duration-standards</item>
+            <item>stagger-patterns</item>
+          </extract>
+        </point>
+
+        <point category="scroll-animations">
+          <query>How are scroll animations implemented?</query>
+          <extract>
+            <item>scroll-hooks-used</item>
+            <item>parallax-patterns</item>
+            <item>scroll-triggers</item>
+            <item>intersection-observer-usage</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 9: Accessibility Patterns -->
+    <phase id="9" name="accessibility-analysis">
+      <description>
+        Document accessibility features and patterns
+      </description>
+      <extraction-points>
+        <point category="semantic-html">
+          <query>How is semantic HTML used?</query>
+          <extract>
+            <item>landmark-elements</item>
+            <item>heading-hierarchy</item>
+            <item>form-semantics</item>
+            <item>button-vs-link-usage</item>
+          </extract>
+        </point>
+
+        <point category="aria-attributes">
+          <query>What ARIA attributes are used?</query>
+          <extract>
+            <item>aria-labels</item>
+            <item>aria-describedby</item>
+            <item>aria-live-regions</item>
+            <item>aria-hidden-usage</item>
+          </extract>
+        </point>
+
+        <point category="keyboard-navigation">
+          <query>How is keyboard navigation supported?</query>
+          <extract>
+            <item>focus-management</item>
+            <item>focus-visible-styles</item>
+            <item>keyboard-shortcuts</item>
+            <item>tab-order</item>
+          </extract>
+        </point>
+
+        <point category="motion-preferences">
+          <query>How are motion preferences respected?</query>
+          <extract>
+            <item>prefers-reduced-motion-usage</item>
+            <item>animation-toggles</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 10: Configuration & Setup -->
+    <phase id="10" name="configuration-analysis">
+      <description>
+        Extract all configuration files and setup requirements
+      </description>
+      <extraction-points>
+        <point category="package-management">
+          <query>What are the npm/yarn configurations?</query>
+          <look-for>
+            <file>package.json</file>
+            <file>.npmrc</file>
+            <file>yarn.lock</file>
+            <file>package-lock.json</file>
+          </look-for>
+          <extract>
+            <item>dependencies</item>
+            <item>devDependencies</item>
+            <item>scripts</item>
+            <item>engines</item>
+            <item>package-manager-version</item>
+          </extract>
+        </point>
+
+        <point category="build-configuration">
+          <query>How is the build configured?</query>
+          <extract>
+            <item>build-command</item>
+            <item>output-directory</item>
+            <item>environment-variables</item>
+            <item>build-optimizations</item>
+            <item>sourcemap-configuration</item>
+          </extract>
+        </point>
+
+        <point category="development-setup">
+          <query>What is needed for development?</query>
+          <extract>
+            <item>dev-server-configuration</item>
+            <item>hot-reload-setup</item>
+            <item>proxy-configuration</item>
+            <item>environment-setup</item>
+          </extract>
+        </point>
+
+        <point category="linting-formatting">
+          <query>What code quality tools are configured?</query>
+          <look-for>
+            <file>.eslintrc.*</file>
+            <file>.prettierrc.*</file>
+            <file>.editorconfig</file>
+          </look-for>
+          <extract>
+            <item>eslint-configuration</item>
+            <item>prettier-configuration</item>
+            <item>editor-configuration</item>
+            <item>pre-commit-hooks</item>
+          </extract>
+        </point>
+
+        <point category="deployment">
+          <query>How is deployment configured?</query>
+          <look-for>
+            <file>vercel.json</file>
+            <file>netlify.toml</file>
+            <file>Dockerfile</file>
+          </look-for>
+          <extract>
+            <item>deployment-platform</item>
+            <item>deployment-configuration</item>
+            <item>build-command</item>
+            <item>output-directory</item>
+            <item>redirects-rewrites</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 11: Best Practices & Patterns -->
+    <phase id="11" name="best-practices-analysis">
+      <description>
+        Identify coding standards and best practices
+      </description>
+      <extraction-points>
+        <point category="code-organization">
+          <query>What code organization patterns are followed?</query>
+          <extract>
+            <item>import-ordering</item>
+            <item>file-structure-consistency</item>
+            <item>naming-conventions</item>
+            <item>comment-patterns</item>
+          </extract>
+        </point>
+
+        <point category="error-handling">
+          <query>How are errors handled?</query>
+          <extract>
+            <item>error-boundary-usage</item>
+            <item>try-catch-patterns</item>
+            <item>error-logging</item>
+            <item>user-facing-error-messages</item>
+          </extract>
+        </point>
+
+        <point category="testing-patterns">
+          <query>What testing patterns are used?</query>
+          <extract>
+            <item>test-framework</item>
+            <item>test-file-location</item>
+            <item>test-naming-conventions</item>
+            <item>testing-utilities</item>
+          </extract>
+        </point>
+      </extraction-points>
+    </phase>
+
+    <!-- Phase 12: Template Generation -->
+    <phase id="12" name="template-generation">
+      <description>
+        Generate the final template structure and documentation
+      </description>
+      <outputs>
+        <output type="template-structure">
+          <description>
+            A boilerplate directory structure with placeholder files
+          </description>
+          <includes>
+            <include>All necessary configuration files</include>
+            <include>Base component structure</include>
+            <include>Styling system setup</include>
+            <include>Utility functions</include>
+            <include>Type definitions</include>
+          </includes>
+        </output>
+
+        <output type="template-documentation">
+          <description>
+            Comprehensive documentation for the template
+          </description>
+          <sections>
+            <section>Getting Started Guide</section>
+            <section>Architecture Overview</section>
+            <section>Component Development Guide</section>
+            <section>Styling Guide</section>
+            <section>State Management Guide</section>
+            <section>Performance Best Practices</section>
+            <section>Accessibility Guidelines</section>
+            <section>Deployment Instructions</section>
+          </sections>
+        </output>
+
+        <output type="setup-scripts">
+          <description>
+            Automated setup scripts for quick project initialization
+          </description>
+          <scripts>
+            <script>init-project.sh</script>
+            <script>install-dependencies.sh</script>
+            <script>setup-environment.sh</script>
+          </scripts>
+        </output>
+
+        <output type="template-config">
+          <description>
+            Configuration file for template customization
+          </description>
+          <format>JSON/YAML</format>
+          <customizable-options>
+            <option>project-name</option>
+            <option>styling-approach</option>
+            <option>component-library</option>
+            <option>routing-solution</option>
+            <option>state-management</option>
+            <option>animation-library</option>
+          </customizable-options>
+        </output>
+
+        <output type="example-implementations">
+          <description>
+            Example components and patterns
+          </description>
+          <examples>
+            <example>Example page component</example>
+            <example>Example feature component</example>
+            <example>Example UI component</example>
+            <example>Example custom hook</example>
+            <example>Example animation pattern</example>
+          </examples>
+        </output>
+      </outputs>
+    </phase>
+  </analysis-phases>
+
+  <extraction-guidelines>
+    <guideline priority="high">
+      Preserve the exact versions of all dependencies to ensure reproducibility
+    </guideline>
+    <guideline priority="high">
+      Document WHY certain patterns are used, not just WHAT they are
+    </guideline>
+    <guideline priority="high">
+      Extract reusable patterns, not project-specific implementations
+    </guideline>
+    <guideline priority="medium">
+      Identify and document any custom or unique solutions
+    </guideline>
+    <guideline priority="medium">
+      Note any deviations from standard practices and their rationale
+    </guideline>
+    <guideline priority="low">
+      Include performance benchmarks if available
+    </guideline>
+    <guideline priority="low">
+      Document any known limitations or technical debt
+    </guideline>
+  </extraction-guidelines>
+
+  <template-criteria>
+    <criterion category="completeness">
+      Template should be immediately usable for starting a new project
+    </criterion>
+    <criterion category="flexibility">
+      Template should be easily customizable for different use cases
+    </criterion>
+    <criterion category="maintainability">
+      Template should follow current best practices and be easy to maintain
+    </criterion>
+    <criterion category="documentation">
+      Template should be thoroughly documented with examples
+    </criterion>
+    <criterion category="performance">
+      Template should include performance optimizations by default
+    </criterion>
+    <criterion category="accessibility">
+      Template should be WCAG AA compliant out of the box
+    </criterion>
+    <criterion category="developer-experience">
+      Template should provide excellent DX with good tooling and clear patterns
+    </criterion>
+  </template-criteria>
+
+  <validation-checklist>
+    <validation-step>
+      Verify all dependencies are correctly specified with versions
+    </validation-step>
+    <validation-step>
+      Test that the template can be installed and built without errors
+    </validation-step>
+    <validation-step>
+      Confirm all configuration files are complete and valid
+    </validation-step>
+    <validation-step>
+      Ensure all code patterns are consistent throughout the template
+    </validation-step>
+    <validation-step>
+      Validate that documentation is clear and comprehensive
+    </validation-step>
+    <validation-step>
+      Check that example implementations work as expected
+    </validation-step>
+    <validation-step>
+      Verify accessibility standards are met
+    </validation-step>
+    <validation-step>
+      Confirm performance optimizations are in place
+    </validation-step>
+  </validation-checklist>
+
+  <usage-instructions>
+    <step number="1">
+      Run this prompt through an AI assistant with access to the codebase
+    </step>
+    <step number="2">
+      Review the extracted information for each phase systematically
+    </step>
+    <step number="3">
+      Identify patterns that should be generalized vs. project-specific code
+    </step>
+    <step number="4">
+      Generate the template structure based on the extracted patterns
+    </step>
+    <step number="5">
+      Create comprehensive documentation for the template
+    </step>
+    <step number="6">
+      Test the template by creating a new project from it
+    </step>
+    <step number="7">
+      Iterate and refine based on testing results
+    </step>
+  </usage-instructions>
+
+  <notes>
+    <note>
+      This prompt is designed to be used with AI assistants that have file system access
+      and the ability to analyze code systematically.
+    </note>
+    <note>
+      The extraction should prioritize patterns and structure over specific business logic.
+    </note>
+    <note>
+      The resulting template should be framework-agnostic where possible, with clear
+      documentation on framework-specific implementations.
+    </note>
+    <note>
+      Consider creating multiple template variants for different use cases (e.g.,
+      minimal template, full-featured template, specific domain templates).
+    </note>
+  </notes>
+</reverse-engineering-prompt>
