@@ -78,6 +78,7 @@
     color: rgb(var(--text-primary));
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    cursor: none;
   }
 
   h1,

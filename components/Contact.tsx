@@ -144,7 +144,7 @@ export const Contact: React.FC = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
             </div>
@@ -157,7 +157,7 @@ export const Contact: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="your@email.com"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
             </div>
@@ -170,7 +170,7 @@ export const Contact: React.FC = () => {
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="What's this about?"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
               />
             </div>
 
@@ -182,7 +182,7 @@ export const Contact: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Your message here..."
                 rows={5}
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors resize-none"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors resize-none"
                 required
               />
             </div>

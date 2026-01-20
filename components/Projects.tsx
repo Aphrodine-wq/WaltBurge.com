@@ -131,7 +131,7 @@ export const projects: Project[] = [
   },
   {
     id: 'cloudgen',
-    title: 'CloudGEN',
+    title: 'cloud forge',
     category: 'Tools',
     description: 'AI-driven infrastructure code generator.',
     fullDescription: 'CloudGEN converts requirements into infrastructure code using AI.',
@@ -426,7 +426,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               </div>
 
               {/* Content Panel - Overlaid on image */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-center items-center relative z-10">
+              <div className="absolute inset-0 p-8 flex flex-col justify-end items-center relative z-10 pb-12">
                 <div className="flex justify-between items-baseline mb-3 w-full">
                   <h3 className="text-2xl font-serif text-white leading-tight">
                     {project.title}
