@@ -421,22 +421,20 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               {/* Full Picture Background */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <ProjectCardImage project={project} />
-                {/* Uniform dark overlay for centered text readability */}
-                <div className="absolute inset-0 bg-black/60 group-hover/card:bg-black/70 transition-all duration-500" />
+                {/* Gradient overlay for bottom text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent group-hover/card:from-black/90 group-hover/card:via-black/50 transition-all duration-500" />
               </div>
 
-              {/* Content Panel - Overlaid on image, CENTERED */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-center items-center relative z-10 text-center">
-                <div className="flex flex-col items-center mb-3">
-                  <h3 className="text-2xl font-serif text-white leading-tight text-center">
-                    {project.title}
-                  </h3>
-                  <span className="text-brand-accent text-xs font-sans tracking-wide mt-2">
-                    {project.year}
-                  </span>
-                </div>
+              {/* Content Panel - Overlaid on image, AT BOTTOM */}
+              <div className="absolute inset-0 p-8 pb-10 flex flex-col justify-end items-center z-10 text-center">
+                <h3 className="text-2xl font-serif text-white leading-tight text-center mb-1">
+                  {project.title}
+                </h3>
+                <span className="text-brand-accent text-xs font-sans tracking-wide mb-3">
+                  {project.year}
+                </span>
 
-                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2 max-w-xs text-center">
+                <p className="text-white/80 text-sm leading-relaxed font-sans mb-4 line-clamp-2 max-w-xs text-center">
                   {project.description}
                 </p>
 
