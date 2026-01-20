@@ -8,7 +8,6 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
-import { DarkModeToggle } from './components/DarkModeToggle';
 import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
 import { Marketplace } from './components/Marketplace';
@@ -55,7 +54,6 @@ const MobileBar: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <DarkModeToggle />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
@@ -164,9 +162,6 @@ function App() {
             {/* Navigation */}
             <MobileBar />
             <ArtisticNav />
-            <div className="hidden md:block fixed top-6 right-6 z-50">
-              <DarkModeToggle />
-            </div>
             <div className="film-grain" />
             <main>
               <Hero />

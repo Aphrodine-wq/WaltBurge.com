@@ -94,10 +94,10 @@ export const Hero: React.FC = () => {
         </motion.div>
       </motion.div>
 
-      {/* Floating Ambient Elements - Strict Jungle Green */}
+      {/* Floating Ambient Elements - Stormy/Pacific Vibes */}
       <motion.div style={{ y: y2 }} className="absolute inset-0 pointer-events-none z-0">
-        <FloatingOrb x="10%" y="20%" size={200} color="rgba(91, 146, 121, 0.1)" delay={0} />
-        <FloatingOrb x="80%" y="60%" size={300} color="rgba(91, 146, 121, 0.08)" delay={2} />
+        <FloatingOrb x="10%" y="20%" size={200} color="rgb(var(--accent-color) / 0.1)" delay={0} />
+        <FloatingOrb x="80%" y="60%" size={300} color="rgb(var(--aurora-teal) / 0.08)" delay={2} />
       </motion.div>
 
       {/* Scroll Hint */}
