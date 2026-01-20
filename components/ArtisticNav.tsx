@@ -23,7 +23,7 @@ export const ArtisticNav: React.FC = () => {
     };
 
     return (
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] flex justify-center">
+        <nav className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] flex justify-center" role="navigation" aria-label="Main navigation">
             {/* The Floating Prism */}
             <motion.div
                 className="glass-prism rounded-full px-8 py-5 flex items-center gap-6 transition-all duration-500 hover:shadow-[0_0_60px_rgba(var(--aurora-teal),0.2)] hover:scale-[1.02] border border-white/10"
@@ -42,7 +42,7 @@ export const ArtisticNav: React.FC = () => {
                     />
                 ))}
             </motion.div>
-        </div>
+        </nav>
     );
 };
 
@@ -55,6 +55,7 @@ const NavItem = ({ item, idx, hoveredIdx, setHoveredIdx, onClick }: any) => {
             onClick={onClick}
             onMouseEnter={() => setHoveredIdx(idx)}
             onMouseLeave={() => setHoveredIdx(null)}
+            aria-label={item.label}
             className="relative flex flex-col items-center justify-center p-2 group"
         >
             <AnimatePresence>
