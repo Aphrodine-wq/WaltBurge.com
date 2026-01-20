@@ -44,15 +44,15 @@ export const projects: Project[] = [
     id: 'g-rump',
     title: 'G-Rump Coding Language',
     category: 'Systems',
-    description: 'A custom high-performance compiled language designed for systems programming.',
-    fullDescription: 'G-Rump is a statically typed, compiled language built from the ground up to address the specific needs of modern systems programming. It offers manual memory management with optional safety rails, aiming to provide C++ level performance with a more modern, expressive syntax.',
-    challenge: 'Existing systems languages often force a trade-off between control and safety, or suffer from decades of legacy bloat. The challenge was to create a compiler backend that could optimize specifically for parallel processing architectures without the overhead of a runtime garbage collector.',
-    solution: 'I architected a custom frontend using LLVM as the backend. The compiler implements a unique ownership model that resolves memory constraints at compile-time. I also developed a "Parallel-Block" syntax that allows the compiler to auto-vectorize specific loops more aggressively than standard O3 optimizations.',
+    description: 'A custom compiled language for systems programming.',
+    fullDescription: 'G-Rump is a compiled language built for modern systems programming with a focus on performance and control.',
+    challenge: 'Balancing performance with safety in low-level programming.',
+    solution: 'Custom compiler architecture with optimizations for parallel processing.',
     features: [
-      'Zero-cost abstractions with no runtime GC',
-      'Custom LLVM frontend implementation',
-      'Built-in "Parallel-Block" syntax for SIMD operations',
-      'Interoperability with C/C++ libraries'
+      'Zero-cost abstractions',
+      'Custom compiler implementation',
+      'Parallel processing support',
+      'C/C++ compatibility'
     ],
     techStack: ['C++', 'LLVM', 'Assembly', 'Compiler Design'],
     tags: ['performance', 'memory-safety', 'multithreading'],
@@ -60,21 +60,21 @@ export const projects: Project[] = [
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump',
     status: 'Beta',
-    year: '2024'
+    year: '2025'
   },
   {
     id: 'clipsync',
     title: 'ClipSync',
     category: 'Tools',
-    description: 'A seamless clipboard synchronization utility connecting Windows and mobile.',
-    fullDescription: 'ClipSync bridges the gap between desktop and mobile workflows. It runs as a lightweight daemon on Windows and a background service on mobile, ensuring your clipboard is always in sync across devices.',
-    challenge: 'Ensuring instant synchronization without compromising security or relying on slow cloud relays.',
-    solution: 'Implemented a local peer-to-peer connection protocol over WiFi. Data is encrypted using AES-256 before transmission. The system uses UDP hole punching to establish direct connections, falling back to a secure relay only when necessary.',
+    description: 'Clipboard sync utility for Windows and mobile.',
+    fullDescription: 'ClipSync enables clipboard synchronization across desktop and mobile platforms.',
+    challenge: 'Maintaining security while ensuring instant synchronization.',
+    solution: 'Local peer-to-peer protocol with encryption.',
     features: [
-      'End-to-End AES-256 Encryption',
-      'Local P2P Data Transfer (No Cloud Storage)',
-      'Cross-Platform Background Services',
-      'Instant Text & Image Sync'
+      'End-to-End Encryption',
+      'Local P2P Transfer',
+      'Cross-Platform Support',
+      'Text & Image Sync'
     ],
     techStack: ['C#', '.NET Core', 'Encryption'],
     tags: ['security', 'p2p', 'workflow'],
@@ -82,21 +82,21 @@ export const projects: Project[] = [
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/clipsync',
     status: 'Archived',
-    year: '2022'
+    year: '2025'
   },
   {
     id: 'ftwos',
     title: 'FTWOS',
     category: 'Systems',
-    description: 'Experimental operating system architecture focused on real-time task scheduling.',
-    fullDescription: 'FTWOS is an experimental operating system kernel built from scratch, focusing on real-time task scheduling and low-level system architecture.',
-    challenge: 'Writing a bootloader and kernel from scratch requires handling hardware interrupts and memory mapping manually, which is notoriously difficult to debug.',
-    solution: 'Wrote a custom bootloader in Assembly to switch the CPU to protected mode. Implemented a microkernel architecture where drivers run in user space to improve stability. The scheduler uses a unique priority-inheritance mechanism to prevent deadlocks.',
+    description: 'Experimental OS with custom task scheduling.',
+    fullDescription: 'FTWOS is an experimental operating system kernel with focus on real-time scheduling.',
+    challenge: 'Low-level hardware management and debugging.',
+    solution: 'Custom bootloader and microkernel architecture.',
     features: [
       'Custom Bootloader & Kernel',
-      'Preemptive Multitasking Scheduler',
-      'FAT32 File System Implementation',
-      'VGA Text Mode Driver'
+      'Multitasking Scheduler',
+      'File System Support',
+      'Display Driver'
     ],
     techStack: ['C', 'Assembly', 'Kernel', 'Bootloader'],
     tags: ['kernel', 'experimental', 'bare-metal'],
@@ -104,21 +104,21 @@ export const projects: Project[] = [
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/ftwos',
     status: 'Concept',
-    year: '2021'
+    year: '2025'
   },
   {
     id: 'icongen',
     title: 'IconGEN',
     category: 'Tools',
-    description: 'Automated asset generation tool using heuristic algorithms.',
-    fullDescription: 'IconGEN is a CLI tool for mobile developers that automatically generates all required icon sizes and asset exports from a single vector source, using AI to suggest aesthetic improvements for different form factors.',
-    challenge: 'Managing hundreds of asset exports for iOS, Android, and Web requires significant manual effort and is prone to errors.',
-    solution: 'Built a Python-based pipeline that wraps standard image processing libraries. Added a heuristic layer that analyzes the input image complexity and suggests simplifications for smaller icon sizes to ensure legibility.',
+    description: 'Automated asset generation tool.',
+    fullDescription: 'IconGEN generates platform-specific assets from a single source.',
+    challenge: 'Managing multi-platform asset exports efficiently.',
+    solution: 'Automated pipeline with intelligent optimization.',
     features: [
-      'Multi-Platform Export (iOS, Android, Web)',
-      'Heuristic Legibility Analysis',
-      'Vector to Raster High-Quality Scaling',
-      'CLI Integration for CI/CD Pipelines'
+      'Multi-Platform Export',
+      'Quality Analysis',
+      'High-Quality Scaling',
+      'CLI Integration'
     ],
     techStack: ['Python', 'AI Heuristics', 'CLI'],
     tags: ['automation', 'generative', 'asset-pipeline'],
@@ -126,21 +126,21 @@ export const projects: Project[] = [
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/icongen',
     status: 'Live',
-    year: '2023'
+    year: '2025'
   },
   {
     id: 'cloudgen',
     title: 'CloudGEN',
     category: 'Tools',
-    description: 'AI-driven infrastructure-as-code generator for enterprise cloud environments.',
-    fullDescription: 'CloudGEN revolutionizes cloud provisioning by using generative AI to convert natural language architecture descriptions into fully compliant Terraform and CloudFormation code. It analyzes best practices, security policies, and cost constraints to generate production-ready infrastructure.',
-    challenge: 'Manual infrastructure coding is slow, error-prone, and requires deep domain expertise. Existing templates are often rigid and do not adapt to specific enterprise compliance needs.',
-    solution: 'Developed a fine-tuned LLM specialized in IaC logic, integrated with a Go-based validation engine. The system parses requirements, generates resource graphs, and output validated Terraform code. It includes a "Cost-Preview" feature that estimates monthly spend before deployment.',
+    description: 'AI-driven infrastructure code generator.',
+    fullDescription: 'CloudGEN converts requirements into infrastructure code using AI.',
+    challenge: 'Simplifying complex infrastructure provisioning.',
+    solution: 'AI-powered code generation with validation.',
     features: [
-      'Natural Language to Terraform/CloudFormation',
-      'Real-time Cost Estimation & Forecasting',
-      'Security Policy Compliance Checks (Sentinel/OPA)',
-      'Multi-Cloud Support (AWS, Azure, GCP)'
+      'Natural Language Input',
+      'Cost Estimation',
+      'Security Compliance',
+      'Multi-Cloud Support'
     ],
     techStack: ['Go', 'Terraform', 'AWS', 'Python', 'AI'],
     tags: ['devops', 'generative-ai', 'infrastructure'],
@@ -153,16 +153,16 @@ export const projects: Project[] = [
     id: 'fairtradeworker',
     title: 'FairTradeWorker.com',
     category: 'Web',
-    description: 'Professional platform connecting workers with fair trade opportunities and ethical employment.',
-    fullDescription: 'FairTradeWorker.com is a comprehensive web platform designed to bridge the gap between ethical employers and workers seeking fair compensation and working conditions. The platform emphasizes transparency, worker rights, and sustainable employment practices.',
-    challenge: 'Creating a trustworthy marketplace that validates both employers and workers while maintaining privacy, security, and scalability across diverse geographic regions with varying labor laws.',
-    solution: 'Built a modern full-stack application using React and Node.js with robust authentication, verification systems, and real-time communication. Implemented geolocation-based job matching, secure payment processing, and a comprehensive review system to ensure accountability and transparency.',
+    description: 'Platform connecting workers with ethical employment.',
+    fullDescription: 'FairTradeWorker.com is a web platform for ethical employment opportunities.',
+    challenge: 'Building a trustworthy marketplace with global scale.',
+    solution: 'Full-stack platform with verification and matching systems.',
     features: [
-      'Verified Employer & Worker Profiles',
-      'Real-Time Job Matching Algorithm',
-      'Secure Payment Escrow System',
-      'Multi-Language Support & Localization',
-      'Transparent Review & Rating System'
+      'Verified Profiles',
+      'Job Matching',
+      'Secure Payments',
+      'Multi-Language Support',
+      'Review System'
     ],
     techStack: ['React', 'Node.js', 'PostgreSQL', 'TypeScript'],
     tags: ['social-impact', 'full-stack', 'marketplace'],
@@ -171,7 +171,7 @@ export const projects: Project[] = [
     link: 'https://fairtradeworker.com',
     repositoryUrl: 'https://github.com/Aphrodine-wq/fairtradeworker',
     status: 'Live',
-    year: '2024'
+    year: '2025'
   }
 ];
 
@@ -308,12 +308,13 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
         src={project.imageUrl}
         alt={project.title}
         loading="lazy"
+        decoding="async"
         onError={() => setHasError(true)}
-        className="w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0"
+        className="w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-transform duration-500 ease-out"
       />
 
       {/* Category Badge - Top Right */}
-      <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
+      <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-200 flex flex-col items-end gap-2">
         <div className="bg-black/50 backdrop-blur-md border border-white/10 shadow-lg uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
           <CategoryIcon category={project.category} />
           <span className="ml-2">{project.category}</span>
@@ -352,11 +353,11 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: { duration: 0.4 }
     }
   };
 
@@ -412,35 +413,36 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <motion.div
               key={project.id}
               variants={cardVariants}
-              whileHover={{ y: -10, scale: 1.01 }}
+              whileHover={{ y: -8, scale: 1.01 }}
               onClick={() => onProjectClick?.(project)}
-              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(91,146,121,0.15)] transition-all duration-700 border border-white/5"
+              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(91,146,121,0.15)] transition-all duration-500 border border-white/5 h-[480px]"
             >
-              {/* Image Container - Full Bleed */}
-              <div className="relative h-[280px] w-full overflow-hidden">
-                {/* Try to show real image first using a custom component that handles error state */}
+              {/* Full Picture Background */}
+              <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <ProjectCardImage project={project} />
+                {/* Dark overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover/card:from-black/90 group-hover/card:via-black/60 transition-all duration-500" />
               </div>
 
-              {/* Content Panel - Soft & Spacious */}
-              <div className="p-8 relative z-10">
-                <div className="flex justify-between items-baseline mb-4">
-                  <h3 className="text-2xl font-serif text-white/95 leading-tight">
+              {/* Content Panel - Overlaid on image */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end relative z-10">
+                <div className="flex justify-between items-baseline mb-3">
+                  <h3 className="text-2xl font-serif text-white leading-tight">
                     {project.title}
                   </h3>
-                  <span className="text-brand-accent/60 text-xs font-sans tracking-wide">
+                  <span className="text-brand-accent text-xs font-sans tracking-wide">
                     {project.year}
                   </span>
                 </div>
 
-                <p className="text-brand-secondary text-sm leading-relaxed font-sans mb-8 line-clamp-2">
+                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2">
                   {project.description}
                 </p>
 
                 {/* Tech Stack - Minimal Pills */}
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.slice(0, 3).map((tech) => (
-                    <span key={tech} className="px-3 py-1 rounded-full bg-brand-accent/10 text-[10px] text-brand-accent tracking-wide font-sans border border-brand-accent/10">
+                    <span key={tech} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-[10px] text-white tracking-wide font-sans border border-white/20">
                       {tech}
                     </span>
                   ))}
@@ -448,7 +450,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               </div>
 
               {/* Hover Glow Effect */}
-              <div className="absolute inset-0 border-2 border-brand-accent/0 rounded-[2rem] group-hover/card:border-brand-accent/20 transition-all duration-700 pointer-events-none" />
+              <div className="absolute inset-0 border-2 border-brand-accent/0 rounded-[2rem] group-hover/card:border-brand-accent/30 transition-all duration-500 pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>

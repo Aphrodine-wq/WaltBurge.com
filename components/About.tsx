@@ -16,16 +16,13 @@ export const About: React.FC = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        duration: 0.7,
-        type: 'spring',
-        stiffness: 100,
-        damping: 15
+        duration: 0.5,
+        ease: 'easeOut'
       }
     }
   };
