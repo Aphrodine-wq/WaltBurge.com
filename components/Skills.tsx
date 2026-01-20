@@ -6,7 +6,7 @@ import {
   Link, Zap, Brain, Box, Wind, MousePointer2, Sparkles, Monitor,
   FileCode, Layers, Rocket, MessageSquare, Table, Sigma, FileSearch,
   Palette, Network, Image as ImageIcon, Key, AppWindow, Command,
-  Smartphone, ScanFace, Activity, Server, Layout, Lock, Search, X, Filter
+  Smartphone, ScanFace, Activity, Server, Layout, Lock, Search, X, Filter, Gamepad
 } from 'lucide-react';
 
 interface Skill {
@@ -143,7 +143,8 @@ const skillCategories: SkillCategory[] = [
   }
 ];
 
-// --- Custom High-End SVG Icons ---
+// Lucide imports handled at top
+
 
 const VercelIcon = () => (
   <svg width="12" height="12" viewBox="0 0 1155 1000" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M577.344 0L1154.69 1000H0L577.344 0Z" /></svg>
@@ -224,32 +225,32 @@ const getSkillIcon = (name: string) => {
   const baseClass = "text-brand-secondary group-hover/skill:text-brand-accent transition-colors";
 
   // AI & Data Tools
-  if (n.includes('openai')) return <span className={baseClass}><OpenAIIcon /></span>;
-  if (n.includes('anthropic')) return <span className={baseClass}><AnthropicIcon /></span>;
-  if (n.includes('gemini')) return <span className={baseClass}><GeminiIcon /></span>;
+  if (n.includes('openai')) return <Bot size={size} className={baseClass} />;
+  if (n.includes('anthropic')) return <Bot size={size} className={baseClass} />;
+  if (n.includes('gemini')) return <Sparkles size={size} className={baseClass} />;
   if (n.includes('pinecone')) return <Database size={size} className={baseClass} />;
   if (n.includes('chroma')) return <Database size={size} className={baseClass} />;
   if (n.includes('llama')) return <FileSearch size={size} className={baseClass} />;
-  if (n.includes('pandas')) return <span className={baseClass}><PythonIcon /></span>;
-  if (n.includes('numpy')) return <span className={baseClass}><PythonIcon /></span>;
+  if (n.includes('pandas')) return <Table size={size} className={baseClass} />;
+  if (n.includes('numpy')) return <Sigma size={size} className={baseClass} />;
   if (n.includes('weights')) return <Activity size={size} className={baseClass} />;
   if (n.includes('midjourney')) return <Palette size={size} className={baseClass} />;
   if (n.includes('stable')) return <ImageIcon size={size} className={baseClass} />;
   if (n.includes('lm studio')) return <Monitor size={size} className={baseClass} />;
-  if (n.includes('ollama')) return <span className={baseClass}><OllamaIcon /></span>;
-  if (n.includes('hugging')) return <span className={baseClass}><HuggingFaceIcon /></span>;
+  if (n.includes('ollama')) return <Bot size={size} className={baseClass} />;
+  if (n.includes('hugging')) return <Bot size={size} className={baseClass} />;
   if (n.includes('groq')) return <Zap size={size} className={baseClass} />;
-  if (n.includes('langchain')) return <span className={baseClass}><LangChainIcon /></span>;
-  if (n.includes('tensorflow')) return <span className={baseClass}><TensorflowIcon /></span>;
-  if (n.includes('pytorch')) return <span className={baseClass}><PyTorchIcon /></span>;
+  if (n.includes('langchain')) return <Link size={size} className={baseClass} />;
+  if (n.includes('tensorflow')) return <Brain size={size} className={baseClass} />;
+  if (n.includes('pytorch')) return <Brain size={size} className={baseClass} />;
   if (n.includes('computer vision')) return <ScanFace size={size} className={baseClass} />;
   if (n.includes('reinforcement')) return <Brain size={size} className={baseClass} />;
 
   // IDEs
-  if (n.includes('vs code')) return <span className={baseClass}><VSCodeIcon /></span>;
-  if (n.includes('visual studio')) return <span className={baseClass}><VisualStudioIcon /></span>;
-  if (n.includes('xcode')) return <span className={baseClass}><XcodeIcon /></span>;
-  if (n.includes('android')) return <span className={baseClass}><AndroidStudioIcon /></span>;
+  if (n.includes('vs code')) return <FileCode size={size} className={baseClass} />;
+  if (n.includes('visual studio')) return <FileCode size={size} className={baseClass} />;
+  if (n.includes('xcode')) return <AppWindow size={size} className={baseClass} />;
+  if (n.includes('android')) return <Smartphone size={size} className={baseClass} />;
   if (n.includes('vim')) return <Terminal size={size} className={baseClass} />;
   if (n.includes('sublime')) return <FileCode size={size} className={baseClass} />;
   if (n.includes('trae')) return <Sparkles size={size} className={baseClass} />;
@@ -257,28 +258,28 @@ const getSkillIcon = (name: string) => {
   if (n.includes('windsurf')) return <Wind size={size} className={baseClass} />;
   if (n.includes('blackbox')) return <Box size={size} className={baseClass} />;
   if (n.includes('grump')) return <Terminal size={size} className={baseClass} />;
-  if (n.includes('intellij')) return <span className={baseClass}><IntellijIcon /></span>;
+  if (n.includes('intellij')) return <Code2 size={size} className={baseClass} />;
   if (n.includes('verdent')) return <Layers size={size} className={baseClass} />;
   if (n.includes('antigravity')) return <Rocket size={size} className={baseClass} />;
 
   // Web & Systems
-  if (n.includes('react')) return <span className={baseClass}><ReactIcon /></span>;
-  if (n.includes('next.js')) return <span className={baseClass}><ReactIcon /></span>;
-  if (n.includes('typescript')) return <span className={baseClass}><TSIcon /></span>;
-  if (n.includes('aws')) return <span className={baseClass}><AWSIcon /></span>;
-  if (n.includes('vercel')) return <span className={baseClass}><VercelIcon /></span>;
+  if (n.includes('react')) return <Code2 size={size} className={baseClass} />;
+  if (n.includes('next.js')) return <Globe size={size} className={baseClass} />;
+  if (n.includes('typescript')) return <FileCode size={size} className={baseClass} />;
+  if (n.includes('aws')) return <Cloud size={size} className={baseClass} />;
+  if (n.includes('vercel')) return <Zap size={size} className={baseClass} />;
   if (n.includes('github')) return <Github size={size} className={baseClass} />;
-  if (n.includes('c++')) return <span className={baseClass}><CppIcon /></span>;
-  if (n.includes('c ')) return <span className={baseClass}><CIcon /></span>;
-  if (n === 'c') return <span className={baseClass}><CIcon /></span>;
-  if (n.includes('assembly')) return <FileCode size={size} className={baseClass} />;
-  if (n.includes('compiler')) return <Cpu size={size} className={baseClass} />;
+  if (n.includes('c++')) return <Cpu size={size} className={baseClass} />;
+  if (n === 'c') return <Cpu size={size} className={baseClass} />;
+  if (n.includes('c ')) return <Cpu size={size} className={baseClass} />;
+  if (n.includes('assembly')) return <Cpu size={size} className={baseClass} />;
+  if (n.includes('compiler')) return <Server size={size} className={baseClass} />;
   if (n.includes('memory')) return <Server size={size} className={baseClass} />;
 
   // Game & Mobile
-  if (n.includes('godot')) return <span className={baseClass}><GodotIcon /></span>;
-  if (n.includes('unreal')) return <span className={baseClass}><UnrealIcon /></span>;
-  if (n.includes('swift')) return <span className={baseClass}><SwiftIcon /></span>;
+  if (n.includes('godot')) return <Gamepad size={size} className={baseClass} />;
+  if (n.includes('unreal')) return <Gamepad size={size} className={baseClass} />;
+  if (n.includes('swift')) return <Smartphone size={size} className={baseClass} />;
   if (n.includes('metal')) return <Layout size={size} className={baseClass} />;
   if (n.includes('hlsl')) return <Code2 size={size} className={baseClass} />;
 
@@ -421,7 +422,7 @@ export const Skills: React.FC = React.memo(() => {
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

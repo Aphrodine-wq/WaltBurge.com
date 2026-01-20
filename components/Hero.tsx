@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { ChevronRight, Database, Cloud, Lock, Zap, MousePointer2, ArrowDown } from 'lucide-react';
+import { ChevronRight, ArrowDown } from 'lucide-react';
 import { Button } from './ui/button';
 import { SectionId } from '../types';
 
@@ -23,11 +23,10 @@ export const Hero: React.FC = () => {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base transition-colors duration-500"
     >
       <div className="absolute inset-0 z-0">
-        {/* Mesh 1: Jungle Green Accent */}
-        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.15),transparent_70%)] blur-[80px] animate-aurora mix-blend-screen" />
-
-        {/* Mesh 2: Jungle Green Depth */}
-        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-pink)/0.15),transparent_70%)] blur-[80px] animate-float-dream mix-blend-screen" />
+        {/* Abstract Things - Geometric Minimalism */}
+        <div className="absolute top-[20%] left-[10%] w-64 h-64 border border-white/5 rounded-full blur-[1px] animate-float-slow" />
+        <div className="absolute bottom-[30%] right-[15%] w-48 h-48 border border-white/5 rounded-full blur-[1px] animate-float-delayed" />
+        <div className="absolute top-[60%] left-[20%] w-24 h-24 bg-white/5 rounded-full blur-[40px] animate-pulse-slow" />
       </div>
 
       <motion.div
@@ -39,20 +38,20 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="font-sans text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8 glow-text"
+          className="font-sans text-[11px] tracking-[0.4em] text-brand-secondary uppercase mb-8"
         >
           Architectural Systems
         </motion.span>
 
-        {/* Main Title: Editorial Serif */}
+        {/* Main Title: Humble Sans */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.9] tracking-tight mb-8 drop-shadow-2xl"
+          className="font-sans font-light text-5xl md:text-7xl lg:text-8xl text-brand-primary leading-[1.1] tracking-tight mb-8"
         >
-          <span className="block">Walt</span>
-          <span className="block italic text-brand-accent opacity-90">Burge</span>
+          <span className="block">Walt Burge</span>
+          {/* Subtitle removed from here to separate component */}
         </motion.h1>
 
         {/* Subtitle: Liquid Text */}
@@ -77,8 +76,8 @@ export const Hero: React.FC = () => {
             onClick={scrollToProjects}
             className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full transition-all duration-500 hover:scale-105"
           >
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-aurora-teal/20 to-aurora-purple/20 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
-            <span className="relative z-10 font-sans text-sm tracking-widest uppercase text-brand-primary group-hover:text-aurora-teal transition-colors">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/5 to-white/10 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
+            <span className="relative z-10 font-sans text-sm tracking-widest uppercase text-brand-primary group-hover:text-white transition-colors">
               View Portfolio
             </span>
           </button>
@@ -96,8 +95,8 @@ export const Hero: React.FC = () => {
 
       {/* Floating Ambient Elements - Stormy/Pacific Vibes */}
       <motion.div style={{ y: y2 }} className="absolute inset-0 pointer-events-none z-0">
-        <FloatingOrb x="10%" y="20%" size={200} color="rgb(var(--accent-color) / 0.1)" delay={0} />
-        <FloatingOrb x="80%" y="60%" size={300} color="rgb(var(--aurora-teal) / 0.08)" delay={2} />
+        <FloatingOrb x="10%" y="20%" size={200} color="rgba(255,255,255,0.02)" delay={0} />
+        <FloatingOrb x="80%" y="60%" size={300} color="rgba(255,255,255,0.01)" delay={2} />
       </motion.div>
 
       {/* Scroll Hint */}
@@ -107,7 +106,7 @@ export const Hero: React.FC = () => {
         className="absolute bottom-12 left-1/2 -translate-x-1/2"
       >
         <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent" />
-        <ArrowDown size={20} className="text-brand-accent relative z-10" />
+        <ArrowDown size={20} className="text-brand-secondary relative z-10" />
       </motion.div>
     </section>
   );

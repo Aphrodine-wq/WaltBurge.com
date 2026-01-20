@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Star, GitFork, Award, ExternalLink, BookOpen, Code2 } from 'lucide-react';
+import { Github, Star, GitFork, Award, ExternalLink, BookOpen, Code2, Cpu, Network, Lightbulb } from 'lucide-react';
 
 interface GitHubStats {
     repos: number;
@@ -10,29 +10,32 @@ interface GitHubStats {
 
 const certifications = [
     { name: 'AWS Solutions Architect', icon: Award, color: 'from-orange-400 to-orange-600' },
-    { name: 'Kubernetes Administrator', icon: Award, color: 'from-blue-400 to-blue-600' },
-    { name: 'Machine Learning Specialist', icon: Award, color: 'from-purple-400 to-purple-600' },
-    { name: 'System Design Expert', icon: Award, color: 'from-green-400 to-green-600' }
+    { name: 'Kubernetes Administrator', icon: Network, color: 'from-blue-400 to-blue-600' },
+    { name: 'Machine Learning Specialist', icon: Cpu, color: 'from-purple-400 to-purple-600' },
+    { name: 'System Design Expert', icon: Lightbulb, color: 'from-green-400 to-green-600' }
 ];
 
 const articles = [
     {
         title: 'Building Scalable RAG Pipelines',
-        description: 'A deep dive into architecting production-ready retrieval systems',
-        link: '#',
-        icon: BookOpen
+        description: 'Deep dive into production-ready retrieval systems.',
+        link: 'https://github.com/Aphrodine-wq',
+        icon: BookOpen,
+        tag: 'AI Engineering'
     },
     {
-        title: 'From Bare Metal to AI',
-        description: 'How systems programming informs modern AI development',
-        link: '#',
-        icon: Code2
+        title: 'From Bare Metal to Cloud',
+        description: 'Systems programming principles in modern infra.',
+        link: 'https://github.com/Aphrodine-wq',
+        icon: Code2,
+        tag: 'Systems'
     },
     {
-        title: 'Enterprise Architecture Patterns',
-        description: 'Lessons from scaling to millions of users',
-        link: '#',
-        icon: BookOpen
+        title: 'Enterprise Architecture',
+        description: 'Lessons from scaling to millions of users.',
+        link: 'https://github.com/Aphrodine-wq',
+        icon: Network,
+        tag: 'Architecture'
     }
 ];
 
@@ -90,16 +93,11 @@ export const ThoughtLeadership: React.FC = () => {
     }, []);
 
     return (
-        <section className="py-20 md:py-32 px-4 md:px-6 bg-brand-base relative overflow-hidden">
+        <section className="py-24 md:py-32 px-4 md:px-6 bg-brand-base relative overflow-hidden border-t border-brand-border/10">
             {/* Background decorations */}
             <div className="absolute inset-0 pointer-events-none">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5 }}
-                    className="absolute top-20 right-10 w-96 h-96 bg-brand-purple/5 rounded-full blur-[120px]"
-                />
+                <div className="absolute top-[20%] left-[10%] w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-brand-purple/5 rounded-full blur-[100px]" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -107,151 +105,107 @@ export const ThoughtLeadership: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16 md:mb-20"
+                    className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
                 >
-                    <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
-                        <span className="inline-block w-8 h-px bg-brand-accent mr-3" />
-                        04. Contributions
-                        <span className="inline-block w-8 h-px bg-brand-accent ml-3" />
-                    </span>
-                    <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6">
-                        Thought <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-purple">Leadership</span>
-                    </h2>
-                    <p className="text-lg text-brand-secondary max-w-2xl mx-auto">
-                        Sharing knowledge through open source, writing, and community engagement
-                    </p>
+                    <div>
+                        <span className="font-mono text-xs text-brand-accent uppercase tracking-widest mb-2 block">
+                            Knowledge Base
+                        </span>
+                        <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter">
+                            Research & <br /> <span className="text-brand-secondary opacity-60">Insights</span>
+                        </h2>
+                    </div>
+
+                    <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 px-6 py-3 rounded-full bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all">
+                        <Github className="text-brand-primary group-hover:text-brand-accent transition-colors" size={20} />
+                        <span className="font-mono text-xs uppercase tracking-wider text-brand-primary">View GitHub</span>
+                    </a>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
-                    {/* GitHub Activity */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                    {/* GitHub Stats Card - Spans 4 Cols */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="lg:col-span-4 p-8 rounded-3xl bg-brand-surface/50 border border-brand-border backdrop-blur-sm hover:border-brand-accent/30 transition-all"
                     >
-                        <h3 className="text-2xl md:text-3xl font-bold text-brand-primary flex items-center gap-3">
-                            <Github className="text-brand-accent" size={32} />
-                            Open Source
-                        </h3>
-
-                        {/* GitHub Stats */}
-                        <div className="grid grid-cols-3 gap-4">
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                className="p-4 md:p-6 rounded-xl bg-brand-surface/50 border border-brand-border hover:border-brand-accent/50 transition-all cursor-default group"
-                            >
-                                <Code2 className="text-brand-accent mb-2 group-hover:scale-110 transition-transform" size={24} />
-                                <div className="text-2xl md:text-3xl font-black text-brand-primary">{githubStats.repos}</div>
-                                <div className="text-xs text-brand-secondary uppercase tracking-wider font-mono">Repositories</div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                className="p-4 md:p-6 rounded-xl bg-brand-surface/50 border border-brand-border hover:border-brand-purple/50 transition-all cursor-default group"
-                            >
-                                <Star className="text-brand-purple mb-2 group-hover:scale-110 transition-transform" size={24} />
-                                <div className="text-2xl md:text-3xl font-black text-brand-primary">{githubStats.stars}</div>
-                                <div className="text-xs text-brand-secondary uppercase tracking-wider font-mono">Stars</div>
-                            </motion.div>
-
-                            <motion.div
-                                whileHover={{ scale: 1.05, y: -4 }}
-                                className="p-4 md:p-6 rounded-xl bg-brand-surface/50 border border-brand-border hover:border-brand-gold/50 transition-all cursor-default group"
-                            >
-                                <GitFork className="text-brand-gold mb-2 group-hover:scale-110 transition-transform" size={24} />
-                                <div className="text-2xl md:text-3xl font-black text-brand-primary">{githubStats.followers}</div>
-                                <div className="text-xs text-brand-secondary uppercase tracking-wider font-mono">Followers</div>
-                            </motion.div>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="p-3 rounded-2xl bg-brand-primary/5">
+                                <Github size={24} className="text-brand-primary" />
+                            </div>
+                            <h3 className="font-bold text-xl text-brand-primary">Open Source</h3>
                         </div>
 
-                        {/* Certifications */}
-                        <div className="mt-8">
-                            <h4 className="text-xl font-bold text-brand-primary mb-4 flex items-center gap-2">
-                                <Award className="text-brand-gold" size={24} />
-                                Certifications
-                            </h4>
-                            <div className="grid grid-cols-2 gap-3">
-                                {certifications.map((cert, index) => (
-                                    <motion.div
-                                        key={cert.name}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        whileHover={{ scale: 1.05 }}
-                                        className="p-4 rounded-xl bg-brand-surface/50 border border-brand-border hover:border-brand-accent/50 transition-all cursor-default group"
-                                    >
-                                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${cert.color} p-2 mb-2 group-hover:scale-110 transition-transform`}>
-                                            <cert.icon className="w-full h-full text-white" />
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-white/5">
+                                <span className="text-brand-secondary text-sm font-mono uppercase">Repositories</span>
+                                <span className="text-2xl font-black text-brand-accent">{githubStats.repos}</span>
+                            </div>
+                            <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-white/5">
+                                <span className="text-brand-secondary text-sm font-mono uppercase">Total Stars</span>
+                                <span className="text-2xl font-black text-brand-purple">{githubStats.stars}</span>
+                            </div>
+                            <div className="flex items-center justify-between p-4 rounded-2xl bg-black/20 border border-white/5">
+                                <span className="text-brand-secondary text-sm font-mono uppercase">Followers</span>
+                                <span className="text-2xl font-black text-brand-secondary">{githubStats.followers}</span>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Articles Grid - Spans 8 Cols */}
+                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {articles.map((article, index) => (
+                            <motion.a
+                                key={article.title}
+                                href={article.link}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="group p-8 rounded-3xl bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-all flex flex-col justify-between h-full"
+                            >
+                                <div>
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="p-3 rounded-2xl bg-brand-surface border border-brand-border group-hover:bg-brand-accent/10 transition-colors">
+                                            <article.icon size={20} className="text-brand-secondary group-hover:text-brand-accent transition-colors" />
                                         </div>
-                                        <div className="text-sm font-semibold text-brand-primary">{cert.name}</div>
-                                    </motion.div>
+                                        <ExternalLink size={16} className="text-brand-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    </div>
+                                    <h4 className="text-xl font-bold text-brand-primary mb-2 group-hover:text-brand-accent transition-colors">{article.title}</h4>
+                                    <p className="text-sm text-brand-secondary leading-relaxed">{article.description}</p>
+                                </div>
+                                <div className="mt-8">
+                                    <span className="px-3 py-1 rounded-full bg-brand-base border border-brand-border text-[10px] uppercase tracking-wider text-brand-secondary font-mono">
+                                        {article.tag}
+                                    </span>
+                                </div>
+                            </motion.a>
+                        ))}
+
+                        {/* Certifications Mini-Card */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="p-8 rounded-3xl bg-gradient-to-br from-brand-surface to-brand-base border border-brand-border flex flex-col justify-center items-center text-center gap-4"
+                        >
+                            <div className="flex -space-x-4">
+                                {certifications.map((cert) => (
+                                    <div key={cert.name} className={`w-10 h-10 rounded-full bg-gradient-to-br ${cert.color} p-2 border-2 border-brand-surface shadow-lg flex items-center justify-center`} title={cert.name}>
+                                        <cert.icon size={16} className="text-white" />
+                                    </div>
                                 ))}
                             </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Articles & Writing */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-6"
-                    >
-                        <h3 className="text-2xl md:text-3xl font-bold text-brand-primary flex items-center gap-3">
-                            <BookOpen className="text-brand-purple" size={32} />
-                            Technical Writing
-                        </h3>
-
-                        <div className="space-y-4">
-                            {articles.map((article, index) => (
-                                <motion.a
-                                    key={article.title}
-                                    href={article.link}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.1 }}
-                                    whileHover={{ x: 8, scale: 1.02 }}
-                                    className="block p-6 rounded-xl bg-brand-surface/50 border border-brand-border hover:border-brand-purple/50 transition-all group cursor-pointer"
-                                >
-                                    <div className="flex items-start justify-between gap-4">
-                                        <div className="flex-1">
-                                            <div className="flex items-center gap-3 mb-2">
-                                                <article.icon className="text-brand-purple group-hover:text-brand-accent transition-colors" size={20} />
-                                                <h4 className="text-lg font-bold text-brand-primary group-hover:text-brand-accent transition-colors">
-                                                    {article.title}
-                                                </h4>
-                                            </div>
-                                            <p className="text-sm text-brand-secondary">
-                                                {article.description}
-                                            </p>
-                                        </div>
-                                        <ExternalLink className="text-brand-secondary group-hover:text-brand-accent transition-colors flex-shrink-0" size={18} />
-                                    </div>
-                                </motion.a>
-                            ))}
-                        </div>
-
-                        {/* CTA for more */}
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            className="p-6 rounded-xl bg-gradient-to-br from-brand-accent/10 to-brand-purple/10 border border-brand-accent/30 hover:border-brand-accent/50 transition-all cursor-pointer group"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <h4 className="text-lg font-bold text-brand-primary mb-1">View All Articles</h4>
-                                    <p className="text-sm text-brand-secondary">Explore more technical insights and tutorials</p>
-                                </div>
-                                <ExternalLink className="text-brand-accent group-hover:translate-x-1 transition-transform" size={24} />
-                            </div>
+                            <h4 className="font-bold text-brand-primary">4+ Major Certifications</h4>
+                            <p className="text-xs text-brand-secondary">Across Cloud, AI & Systems</p>
                         </motion.div>
-                    </motion.div>
+                    </div>
+
                 </div>
             </div>
         </section>

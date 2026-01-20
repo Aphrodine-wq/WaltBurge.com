@@ -6,44 +6,60 @@
 
 @layer base {
   :root {
-    /* Default: Retro Earth Theme */
-    /* Primary: Rich Mahogany */
-    --bg-deep: 54 10 20;
+    /* Default: Minimalist Black Theme (Onyx & Snow) */
+    /* Primary Background (Deep): Onyx */
+    --bg-deep: 18 17 19;
+    /* #121113 */
 
-    /* Secondary/Nebula: Blue Slate */
-    --bg-nebula: 79 99 103;
+    /* Secondary/Surface: Carbon Black */
+    --bg-nebula: 34 39 37;
+    /* #222725 */
+    --bg-surface: 34 39 37;
+    /* #222725 */
 
-    /* Surface: Rich Mahogany */
-    --bg-surface: 54 10 20;
+    /* Text Glow: Bright Snow (White) */
+    --text-glow: 249 249 249;
+    /* #F9F9F9 */
 
-    /* Text Glow: Sandy Brown */
-    --text-glow: 247 147 76;
+    /* Text Primary: Bright Snow */
+    --text-primary: 249 249 249;
+    /* #F9F9F9 */
 
-    /* Text Primary: Beige */
-    --text-primary: 238 245 219;
+    /* Text Secondary: Gray-400 equivalent for subtlety */
+    --text-secondary: 156 163 175;
 
-    /* Text Secondary: Blue Slate */
-    --text-secondary: 79 99 103;
+    /* Accent: Bright Snow (Monochrome) */
+    --accent-color: 249 249 249;
 
-    /* Accent: Sandy Brown */
-    --accent-color: 247 147 76;
+    /* Border: Low contrast gray/carbon */
+    --border-color: 60 65 60;
 
-    /* Border: Blue Slate */
-    --border-color: 79 99 103;
-
-    /* Accents */
-    --aurora-teal: 79 99 103;
-    /* Blue Slate */
-    --aurora-purple: 54 10 20;
-    /* Rich Mahogany */
-    --aurora-pink: 247 147 76;
-    /* Sandy Brown */
+    /* Accents (Desaturated/Monochrome) */
+    --aurora-teal: 249 249 249;
+    /* White */
+    --aurora-purple: 156 163 175;
+    /* Gray */
+    --aurora-pink: 229 231 235;
+    /* Light Gray */
 
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
   }
 
+  html {
+    scroll-behavior: smooth;
+    background-color: rgb(var(--bg-deep));
+  }
 
+  /* Mobile Zoom Adjustment - Removed for native fit */
+  @media (max-width: 768px) {
+
+    /* Ensure no horizontal scroll and proper scaling without forceful zoom */
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  }
 
   /* Accessibility: Respect prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {

@@ -6,7 +6,7 @@ import { Expertise } from './components/Expertise';
 import { ThoughtLeadership } from './components/ThoughtLeadership';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { BackToTop } from './components/BackToTop';
+
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
@@ -23,94 +23,8 @@ const Skills = lazy(() => import('./components/Skills').then(module => ({ defaul
 const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
 import { SplashScreen } from './components/SplashScreen';
 
-const MobileBar: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const scrollTo = (id: string, offset = 0) => {
-    setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth"
-    });
-  };
-
-  const navItems = ['Shop', 'About', 'Skills', 'Projects'];
-
-  return (
-    <>
-      <nav className="fixed top-0 left-0 w-full z-50 md:hidden bg-brand-base/80 backdrop-blur-md border-b border-brand-border h-16 flex items-center justify-between px-6 transition-all duration-300">
-        <div
-          onClick={() => scrollTo(SectionId.HERO)}
-          className="flex items-center gap-2 cursor-pointer"
-        >
-          <div className="w-8 h-8 rounded-lg bg-brand-primary/5 flex items-center justify-center border border-brand-primary/10">
-            <Code2 size={18} className="text-brand-accent" />
-          </div>
-          <span className="font-bold text-lg tracking-tight text-brand-primary">WB<span className="text-brand-accent">.SYS</span></span>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-brand-secondary hover:text-brand-primary transition-colors"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </nav >
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {
-          isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-40 bg-brand-base/95 backdrop-blur-xl pt-24 px-6 md:hidden flex flex-col items-center justify-center gap-8"
-            >
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.15 }}
-                  whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollTo(item === 'Shop' ? 'marketplace' : item === 'Skills' ? SectionId.SKILLS : item.toLowerCase())}
-                  className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
-                >
-                  {item}
-                </motion.button>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.45 }}
-                className="w-full max-w-xs"
-              >
-                <Button
-                  onClick={() => scrollTo(SectionId.CONTACT)}
-                  variant="default"
-                  className="mt-4 w-full text-lg py-6 bg-brand-accent text-brand-base"
-                >
-                  Contact System
-                </Button>
-              </motion.div>
-            </motion.div>
-          )
-        }
-      </AnimatePresence >
-    </>
-  );
-};
+// MobileBar removed by user request (cleaner UI)
+const MobileBar: React.FC = () => null;
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -165,7 +79,13 @@ function App() {
             <MobileBar />
             <ArtisticNav />
             <div className="film-grain" />
-            <main>
+            {/* Global Ambient Background - Seamless */}
+            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+              <div className="absolute top-[10%] left-[5%] w-[40vw] h-[40vw] bg-brand-accent/5 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow" />
+              <div className="absolute bottom-[10%] right-[0%] w-[30vw] h-[30vw] bg-brand-purple/5 rounded-full blur-[100px] mix-blend-screen animate-float-delayed" />
+            </div>
+
+            <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
               <About />
               <Expertise />
@@ -185,7 +105,7 @@ function App() {
             </main>
             <Contact />
             <Footer />
-            <BackToTop />
+
           </>
         )}
       </div>

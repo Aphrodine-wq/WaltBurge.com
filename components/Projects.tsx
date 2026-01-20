@@ -18,7 +18,8 @@ const getProjectImage = (id: string) => {
     case 'g-rump': return '/assets/projects/g-rump/Screenshot (309).png';
     case 'ftwos': return '/assets/projects/ftwos/Screenshot (304).png';
     case 'icongen': return '/assets/projects/icongen/Screenshot (319).png';
-    // Add other known mappings or fallback to default structure if you had verified them
+    case 'cloudgen': return '/assets/projects/cloudgen/cloudgen.png';
+    case 'fairtradeworker': return '/assets/projects/fairtradeworker/fairtradeworker.png';
     default: return `/assets/projects/${id}/cover.jpg`;
   }
 };
@@ -228,84 +229,96 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
   }
 };
 
-const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
+const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => {
+  // Generate deterministic abstract patterns based on project ID
+  const seed = project.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+  // Pattern Types: 0: Grid, 1: Concentric, 2: Particles
+  const type = seed % 3;
 
   return (
-    <div className="h-full w-full overflow-hidden relative bg-brand-surface/20 group/image">
+    <div className={`h-full w-full relative overflow-hidden bg-brand-surface group/image`}>
 
-      {/* Skeleton Loader */}
-      {!isLoaded && !hasError && (
-        <div className="absolute inset-0 z-20">
-          <Skeleton className="w-full h-full bg-brand-surface/80" />
+      {/* Base Gradient / Mesh */}
+      <div className={`absolute inset-0 opacity-20 ${getGradientForProject(project.id)}`} />
+
+      {/* Pattern Overlay */}
+      <div className="absolute inset-0 opacity-30">
+        {type === 0 && (
+          <div className="w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
+        )}
+        {type === 1 && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-brand-accent/30 border-t-brand-accent rounded-full animate-spin"></div>
+            <div className="w-[150%] h-[150%] border-2 border-brand-accent/10 rounded-full animate-spin-slow-reverse" />
+            <div className="w-[100%] h-[100%] border-2 border-brand-accent/20 rounded-full animate-spin-slow" />
+            <div className="w-[50%] h-[50%] border-2 border-brand-accent/30 rounded-full" />
+          </div>
+        )}
+        {type === 2 && (
+          <div className="absolute top-10 right-10 w-32 h-32 bg-brand-accent/20 blur-[50px] rounded-full mix-blend-screen animate-pulse-slow" />
+        )}
+      </div>
+
+      {/* Central Abstract Icon/UI Representation */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative z-10 p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl skew-y-3 group-hover/card:skew-y-0 group-hover/card:scale-110 transition-all duration-700 ease-[0.2,1,0.3,1]">
+          <div className="w-16 h-16 flex items-center justify-center text-brand-primary">
+            {project.category === 'Systems' && <Cpu size={32} />}
+            {project.category === 'Tools' && <Terminal size={32} />}
+            {project.category === 'Web' && <Layout size={32} />}
+          </div>
+          {/* Mock UI Lines */}
+          <div className="space-y-2 mt-4 w-24 opacity-50">
+            <div className="h-1 bg-current rounded-full w-3/4" />
+            <div className="h-1 bg-current rounded-full w-full" />
+            <div className="h-1 bg-current rounded-full w-1/2" />
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Fallback Gradient (Visible on Error) */}
-      {hasError && (
-        <div
-          className={`absolute inset-0 z-10 ${getGradientForProject(project.id)} flex items-center justify-center`}
-        >
-          <div className="flex flex-col items-center gap-3 text-white/50 mix-blend-overlay opacity-50">
-            <div className="p-4 rounded-full border border-white/20">
-              <ImageIcon size={32} />
-            </div>
-          </div>
+      {/* Hover Reveal Overlay */}
+      <div className="absolute inset-0 bg-brand-surface/40 group-hover/card:bg-transparent transition-all duration-500" />
+
+      {/* Category Badge - Top Right */}
+      <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
+        <div className="bg-black/50 backdrop-blur-md border border-white/10 shadow-lg uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
+          <CategoryIcon category={project.category} />
+          <span className="ml-2">{project.category}</span>
         </div>
-      )}
+      </div>
 
-      {/* Soft Hover Reveal - No hard masks */}
-      {/* Soft Hover Reveal - No hard masks */}
-      <div className="absolute inset-0 bg-brand-surface/20 transition-colors duration-500 group-hover/card:bg-transparent"></div>
+      {/* Year Badge - Top Left */}
+      <div className="absolute top-4 left-4 z-20 opacity-60 font-mono text-xs tracking-widest text-brand-secondary">
+        {project.year}
+      </div>
+    </div>
+  );
+});
 
+const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return <AbstractProjectVisual project={project} />;
+  }
+
+  return (
+    <div className="h-full w-full relative group/image bg-brand-surface">
       <img
         src={project.imageUrl}
         alt={project.title}
         loading="lazy"
-        width={600}
-        height={400}
-        onLoad={() => setIsLoaded(true)}
-        onError={() => {
-          setHasError(true);
-          setIsLoaded(true);
-        }}
-        className={`w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'} ${hasError ? 'hidden' : ''}`}
+        onError={() => setHasError(true)}
+        className="w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-all duration-700 ease-out filter grayscale group-hover/card:grayscale-0"
       />
 
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-        <Badge className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5">
+        <div className="bg-black/50 backdrop-blur-md border border-white/10 shadow-lg uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
           <CategoryIcon category={project.category} />
           <span className="ml-2">{project.category}</span>
-        </Badge>
-
-        {project.status && (
-          <Badge className={`bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 ${project.status === 'Live' ? 'text-green-400 border-green-400/20' :
-            project.status === 'Beta' ? 'text-brand-accent border-brand-accent/20' :
-              project.status === 'Archived' ? 'text-gray-400 border-gray-400/20' : 'text-brand-purple border-brand-purple/20'
-            }`}>
-            <span className={`w-1.5 h-1.5 rounded-full mr-2 ${project.status === 'Live' ? 'bg-green-400 animate-pulse' :
-              project.status === 'Beta' ? 'bg-brand-accent animate-pulse' :
-                project.status === 'Archived' ? 'bg-gray-400' : 'bg-brand-purple'
-              }`}></span>
-            {project.status}
-          </Badge>
-        )}
-      </div>
-
-      {/* Year Badge - Top Left */}
-      {project.year && (
-        <div className="absolute top-4 left-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 delay-75">
-          <Badge className="bg-brand-base/90 backdrop-blur-md border-brand-border/20 shadow-lg uppercase tracking-wide px-3 py-1.5 text-brand-secondary">
-            <Calendar size={12} className="mr-2" />
-            {project.year}
-          </Badge>
         </div>
-      )}
+      </div>
     </div>
   );
 });
@@ -405,17 +418,8 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             >
               {/* Image Container - Full Bleed */}
               <div className="relative h-[280px] w-full overflow-hidden">
+                {/* Try to show real image first using a custom component that handles error state */}
                 <ProjectCardImage project={project} />
-
-                {/* Dreamy Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-surface via-brand-surface/20 to-transparent opacity-80" />
-
-                {/* Category Floating Pill */}
-                <div className="absolute top-6 right-6">
-                  <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-xs font-sans tracking-wider text-white border border-white/10">
-                    {project.category}
-                  </span>
-                </div>
               </div>
 
               {/* Content Panel - Soft & Spacious */}

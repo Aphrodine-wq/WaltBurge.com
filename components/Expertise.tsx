@@ -148,7 +148,7 @@ export const Expertise: React.FC = () => {
                             variants={itemVariants}
                             whileHover={{ y: -8, scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className={`group relative p-6 md:p-8 rounded-2xl border ${area.borderColor} ${area.hoverBorder} bg-brand-surface/50 backdrop-blur-sm transition-all duration-500 cursor-default overflow-hidden hover:shadow-2xl ${area.glowColor}`}
+                            className={`group relative p-6 md:p-8 rounded-2xl border ${area.borderColor} ${area.hoverBorder} bg-brand-surface/50 backdrop-blur-sm transition-all duration-500 cursor-default overflow-hidden hover:shadow-2xl ${area.glowColor} flex flex-col items-center text-center`}
                         >
                             {/* Gradient overlay on hover */}
                             <div className="absolute inset-0 bg-brand-surface opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
@@ -172,7 +172,7 @@ export const Expertise: React.FC = () => {
                             </p>
 
                             {/* Skills tags */}
-                            <div className="flex flex-wrap gap-2 relative z-10">
+                            <div className="flex flex-wrap gap-2 relative z-10 justify-center">
                                 {area.skills.map((skill, idx) => (
                                     <motion.span
                                         key={skill}

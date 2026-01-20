@@ -108,7 +108,7 @@ export const Marketplace: React.FC = () => {
                 </div>
 
                 {/* Tabs */}
-                <div className="flex justify-center mb-12">
+                <div className="flex justify-center mb-12 relative z-0 opacity-50 pointer-events-none filter blur-sm select-none">
                     <div className="p-1.5 bg-brand-surface/50 backdrop-blur-md rounded-2xl border border-brand-border inline-flex shadow-inner">
                         {(['Template', 'Component'] as const).map((tab) => (
                             <button
@@ -125,10 +125,28 @@ export const Marketplace: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Grid */}
+                {/* Coming Soon Overlay */}
+                <div className="absolute inset-0 z-50 flex items-center justify-center top-64">
+                    <div className="bg-brand-surface/80 backdrop-blur-xl border border-brand-border p-8 rounded-3xl text-center shadow-2xl max-w-md mx-4">
+                        <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-brand-accent animate-pulse">
+                            <Package size={32} />
+                        </div>
+                        <h3 className="text-2xl font-bold text-brand-primary mb-2">System Upgrade in Progress</h3>
+                        <p className="text-brand-secondary text-sm leading-relaxed mb-6">
+                            The Marketplace is currently offline for inventory updates.
+                            New assets will be available soon.
+                        </p>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/5 border border-brand-primary/10 text-xs font-mono text-brand-primary/60">
+                            <span className="w-2 h-2 rounded-full bg-yellow-500 animate-pulse" />
+                            STATUS: MAINTENANCE
+                        </div>
+                    </div>
+                </div>
+
+                {/* Grid - Blurred */}
                 <motion.div
                     layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-20 pointer-events-none filter blur-sm select-none"
                 >
                     <AnimatePresence mode="popLayout">
                         {filteredProducts.map((product) => (
