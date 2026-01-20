@@ -1,5 +1,6 @@
 import React, { useState, lazy, Suspense, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
@@ -59,6 +60,7 @@ function App() {
               onTechClick={handleTechClickFromDetail}
             />
           </Suspense>
+          <Analytics />
         </div>
       </TooltipProvider>
     );
@@ -105,6 +107,7 @@ function App() {
             </main>
             <Contact />
             <Footer />
+            <Analytics />
 
           </>
         )}
