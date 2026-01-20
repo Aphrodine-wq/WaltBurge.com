@@ -1,15 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, ArrowUpRight, Copy } from 'lucide-react';
+import { Mail, Github, ArrowUpRight, Copy, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { SectionId } from '../types';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = React.useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const copyEmail = () => {
     navigator.clipboard.writeText('contact@waltburge.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      setErrorMessage('Name is required');
+      return false;
+    }
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage('Valid email is required');
+      return false;
+    }
+    if (!formData.message.trim()) {
+      setErrorMessage('Message is required');
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      setFormStatus('error');
+      return;
+    }
+
+    setFormStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // Using Formspree for email handling
+      const response = await fetch('https://formspree.io/f/xyzgwdzk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'No subject',
+          message: formData.message
+        })
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setFormStatus('idle'), 3000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      setFormStatus('error');
+      setErrorMessage('Failed to send message. Please try again or email directly.');
+    }
   };
 
   const containerVariants = {
@@ -67,52 +130,128 @@ export const Contact: React.FC = () => {
             </p>
           </motion.div>
 
-          {/* Right Column: Links */}
-          <div className="flex flex-col gap-8 md:pt-10">
+          {/* Right Column: Contact Form */}
+          <motion.form
+            variants={itemVariants}
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-6 md:pt-10"
+          >
+            {/* Name Input */}
+            <div>
+              <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Your name"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+                required
+              />
+            </div>
 
-            {/* Email Link */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.02, borderColor: 'rgba(34, 211, 238, 0.5)' }}
-              className="group relative p-6 md:p-8 rounded-2xl border border-brand-border bg-brand-dark/30 transition-all duration-500 cursor-pointer"
+            {/* Email Input */}
+            <div>
+              <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="your@email.com"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+                required
+              />
+            </div>
+
+            {/* Subject Input */}
+            <div>
+              <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Subject (Optional)</label>
+              <input
+                type="text"
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                placeholder="What's this about?"
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors"
+              />
+            </div>
+
+            {/* Message Input */}
+            <div>
+              <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Message</label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Your message here..."
+                rows={5}
+                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/50 focus:outline-none focus:border-brand-accent transition-colors resize-none"
+                required
+              />
+            </div>
+
+            {/* Error Message */}
+            {formStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400"
+              >
+                <AlertCircle size={18} />
+                <span className="text-sm">{errorMessage}</span>
+              </motion.div>
+            )}
+
+            {/* Success Message */}
+            {formStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400"
+              >
+                <CheckCircle size={18} />
+                <span className="text-sm">Message sent successfully! I'll get back to you soon.</span>
+              </motion.div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={formStatus === 'loading'}
+              className="w-full bg-brand-accent hover:bg-brand-accent/90 disabled:bg-brand-accent/50 text-brand-base font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 mt-2"
             >
-              <div className="flex items-baseline justify-between border-b border-brand-border/50 pb-4 group-hover:border-brand-accent/30 transition-colors duration-500">
-                <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest group-hover:text-brand-accent transition-colors">Email Protocol</span>
-                <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
-              </div>
-              <div className="pt-4 flex items-center justify-between">
-                <a href="mailto:contact@waltburge.com" className="text-xl md:text-2xl font-bold text-brand-primary group-hover:text-white transition-colors">
-                  contact@waltburge.com
-                </a>
+              {formStatus === 'loading' ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-brand-base/30 border-t-brand-base rounded-full animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  Send Message
+                </>
+              )}
+            </button>
+
+            {/* Alternative Contact */}
+            <div className="pt-4 border-t border-brand-border/30">
+              <p className="text-brand-secondary text-sm mb-3">Or reach out directly:</p>
+              <div className="flex items-center justify-between gap-4">
                 <button
                   onClick={copyEmail}
-                  className="p-2 text-brand-secondary hover:text-brand-primary hover:bg-brand-primary/10 rounded-full transition-all"
+                  className="flex-1 p-3 bg-brand-dark/50 border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
                   title="Copy to clipboard"
                 >
-                  {copied ? <span className="text-xs font-mono text-brand-accent">COPIED</span> : <Copy size={18} />}
+                  {copied ? <span className="text-brand-accent">COPIED!</span> : 'contact@waltburge.com'}
                 </button>
-              </div>
-            </motion.div>
-
-            {/* GitHub Link */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.02, borderColor: 'rgba(34, 211, 238, 0.5)' }}
-              className="group relative p-6 md:p-8 rounded-2xl border border-brand-border bg-brand-dark/30 transition-all duration-500 cursor-pointer"
-            >
-              <div className="flex items-baseline justify-between border-b border-brand-border/50 pb-4 group-hover:border-brand-accent/30 transition-colors duration-500">
-                <span className="text-sm font-mono text-brand-secondary uppercase tracking-widest group-hover:text-brand-accent transition-colors">Source Control</span>
-                <ArrowUpRight className="text-brand-secondary group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={20} />
-              </div>
-              <div className="pt-4">
-                <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="text-xl md:text-2xl font-bold text-brand-primary group-hover:text-white transition-colors flex items-center gap-4">
-                  github.com/Aphrodine-wq
-                  <Github size={24} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+                <a
+                  href="https://github.com/Aphrodine-wq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-brand-dark/50 border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
+                >
+                  <Github size={20} />
                 </a>
               </div>
-            </motion.div>
-
-          </div>
+            </div>
+          </motion.form>
 
         </motion.div>
 
@@ -121,7 +260,7 @@ export const Contact: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-24 pt-8 border-t border-brand-border/30 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-brand-secondary uppercase tracking-widest text-center md:text-left"
+          className="mt-24 pt-8 border-t border-brand-border/30 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-[10px] font-mono text-brand-secondary uppercase tracking-widest text-center md:text-left"
         >
           <span>© 2024 Walt Burge Systems. All rights reserved.</span>
           <div className="flex items-center gap-2">

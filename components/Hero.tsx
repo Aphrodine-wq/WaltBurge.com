@@ -24,10 +24,10 @@ export const Hero: React.FC = () => {
     >
       <div className="absolute inset-0 z-0">
         {/* Mesh 1: Jungle Green Accent */}
-        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.1),transparent_70%)] blur-[120px] animate-aurora mix-blend-screen" />
+        <div className="absolute top-[-20%] left-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.08),transparent_70%)] blur-[80px] animate-aurora mix-blend-screen" />
 
         {/* Mesh 2: Jungle Green Depth */}
-        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.15),transparent_70%)] blur-[120px] animate-float-dream mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-20%] w-[80vw] h-[80vw] bg-[radial-gradient(circle_at_center,rgb(var(--aurora-teal)/0.12),transparent_70%)] blur-[80px] animate-float-dream mix-blend-screen" />
       </div>
 
       <motion.div

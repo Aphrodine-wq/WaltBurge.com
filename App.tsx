@@ -12,6 +12,7 @@ import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
 import { Marketplace } from './components/Marketplace';
 import { TooltipProvider } from './components/ui/tooltip';
+import { ContentSkeleton } from './components/ui/content-skeleton';
 import { Code2, Menu, X } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { SectionId, Project } from './types';
@@ -168,7 +169,7 @@ function App() {
               <About />
               <Expertise />
 
-              <Suspense fallback={null}>
+              <Suspense fallback={<div className="py-24 md:py-32 px-6 max-w-7xl mx-auto"><ContentSkeleton count={3} variant="grid" /></div>}>
                 <Projects
                   onProjectClick={handleProjectClick}
                   activeFilter={activeTechFilter}

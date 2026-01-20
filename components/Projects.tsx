@@ -266,6 +266,8 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
         src={project.imageUrl}
         alt={project.title}
         loading="lazy"
+        width={600}
+        height={400}
         onLoad={() => setIsLoaded(true)}
         onError={() => {
           setHasError(true);

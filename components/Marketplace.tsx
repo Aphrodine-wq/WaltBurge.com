@@ -12,6 +12,7 @@ interface Product {
     type: 'Template' | 'Component';
     features: string[];
     popular?: boolean;
+    storeUrl?: string;
 }
 
 const products: Product[] = [
@@ -22,7 +23,8 @@ const products: Product[] = [
         price: '$49',
         type: 'Template',
         features: ['Dark/Light Mode', 'MDX Blog Support', 'SEO Optimized', 'Framer Motion'],
-        popular: true
+        popular: true,
+        storeUrl: 'https://gumroad.com/waltburge'
     },
     {
         id: 'saas-starter',
@@ -30,7 +32,8 @@ const products: Product[] = [
         description: 'Complete dashboard starter kit with authentication, billing, and user management.',
         price: '$89',
         type: 'Template',
-        features: ['Stripe Integration', 'Supabase Auth', 'Dashboard UI', 'Email Templates']
+        features: ['Stripe Integration', 'Supabase Auth', 'Dashboard UI', 'Email Templates'],
+        storeUrl: 'https://gumroad.com/waltburge'
     },
     {
         id: 'agency-landing',
@@ -38,7 +41,8 @@ const products: Product[] = [
         description: 'High-conversion landing page optimized for digital agencies and studios.',
         price: '$59',
         type: 'Template',
-        features: ['Case Studies CMS', 'Contact Forms', 'Performance Optimized', 'Scroll Animations']
+        features: ['Case Studies CMS', 'Contact Forms', 'Performance Optimized', 'Scroll Animations'],
+        storeUrl: 'https://gumroad.com/waltburge'
     },
     {
         id: 'motion-dock',
@@ -46,7 +50,8 @@ const products: Product[] = [
         description: 'The exact floating dock component used on this site with physics-based magnification.',
         price: '$15',
         type: 'Component',
-        features: ['React + Framer Motion', 'Fully Customizable', 'TypeScript Ready']
+        features: ['React + Framer Motion', 'Fully Customizable', 'TypeScript Ready'],
+        storeUrl: 'https://gumroad.com/waltburge'
     },
     {
         id: 'magic-card',
@@ -54,7 +59,8 @@ const products: Product[] = [
         description: 'Interactive cards with spotlight hover effects and border gradients.',
         price: '$10',
         type: 'Component',
-        features: ['Hardware Accelerated', 'Tailwind Native', 'Copy-Paste Ready']
+        features: ['Hardware Accelerated', 'Tailwind Native', 'Copy-Paste Ready'],
+        storeUrl: 'https://gumroad.com/waltburge'
     },
     {
         id: 'grid-bg',
@@ -62,7 +68,8 @@ const products: Product[] = [
         description: 'A pack of 5 high-performance, animated SVG background patterns.',
         price: '$12',
         type: 'Component',
-        features: ['Lightweight', 'Theme Compatible', 'No JS Dependency']
+        features: ['Lightweight', 'Theme Compatible', 'No JS Dependency'],
+        storeUrl: 'https://gumroad.com/waltburge'
     }
 ];
 
@@ -256,10 +263,17 @@ export const Marketplace: React.FC = () => {
                                             </div>
                                         </section>
 
-                                        <Button className="w-full h-16 rounded-2xl bg-brand-primary text-brand-base text-lg font-black hover:bg-brand-accent hover:text-black transition-all group">
-                                            ACQUIRE ASSET
-                                            <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
-                                        </Button>
+                                        <a
+                                            href={selectedProduct.storeUrl || '#'}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="block"
+                                        >
+                                            <Button className="w-full h-16 rounded-2xl bg-brand-primary text-brand-base text-lg font-black hover:bg-brand-accent hover:text-black transition-all group cursor-pointer">
+                                                ACQUIRE ASSET
+                                                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                                            </Button>
+                                        </a>
 
                                         <p className="text-center text-[10px] font-mono text-brand-secondary/40">
                                             SECURE ENCRYPTED TRANSACTION • INSTANT REPOSITORY ACCESS

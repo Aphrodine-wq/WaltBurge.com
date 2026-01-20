@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
                         <Code2 size={16} className="text-brand-accent" />
                         <span className="font-bold text-sm tracking-tight text-brand-primary">WB<span className="text-brand-accent">.SYSTEMS</span></span>
                     </div>
-                    <p className="text-[10px] text-brand-secondary font-mono">
+                    <p className="text-xs md:text-[10px] text-brand-secondary font-mono">
                         &copy; {currentYear} Walt Burge. All Systems Operational.
                     </p>
                 </div>
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
                 {/* Center: Tech Badge */}
                 <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface border border-brand-border/50">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
-                    <span className="text-[10px] text-brand-secondary font-mono uppercase tracking-wider">
+                    <span className="text-xs md:text-[10px] text-brand-secondary font-mono uppercase tracking-wider">
                         Built with React & Tailwind
                     </span>
                 </div>

@@ -43,23 +43,50 @@ export const ThoughtLeadership: React.FC = () => {
         followers: 350
     });
 
-    // Placeholder for GitHub API integration
-    // In production, you would fetch real data here
+    // GitHub API integration with caching and error handling
     useEffect(() => {
-        // const fetchGitHubStats = async () => {
-        //   try {
-        //     const response = await fetch('https://api.github.com/users/YOUR_USERNAME');
-        //     const data = await response.json();
-        //     setGithubStats({
-        //       repos: data.public_repos,
-        //       stars: data.total_stars, // Would need additional API call
-        //       followers: data.followers
-        //     });
-        //   } catch (error) {
-        //     console.error('Failed to fetch GitHub stats:', error);
-        //   }
-        // };
-        // fetchGitHubStats();
+        const fetchGitHubStats = async () => {
+            try {
+                // Check cache first
+                const cachedStats = localStorage.getItem('githubStats');
+                const cachedTime = localStorage.getItem('githubStatsTime');
+                const now = Date.now();
+
+                // Use cache if less than 1 hour old
+                if (cachedStats && cachedTime && now - parseInt(cachedTime) < 3600000) {
+                    setGithubStats(JSON.parse(cachedStats));
+                    return;
+                }
+
+                // Fetch user data
+                const userResponse = await fetch('https://api.github.com/users/Aphrodine-wq');
+                if (!userResponse.ok) throw new Error('Failed to fetch user data');
+                const userData = await userResponse.json();
+
+                // Fetch repos to calculate total stars
+                const reposResponse = await fetch('https://api.github.com/users/Aphrodine-wq/repos?per_page=100');
+                if (!reposResponse.ok) throw new Error('Failed to fetch repos');
+                const repos = await reposResponse.json();
+
+                const totalStars = repos.reduce((sum: number, repo: any) => sum + (repo.stargazers_count || 0), 0);
+
+                const stats = {
+                    repos: userData.public_repos,
+                    stars: totalStars,
+                    followers: userData.followers
+                };
+
+                setGithubStats(stats);
+                // Cache the results
+                localStorage.setItem('githubStats', JSON.stringify(stats));
+                localStorage.setItem('githubStatsTime', now.toString());
+            } catch (error) {
+                console.error('Failed to fetch GitHub stats:', error);
+                // Keep fallback values on error
+            }
+        };
+
+        fetchGitHubStats();
     }, []);
 
     return (
