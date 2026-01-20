@@ -23,10 +23,10 @@ export const Hero: React.FC = () => {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base transition-colors duration-500"
     >
       <div className="absolute inset-0 z-0">
-        {/* Abstract Things - Geometric Minimalism */}
-        <div className="absolute top-[20%] left-[10%] w-64 h-64 border border-white/5 rounded-full blur-[1px] animate-float-slow" />
-        <div className="absolute bottom-[30%] right-[15%] w-48 h-48 border border-white/5 rounded-full blur-[1px] animate-float-delayed" />
-        <div className="absolute top-[60%] left-[20%] w-24 h-24 bg-white/5 rounded-full blur-[40px] animate-pulse-slow" />
+        {/* Abstract Things - Geometric Minimalism (Brighter) */}
+        <div className="absolute top-[20%] left-[10%] w-64 h-64 border-2 border-white/20 rounded-full blur-[1px] animate-float-slow" />
+        <div className="absolute bottom-[30%] right-[15%] w-48 h-48 border-2 border-white/20 rounded-full blur-[1px] animate-float-delayed" />
+        <div className="absolute top-[60%] left-[20%] w-24 h-24 bg-white/25 rounded-full blur-[40px] animate-pulse-slow" />
       </div>
 
       <motion.div
@@ -61,8 +61,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="font-sans text-lg md:text-xl text-brand-primary/80 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
         >
-          Bringing ideas to life through code and design.
-          Building beautiful interfaces and powerful systems that just work.
+          Full-stack engineer building performant systems and clean interfaces.
         </motion.p>
 
         {/* Liquid Actions */}
@@ -93,10 +92,10 @@ export const Hero: React.FC = () => {
         </motion.div>
       </motion.div>
 
-      {/* Floating Ambient Elements - Stormy/Pacific Vibes */}
+      {/* Floating Ambient Elements - Stormy/Pacific Vibes (Brighter) */}
       <motion.div style={{ y: y2 }} className="absolute inset-0 pointer-events-none z-0">
-        <FloatingOrb x="10%" y="20%" size={200} color="rgba(255,255,255,0.02)" delay={0} />
-        <FloatingOrb x="80%" y="60%" size={300} color="rgba(255,255,255,0.01)" delay={2} />
+        <FloatingOrb x="10%" y="20%" size={200} color="rgba(255,255,255,0.12)" delay={0} />
+        <FloatingOrb x="80%" y="60%" size={300} color="rgba(255,255,255,0.08)" delay={2} />
       </motion.div>
 
       {/* Scroll Hint */}

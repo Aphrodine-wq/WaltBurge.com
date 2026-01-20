@@ -131,10 +131,10 @@ export const projects: Project[] = [
   },
   {
     id: 'cloudgen',
-    title: 'cloud forge',
+    title: 'Cloud Forge',
     category: 'Tools',
     description: 'AI-driven infrastructure code generator.',
-    fullDescription: 'CloudGEN converts requirements into infrastructure code using AI.',
+    fullDescription: 'Cloud Forge converts requirements into infrastructure code using AI.',
     challenge: 'Simplifying complex infrastructure provisioning.',
     solution: 'AI-powered code generation with validation.',
     features: [
@@ -421,26 +421,26 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               {/* Full Picture Background */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <ProjectCardImage project={project} />
-                {/* Dark overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 group-hover/card:from-black/90 group-hover/card:via-black/60 transition-all duration-500" />
+                {/* Uniform dark overlay for centered text readability */}
+                <div className="absolute inset-0 bg-black/60 group-hover/card:bg-black/70 transition-all duration-500" />
               </div>
 
-              {/* Content Panel - Overlaid on image */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end items-center relative z-10 pb-12">
-                <div className="flex justify-between items-baseline mb-3 w-full">
-                  <h3 className="text-2xl font-serif text-white leading-tight">
+              {/* Content Panel - Overlaid on image, CENTERED */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-center items-center relative z-10 text-center">
+                <div className="flex flex-col items-center mb-3">
+                  <h3 className="text-2xl font-serif text-white leading-tight text-center">
                     {project.title}
                   </h3>
-                  <span className="text-brand-accent text-xs font-sans tracking-wide">
+                  <span className="text-brand-accent text-xs font-sans tracking-wide mt-2">
                     {project.year}
                   </span>
                 </div>
 
-                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2 text-center">
+                <p className="text-white/80 text-sm leading-relaxed font-sans mb-6 line-clamp-2 max-w-xs text-center">
                   {project.description}
                 </p>
 
-                {/* Tech Stack - Minimal Pills */}
+                {/* Tech Stack - Minimal Pills - Centered */}
                 <div className="flex flex-wrap gap-2 justify-center">
                   {project.techStack.slice(0, 3).map((tech) => (
                     <span key={tech} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-[10px] text-white tracking-wide font-sans border border-white/20">
