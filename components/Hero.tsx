@@ -45,9 +45,9 @@ export const Hero: React.FC = () => {
 
         {/* Main Title: Humble Sans */}
         <motion.h1
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-sans font-light text-5xl md:text-7xl lg:text-8xl text-brand-primary leading-[1.1] tracking-tight mb-8"
         >
           <span className="block">Walt Burge</span>
@@ -58,7 +58,7 @@ export const Hero: React.FC = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="font-sans text-lg md:text-xl text-brand-primary/80 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
         >
           Forging nebulous ideas into solid digital matter.
@@ -67,9 +67,9 @@ export const Hero: React.FC = () => {
 
         {/* Liquid Actions */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-6 items-center"
         >
           <button

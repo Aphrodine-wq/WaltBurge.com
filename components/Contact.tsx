@@ -262,7 +262,7 @@ export const Contact: React.FC = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="mt-24 pt-8 border-t border-brand-border/30 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-[10px] font-mono text-brand-secondary uppercase tracking-widest text-center md:text-left"
         >
-          <span>© 2024 Walt Burge Systems. All rights reserved.</span>
+          <span>© 2025 Walt Burge Systems. All rights reserved.</span>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
             System Operational
