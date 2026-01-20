@@ -8,11 +8,11 @@ export const ArtisticNav: React.FC = () => {
 
     const navItems = [
         { id: SectionId.HERO, label: 'Home', icon: Home },
-        { id: 'about', label: 'Essence', icon: User },
-        { id: SectionId.PROJECTS, label: 'Creation', icon: Briefcase },
-        { id: SectionId.SKILLS, label: 'Craft', icon: Code },
-        { id: 'marketplace', label: 'Treasury', icon: Sparkles },
-        { id: SectionId.CONTACT, label: 'Connect', icon: Mail },
+        { id: 'about', label: 'About', icon: User },
+        { id: SectionId.PROJECTS, label: 'Projects', icon: Briefcase },
+        { id: SectionId.SKILLS, label: 'Skills', icon: Code },
+        { id: 'marketplace', label: 'Shop', icon: Sparkles },
+        { id: SectionId.CONTACT, label: 'Contact', icon: Mail },
     ];
 
     const scrollTo = (id: string) => {

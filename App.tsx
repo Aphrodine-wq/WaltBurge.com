@@ -38,7 +38,7 @@ const MobileBar: React.FC = () => {
     });
   };
 
-  const navItems = ['STORE', 'ABOUT', 'EXPERTISE', 'PROJECTS'];
+  const navItems = ['Shop', 'About', 'Skills', 'Projects'];
 
   return (
     <>
@@ -82,7 +82,7 @@ const MobileBar: React.FC = () => {
                   transition={{ delay: index * 0.1 + 0.15 }}
                   whileHover={{ scale: 1.1, color: 'rgb(34, 211, 238)' }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollTo(item === 'JOURNEY' ? 'timeline' : item === 'EXPERTISE' ? SectionId.SKILLS : item === 'STORE' ? 'marketplace' : item.toLowerCase())}
+                  onClick={() => scrollTo(item === 'Shop' ? 'marketplace' : item === 'Skills' ? SectionId.SKILLS : item.toLowerCase())}
                   className="text-4xl md:text-5xl font-black text-brand-primary transition-colors tracking-tighter uppercase"
                 >
                   {item}

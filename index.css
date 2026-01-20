@@ -6,24 +6,35 @@
 
 @layer base {
   :root {
-    /* Default: Dark Mode (Strict Onyx & Jungle) */
-    --bg-deep: 18 19 15;
-    /* Onyx #12130F */
-    --bg-nebula: 18 19 15;
-    --bg-surface: 18 19 15;
+    /* Default: Retro Earth Theme */
+    /* Primary: Rich Mahogany */
+    --bg-deep: 54 10 20;
+    
+    /* Secondary/Nebula: Blue Slate */
+    --bg-nebula: 79 99 103;
+    
+    /* Surface: Rich Mahogany */
+    --bg-surface: 54 10 20;
 
-    --text-glow: 91 146 121;
-    /* Jungle Green #5B9279 */
-    --text-primary: 91 146 121;
-    --text-secondary: 91 146 121;
+    /* Text Glow: Sandy Brown */
+    --text-glow: 247 147 76;
+    
+    /* Text Primary: Beige */
+    --text-primary: 238 245 219;
+    
+    /* Text Secondary: Blue Slate */
+    --text-secondary: 79 99 103;
 
-    --accent-color: 91 146 121;
-    --border-color: 91 146 121;
+    /* Accent: Sandy Brown */
+    --accent-color: 247 147 76;
+    
+    /* Border: Blue Slate */
+    --border-color: 79 99 103;
 
     /* Accents */
-    --aurora-teal: 91 146 121;
-    --aurora-purple: 91 146 121;
-    --aurora-pink: 91 146 121;
+    --aurora-teal: 79 99 103;    /* Blue Slate */
+    --aurora-purple: 54 10 20;   /* Rich Mahogany */
+    --aurora-pink: 247 147 76;   /* Sandy Brown */
 
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
