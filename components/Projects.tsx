@@ -42,46 +42,48 @@ const getGradientForProject = (id: string) => {
 export const projects: Project[] = [
   {
     id: 'g-rump',
-    title: 'G-Rump Coding Language',
+    title: 'G-Rump',
     category: 'Systems',
-    description: 'A custom compiled language for systems programming.',
-    fullDescription: 'G-Rump is a compiled language built for modern systems programming with a focus on performance and control.',
-    challenge: 'Balancing performance with safety in low-level programming.',
-    solution: 'Custom compiler architecture with optimizations for parallel processing.',
+    description: 'Full-stack platform with custom compiler and animation framework.',
+    fullDescription: 'G-Rump is a comprehensive full-stack project integrating web, mobile (iOS), backend, AI services, and a custom compiler with animation support.',
+    challenge: 'Building an integrated ecosystem spanning multiple platforms with a custom language compiler.',
+    solution: 'Modular architecture with specialized components for each platform, unified by a custom compiler.',
     features: [
-      'Zero-cost abstractions',
-      'Custom compiler implementation',
-      'Parallel processing support',
-      'C/C++ compatibility'
+      'Custom compiler with animation support',
+      'AI service integration',
+      'Cross-platform (Web, iOS)',
+      'Modern TypeScript/Rust architecture'
     ],
-    techStack: ['C++', 'LLVM', 'Assembly', 'Compiler Design'],
-    tags: ['performance', 'memory-safety', 'multithreading'],
+    techStack: ['TypeScript', 'Rust', 'Swift', 'React'],
+    tags: ['full-stack', 'compiler', 'cross-platform'],
     imageUrl: getProjectImage('g-rump'),
     images: [],
+    link: 'https://g-rump.vercel.app',
     repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump',
-    status: 'Beta',
+    status: 'Live',
     year: '2025'
   },
   {
     id: 'clipsync',
     title: 'ClipSync',
     category: 'Tools',
-    description: 'Clipboard sync utility for Windows and mobile.',
-    fullDescription: 'ClipSync enables clipboard synchronization across desktop and mobile platforms.',
-    challenge: 'Maintaining security while ensuring instant synchronization.',
-    solution: 'Local peer-to-peer protocol with encryption.',
+    description: 'Professional clipboard manager with real-time sync across all platforms.',
+    fullDescription: 'ClipSync is a comprehensive clipboard management system enabling device synchronization, powerful search, and team collaboration across Web, Desktop, Mobile, and Browser Extensions.',
+    challenge: 'Building real-time synchronization with rich content support while maintaining security and team collaboration features.',
+    solution: 'Electron-based desktop app with React Native mobile apps, Node.js backend, real-time Socket.IO communication, and end-to-end encryption.',
     features: [
+      'Real-time sync across all platforms',
+      'AI-powered search',
+      'Team workspaces & collaboration',
       'End-to-End Encryption',
-      'Local P2P Transfer',
-      'Cross-Platform Support',
-      'Text & Image Sync'
+      'CLI & API for developers'
     ],
-    techStack: ['C#', '.NET Core', 'Encryption'],
-    tags: ['security', 'p2p', 'workflow'],
+    techStack: ['TypeScript', 'Node.js', 'React Native', 'Electron', 'PostgreSQL', 'Socket.IO'],
+    tags: ['real-time', 'cross-platform', 'productivity'],
     imageUrl: getProjectImage('clipsync'),
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/clipsync',
-    status: 'Archived',
+    status: 'Beta',
     year: '2025'
   },
   {
@@ -102,26 +104,25 @@ export const projects: Project[] = [
     tags: ['kernel', 'experimental', 'bare-metal'],
     imageUrl: getProjectImage('ftwos'),
     images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/ftwos',
-    status: 'Concept',
+    status: 'Private',
     year: '2025'
   },
   {
     id: 'icongen',
     title: 'IconGEN',
     category: 'Tools',
-    description: 'Automated asset generation tool.',
-    fullDescription: 'IconGEN generates platform-specific assets from a single source.',
-    challenge: 'Managing multi-platform asset exports efficiently.',
-    solution: 'Automated pipeline with intelligent optimization.',
+    description: 'Modern icon and asset generation tool built with React.',
+    fullDescription: 'IconGEN is a web-based icon generation application that helps developers and designers create, customize, and export icons efficiently using modern web technologies.',
+    challenge: 'Creating an intuitive interface for icon generation with real-time preview and export capabilities.',
+    solution: 'React + TypeScript application with Vite for fast development, providing instant feedback and flexible export options.',
     features: [
-      'Multi-Platform Export',
-      'Quality Analysis',
-      'High-Quality Scaling',
-      'CLI Integration'
+      'Real-time icon preview',
+      'Multiple export formats',
+      'Modern React interface',
+      'Fast Vite build system'
     ],
-    techStack: ['Python', 'AI Heuristics', 'CLI'],
-    tags: ['automation', 'generative', 'asset-pipeline'],
+    techStack: ['TypeScript', 'React', 'Vite', 'HTML5'],
+    tags: ['design-tools', 'web-app', 'productivity'],
     imageUrl: getProjectImage('icongen'),
     images: [],
     repositoryUrl: 'https://github.com/Aphrodine-wq/icongen',
@@ -146,7 +147,7 @@ export const projects: Project[] = [
     tags: ['devops', 'generative-ai', 'infrastructure'],
     imageUrl: getProjectImage('cloudgen'),
     images: [],
-    status: 'Beta',
+    status: 'Private',
     year: '2025'
   },
   {
@@ -154,9 +155,9 @@ export const projects: Project[] = [
     title: 'FairTradeWorker.com',
     category: 'Web',
     description: 'Platform connecting workers with ethical employment.',
-    fullDescription: 'FairTradeWorker.com is a web platform for ethical employment opportunities.',
-    challenge: 'Building a trustworthy marketplace with global scale.',
-    solution: 'Full-stack platform with verification and matching systems.',
+    fullDescription: 'FairTradeWorker.com is a full-stack web platform for ethical employment opportunities, built with modern TypeScript and React technologies.',
+    challenge: 'Building a trustworthy marketplace with global scale, comprehensive testing, and reliable infrastructure.',
+    solution: 'Full-stack TypeScript platform with Prisma ORM, PostgreSQL database, Docker containerization, and comprehensive testing using Jest and Playwright.',
     features: [
       'Verified Profiles',
       'Job Matching',
@@ -164,11 +165,11 @@ export const projects: Project[] = [
       'Multi-Language Support',
       'Review System'
     ],
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'TypeScript'],
+    techStack: ['TypeScript', 'React', 'Vite', 'Prisma', 'PostgreSQL', 'Docker'],
     tags: ['social-impact', 'full-stack', 'marketplace'],
     imageUrl: getProjectImage('fairtradeworker'),
     images: [],
-    link: 'https://fairtradeworker.com',
+    link: 'https://fair-trade-worker.vercel.app',
     repositoryUrl: 'https://github.com/Aphrodine-wq/fairtradeworker',
     status: 'Live',
     year: '2025'
@@ -407,7 +408,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center"
         >
           {filteredProjects.map((project, index) => (
             <motion.div
@@ -415,7 +416,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               variants={cardVariants}
               whileHover={{ y: -8, scale: 1.01 }}
               onClick={() => onProjectClick?.(project)}
-              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(91,146,121,0.15)] transition-all duration-500 border border-white/5 h-[480px]"
+              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(91,146,121,0.15)] transition-all duration-500 border border-white/5 h-[480px] w-full max-w-[400px]"
             >
               {/* Full Picture Background */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">

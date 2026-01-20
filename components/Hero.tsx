@@ -40,7 +40,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="font-sans text-[11px] tracking-[0.4em] text-brand-secondary uppercase mb-8"
         >
-          Architectural Systems
+          Creative Development
         </motion.span>
 
         {/* Main Title: Humble Sans */}
@@ -61,8 +61,8 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="font-sans text-lg md:text-xl text-brand-primary/80 max-w-xl leading-relaxed mb-12 mix-blend-plus-lighter"
         >
-          Forging nebulous ideas into solid digital matter.
-          Specializing in high-fidelity interfaces and deep-system architecture.
+          Bringing ideas to life through code and design.
+          Building beautiful interfaces and powerful systems that just work.
         </motion.p>
 
         {/* Liquid Actions */}
