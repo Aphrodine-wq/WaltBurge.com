@@ -23,11 +23,11 @@ export const ArtisticNav: React.FC = () => {
     };
 
     return (
-        <nav className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] flex justify-center" role="navigation" aria-label="Main navigation">
+        <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 z-[100] flex justify-center" role="navigation" aria-label="Main navigation">
             {/* The Floating Prism */}
             <motion.div
                 className="glass-prism rounded-full px-8 py-5 flex items-center gap-6 transition-all duration-500 hover:shadow-[0_0_60px_rgba(var(--aurora-teal),0.2)] hover:scale-[1.02] border border-white/10"
-                initial={{ y: 100, opacity: 0 }}
+                initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
