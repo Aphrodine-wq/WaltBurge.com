@@ -36,30 +36,33 @@
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   React Application                  │
+│              React 19 Application (flat root)        │
 ├─────────────────────────────────────────────────────┤
-│                    App.tsx (Router)                  │
+│          App.tsx (SPA, scroll-based navigation)      │
 ├──────────────┬──────────────┬──────────────┬─────────┤
-│   Layout     │   Components │   Utilities  │   UI    │
+│   Layout     │   Sections   │   Utilities  │   UI    │
 ├──────────────┼──────────────┼──────────────┼─────────┤
 │ ArtisticNav  │ Hero         │ lib/utils.ts │ Button  │
 │ Footer       │ About        │ types.ts     │ Badge   │
-│              │ Expertise    │              │ Tooltip │
-│              │ Projects     │              │ Skeleton│
-│              │ Skills       │              │         │
+│ SplashScreen │ Expertise    │              │ Tooltip │
+│ CustomCursor │ Projects*    │              │ Skeleton│
+│ ScrollProgress│ Skills*     │              │ Content │
+│              │ Marketplace  │              │ Skeleton│
+│              │ ThoughtLdr   │              │         │
 │              │ Contact      │              │         │
+│              │ ProjectDtl*  │              │         │
 ├──────────────┴──────────────┴──────────────┴─────────┤
 │          Framer Motion + Tailwind CSS                │
 ├──────────────────────────────────────────────────────┤
 │          Vercel Analytics + Vite Build               │
 └──────────────────────────────────────────────────────┘
+* = lazy loaded
 ```
 
 ### Application Entry Points
 
 - **index.tsx** - Root React entry point with React 19 and Strict Mode
 - **App.tsx** - Main routing logic and application shell
-- **main.tsx** - Vite entry point
 
 ---
 
@@ -67,61 +70,55 @@
 
 ```
 WaltBurge.com/
-├── src/
-│   ├── components/
-│   │   ├── ui/                          # Reusable UI components
-│   │   │   ├── button.tsx               # Button component with variants
-│   │   │   ├── badge.tsx                # Badge component
-│   │   │   ├── tooltip.tsx              # Radix UI tooltip wrapper
-│   │   │   ├── skeleton.tsx             # Loading skeleton
-│   │   │   └── content-skeleton.tsx     # Content-specific skeletons
-│   │   │
-│   │   ├── ArtisticNav.tsx              # Main navigation component (~4.5KB)
-│   │   ├── Footer.tsx                   # Footer section
-│   │   ├── SplashScreen.tsx             # Animated splash/loading screen (~6.5KB)
-│   │   ├── CustomCursor.tsx             # Custom cursor implementation (~3.5KB)
-│   │   ├── ScrollProgress.tsx           # Page scroll progress indicator
-│   │   ├── BackToTop.tsx                # Back-to-top button
-│   │   ├── ErrorBoundary.tsx            # Error handling wrapper
-│   │   │
-│   │   ├── Hero.tsx                     # Landing hero section (~120 lines)
-│   │   ├── About.tsx                    # About/bio section (~14KB)
-│   │   ├── Expertise.tsx                # Skills/expertise showcase (~10KB)
-│   │   ├── Projects.tsx                 # Project grid with filtering (~26KB)
-│   │   ├── ProjectDetail.tsx            # Project detail modal (~19KB)
-│   │   ├── Skills.tsx                   # Technical skills breakdown (~35KB)
-│   │   ├── ThoughtLeadership.tsx        # Blog/articles section (~11KB)
-│   │   ├── Marketplace.tsx              # Marketplace/services section (~18KB)
-│   │   └── Contact.tsx                  # Contact form section (~11KB)
+├── components/
+│   ├── ui/                              # Reusable UI components
+│   │   ├── button.tsx                   # Button component with variants (CVA)
+│   │   ├── badge.tsx                    # Badge component
+│   │   ├── tooltip.tsx                  # Radix UI tooltip wrapper
+│   │   ├── skeleton.tsx                 # Loading skeleton
+│   │   └── content-skeleton.tsx         # Content-specific skeletons
 │   │
-│   ├── lib/
-│   │   └── utils.ts                     # Utility functions (cn for class merging)
+│   ├── ArtisticNav.tsx                  # Main navigation component
+│   ├── Footer.tsx                       # Footer section
+│   ├── SplashScreen.tsx                 # Animated splash/loading screen
+│   ├── CustomCursor.tsx                 # Custom cursor implementation
+│   ├── ScrollProgress.tsx               # Page scroll progress indicator
+│   ├── BackToTop.tsx                    # Back-to-top button (not currently used in App.tsx)
+│   ├── ErrorBoundary.tsx                # Error handling wrapper
 │   │
-│   ├── App.tsx                          # Main application component
-│   ├── App.css                          # Application-level styles (optional)
-│   ├── index.css                        # Global styles, animations, theme variables
-│   ├── types.ts                         # Core TypeScript interfaces and types
-│   ├── main.tsx                         # React DOM render entry
-│   └── vite-env.d.ts                    # Vite environment type definitions
+│   ├── Hero.tsx                         # Landing hero section
+│   ├── About.tsx                        # About/bio section
+│   ├── Expertise.tsx                    # Skills/expertise showcase
+│   ├── Projects.tsx                     # Project grid with filtering (lazy loaded)
+│   ├── ProjectDetail.tsx                # Project detail view (lazy loaded)
+│   ├── Skills.tsx                       # Technical skills breakdown (lazy loaded)
+│   ├── ThoughtLeadership.tsx            # Blog/articles section
+│   ├── Marketplace.tsx                  # Marketplace/services section
+│   └── Contact.tsx                      # Contact form section
+│
+├── lib/
+│   └── utils.ts                         # Utility functions (cn for class merging)
 │
 ├── public/
 │   ├── og-image.png                     # Open Graph preview image
 │   └── assets/
-│       ├── projects/                    # Project-specific images
-│       └── [other static assets]
+│       └── projects/                    # Project-specific images
 │
-├── .claude/
-│   └── settings.local.json              # Claude AI configuration
+├── App.tsx                              # Main application component
+├── index.css                            # Global styles, animations, theme variables
+├── index.html                           # HTML entry point
+├── index.tsx                            # React DOM render entry (StrictMode)
+├── types.ts                             # Core TypeScript interfaces and types
+├── metadata.json                        # Project metadata
 │
-├── .trae/
-│   ├── documents/                       # Project planning documents (~8 files)
-│   └── [planning and documentation]
-│
-├── vite.config.ts                       # Vite configuration
+├── vite.config.ts                       # Vite configuration (port 3000)
 ├── tailwind.config.js                   # Tailwind CSS configuration
 ├── tsconfig.json                        # TypeScript configuration
+├── postcss.config.js                    # PostCSS configuration
+├── vercel.json                          # Vercel SPA rewrite rules
 ├── package.json                         # Project dependencies and scripts
 ├── package-lock.json                    # Locked dependency versions
+├── CodebaseOverview.md                  # This file
 └── README.md                            # Project readme
 
 ```
@@ -298,11 +295,8 @@ interface Project {
 enum SectionId {
   HERO = 'hero'
   ABOUT = 'about'
-  EXPERTISE = 'expertise'
   PROJECTS = 'projects'
   SKILLS = 'skills'
-  THOUGHT_LEADERSHIP = 'thoughtLeadership'
-  MARKETPLACE = 'marketplace'
   CONTACT = 'contact'
 }
 ```
@@ -323,14 +317,19 @@ The `SectionId` enum is used for:
 
 #### CSS Variables (Theme System)
 ```css
---background: Main background color
---foreground: Primary text color
---primary: Primary brand color
---secondary: Secondary accent color
---accent: Accent color for highlights
---destructive: Color for destructive actions
---muted: Muted text color
---border: Border color
+--bg-deep: Deep background (Onyx: 18 17 19)
+--bg-primary: Alias for --bg-deep
+--bg-surface: Surface background (Carbon Black: 34 39 37)
+--bg-nebula: Alias for --bg-surface
+--bg-secondary: Alias for --bg-nebula
+--text-primary: Primary text (Snow White: 249 249 249)
+--text-secondary: Secondary text (Gray: 156 163 175)
+--text-glow: Glow text (Snow White)
+--accent-color: Accent (Snow White in default monochrome theme)
+--border-color: Border (Low contrast: 60 65 60)
+--aurora-teal: Aurora teal accent
+--aurora-purple: Aurora purple accent
+--aurora-pink: Aurora pink accent
 ```
 
 #### Custom Animations
@@ -350,16 +349,17 @@ The `SectionId` enum is used for:
 #### Custom Theme Colors
 ```javascript
 colors: {
-  // Brand colors
-  primary: 'hsl(var(--primary))',
-  secondary: 'hsl(var(--secondary))',
-  accent: 'hsl(var(--accent))',
-  // Semantic colors
-  background: 'hsl(var(--background))',
-  foreground: 'hsl(var(--foreground))',
-  // UI colors
-  border: 'hsl(var(--border))',
-  muted: 'hsl(var(--muted))',
+  brand: {
+    base: 'rgb(var(--bg-primary) / <alpha-value>)',
+    surface: 'rgb(var(--bg-surface) / <alpha-value>)',
+    accent: 'rgb(var(--accent-color) / <alpha-value>)',
+    secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+    border: 'rgb(var(--border-color) / <alpha-value>)',
+    primary: 'rgb(var(--text-primary) / <alpha-value>)',
+  },
+  aurora: {
+    teal: 'rgb(var(--aurora-teal) / <alpha-value>)',
+  },
 }
 ```
 
@@ -379,10 +379,29 @@ keyframes: {
 - Tablet: 768px (md) - 1024px (lg)
 - Desktop: > 1024px (xl, 2xl)
 
+#### Custom Fonts
+```javascript
+fontFamily: {
+  sans: ['Inter', 'sans-serif'],     // Primary body font (loaded via Google Fonts)
+  mono: ['JetBrains Mono', 'monospace'],  // Code/mono font
+}
+```
+
+Also loads Playfair Display via Google Fonts in `index.css`.
+
+#### Custom Background Images
+```javascript
+backgroundImage: {
+  'grid-pattern': "linear-gradient(...)",   // Grid overlay using border-color
+  'radial-fade': "radial-gradient(...)",    // Radial accent fade
+}
+```
+
 ### Styling Approach
 - **Utility-First**: Tailwind CSS for styling
 - **Component Variants**: CVA (Class Variance Authority) for component variants
-- **Dynamic Theming**: CSS variables for theme switching
+- **Dynamic Theming**: CSS variables with RGB triplets for alpha support
+- **Dark Mode**: Enabled via `darkMode: 'class'` in Tailwind config
 - **Responsive**: Mobile-first design approach
 - **Animation Ready**: Framer Motion integration with Tailwind
 
@@ -432,10 +451,9 @@ Component Import Sources:
 
 ### State Management Approach
 
-1. **Local Component State**: Each component manages its own state
+1. **Local Component State**: Each component manages its own state (useState in App.tsx for splash, selected project, tech filter)
 2. **Props Drilling**: Parent-to-child data flow
-3. **React Context**: Potentially used for theme/navigation state
-4. **No Global State Library**: No Redux/Zustand detected (keeping it simple)
+3. **No Global State Library**: No Redux/Zustand/Context -- kept simple with local state and prop passing
 
 ### Data Flow Example: Project Display
 
@@ -456,10 +474,11 @@ Filtering Logic (by technology)
 ### Navigation Flow
 
 ```
-App.tsx (Router)
-  ↓ (React Router or smooth scroll navigation)
-  ├─→ Section Scrolls (Hero → About → Expertise → Projects → etc.)
-  └─→ ArtisticNav (navigation controls)
+App.tsx (SPA - no router library)
+  ↓ (smooth scroll navigation via SectionId anchors)
+  ├─→ Section Scrolls (Hero → About → Expertise → Projects → Marketplace → ThoughtLeadership → Contact)
+  ├─→ ArtisticNav (navigation controls)
+  └─→ ProjectDetail (full-page view, replaces main layout when a project is selected)
 ```
 
 ---
@@ -623,11 +642,12 @@ xl: 1280px  - Large screens
 
 ### Environment Variables
 
-Expected variables (based on code analysis):
+Variables loaded via Vite's `loadEnv` in `vite.config.ts`:
 ```
-VITE_GEMINI_API_KEY    - Gemini API key for potential AI features
-VITE_API_URL           - Backend API URL (if applicable)
+GEMINI_API_KEY    - Gemini API key (exposed as process.env.GEMINI_API_KEY and process.env.API_KEY)
 ```
+
+Note: These are NOT `VITE_` prefixed. They are loaded from a root `.env` file via `loadEnv(mode, '.', '')` and injected via Vite's `define` config.
 
 ### Configuration Files
 
@@ -639,7 +659,7 @@ VITE_API_URL           - Backend API URL (if applicable)
 ### Development Setup
 ```bash
 npm install           # Install dependencies
-npm run dev          # Start development server (Vite)
+npm run dev          # Start development server (Vite, port 3000)
 npm run build        # Build for production
 npm run preview      # Preview production build
 ```
@@ -785,8 +805,8 @@ npm run preview      # Preview production build
 |---|---|---|
 | React | 19.2.3+ | UI Framework |
 | React-DOM | 19.2.3+ | DOM rendering |
-| TypeScript | Latest | Type safety |
-| Vite | Latest | Build tool |
+| TypeScript | ~5.8.2 | Type safety |
+| Vite | 6.2.0+ | Build tool |
 | Tailwind CSS | 3.4.17+ | Styling |
 | Framer Motion | 12.27.1+ | Animations |
 | Lucide React | Latest | Icon library |
@@ -816,13 +836,14 @@ npm run preview      # Preview production build
 1. **Testing**: Add unit and E2E tests
 2. **CMS Integration**: Dynamic content management
 3. **Internationalization**: Multi-language support
-4. **Dark Mode**: Theme switching system
-5. **PWA Features**: Offline support, installable
-6. **Performance**: Further optimization opportunities
-7. **SEO**: Enhanced meta tags and structured data
-8. **Backend**: Optional API for dynamic content
-9. **Comments/Ratings**: User feedback system
-10. **Search**: Site-wide search functionality
+4. **PWA Features**: Offline support, installable
+5. **Performance**: Further optimization opportunities
+6. **SEO**: Enhanced meta tags and structured data
+7. **Backend**: Optional API for dynamic content
+8. **Comments/Ratings**: User feedback system
+9. **Search**: Site-wide search functionality
+
+Note: Dark mode is already configured (`darkMode: 'class'` in Tailwind config). The default theme is a monochrome Onyx/Snow palette.
 
 ---
 
@@ -840,33 +861,32 @@ npm run preview      # Preview production build
 ## Quick Reference
 
 ### Import Paths
+
+The `@` alias resolves to the project root (configured in both `vite.config.ts` and `tsconfig.json`).
+
 ```typescript
-// Components
-import Hero from '@/components/Hero'
-import { Button } from '@/components/ui/button'
+// Components (relative imports used in practice)
+import { Hero } from './components/Hero'
+import { Button } from './components/ui/button'
 
 // Types
-import type { Project, SectionId } from '@/types'
+import { Project, SectionId } from './types'
 
 // Utilities
 import { cn } from '@/lib/utils'
 
 // Framer Motion
 import { motion } from 'framer-motion'
-
-// Styling
-import '@/index.css'
 ```
 
 ### Common Component Structure
 ```typescript
-import React from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import React from 'react';
+import { motion } from 'framer-motion';
 
 interface ComponentProps {
-  prop1: string
-  prop2?: number
+  prop1: string;
+  prop2?: number;
 }
 
 export const MyComponent: React.FC<ComponentProps> = ({
@@ -877,16 +897,16 @@ export const MyComponent: React.FC<ComponentProps> = ({
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      className={cn('base-styles', 'additional-styles')}
+      className="bg-brand-base text-brand-primary"
     >
       {prop1}
     </motion.div>
-  )
-}
+  );
+};
 ```
 
 ---
 
-**Last Updated**: 2026-01-21
-**Maintainer**: WaltBurge.com Development Team
+**Last Updated**: 2026-03-29
+**Maintainer**: James Walton
 **Status**: Active - Maintained
