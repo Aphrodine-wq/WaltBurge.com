@@ -263,19 +263,19 @@ const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => 
         )}
         {type === 1 && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[150%] h-[150%] border-2 border-brand-accent/10 rounded-full animate-spin-slow-reverse" />
-            <div className="w-[100%] h-[100%] border-2 border-brand-accent/20 rounded-full animate-spin-slow" />
-            <div className="w-[50%] h-[50%] border-2 border-brand-accent/30 rounded-full" />
+            <div className="w-[150%] h-[150%] border border-brand-accent/10 rounded-full" />
+            <div className="w-[100%] h-[100%] border border-brand-accent/15 rounded-full" />
+            <div className="w-[50%] h-[50%] border border-brand-accent/20 rounded-full" />
           </div>
         )}
         {type === 2 && (
-          <div className="absolute top-10 right-10 w-32 h-32 bg-brand-accent/20 blur-[50px] rounded-full mix-blend-screen animate-pulse-slow" />
+          <div className="absolute top-10 right-10 w-32 h-32 bg-brand-accent/10 rounded-full" />
         )}
       </div>
 
       {/* Central Abstract Icon/UI Representation */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative z-10 p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl skew-y-3 group-hover/card:skew-y-0 group-hover/card:scale-110 transition-all duration-700 ease-[0.2,1,0.3,1]">
+        <div className="relative z-10 p-6 rounded-2xl bg-white/5 border border-white/10">
           <div className="w-16 h-16 flex items-center justify-center text-brand-primary">
             {project.category === 'Systems' && <Cpu size={32} />}
             {project.category === 'Tools' && <Terminal size={32} />}
@@ -297,7 +297,7 @@ const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => 
 
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-        <div className="bg-black/50 backdrop-blur-md border border-white/10 shadow-lg uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
+        <div className="bg-black/70 border border-white/10 uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
           <CategoryIcon category={project.category} />
           <span className="ml-2">{project.category}</span>
         </div>
@@ -331,7 +331,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
       {/* Category Badge - Top Right */}
       <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-200 flex flex-col items-end gap-2">
-        <div className="bg-black/50 backdrop-blur-md border border-white/10 shadow-lg uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
+        <div className="bg-black/70 border border-white/10 uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
           <CategoryIcon category={project.category} />
           <span className="ml-2">{project.category}</span>
         </div>
@@ -395,7 +395,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <div className="h-1 w-20 bg-brand-accent rounded-full mx-auto md:mx-0"></div>
           </div>
           <div className="hidden md:block">
-            <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50 backdrop-blur-sm">
+            <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50">
               <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
               ALL SYSTEMS OPERATIONAL
             </div>
@@ -429,18 +429,16 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
             <motion.div
               key={project.id}
               variants={cardVariants}
-              whileHover={{ y: -8, scale: 1.01 }}
               onClick={() => onProjectClick?.(project)}
-              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer shadow-[0_10px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_rgba(91,146,121,0.15)] transition-all duration-500 border border-white/5 h-[480px] w-full max-w-[400px]"
+              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer border border-white/5 hover:border-brand-accent/30 h-[480px] w-full max-w-[400px] hover:-translate-y-1 transition-all duration-300"
             >
               {/* Full Picture Background */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">
                 <ProjectCardImage project={project} />
-                {/* Gradient overlay for bottom text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent group-hover/card:from-black/90 group-hover/card:via-black/50 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
               </div>
 
-              {/* Content Panel - Overlaid on image, AT BOTTOM */}
+              {/* Content Panel */}
               <div className="absolute inset-0 p-8 pb-10 flex flex-col justify-end items-center z-10 text-center">
                 <h3 className="text-2xl font-serif text-white leading-tight text-center mb-1">
                   {project.title}
@@ -453,18 +451,14 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
                   {project.description}
                 </p>
 
-                {/* Tech Stack - Minimal Pills - Centered */}
                 <div className="flex flex-wrap gap-2 justify-center">
                   {project.techStack.slice(0, 3).map((tech) => (
-                    <span key={tech} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-[10px] text-white tracking-wide font-sans border border-white/20">
+                    <span key={tech} className="px-3 py-1 rounded-full bg-white/10 text-[10px] text-white tracking-wide font-sans border border-white/20">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
-
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 border-2 border-brand-accent/0 rounded-[2rem] group-hover/card:border-brand-accent/30 transition-all duration-500 pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>

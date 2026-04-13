@@ -90,7 +90,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
     <div className="min-h-screen bg-brand-black text-brand-primary pt-16 md:pt-20 animate-fade-in transition-colors duration-300">
       
       {/* Navbar Overlay for Back Button */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center bg-brand-black/90 backdrop-blur-md border-b border-brand-border">
+      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center bg-brand-black/95 border-b border-brand-border">
         <button 
           onClick={onBack}
           className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs md:text-sm group"
@@ -124,13 +124,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             <>
                 <button 
                     onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20 backdrop-blur-sm"
+                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
                 >
                     <ChevronLeft size={20} className="md:w-6 md:h-6" />
                 </button>
                 <button 
                     onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20 backdrop-blur-sm"
+                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
                 >
                     <ChevronRight size={20} className="md:w-6 md:h-6" />
                 </button>
@@ -183,7 +183,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                
                {/* Challenge Card */}
-               <div ref={challengeRef} className="glass-panel p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10 transition-all duration-300">
+               <div ref={challengeRef} className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500/10"></div>
                   <div 
                     ref={challengeBorderRef}
@@ -215,7 +215,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                </div>
                
                {/* Solution Card */}
-               <div ref={solutionRef} className="glass-panel p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10 transition-all duration-300">
+               <div ref={solutionRef} className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-success/10"></div>
                   <div 
                     ref={solutionBorderRef}
@@ -264,7 +264,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
 
           {/* Right Column: Meta Data */}
           <div className="space-y-8">
-            <div className="glass-card p-6 md:p-8 rounded-xl lg:sticky lg:top-24">
+            <div className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl lg:sticky lg:top-24">
               <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">Technologies</h3>
               
               <div className="flex flex-wrap gap-3 mb-8">

@@ -100,7 +100,7 @@ export const Contact: React.FC = () => {
 
       {/* Background Elements */}
       <div className="absolute bottom-0 right-0 w-full h-full opacity-20 pointer-events-none">
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[150px]"></div>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full"></div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">

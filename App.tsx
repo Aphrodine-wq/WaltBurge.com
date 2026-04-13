@@ -80,12 +80,6 @@ function App() {
             {/* Navigation */}
             <MobileBar />
             <ArtisticNav />
-            <div className="film-grain" />
-            {/* Global Ambient Background - Seamless */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-              <div className="absolute top-[10%] left-[5%] w-[40vw] h-[40vw] bg-brand-accent/5 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow" />
-              <div className="absolute bottom-[10%] right-[0%] w-[30vw] h-[30vw] bg-brand-purple/5 rounded-full blur-[100px] mix-blend-screen animate-float-delayed" />
-            </div>
 
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
