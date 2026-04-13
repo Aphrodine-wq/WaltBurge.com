@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-sans text-lg md:text-xl text-brand-primary/80 max-w-xl leading-relaxed mb-12"
         >
-          Full-stack engineer building performant systems and clean interfaces.
+          Full-stack developer building construction technology, AI estimation models, and contractor marketplaces.
         </motion.p>
 
         <motion.div
