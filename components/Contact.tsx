@@ -15,7 +15,7 @@ export const Contact: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('contact@waltburge.com');
+    navigator.clipboard.writeText('jamesburge.mcm@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -239,7 +239,7 @@ export const Contact: React.FC = () => {
                   className="flex-1 p-3 bg-brand-dark/50 border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
                   title="Copy to clipboard"
                 >
-                  {copied ? <span className="text-brand-accent">COPIED!</span> : 'contact@waltburge.com'}
+                  {copied ? <span className="text-brand-accent">COPIED!</span> : 'jamesburge.mcm@gmail.com'}
                 </button>
                 <a
                   href="https://github.com/Aphrodine-wq"

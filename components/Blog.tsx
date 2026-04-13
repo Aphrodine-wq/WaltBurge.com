@@ -74,7 +74,7 @@ export const Blog: React.FC = () => {
   const rest = filtered.filter(p => p.id !== featured?.id);
 
   return (
-    <section id={SectionId.BLOG} className="py-20 md:py-32 px-4 md:px-6 bg-brand-base relative border-t border-brand-border/10">
+    <section id={SectionId.BLOG} className="py-24 md:py-40 px-4 md:px-6 bg-brand-base relative border-t border-brand-border/10">
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Header */}
@@ -83,97 +83,102 @@ export const Blog: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-6"
+          className="mb-16 md:mb-24"
         >
-          <div className="space-y-4">
-            <span className="font-mono text-xs text-brand-accent uppercase tracking-widest">
-              Writing
-            </span>
-            <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter">
-              From the <br className="hidden md:block" />
-              <span className="text-brand-secondary opacity-60">Build Log</span>
-            </h2>
-            <div className="h-1 w-20 bg-brand-accent rounded-full" />
-          </div>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+            <div className="space-y-5">
+              <span className="font-mono text-xs text-brand-accent uppercase tracking-widest">
+                Writing
+              </span>
+              <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter">
+                From the <br className="hidden md:block" />
+                <span className="text-brand-secondary opacity-60">Build Log</span>
+              </h2>
+              <div className="h-1 w-24 bg-brand-accent rounded-full" />
+              <p className="text-brand-secondary text-lg max-w-lg leading-relaxed">
+                Notes on building products, training models, and figuring out software engineering from scratch.
+              </p>
+            </div>
 
-          {/* Tag filters */}
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setActiveTag(null)}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider border transition-all ${
-                !activeTag
-                  ? 'bg-brand-accent/10 border-brand-accent/30 text-brand-accent'
-                  : 'bg-brand-surface border-brand-border text-brand-secondary hover:border-brand-accent/20'
-              }`}
-            >
-              All
-            </button>
-            {allTags.map(tag => (
+            {/* Tag filters */}
+            <div className="flex flex-wrap gap-2">
               <button
-                key={tag}
-                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-                className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider border transition-all ${
-                  activeTag === tag
+                onClick={() => setActiveTag(null)}
+                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border transition-all ${
+                  !activeTag
                     ? 'bg-brand-accent/10 border-brand-accent/30 text-brand-accent'
                     : 'bg-brand-surface border-brand-border text-brand-secondary hover:border-brand-accent/20'
                 }`}
               >
-                {tag}
+                All
               </button>
-            ))}
+              {allTags.map(tag => (
+                <button
+                  key={tag}
+                  onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                  className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border transition-all ${
+                    activeTag === tag
+                      ? 'bg-brand-accent/10 border-brand-accent/30 text-brand-accent'
+                      : 'bg-brand-surface border-brand-border text-brand-secondary hover:border-brand-accent/20'
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Featured post */}
+        {/* Featured post — full width, big */}
         {featured && (
           <motion.article
             key={featured.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="group mb-8 md:mb-12 p-8 md:p-12 rounded-3xl bg-brand-surface/50 border border-brand-border hover:border-brand-accent/30 transition-all cursor-pointer"
+            className="group mb-12 md:mb-16 p-10 md:p-16 rounded-3xl bg-brand-surface/50 border border-brand-border hover:border-brand-accent/30 transition-all cursor-pointer"
           >
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-8">
               {featured.tags.map(tag => (
-                <span key={tag} className="px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-[10px] uppercase tracking-wider text-brand-accent font-mono">
+                <span key={tag} className="px-4 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-xs uppercase tracking-wider text-brand-accent font-mono">
                   {tag}
                 </span>
               ))}
               {featured.featured && (
-                <span className="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-[10px] uppercase tracking-wider text-brand-purple font-mono">
+                <span className="px-4 py-1.5 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs uppercase tracking-wider text-brand-purple font-mono">
                   Featured
                 </span>
               )}
             </div>
 
-            <h3 className="text-2xl md:text-4xl font-black text-brand-primary tracking-tight mb-4 group-hover:text-brand-accent transition-colors leading-tight">
+            <h3 className="text-3xl md:text-5xl font-black text-brand-primary tracking-tight mb-6 group-hover:text-brand-accent transition-colors leading-tight max-w-4xl">
               {featured.title}
             </h3>
 
-            <p className="text-brand-secondary text-base md:text-lg leading-relaxed mb-8 max-w-3xl">
+            <p className="text-brand-secondary text-lg md:text-xl leading-relaxed mb-10 max-w-3xl">
               {featured.excerpt}
             </p>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 text-xs text-brand-secondary font-mono">
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={14} />
+            <div className="flex items-center justify-between pt-8 border-t border-brand-border/30">
+              <div className="flex items-center gap-6 text-sm text-brand-secondary font-mono">
+                <span className="flex items-center gap-2">
+                  <Calendar size={16} />
                   {formatDate(featured.date)}
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={14} />
+                <span className="flex items-center gap-2">
+                  <Clock size={16} />
                   {featured.readTime}
                 </span>
               </div>
               <span className="flex items-center gap-2 text-sm text-brand-accent font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
-                Read <ArrowRight size={16} />
+                Read <ArrowRight size={18} />
               </span>
             </div>
           </motion.article>
         )}
 
-        {/* Post grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Post grid — 2 columns for bigger cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {rest.map((post, index) => (
             <motion.article
               key={post.id}
@@ -181,34 +186,39 @@ export const Blog: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group p-6 md:p-8 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/30 transition-all cursor-pointer flex flex-col justify-between"
+              className="group p-8 md:p-10 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/30 transition-all cursor-pointer flex flex-col justify-between min-h-[280px]"
             >
               <div>
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-5">
                   {post.tags.map(tag => (
-                    <span key={tag} className="px-2 py-0.5 rounded-full bg-brand-base border border-brand-border text-[10px] uppercase tracking-wider text-brand-secondary font-mono">
+                    <span key={tag} className="px-3 py-1 rounded-full bg-brand-base border border-brand-border text-[11px] uppercase tracking-wider text-brand-secondary font-mono">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h4 className="text-lg md:text-xl font-bold text-brand-primary mb-3 group-hover:text-brand-accent transition-colors leading-snug">
+                <h4 className="text-xl md:text-2xl font-bold text-brand-primary mb-4 group-hover:text-brand-accent transition-colors leading-snug">
                   {post.title}
                 </h4>
 
-                <p className="text-sm text-brand-secondary leading-relaxed line-clamp-3">
+                <p className="text-sm md:text-base text-brand-secondary leading-relaxed">
                   {post.excerpt}
                 </p>
               </div>
 
-              <div className="flex items-center gap-4 mt-6 pt-4 border-t border-brand-border/50 text-xs text-brand-secondary font-mono">
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={12} />
-                  {formatDate(post.date)}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={12} />
-                  {post.readTime}
+              <div className="flex items-center justify-between mt-8 pt-5 border-t border-brand-border/50">
+                <div className="flex items-center gap-4 text-xs text-brand-secondary font-mono">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={14} />
+                    {formatDate(post.date)}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={14} />
+                    {post.readTime}
+                  </span>
+                </div>
+                <span className="flex items-center gap-2 text-xs text-brand-accent font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
+                  Read <ArrowRight size={14} />
                 </span>
               </div>
             </motion.article>
@@ -216,9 +226,9 @@ export const Blog: React.FC = () => {
         </div>
 
         {filtered.length === 0 && (
-          <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
-            <BookOpen size={32} className="mx-auto mb-4 text-brand-secondary" />
-            <p className="text-brand-secondary font-mono">No posts with tag "{activeTag}".</p>
+          <div className="py-24 text-center border border-dashed border-brand-border rounded-xl">
+            <BookOpen size={40} className="mx-auto mb-4 text-brand-secondary" />
+            <p className="text-brand-secondary font-mono text-lg">No posts with tag "{activeTag}".</p>
             <button onClick={() => setActiveTag(null)} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider">
               Clear Filter
             </button>
