@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
-import { ThoughtLeadership } from './components/ThoughtLeadership';
+import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
@@ -103,7 +103,7 @@ function App() {
               </ErrorBoundary>
 
               <Marketplace />
-              <ThoughtLeadership />
+              <Blog />
             </main>
             <Contact />
             <Footer />

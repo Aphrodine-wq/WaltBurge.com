@@ -12,15 +12,10 @@ import {
 
 // --- Image Handling Helper ---
 const getProjectImage = (id: string) => {
-  // Map IDs to specific files found in public/assets/projects
+  // Map IDs to specific files in public/assets/projects
   switch (id) {
-    case 'clipsync': return '/assets/projects/clipsync/Clipsync.png';
-    case 'g-rump': return '/assets/projects/g-rump/Screenshot (309).png';
-    case 'ftwos': return '/assets/projects/ftwos/Screenshot (304).png';
-    case 'icongen': return '/assets/projects/icongen/Screenshot (319).png';
-    case 'cloudgen': return '/assets/projects/cloudgen/cloudgen.png';
     case 'fairtradeworker': return '/assets/projects/fairtradeworker/fairtradeworker.png';
-    default: return `/assets/projects/${id}/cover.jpg`;
+    default: return `/assets/projects/${id}/cover.png`;
   }
 };
 
@@ -41,137 +36,146 @@ const getGradientForProject = (id: string) => {
 
 export const projects: Project[] = [
   {
-    id: 'g-rump',
-    title: 'G-Rump',
-    category: 'Systems',
-    description: 'Full-stack platform with custom compiler and animation framework.',
-    fullDescription: 'G-Rump is a comprehensive full-stack project integrating web, mobile (iOS), backend, AI services, and a custom compiler with animation support.',
-    challenge: 'Building an integrated ecosystem spanning multiple platforms with a custom language compiler.',
-    solution: 'Modular architecture with specialized components for each platform, unified by a custom compiler.',
-    features: [
-      'Custom compiler with animation support',
-      'AI service integration',
-      'Cross-platform (Web, iOS)',
-      'Modern TypeScript/Rust architecture'
-    ],
-    techStack: ['TypeScript', 'Rust', 'Swift', 'React'],
-    tags: ['full-stack', 'compiler', 'cross-platform'],
-    imageUrl: getProjectImage('g-rump'),
-    images: [],
-    link: 'https://g-rump.vercel.app',
-    repositoryUrl: 'https://github.com/Aphrodine-wq/g-rump',
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'clipsync',
-    title: 'ClipSync',
-    category: 'Tools',
-    description: 'Professional clipboard manager with real-time sync across all platforms.',
-    fullDescription: 'ClipSync is a comprehensive clipboard management system enabling device synchronization, powerful search, and team collaboration across Web, Desktop, Mobile, and Browser Extensions.',
-    challenge: 'Building real-time synchronization with rich content support while maintaining security and team collaboration features.',
-    solution: 'Electron-based desktop app with React Native mobile apps, Node.js backend, real-time Socket.IO communication, and end-to-end encryption.',
-    features: [
-      'Real-time sync across all platforms',
-      'AI-powered search',
-      'Team workspaces & collaboration',
-      'End-to-End Encryption',
-      'CLI & API for developers'
-    ],
-    techStack: ['TypeScript', 'Node.js', 'React Native', 'Electron', 'PostgreSQL', 'Socket.IO'],
-    tags: ['real-time', 'cross-platform', 'productivity'],
-    imageUrl: getProjectImage('clipsync'),
-    images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/clipsync',
-    status: 'Beta',
-    year: '2025'
-  },
-  {
-    id: 'ftwos',
-    title: 'FTWOS',
-    category: 'Systems',
-    description: 'Experimental OS with custom task scheduling.',
-    fullDescription: 'FTWOS is an experimental operating system kernel with focus on real-time scheduling.',
-    challenge: 'Low-level hardware management and debugging.',
-    solution: 'Custom bootloader and microkernel architecture.',
-    features: [
-      'Custom Bootloader & Kernel',
-      'Multitasking Scheduler',
-      'File System Support',
-      'Display Driver'
-    ],
-    techStack: ['C', 'Assembly', 'Kernel', 'Bootloader'],
-    tags: ['kernel', 'experimental', 'bare-metal'],
-    imageUrl: getProjectImage('ftwos'),
-    images: [],
-    status: 'Private',
-    year: '2025'
-  },
-  {
-    id: 'icongen',
-    title: 'IconGEN',
-    category: 'Tools',
-    description: 'Modern icon and asset generation tool built with React.',
-    fullDescription: 'IconGEN is a web-based icon generation application that helps developers and designers create, customize, and export icons efficiently using modern web technologies.',
-    challenge: 'Creating an intuitive interface for icon generation with real-time preview and export capabilities.',
-    solution: 'React + TypeScript application with Vite for fast development, providing instant feedback and flexible export options.',
-    features: [
-      'Real-time icon preview',
-      'Multiple export formats',
-      'Modern React interface',
-      'Fast Vite build system'
-    ],
-    techStack: ['TypeScript', 'React', 'Vite', 'HTML5'],
-    tags: ['design-tools', 'web-app', 'productivity'],
-    imageUrl: getProjectImage('icongen'),
-    images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/icongen',
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'cloudgen',
-    title: 'Cloud Forge',
-    category: 'Tools',
-    description: 'AI-driven infrastructure code generator.',
-    fullDescription: 'Cloud Forge converts requirements into infrastructure code using AI.',
-    challenge: 'Simplifying complex infrastructure provisioning.',
-    solution: 'AI-powered code generation with validation.',
-    features: [
-      'Natural Language Input',
-      'Cost Estimation',
-      'Security Compliance',
-      'Multi-Cloud Support'
-    ],
-    techStack: ['Go', 'Terraform', 'AWS', 'Python', 'AI'],
-    tags: ['devops', 'generative-ai', 'infrastructure'],
-    imageUrl: getProjectImage('cloudgen'),
-    images: [],
-    status: 'Private',
-    year: '2025'
-  },
-  {
     id: 'fairtradeworker',
-    title: 'FairTradeWorker.com',
+    title: 'FairTradeWorker',
     category: 'Web',
-    description: 'Platform connecting workers with ethical employment.',
-    fullDescription: 'FairTradeWorker.com is a full-stack web platform for ethical employment opportunities, built with modern TypeScript and React technologies.',
-    challenge: 'Building a trustworthy marketplace with global scale, comprehensive testing, and reliable infrastructure.',
-    solution: 'Full-stack TypeScript platform with Prisma ORM, PostgreSQL database, Docker containerization, and comprehensive testing using Jest and Playwright.',
+    description: 'Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.',
+    fullDescription: 'FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across three repos — Next.js frontend, Kotlin/Spring Boot backend with STOMP WebSocket realtime, and a React Native mobile app.',
+    challenge: 'Building a marketplace that handles the full lifecycle — from job posting through bidding, contract signing, milestone-based payments, and dispute resolution — while keeping contractors honest and homeowners protected.',
+    solution: 'Three-tier architecture: homeowner posts job, contractor bids, subcontractor handles specialty work. QuickBooks handles all payment flows natively. ConstructionAI powers instant cost estimates so homeowners know what\'s fair before a single bid comes in.',
     features: [
-      'Verified Profiles',
-      'Job Matching',
-      'Secure Payments',
-      'Multi-Language Support',
-      'Review System'
+      'QuickBooks-native invoicing and payout',
+      'AI-powered cost estimation via ConstructionAI',
+      'Real-time bidding with STOMP WebSocket',
+      'Three-role system: homeowner, contractor, subcontractor',
+      'Mobile app with 30+ screens (React Native/Expo)',
+      '6 revenue streams including white-label licensing'
     ],
-    techStack: ['TypeScript', 'React', 'Vite', 'Prisma', 'PostgreSQL', 'Docker'],
-    tags: ['social-impact', 'full-stack', 'marketplace'],
+    techStack: ['Next.js', 'TypeScript', 'Kotlin', 'React Native', 'PostgreSQL', 'Tailwind'],
+    tags: ['marketplace', 'full-stack', 'construction'],
     imageUrl: getProjectImage('fairtradeworker'),
     images: [],
     link: 'https://fair-trade-worker.vercel.app',
     repositoryUrl: 'https://github.com/Aphrodine-wq/fairtradeworker',
     status: 'Live',
+    year: '2025'
+  },
+  {
+    id: 'mshomepros',
+    title: 'MsHomePros',
+    category: 'Web',
+    description: 'Contractor business platform — estimation, proposals, tracking, and payments powered by ConstructionAI.',
+    fullDescription: 'MsHomePros is a contractor-facing business management platform. Contractors generate AI-powered estimates, create professional proposals, track jobs, and manage client relationships. The estimation engine runs on a custom fine-tuned LLM deployed on RunPod Serverless.',
+    challenge: 'Construction contractors still price jobs on gut feel and napkin math. Getting accurate, professional estimates out the door fast is the difference between winning and losing bids.',
+    solution: 'ConstructionAI generates line-item estimates in seconds. The platform wraps that in professional PDF proposals, job tracking, and client management — everything a contractor needs to run their business from one place.',
+    features: [
+      'AI-powered line-item estimation',
+      'Professional PDF proposal generation',
+      'Job tracking and scheduling',
+      'Client relationship management',
+      'Real contractor in production (MHP Construction, Oxford MS)'
+    ],
+    techStack: ['Next.js', 'TypeScript', 'Python', 'Tailwind', 'PostgreSQL'],
+    tags: ['saas', 'construction', 'ai-powered'],
+    imageUrl: getProjectImage('mshomepros'),
+    images: [],
+    link: 'https://mhpestimate.cloud',
+    repositoryUrl: 'https://github.com/Aphrodine-wq/MsHomePros',
+    status: 'Live',
+    year: '2025'
+  },
+  {
+    id: 'constructionai',
+    title: 'ConstructionAI',
+    category: 'AI',
+    description: 'Fine-tuned Llama 3.1 8B for construction cost estimation — 18,000+ training examples, deployed on RunPod.',
+    fullDescription: 'ConstructionAI is a custom fine-tuned large language model built specifically for construction cost estimation. Trained on 18,000+ curated examples covering residential and commercial trades, it generates detailed line-item estimates with material quantities, labor hours, and market-adjusted pricing. Currently scaling to 500K+ training examples via synthetic data distillation.',
+    challenge: 'No existing AI model understands construction pricing at the line-item level. Generic LLMs hallucinate costs and miss trade-specific nuances like regional labor rates, material waste factors, and code requirements.',
+    solution: 'Built a full training pipeline: curated real-world estimation data, generated synthetic examples via distillation from larger models, fine-tuned Llama 3.1 8B with custom hyperparameters, and deployed on RunPod Serverless at ~$0.002 per estimate.',
+    features: [
+      'Line-item cost breakdowns by trade',
+      'Material quantity and waste calculations',
+      'Regional labor rate adjustment',
+      'RunPod Serverless deployment (~$0.002/estimate)',
+      '8 specialized tool functions',
+      'Scaling to 500K+ training examples (v5 pipeline)'
+    ],
+    techStack: ['Python', 'PyTorch', 'Llama', 'RunPod'],
+    tags: ['llm', 'fine-tuning', 'construction'],
+    imageUrl: getProjectImage('constructionai'),
+    images: [],
+    status: 'Live',
+    year: '2025'
+  },
+  {
+    id: 'walt',
+    title: 'W.A.L.T.',
+    category: 'AI',
+    description: 'Distributed AI platform spanning three machines — 20 AGI layers, 73-engine verification, screen vision, and autonomous execution.',
+    fullDescription: 'W.A.L.T. is a unified AI platform that turns Claude Code into something closer to a full operating system. It runs across three networked machines (Mac, Mini PC, GPU workstation) and includes screen understanding (Claude Eyes — 64 MCP tools), formal code verification (AEON — 73 engines), autonomous overnight execution, persistent goal tracking, an immune system for self-healing, and a file-backed event bus (Nerve) connecting 20 AGI-inspired layers.',
+    challenge: 'AI assistants are stateless and reactive. They forget everything between sessions, can\'t see your screen, can\'t verify their own code, and can\'t work while you sleep.',
+    solution: 'Built persistence, perception, and autonomy from scratch. Nerve connects all subsystems via pub/sub events. Eyes reads the screen. AEON verifies code formally. The overnight runner executes multi-project work queues autonomously. Goals persist across sessions with velocity tracking.',
+    features: [
+      'Claude Eyes: 64 MCP tools for screen + webcam understanding',
+      'AEON: 73-engine formal verification (22 cybersecurity)',
+      'Nerve: file-backed pub/sub event bus across all layers',
+      'Overnight runner: autonomous multi-project execution',
+      '20 AGI layers: goals, immune, memory, metacognition, and more',
+      '3-node distributed network (Mac + Mini PC + GPU workstation)'
+    ],
+    techStack: ['TypeScript', 'Python', 'Rust', 'Node.js'],
+    tags: ['ai-platform', 'distributed', 'autonomous'],
+    imageUrl: getProjectImage('walt'),
+    images: [],
+    repositoryUrl: 'https://github.com/Aphrodine-wq/walt',
+    status: 'Live',
+    year: '2025'
+  },
+  {
+    id: 'driftlands',
+    title: 'Driftlands',
+    category: 'Game Dev',
+    description: 'Survival crafting game built in Rust and Bevy — 27K lines of code, targeting Steam Early Access.',
+    fullDescription: 'Driftlands is a survival crafting game built from scratch in Rust using the Bevy 0.15 ECS game engine. 47 source files, 43 plugins, covering terrain generation, inventory systems, crafting, day/night cycles, and procedural world building. Pixel art assets generated via ComfyUI pipeline on a GPU server.',
+    challenge: 'Building a full game in Rust with an ECS engine that\'s still evolving. No Unity safety net, no C# scripting shortcuts — just systems, components, and queries.',
+    solution: 'Leaned into Bevy\'s plugin architecture. Each game system (inventory, crafting, terrain, lighting) is an isolated plugin with clean boundaries. Pixel art pipeline runs on vast.ai with ComfyUI for consistent asset generation.',
+    features: [
+      'Procedural terrain generation',
+      'Full inventory and crafting system',
+      'Day/night cycle with dynamic lighting',
+      'ECS architecture with 43 Bevy plugins',
+      'ComfyUI pixel art generation pipeline',
+      'Custom keybinding and settings system'
+    ],
+    techStack: ['Rust', 'Bevy'],
+    tags: ['game-dev', 'ecs', 'survival'],
+    imageUrl: getProjectImage('driftlands'),
+    images: [],
+    repositoryUrl: 'https://github.com/Aphrodine-wq/driftlands',
+    status: 'Beta',
+    year: '2025'
+  },
+  {
+    id: 'wos',
+    title: 'WOS',
+    category: 'Systems',
+    description: 'Custom Linux distribution built on Nobara — gaming, AI development, and cybersecurity in one OS.',
+    fullDescription: 'WOS is a custom Linux distribution based on Nobara (Fedora) designed for three workflows: gaming, AI/ML development, and cybersecurity. Ships with a custom AI-powered terminal shell (powered by a fine-tuned Qwen 2B model), pre-configured GPU drivers, and curated tooling for each domain.',
+    challenge: 'Switching between gaming, AI work, and security research means juggling different OS configs, driver versions, and tool sets. No existing distro optimizes for all three.',
+    solution: 'Built on Nobara\'s gaming-optimized Fedora base, then layered AI development tools and security frameworks on top. The AI terminal shell (liai) runs a locally fine-tuned 2B parameter model for instant command assistance.',
+    features: [
+      'AI-powered terminal shell (fine-tuned Qwen 2B)',
+      'Pre-configured AMD GPU drivers for gaming + ML',
+      'Curated cybersecurity toolkit',
+      'Custom system configuration and theming',
+      'Omarchy desktop environment'
+    ],
+    techStack: ['Rust', 'Python', 'Bash'],
+    tags: ['linux', 'os', 'gaming'],
+    imageUrl: getProjectImage('wos'),
+    images: [],
+    repositoryUrl: 'https://github.com/Aphrodine-wq/WOS',
+    status: 'Beta',
     year: '2025'
   }
 ];
@@ -182,6 +186,7 @@ export const CategoryIcon = ({ category }: { category: string }) => {
     case 'Game Dev': return <Gamepad size={14} />;
     case 'Web': return <Monitor size={14} />;
     case 'Tools': return <Wrench size={14} />;
+    case 'AI': return <BrainCircuit size={14} />;
     default: return <Terminal size={14} />;
   }
 };
@@ -226,6 +231,14 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
     case 'PostgreSQL': return <Database size={size} className={`${colorClass} ${baseClass}`} />;
     case 'AWS': return <Cloud size={size} className={`${colorClass} ${baseClass}`} />;
     case 'WebGL': return <Box size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'Kotlin': return <Code2 size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'React Native': return <Smartphone size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'Rust': return <Cpu size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'Bevy': return <Gamepad size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'PyTorch': return <BrainCircuit size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'Llama': return <BrainCircuit size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'RunPod': return <Cloud size={size} className={`${colorClass} ${baseClass}`} />;
+    case 'Bash': return <Terminal size={size} className={`${colorClass} ${baseClass}`} />;
     default: return <Code2 size={size} className={`${colorClass} ${baseClass}`} />;
   }
 };
@@ -267,6 +280,8 @@ const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => 
             {project.category === 'Systems' && <Cpu size={32} />}
             {project.category === 'Tools' && <Terminal size={32} />}
             {project.category === 'Web' && <Layout size={32} />}
+            {project.category === 'AI' && <BrainCircuit size={32} />}
+            {project.category === 'Game Dev' && <Gamepad size={32} />}
           </div>
           {/* Mock UI Lines */}
           <div className="space-y-2 mt-4 w-24 opacity-50">

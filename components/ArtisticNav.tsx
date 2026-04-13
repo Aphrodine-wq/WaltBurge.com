@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Home, User, Lightbulb, Briefcase, Code, Mail, Sparkles } from 'lucide-react';
+import { Home, User, Lightbulb, Briefcase, Code, Mail, Sparkles, BookOpen } from 'lucide-react';
 import { SectionId } from '../types';
 
 export const ArtisticNav: React.FC = () => {
@@ -12,6 +12,7 @@ export const ArtisticNav: React.FC = () => {
         { id: SectionId.PROJECTS, label: 'Projects', icon: Briefcase },
         { id: SectionId.SKILLS, label: 'Skills', icon: Code },
         { id: 'marketplace', label: 'Shop', icon: Sparkles },
+        { id: SectionId.BLOG, label: 'Blog', icon: BookOpen },
         { id: SectionId.CONTACT, label: 'Contact', icon: Mail },
     ];
 

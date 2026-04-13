@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   title: string;
-  category: 'Systems' | 'Web' | 'Game Dev' | 'Tools';
+  category: 'Systems' | 'Web' | 'Game Dev' | 'Tools' | 'AI';
   description: string;
   techStack: string[];
   tags: string[];
@@ -23,5 +23,17 @@ export enum SectionId {
   ABOUT = 'about',
   PROJECTS = 'projects',
   SKILLS = 'skills',
+  BLOG = 'blog',
   CONTACT = 'contact'
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content?: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  featured?: boolean;
 }
