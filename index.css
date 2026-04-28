@@ -21,7 +21,14 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     background-color: rgb(var(--bg-deep));
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 7rem;
+    }
   }
 
   @media (max-width: 768px) {

@@ -18,7 +18,7 @@ export const Hero: React.FC = () => {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base"
     >
       {/* Lightweight geometric accents — no blur, no blend modes */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block">
         <div className="absolute top-[20%] left-[10%] w-64 h-64 border border-white/10 rounded-full" />
         <div className="absolute bottom-[30%] right-[15%] w-48 h-48 border border-white/10 rounded-full" />
       </div>
@@ -58,11 +58,11 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-6 items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-6 items-stretch sm:items-center w-full sm:w-auto px-4 sm:px-0"
         >
           <button
             onClick={scrollToProjects}
-            className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 rounded-full transition-colors duration-300"
+            className="group relative px-8 py-4 bg-white/10 hover:bg-white/15 rounded-full transition-colors duration-300"
           >
             <span className="relative z-10 font-sans text-sm tracking-widest uppercase text-brand-primary group-hover:text-white transition-colors">
               View Portfolio
@@ -71,9 +71,9 @@ export const Hero: React.FC = () => {
 
           <button
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative px-8 py-4 rounded-full transition-colors duration-300"
+            className="group relative px-8 py-4 rounded-full border border-white/20 hover:border-white/40 transition-colors duration-300"
           >
-            <span className="font-sans text-sm tracking-widest uppercase text-brand-primary/60 group-hover:text-brand-primary transition-colors border-b border-transparent group-hover:border-brand-primary/40 pb-1">
+            <span className="font-sans text-sm tracking-widest uppercase text-brand-primary/80 group-hover:text-brand-primary transition-colors">
               Contact Me
             </span>
           </button>
