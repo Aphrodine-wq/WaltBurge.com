@@ -157,7 +157,31 @@ const renderMarkdown = (md: string): React.ReactNode[] => {
 export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, onTagClick }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [post.id]);
+
+    // Swap document title + meta/OG description to this post while it's open,
+    // so a shared /blog/<slug> link previews the article, not the homepage.
+    const prevTitle = document.title;
+    document.title = `${post.title} — Walt Burge`;
+
+    const setMeta = (selector: string, value: string) => {
+      const el = document.querySelector<HTMLMetaElement>(selector);
+      const prev = el?.getAttribute('content') ?? null;
+      el?.setAttribute('content', value);
+      return () => { if (el && prev !== null) el.setAttribute('content', prev); };
+    };
+    const restorers = [
+      setMeta('meta[name="description"]', post.excerpt),
+      setMeta('meta[property="og:title"]', post.title),
+      setMeta('meta[property="og:description"]', post.excerpt),
+      setMeta('meta[name="twitter:title"]', post.title),
+      setMeta('meta[name="twitter:description"]', post.excerpt),
+    ];
+
+    return () => {
+      document.title = prevTitle;
+      restorers.forEach(restore => restore());
+    };
+  }, [post.id, post.title, post.excerpt]);
 
   return (
     <div className="min-h-screen bg-brand-base text-brand-primary pt-16 md:pt-20 animate-fade-in">

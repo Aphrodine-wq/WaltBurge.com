@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { SectionId, BlogPost } from '../types';
 
-const posts: BlogPost[] = [
+export const posts: BlogPost[] = [
   {
     id: 'tessera-markdown-native-agents',
     title: 'Tessera: Why I\'m Writing AI Agents in Markdown',
