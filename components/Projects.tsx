@@ -132,6 +132,29 @@ export const projects: Project[] = [
     year: '2025'
   },
   {
+    id: 'tessera',
+    title: 'Tessera',
+    category: 'AI',
+    description: 'A markdown-native programming language for AI agents — write agents in .t.md files, verify them formally before they run, and execute them on real LLM, LangChain, and PyTorch backends.',
+    fullDescription: 'Tessera is a programming language where the markdown file IS the program. Each .t.md file is simultaneously a runnable agent, a browsable Obsidian note, and a formally-verifiable safety boundary. Agents are written as substrate-tagged code fences — logic, agent, memory, prompt, tool, neural — and the compiler enforces the boundaries between them. It lives at the center of a five-system ecosystem: AEON verifies the agent, Synapse persists its memory, Obsidian is where it\'s written, and Ollama/Anthropic/LangChain/PyTorch do the heavy lifting.',
+    challenge: 'Building an AI agent shouldn\'t require five frameworks, three vendor SDKs, and a vector database to babysit. Agent behavior ends up scattered across files and prompt strings nobody can read or verify — and there\'s no way to prove an agent is safe before you run it in production.',
+    solution: 'Make markdown the substrate. A .t.md file compiles to a Substrate IR that AEON\'s 73 engines verify the same way they verify Python or Rust — catching capability leaks and PII egress before the agent ever runs. Substrate fences declare named modes of thinking; capability grants in frontmatter propagate to every region and are enforced at compile, spawn, and runtime.',
+    features: [
+      'Write agents in .t.md files — markdown is the source of truth',
+      '9 shipped substrates: logic, agent, 4 memory kinds, prompt, tool, neural',
+      'Formal verification via AEON before the agent runs (73 engines)',
+      'Capability gating enforced at compile, spawn, and runtime',
+      'Synapse-backed semantic memory + Obsidian vault discovery',
+      'Cognitive traits — installable reasoning postures as first-class code'
+    ],
+    techStack: ['Python', 'PyTorch', 'Ollama', 'LangChain', 'Markdown'],
+    tags: ['agent-language', 'compiler', 'ai-platform'],
+    imageUrl: getProjectImage('tessera'),
+    images: [],
+    status: 'Beta',
+    year: '2026'
+  },
+  {
     id: 'driftlands',
     title: 'Driftlands',
     category: 'Game Dev',

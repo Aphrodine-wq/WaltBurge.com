@@ -12,12 +12,13 @@ import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
 import { Marketplace } from './components/Marketplace';
+import { BlogPostDetail } from './components/BlogPostDetail';
 import { TooltipProvider } from './components/ui/tooltip';
 import { ContentSkeleton } from './components/ui/content-skeleton';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Code2, Menu, X } from 'lucide-react';
 import { Button } from './components/ui/button';
-import { SectionId, Project } from './types';
+import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
 const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
@@ -30,6 +31,7 @@ const MobileBar: React.FC = () => null;
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   const handleProjectClick = (project: Project) => {
@@ -60,6 +62,18 @@ function App() {
               onTechClick={handleTechClickFromDetail}
             />
           </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
+  if (selectedPost) {
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans">
+          <CustomCursor />
+          <BlogPostDetail post={selectedPost} onBack={() => setSelectedPost(null)} />
           <Analytics />
         </div>
       </TooltipProvider>
@@ -97,7 +111,7 @@ function App() {
               </ErrorBoundary>
 
               <Marketplace />
-              <Blog />
+              <Blog onPostClick={setSelectedPost} />
             </main>
             <Contact />
             <Footer />
