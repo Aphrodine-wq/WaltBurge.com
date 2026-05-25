@@ -34,19 +34,27 @@ export const About: React.FC = () => {
               01. About Me
             </span>
             <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-8 leading-[0.9]">
-              Engineering <br />
-              <span className="text-brand-secondary/50">From First</span> <br />
-              Principles.
+              From the <br />
+              <span className="text-brand-secondary/50">Job Site to</span> <br />
+              the Codebase.
             </h2>
 
             <div className="grid grid-cols-2 gap-4 mt-8 mx-auto md:mx-0 max-w-sm md:max-w-none">
               <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
-                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">5+</div>
-                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Years Experience</div>
+                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">7mo</div>
+                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Self-Taught</div>
               </div>
               <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">12+</div>
-                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Shipped Projects</div>
+                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Projects Shipped</div>
+              </div>
+              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">18K+</div>
+                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">AI Training Examples</div>
+              </div>
+              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">1</div>
+                <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Custom LLM Trained</div>
               </div>
             </div>
           </motion.div>
@@ -59,7 +67,7 @@ export const About: React.FC = () => {
               className="p-6 md:p-10 rounded-2xl border-l-4 border-l-brand-accent bg-brand-base/30 border border-brand-primary/5 w-full"
             >
               <p className="text-lg md:text-2xl leading-relaxed font-light text-brand-secondary text-center md:text-left">
-                "I don't just use tools; I build them. My engineering philosophy is rooted in a deep understanding of the entire stack -- from <span className="text-brand-primary font-medium">kernel-level memory management</span> to <span className="text-brand-primary font-medium">distributed AI architectures</span>."
+                "I came up on job sites, not in a CS program. I wrote my first line of code about seven months ago. Since then I've shipped a <span className="text-brand-primary font-medium">contractor marketplace</span>, trained a <span className="text-brand-primary font-medium">custom AI model</span> for construction estimation, and built the tools I use to build everything else."
               </p>
             </motion.div>
 
@@ -71,9 +79,9 @@ export const About: React.FC = () => {
                   <div className="w-px h-full bg-brand-primary/10 my-2" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">The Systems Approach</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">The Construction Edge</h3>
                   <p className="text-sm md:text-base text-brand-secondary leading-relaxed font-light">
-                    My journey began with a frustration: modern abstractions often obscure how computers actually work. This "bare-metal" education gave me a unique perspective on performance optimization -- knowing the cost of every cycle and allocation allows me to write high-level code that is incredibly efficient.
+                    Years of construction taught me how to scope a job, sequence the work, and finish what I start -- and that a thing is only done when it holds up under load. I build software the same way I built houses: estimate honestly, sequence the work, and ship something real. It's also why my construction-tech actually fits the trade -- I've lived the problems I'm solving.
                   </p>
                 </div>
               </div>
@@ -84,9 +92,9 @@ export const About: React.FC = () => {
                   <div className="w-px h-full bg-brand-primary/10 my-2" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">AI & The Future</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">Self-Taught, Production-First</h3>
                   <p className="text-sm md:text-base text-brand-secondary leading-relaxed font-light">
-                    Today, I apply that systems mindset to Artificial Intelligence. I'm not just integrating APIs; I'm architecting <strong className="text-brand-primary">Agentic Workflows</strong> and <strong className="text-brand-primary">RAG Pipelines</strong> that function as reliable system components. Whether it's optimizing inference latency or designing context-aware memory structures, I treat AI models as deterministic parts of a larger, robust machine.
+                    I didn't learn from a curriculum -- I learned by shipping. My first real project had a real client (<strong className="text-brand-primary">MHP Construction</strong> in Oxford, MS) using it in production. I'd rather build the hard thing for someone who needs it tomorrow than work through tutorials. That pressure is how I went from zero to a working <strong className="text-brand-primary">AI estimation platform</strong> in months.
                   </p>
                 </div>
               </div>
@@ -96,9 +104,9 @@ export const About: React.FC = () => {
                   <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-green-400 font-bold font-mono text-sm">03</div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">Creative Engineering</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">Own Your Tools</h3>
                   <p className="text-sm md:text-base text-brand-secondary leading-relaxed font-light">
-                    Code is ultimately a creative medium. My background in <strong className="text-brand-primary">Game Development</strong> drives me to build interfaces that feel alive. I obsess over micro-interactions, frame rates, and user feedback loops. I believe software should not only work perfectly but also feel powerful to use.
+                    When the tool I needed didn't exist, I built it. Instead of renting an AI API, I trained my own model -- <strong className="text-brand-primary">ConstructionAI</strong>. Instead of wiring up five agent frameworks, I built a language for it -- <strong className="text-brand-primary">Tessera</strong>. I'd rather own the thing I depend on than be locked into someone else's roadmap.
                   </p>
                 </div>
               </div>
@@ -110,7 +118,7 @@ export const About: React.FC = () => {
               className="pt-8 border-t border-brand-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4 w-full text-center sm:text-left"
             >
               <div className="font-mono text-xs text-brand-secondary uppercase tracking-widest">
-                Based in Global / Remote
+                Based in North Mississippi
               </div>
               <div className="font-mono text-xs text-brand-secondary uppercase tracking-widest">
                 Open for collaborations

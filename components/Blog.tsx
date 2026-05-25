@@ -264,6 +264,31 @@ Because posture should be **inspectable and shareable**, not buried in a prompt 
     date: '2026-04-10',
     readTime: '8 min',
     tags: ['Career', 'Construction'],
+    content: `I came up on job sites, not in a CS program. About seven months ago I wrote my first line of code. Since then I've shipped a contractor marketplace, trained a custom AI model for construction estimation, and built the tools I use to build everything else. People hear that and assume the jump from construction to software was huge. It wasn't. The two are closer than anyone gives them credit for.
+
+## A house and a codebase are the same problem
+
+Framing a house is systems thinking. You sequence the work — you can't hang drywall before the rough-in passes inspection, you can't set trim before the floors go down. You estimate honestly, because a bad number doesn't just cost you margin, it costs you the next job. And you build to hold up under load, because a thing that looks finished but fails the first time it's stressed isn't finished.
+
+Software is the same. Dependencies are sequencing. Architecture is load-bearing. A feature that demos well but falls over with real users is a wall that isn't tied into the frame. I didn't have to learn that mindset when I started coding — I'd been living it for years. I just had to learn the syntax.
+
+## What construction gave me that a bootcamp wouldn't
+
+**You finish what you start.** On a site, an unfinished job is money sitting still and a client who can't move in. That instinct — close the loop, don't leave it framed and walk away — is rarer in software than it should be. Half-built features rot.
+
+**You respect the cost of every decision.** When materials and labor come out of a fixed bid, you don't over-engineer. You build the thing that solves the problem and holds up, not the thing that's clever. That translates directly: the minimal solution that fully solves it beats the elegant abstraction nobody asked for.
+
+**You've actually lived the problem.** This is the big one. My construction-tech isn't built from a product manager's user-interview notes. I've stood in the spot where a contractor loses a bid because his estimate took three days and the other guy's took an hour. That's why FairTradeWorker and ConstructionAI fit the trade — I'm not guessing at the pain.
+
+## How I actually learned
+
+Not through tutorials. I learned by shipping, with real stakes. My first serious project had a real client — a contractor in Oxford, Mississippi — using it in production. Nothing teaches you faster than someone depending on the thing you built that morning.
+
+I treated AI as a cofounder from day one. Not autocomplete — a partner I could think out loud with, that would catch what I missed and push back when I was wrong. That's a different relationship than most developers have with their tools, and it's the reason a guy off the job site could go from zero to a working AI estimation platform in months.
+
+> The transition wasn't a leap. It was the same work — build something real, make it hold up, finish it — in a new material.
+
+I'm still early. Seven months is nothing. But I'd put the instincts I brought from the trade up against a CS degree any day, because the hard part of building software was never the syntax. It was knowing what "done" means and refusing to ship anything less.`,
   },
   {
     id: 'fine-tuning-construction-llm',
@@ -272,6 +297,42 @@ Because posture should be **inspectable and shareable**, not buried in a prompt 
     date: '2026-04-06',
     readTime: '12 min',
     tags: ['AI', 'ConstructionAI'],
+    content: `Ask a general-purpose LLM to estimate a bathroom remodel and it will give you a confident, beautifully-formatted answer that's wrong. It hallucinates line items, invents prices, and has no idea that demo and haul-off is a real cost or that tile labor is priced by the square foot in your market and not in California. Generic models don't understand construction pricing at the line-item level, because nobody trained them to. So I did.
+
+## Why a custom model at all
+
+The obvious move is to wrap GPT or Claude in a prompt and call it estimation. I don't build that way — I'd rather own the thing I depend on than rent it and be locked into someone else's roadmap and someone else's per-token bill. A fine-tuned model I control is cheaper at scale, runs where I want it, and gets better every time I improve the data. So ConstructionAI is a fine-tune of **Llama 3.1 8B**, built specifically to produce line-item construction estimates.
+
+## The data is the whole game
+
+Fine-tuning is easy. Getting the data right is the entire project. The first version trained on **18,000+ curated examples** covering residential and commercial trades — each one a realistic job mapped to a structured estimate with material quantities, labor hours, and market-adjusted pricing.
+
+Hand-writing that volume is impossible, so the pipeline leans on distillation: generate synthetic estimation examples from larger models, then curate hard. The curation is where the quality lives — bad synthetic data teaches the model to hallucinate more confidently, which is worse than not training at all.
+
+\`\`\`
+raw trade knowledge + real estimates
+        │  distill from larger models
+        ▼
+   synthetic examples (hundreds of thousands)
+        │  curate, dedupe, validate against real prices
+        ▼
+   training set  →  fine-tune Llama 3.1 8B
+        │
+        ▼
+   eval against held-out real jobs
+\`\`\`
+
+## Deployment: cheap enough to be free
+
+The model runs on **RunPod Serverless** at roughly **$0.002 per estimate**. That number matters more than it looks. At a fifth of a cent, estimation is effectively free to the product — I can put it everywhere in FairTradeWorker and MsHomePros without thinking about cost per call. A homeowner gets an instant fair-price read before a single contractor bids. A contractor gets a professional line-item estimate out the door in seconds instead of three days. That speed is the difference between winning and losing the job.
+
+## Where it's going
+
+The current pipeline is scaling toward **500K+ training examples** — bigger, cleaner, with a stronger base model and tighter curation. The eval bar is honest accuracy against held-out real jobs, not vibes. I bet on going over 90% once; I lost that bet at ~88% and learned exactly which trades the model was weakest on. That's the loop: ship, measure against reality, fix the data, retrain.
+
+> No existing AI understood construction pricing. The fix wasn't a better prompt — it was owning the model and the data behind it.
+
+The lesson that generalizes past construction: when the tool you need doesn't exist, the answer isn't to contort a general model into pretending. It's to build the specialist and own it.`,
   },
   {
     id: 'building-with-ai-not-around-it',
@@ -280,6 +341,31 @@ Because posture should be **inspectable and shareable**, not buried in a prompt 
     date: '2026-03-28',
     readTime: '6 min',
     tags: ['AI', 'Development'],
+    content: `Most developers use AI as autocomplete. They type, it finishes the line, they move on. That's useful, and it's also leaving most of the value on the table. I use AI as a cofounder — something that shapes architecture, catches what I miss, and pushes back when I'm wrong. The difference isn't the model. It's the relationship.
+
+## Autocomplete vs. a thinking partner
+
+Autocomplete answers the question "what comes next on this line?" A cofounder answers "is this the right line at all?" When I'm wiring an endpoint, I don't just want the boilerplate — I want the thing that says *this will race under concurrent writes* or *that dependency has a known footgun*. The model knows enough to catch those. You only get that value if you let it into the decision, not just the typing.
+
+## Let it shape architecture, not just fill blanks
+
+The fear is that letting AI shape architecture means losing the plot — ending up with code you don't understand. The opposite happens if you do it right. I think out loud with it before I build: here's the problem, here are two approaches, here's what breaks under load. It argues. I argue back. By the time I write code, the design has been stress-tested by a second mind that's read more systems than I ever will.
+
+That only works if the AI is wired to disagree. An assistant that agrees with everything is autocomplete with extra steps. I deliberately set mine up to assume I might be wrong, to verify before committing, and to scan across my other projects for patterns I'm not seeing in the one I'm staring at.
+
+## The traits that make it a cofounder
+
+The postures I lean on most:
+
+- **Productive doubt** — assume the first answer is wrong, check it, *then* commit. Stops confident mistakes from shipping.
+- **Cross-project insight** — pull the pattern from the marketplace work when I'm stuck on the AI platform. The connection I'd miss is usually the one that solves it.
+- **Compulsive verification** — before anything is called "done," enumerate the failure modes and check each edge. Construction taught me that; the AI enforces it.
+
+I cared about this enough that I built it into a language — Tessera lets you declare these reasoning postures as first-class, inspectable code instead of burying them in a prompt. But you don't need a language to start. You need to stop treating the model like a faster keyboard.
+
+> The question isn't whether you use AI. It's whether you let it into the part of the work that actually matters — the decisions.
+
+I'm a guy who learned to code seven months ago and shipped a marketplace, a custom LLM, and an agent language. I did not do that by typing faster. I did it by building *with* a cofounder, not around a tool.`,
   },
   {
     id: 'three-node-ai-network',
