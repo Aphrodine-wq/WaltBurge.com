@@ -11,6 +11,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
+import { RelatedServices } from '@/components/RelatedServices';
 
 export const metadata: Metadata = {
   title: 'Custom AI & Machine Learning Development | Fine-Tuned Models & Automation',
@@ -326,6 +327,30 @@ export default function AISolutionsPage() {
           </h2>
           <FAQSection items={faqs} />
         </section>
+
+        {/* Related Services */}
+        <RelatedServices
+          items={[
+            {
+              title: 'Hire an AI Engineer',
+              href: '/services/hire-ai-engineer',
+              description:
+                'Looking for a dedicated AI engineer? Custom model training, LLM fine-tuning, and production deployment from a single engineer.',
+            },
+            {
+              title: 'Construction Technology',
+              href: '/services/construction-technology',
+              description:
+                'AI-powered construction estimation, contractor platforms, and digital job tracking built by a former builder.',
+            },
+            {
+              title: 'AI Developer for Hire',
+              href: '/services/ai-developer-for-hire',
+              description:
+                'Flexible engagement models — project-based, retainer, or embedded as a fractional AI engineer on your team.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">

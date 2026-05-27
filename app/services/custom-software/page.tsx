@@ -14,6 +14,7 @@ import {
   LifeBuoy,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
+import { RelatedServices } from '@/components/RelatedServices';
 
 export const metadata: Metadata = {
   title: 'Custom Software Development | Production-Grade Apps & Platforms',
@@ -380,6 +381,30 @@ export default function CustomSoftwarePage() {
           </h2>
           <FAQSection items={faqs} />
         </section>
+
+        {/* Related Services */}
+        <RelatedServices
+          items={[
+            {
+              title: 'AI & Machine Learning Solutions',
+              href: '/services/ai-solutions',
+              description:
+                'Add intelligent features to your software — chatbots, automation, custom-trained models, and AI-powered analytics.',
+            },
+            {
+              title: 'Web Design & Development',
+              href: '/services/web-design',
+              description:
+                'Professional, SEO-optimized websites for businesses in Oxford, MS and beyond. Mobile-friendly and built to convert.',
+            },
+            {
+              title: 'Construction Technology',
+              href: '/services/construction-technology',
+              description:
+                'AI-powered estimation, contractor platforms, and digital job tracking built by someone who has been on the job site.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">

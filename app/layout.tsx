@@ -82,6 +82,7 @@ const jsonLd = {
   name: 'Walt Burge',
   url: 'https://waltburge.com',
   email: 'jamesburge.mcm@gmail.com',
+  priceRange: '$$$$',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Oxford',
@@ -102,6 +103,57 @@ const jsonLd = {
     },
     { '@type': 'State', name: 'Mississippi' },
   ],
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: 34.3665,
+      longitude: -89.5193,
+    },
+    geoRadius: '150 mi',
+  },
+  additionalType: [
+    'https://www.wikidata.org/wiki/Q80968',
+    'https://www.wikidata.org/wiki/Q11660',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Software & AI Engineering Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom Software Development',
+          url: 'https://waltburge.com/services/custom-software',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI & Machine Learning Solutions',
+          url: 'https://waltburge.com/services/ai-solutions',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Construction Technology',
+          url: 'https://waltburge.com/services/construction-technology',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Web Design & Development',
+          url: 'https://waltburge.com/services/web-design',
+        },
+      },
+    ],
+  },
   sameAs: [
     'https://github.com/Aphrodine-wq',
     'https://www.facebook.com/walt.burge.1/',
@@ -119,6 +171,42 @@ const jsonLd = {
   ],
 };
 
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://waltburge.com/#business',
+  name: 'Walt Burge',
+  description: 'AI engineer and custom software developer in Oxford, Mississippi',
+  url: 'https://waltburge.com',
+  email: 'jamesburge.mcm@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Oxford',
+    addressRegion: 'MS',
+    postalCode: '38655',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 34.3665,
+    longitude: -89.5193,
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Oxford', containedInPlace: 'Mississippi' },
+    { '@type': 'City', name: 'Tupelo', containedInPlace: 'Mississippi' },
+    { '@type': 'City', name: 'Memphis', containedInPlace: 'Tennessee' },
+    { '@type': 'City', name: 'Jackson', containedInPlace: 'Mississippi' },
+    { '@type': 'State', name: 'Mississippi' },
+  ],
+  priceRange: '$$$$',
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -133,6 +221,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans">
           {children}

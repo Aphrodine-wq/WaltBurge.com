@@ -11,6 +11,7 @@ import {
   Hammer,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
+import { RelatedServices } from '@/components/RelatedServices';
 
 export const metadata: Metadata = {
   title: 'Construction Technology & AI Estimation | Contractor Platforms',
@@ -333,6 +334,30 @@ export default function ConstructionTechnologyPage() {
           </h2>
           <FAQSection items={faqs} />
         </section>
+
+        {/* Related Services */}
+        <RelatedServices
+          items={[
+            {
+              title: 'AI & Machine Learning Solutions',
+              href: '/services/ai-solutions',
+              description:
+                'Beyond construction — AI chatbots, workflow automation, custom model training, and intelligent tools for any industry.',
+            },
+            {
+              title: 'Custom Software Development',
+              href: '/services/custom-software',
+              description:
+                'Web apps, mobile apps, and SaaS platforms built for your specific business needs. Full-stack development in Oxford, MS.',
+            },
+            {
+              title: 'Hire an AI Engineer',
+              href: '/services/hire-ai-engineer',
+              description:
+                'Need dedicated AI engineering? Custom model training, LLM fine-tuning, and production AI systems built by a single engineer.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">

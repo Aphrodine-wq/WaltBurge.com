@@ -14,6 +14,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
+import { RelatedServices } from '@/components/RelatedServices';
 
 export const metadata: Metadata = {
   title: 'Web Design & Development | High-Performance Sites | Oxford, MS',
@@ -327,6 +328,30 @@ export default function WebDesignPage() {
           </h2>
           <FAQSection items={faqs} />
         </section>
+
+        {/* Related Services */}
+        <RelatedServices
+          items={[
+            {
+              title: 'Custom Software Development',
+              href: '/services/custom-software',
+              description:
+                'Need more than a website? Full-stack custom software — web apps, mobile apps, SaaS platforms, and internal tools.',
+            },
+            {
+              title: 'All Services',
+              href: '/services',
+              description:
+                'Explore the full range of services — AI engineering, custom software, construction technology, and web development.',
+            },
+            {
+              title: 'AI & Machine Learning Solutions',
+              href: '/services/ai-solutions',
+              description:
+                'Add intelligent features to your business — AI chatbots, automation, and custom-trained models.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">

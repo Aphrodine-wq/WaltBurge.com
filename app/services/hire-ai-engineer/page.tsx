@@ -10,8 +10,10 @@ import {
   Phone,
   Hammer,
   Rocket,
+  MapPin,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
+import { RelatedServices } from '@/components/RelatedServices';
 
 export const metadata: Metadata = {
   title: 'Hire an AI Engineer | Custom Models, LLMs & Intelligent Systems',
@@ -120,17 +122,22 @@ const faqs = [
   {
     question: 'How much does it cost to hire an AI engineer?',
     answer:
-      'It depends on the scope. A focused AI integration might start at $8,000-$15,000. A fully custom-trained model with dedicated infrastructure is a larger investment, typically $20,000-$75,000+. I scope every project honestly and give you a fixed price before work begins.',
+      'It depends on the scope. A focused AI integration might start at $8,000-$15,000. A fully custom-trained model with dedicated infrastructure is a larger investment, typically $20,000-$75,000+. I scope every project honestly and give you a fixed price before work begins. Based in Oxford, Mississippi, I offer competitive rates without Bay Area overhead — whether you are a local Mississippi business or a company searching for an AI engineer near me from anywhere in the country.',
   },
   {
     question: 'Can you work with my existing development team?',
     answer:
-      'Absolutely. I can operate as an embedded AI engineer on your team, owning the model training and AI architecture while your developers handle the rest of the application. I document everything and build clean APIs so integration is straightforward.',
+      'Absolutely. I can operate as an embedded AI engineer on your team, owning the model training and AI architecture while your developers handle the rest of the application. I document everything and build clean APIs so integration is straightforward. I work with teams across Mississippi, Tennessee, Alabama, and nationwide — both on-site and remotely.',
   },
   {
     question: 'How long does a typical AI project take?',
     answer:
       'A focused AI feature or integration typically takes 4-8 weeks. A custom-trained model with production deployment takes 8-16 weeks depending on data complexity and accuracy requirements. I set clear milestones so you see progress throughout.',
+  },
+  {
+    question: 'Where are you located?',
+    answer:
+      'I am based in Oxford, Mississippi and work with clients across the state, the Memphis metro area, and nationwide. For local clients in North Mississippi, in-person meetings and on-site work are standard. For clients elsewhere, I deliver the same quality through video calls, shared project management tools, and regular demos.',
   },
 ];
 
@@ -353,6 +360,27 @@ export default function HireAIEngineerPage() {
           </div>
         </section>
 
+        {/* Service Area */}
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
+          <div className="flex gap-4 items-start">
+            <div className="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border p-2.5 flex items-center justify-center shrink-0">
+              <MapPin className="w-6 h-6 text-brand-accent" />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tighter mb-4">
+                Service Area
+              </h2>
+              <p className="text-brand-secondary leading-relaxed text-lg">
+                Based in Oxford, Mississippi. Working with clients across Mississippi, Tennessee,
+                Alabama, and nationwide. Whether you are searching for an AI engineer near you in
+                the Memphis metro, a machine learning developer in Mississippi, or a freelance AI
+                engineer anywhere in the United States, I deliver production-grade AI systems
+                with the same commitment to quality regardless of location.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
           <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
@@ -360,6 +388,30 @@ export default function HireAIEngineerPage() {
           </h2>
           <FAQSection items={faqs} />
         </section>
+
+        {/* Related Services */}
+        <RelatedServices
+          items={[
+            {
+              title: 'AI & Machine Learning Solutions',
+              href: '/services/ai-solutions',
+              description:
+                'Full suite of AI solutions — chatbots, workflow automation, custom model training, and AI-powered estimation tools.',
+            },
+            {
+              title: 'Custom Software Development',
+              href: '/services/custom-software',
+              description:
+                'Production-grade web apps, mobile apps, and SaaS platforms. Full-stack development from architecture to deployment.',
+            },
+            {
+              title: 'AI Developer for Hire',
+              href: '/services/ai-developer-for-hire',
+              description:
+                'Flexible engagement models — project-based, retainer, or embedded on your team as a fractional AI engineer.',
+            },
+          ]}
+        />
 
         {/* CTA */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">

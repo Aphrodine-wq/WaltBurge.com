@@ -124,7 +124,7 @@ export default function AboutPage() {
                 About James Walton
               </h1>
               <p className="text-xl md:text-2xl text-brand-secondary font-light max-w-2xl">
-                Full-Stack Developer & AI Engineer | Oxford, Mississippi
+                Full-Stack Developer & AI Engineer based in Oxford, Mississippi — building custom AI models, production software, and construction technology for businesses locally and nationwide.
               </p>
               <div className="h-1 w-24 bg-brand-accent rounded-full" />
             </div>
