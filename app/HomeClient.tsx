@@ -4,6 +4,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Hero } from '../components/Hero';
+import { SocialProof } from '../components/SocialProof';
 import { About } from '../components/About';
 import { Expertise } from '../components/Expertise';
 import { Blog, posts as blogPosts } from '../components/Blog';
@@ -123,6 +124,7 @@ export default function HomeClient() {
 
           <main className="relative z-10 w-full overflow-x-hidden">
             <Hero />
+            <SocialProof />
             <About />
             <Expertise />
 

@@ -27,3 +27,4 @@ next-env.d.ts
 
 # playwright-cli session artifacts
 .playwright-cli/
+tsconfig.tsbuildinfo

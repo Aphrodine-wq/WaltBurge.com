@@ -10,6 +10,7 @@ import {
   Database,
   TrendingUp,
 } from 'lucide-react';
+import { FAQSection } from '@/components/FAQSection';
 
 export const metadata: Metadata = {
   title: 'AI & Machine Learning Solutions | Chatbots & Automation | Mississippi',
@@ -194,22 +195,36 @@ export default function AISolutionsPage() {
         </div>
 
         {/* Hero */}
-        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
-          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block">
-            AI & Machine Learning
-          </span>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-primary tracking-tighter leading-[0.95] mb-8">
-            AI & Machine Learning Solutions for Business
-          </h1>
-          <p className="text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed">
-            Intelligent automation, custom-trained models, and AI-powered tools that solve
-            real business problems. Not AI for the sake of AI — practical systems that save
-            time, cut costs, and give your team a measurable advantage.
-          </p>
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 relative">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-accent/[0.04] rounded-full blur-3xl" />
+          </div>
+          <div className="relative">
+            <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block">
+              AI & Machine Learning
+            </span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-primary tracking-tighter leading-[0.95] mb-8">
+              AI & Machine Learning Solutions for Business
+            </h1>
+            <p className="text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed">
+              Intelligent automation, custom-trained models, and AI-powered tools that solve
+              real business problems. Not AI for the sake of AI — practical systems that save
+              time, cut costs, and give your team a measurable advantage.
+            </p>
+          </div>
         </section>
 
+        {/* Divider */}
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="relative flex items-center">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-brand-border/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-brand-accent mx-4" />
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-brand-border/30" />
+          </div>
+        </div>
+
         {/* What We Offer */}
-        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
             01. Capabilities
           </span>
@@ -220,7 +235,7 @@ export default function AISolutionsPage() {
             {offerings.map((item) => (
               <div
                 key={item.title}
-                className="p-6 md:p-8 rounded-2xl border border-brand-border/40 bg-brand-surface/30"
+                className="p-6 md:p-8 rounded-2xl border border-brand-border/40 bg-brand-surface/30 hover:border-brand-accent/40 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-base border border-brand-border p-2.5 mb-5 flex items-center justify-center">
                   <item.icon className="w-6 h-6 text-brand-accent" />
@@ -252,7 +267,7 @@ export default function AISolutionsPage() {
             {provenResults.map((item) => (
               <div
                 key={item.label}
-                className="p-5 md:p-6 rounded-2xl bg-brand-surface/30 border border-brand-border/40 text-center"
+                className="p-5 md:p-6 rounded-2xl bg-brand-surface/30 border border-brand-border/40 text-center hover:border-brand-accent/40 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">
                   {item.metric}
@@ -271,19 +286,7 @@ export default function AISolutionsPage() {
           <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-8">
-            {faqs.map((faq) => (
-              <div
-                key={faq.question}
-                className="pb-8 border-b border-brand-border/20 last:border-b-0 last:pb-0"
-              >
-                <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-brand-secondary leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
+          <FAQSection items={faqs} />
         </section>
 
         {/* CTA */}
