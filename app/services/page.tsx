@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code2, Brain, HardHat, Globe } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Software Development Services | Strata Software Group | Oxford, MS',
+  title: 'Software Development Services | Walt Burge | Oxford, MS',
   description:
-    'Custom software development, AI & machine learning solutions, construction technology, and web design services from Strata Software Group in Oxford, Mississippi.',
+    'Custom software development, AI & machine learning solutions, construction technology, and web design services from Walt Burge in Oxford, Mississippi.',
   openGraph: {
-    title: 'Software Development Services | Strata Software Group | Oxford, MS',
+    title: 'Software Development Services | Walt Burge | Oxford, MS',
     description:
-      'Custom software development, AI & machine learning solutions, construction technology, and web design services from Strata Software Group in Oxford, Mississippi.',
+      'Custom software development, AI & machine learning solutions, construction technology, and web design services from Walt Burge in Oxford, Mississippi.',
   },
 };
 
@@ -96,7 +96,7 @@ export default function ServicesPage() {
         {/* Hero */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block">
-            Strata Software Group
+            Walt Burge
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-primary tracking-tighter leading-[0.95] mb-8">
             Software Development Services

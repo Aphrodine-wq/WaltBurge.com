@@ -14,11 +14,11 @@ import {
 export const metadata: Metadata = {
   title: 'AI & Machine Learning Solutions | Chatbots & Automation | Mississippi',
   description:
-    'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Strata Software Group in Oxford, Mississippi.',
+    'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Walt Burge in Oxford, Mississippi.',
   openGraph: {
     title: 'AI & Machine Learning Solutions | Chatbots & Automation | Mississippi',
     description:
-      'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Strata Software Group in Oxford, Mississippi.',
+      'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Walt Burge in Oxford, Mississippi.',
   },
 };
 
@@ -108,11 +108,11 @@ export default function AISolutionsPage() {
             serviceType: 'AI & Machine Learning Solutions',
             provider: {
               '@type': 'ProfessionalService',
-              name: 'Strata Software Group',
+              name: 'Walt Burge',
             },
             areaServed: { '@type': 'State', name: 'Mississippi' },
             description:
-              'AI chatbots, custom model training, workflow automation, and intelligent business tools built by Strata Software Group in Oxford, Mississippi.',
+              'AI chatbots, custom model training, workflow automation, and intelligent business tools built by Walt Burge in Oxford, Mississippi.',
           }),
         }}
       />

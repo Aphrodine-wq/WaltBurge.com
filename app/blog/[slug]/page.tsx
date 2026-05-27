@@ -66,8 +66,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       url: 'https://waltburge.com/about',
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'Strata Software Group',
+      '@type': 'Person',
+      name: 'Walt Burge',
       url: 'https://waltburge.com',
     },
     url: `https://waltburge.com/blog/${post.id}`,

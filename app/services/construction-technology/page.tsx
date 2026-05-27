@@ -85,7 +85,7 @@ export default function ConstructionTechnologyPage() {
             serviceType: 'Construction Technology',
             provider: {
               '@type': 'ProfessionalService',
-              name: 'Strata Software Group',
+              name: 'Walt Burge',
             },
             areaServed: { '@type': 'State', name: 'Mississippi' },
             description:
@@ -261,10 +261,9 @@ export default function ConstructionTechnologyPage() {
             <div>
               <p className="text-brand-secondary leading-relaxed text-lg mb-4">
                 Most construction software is built by people who have never been on a job
-                site. Strata Software Group is different. Our founder, James Walton, spent
-                years in construction before writing his first line of code — framing houses,
-                managing crews, and learning the trade from the ground up in Oxford,
-                Mississippi.
+                site. I'm different. I spent years in construction before writing my first
+                line of code — framing houses, managing crews, and learning the trade from
+                the ground up in Oxford, Mississippi.
               </p>
               <p className="text-brand-secondary leading-relaxed text-lg mb-4">
                 That background shapes everything we build. We know what it is like to

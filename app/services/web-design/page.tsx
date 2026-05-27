@@ -115,7 +115,7 @@ export default function WebDesignPage() {
             serviceType: 'Web Design & Development',
             provider: {
               '@type': 'ProfessionalService',
-              name: 'Strata Software Group',
+              name: 'Walt Burge',
             },
             areaServed: {
               '@type': 'City',
@@ -284,7 +284,7 @@ export default function WebDesignPage() {
             </div>
             <div>
               <p className="text-brand-secondary leading-relaxed text-lg mb-4">
-                Strata Software Group is based in Oxford, Mississippi. We understand the local
+                Walt Burge is based in Oxford, Mississippi. I understand the local
                 market because we are part of it. When we build your website, we optimize it
                 for the searches that matter to your business — "plumber in Oxford MS,"
                 "restaurant near Ole Miss," "contractor in Lafayette County."

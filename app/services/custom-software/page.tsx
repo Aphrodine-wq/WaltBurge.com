@@ -141,7 +141,7 @@ export default function CustomSoftwarePage() {
             serviceType: 'Custom Software Development',
             provider: {
               '@type': 'ProfessionalService',
-              name: 'Strata Software Group',
+              name: 'Walt Burge',
             },
             areaServed: { '@type': 'State', name: 'Mississippi' },
             description:

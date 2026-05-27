@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About James Walton | Strata Software Group | Oxford, MS',
+  title: 'About James Walton | Walt Burge | Oxford, MS',
   description:
-    'Founder of Strata Software Group in Oxford, Mississippi. Full-stack developer and AI engineer building construction technology and custom software.',
+    'Full-stack developer and AI engineer in Oxford, Mississippi. Building construction technology, custom software, and intelligent automation.',
   alternates: {
     canonical: 'https://waltburge.com/about',
   },
@@ -15,12 +15,7 @@ const personJsonLd = {
   '@type': 'Person',
   name: 'James Walton',
   alternateName: 'Walt Burge',
-  jobTitle: 'Founder & Developer',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Strata Software Group',
-    url: 'https://waltburge.com',
-  },
+  jobTitle: 'Full-Stack Developer & AI Engineer',
   url: 'https://waltburge.com/about',
   email: 'jamesburge.mcm@gmail.com',
   address: {
@@ -129,7 +124,7 @@ export default function AboutPage() {
                 About James Walton
               </h1>
               <p className="text-xl md:text-2xl text-brand-secondary font-light max-w-2xl">
-                Founder of Strata Software Group | Oxford, Mississippi
+                Full-Stack Developer & AI Engineer | Oxford, Mississippi
               </p>
               <div className="h-1 w-24 bg-brand-accent rounded-full" />
             </div>
@@ -267,7 +262,7 @@ export default function AboutPage() {
                     </h2>
                     <p className="text-sm md:text-base text-brand-secondary leading-relaxed font-light">
                       Based in Oxford, MS -- a small town with outsized ambition.
-                      Strata Software Group serves local businesses who need
+                      I serve local businesses who need
                       technology that actually works for them, and companies
                       nationwide who need serious engineering done right. Whether
                       it's a contractor down the street or a client across the

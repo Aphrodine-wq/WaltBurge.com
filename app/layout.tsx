@@ -24,13 +24,13 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL('https://waltburge.com'),
   title: {
-    template: '%s | Strata Software Group',
-    default: 'Strata Software Group | Custom Software & AI Solutions | Oxford, MS',
+    template: '%s | Walt Burge',
+    default: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
   },
   description:
-    'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Strata Software Group.',
+    'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Walt Burge.',
   keywords: [
-    'Strata Software Group',
+    'Walt Burge',
     'custom software development',
     'AI solutions',
     'web design',
@@ -45,23 +45,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://waltburge.com',
-    title: 'Strata Software Group | Custom Software & AI Solutions | Oxford, MS',
+    title: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
     description:
-      'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Strata Software Group.',
-    siteName: 'Strata Software Group',
+      'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Walt Burge.',
+    siteName: 'Walt Burge',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Strata Software Group',
+        alt: 'Walt Burge',
       },
     ],
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Strata Software Group | Custom Software & AI Solutions | Oxford, MS',
+    title: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
     description:
       'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi.',
     images: ['/og-image.png'],
@@ -75,12 +75,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Strata Software Group',
-  founder: {
-    '@type': 'Person',
-    name: 'James Walton',
-    alternateName: 'Walt Burge',
-  },
+  name: 'Walt Burge',
   url: 'https://waltburge.com',
   email: 'jamesburge.mcm@gmail.com',
   address: {
