@@ -53,6 +53,10 @@ export const Footer: React.FC = () => {
                         Products
                     </Link>
                     <span className="text-brand-border/50">|</span>
+                    <Link href="/products/fairtradeworker" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        FairTradeWorker
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
                     <Link href="/enterprise" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
                         Enterprise
                     </Link>

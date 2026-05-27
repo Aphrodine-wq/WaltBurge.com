@@ -270,6 +270,57 @@ Looking for: acquisition, investment, or strategic partnership with a constructi
 Portfolio: waltburge.com/products/construction-ai
 Full case study: waltburge.com/work/constructionai`}
         </Template>
+
+        {/* Template 12: Y Combinator Application Key Points */}
+        <Template title="Template 12: Y Combinator Application Key Points">
+{`Company: FairTradeWorker
+One-liner: AI-powered construction marketplace \u2014 fair prices for homeowners, fast estimates for contractors, fair rates for subcontractors.
+
+What do you make?
+A three-sided construction marketplace with AI-powered cost estimation. Homeowners get instant fair-price baselines. Contractors generate detailed estimates in seconds instead of days. Subcontractors access jobs directly at fair rates.
+
+Why this team?
+I came from construction \u2014 I worked the trades before teaching myself to code 7 months ago. I built every piece of this: the marketplace (Next.js + Kotlin), the mobile app (React Native, 30+ screens), and the AI model (fine-tuned Llama 3.1 8B on 18,000+ real construction projects). No cofounder needed because I am the entire engineering team.
+
+What\u2019s your moat?
+18,000+ curated construction training examples. That dataset took months to build through a custom distillation + curation pipeline. A competitor starting from scratch needs 6-12 months to match it. We\u2019re scaling to 500K+.
+
+Traction?
+Live in production with MHP Construction in Oxford, MS. AI model deployed on RunPod at $0.002/inference.
+
+Market size?
+US construction: $1.8 trillion. Estimation alone is a multi-billion dollar pain point \u2014 contractors lose thousands per month on slow, inaccurate bids.
+
+How do you make money?
+6 revenue streams: transaction fees, contractor subscriptions ($299/mo), premium listings, white-label licensing, ConstructionAI API, lead generation.
+
+What\u2019s your growth plan?
+1. Sign 100 contractors in Mississippi/Tennessee in 6 months via direct outreach
+2. Launch ConstructionAI as a standalone API for construction software companies
+3. White-label the marketplace platform to regional markets
+4. Raise seed to scale go-to-market nationally`}
+        </Template>
+
+        {/* Template 13: Procore / Buildertrend / Major Construction Tech Companies */}
+        <Template
+          title="Template 13: Procore / Buildertrend / Major Construction Tech Companies"
+          subject="AI construction estimation — 18K+ training examples, production deployed"
+        >
+{`Hi [Name],
+
+I built ConstructionAI \u2014 a fine-tuned Llama 3.1 8B that generates detailed construction cost estimates in seconds. It\u2019s trained on 18,000+ real project examples and runs in production at $0.002 per inference.
+
+It currently powers FairTradeWorker, a three-sided construction marketplace I built from scratch. But the estimation engine is modular and API-ready.
+
+I\u2019m exploring integration partnerships with established construction platforms. If [Procore/Buildertrend/etc.] is looking to add AI estimation capabilities, I\u2019d love to demo what we\u2019ve built.
+
+18,000 curated training examples is 6-12 months of work your team would skip.
+
+Best,
+Walt Burge
+waltburge.com/products/fairtradeworker
+waltburge.com/products/construction-ai`}
+        </Template>
       </div>
     </div>
   );

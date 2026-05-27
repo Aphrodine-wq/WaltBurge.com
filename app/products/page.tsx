@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Cpu } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Cpu, Users } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Products',
@@ -17,6 +17,19 @@ export const metadata: Metadata = {
 };
 
 const products = [
+  {
+    icon: Users,
+    title: 'FairTradeWorker',
+    href: '/products/fairtradeworker',
+    tagline: 'AI-Powered Construction Marketplace',
+    description:
+      'Three-sided construction marketplace with AI-powered estimation. Homeowners get fair prices. Contractors win more bids. Subcontractors get fair rates. QuickBooks-native payments, real-time bidding, 30+ screen mobile app. Live in production.',
+    stats: [
+      { value: '3-Sided', label: 'Marketplace' },
+      { value: '30+', label: 'App Screens' },
+      { value: '6', label: 'Revenue Streams' },
+    ],
+  },
   {
     icon: Cpu,
     title: 'ConstructionAI',
