@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import HomeClient from './HomeClient';
 
 export const metadata: Metadata = {
-  title: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
+  title: 'Walt Burge | AI Engineer & Custom Software Developer | Oxford, MS',
   description:
-    'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Walt Burge.',
+    'I build custom AI models, full-stack applications, and construction technology. Fine-tuned LLMs, contractor marketplaces, and production-grade software for businesses that need more than a template.',
   alternates: {
     canonical: 'https://waltburge.com',
   },

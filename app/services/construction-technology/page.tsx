@@ -13,13 +13,13 @@ import {
 import { FAQSection } from '@/components/FAQSection';
 
 export const metadata: Metadata = {
-  title: 'Construction Technology | AI Estimation & Contractor Platforms | Mississippi',
+  title: 'Construction Technology & AI Estimation | Contractor Platforms',
   description:
-    'AI-powered construction cost estimation, contractor management platforms, and digital job tracking built for Mississippi contractors by a former builder.',
+    'Custom AI model trained on 18,000+ real project examples generates construction estimates in seconds at $0.002 each. Contractor platforms and digital job tracking built by a former builder who writes code.',
   openGraph: {
-    title: 'Construction Technology | AI Estimation & Contractor Platforms | Mississippi',
+    title: 'Construction Technology & AI Estimation | Contractor Platforms | Walt Burge',
     description:
-      'AI-powered construction cost estimation, contractor management platforms, and digital job tracking built for Mississippi contractors by a former builder.',
+      'Custom AI model trained on 18,000+ real project examples generates construction estimates in seconds at $0.002 each. Contractor platforms and digital job tracking built by a former builder.',
   },
 };
 
@@ -188,6 +188,37 @@ export default function ConstructionTechnologyPage() {
               built by someone who has swung a hammer. Technology that fits how builders
               actually work — not how software companies think they should.
             </p>
+          </div>
+        </section>
+
+        {/* Results */}
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
+            Hard Numbers
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
+            Results from Production
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {[
+              { metric: '18,000+', label: 'Training Examples', description: 'Real project data curated and cleaned for model training' },
+              { metric: '$0.002', label: 'Per AI Estimate', description: 'Cost per generated estimate — fractions of a penny' },
+              { metric: 'Seconds', label: 'Per Estimate', description: 'vs. 3 days for a manual estimate under time pressure' },
+              { metric: 'Live', label: 'Production Client', description: 'Active contractor in Oxford, MS using it on real bids' },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="p-5 md:p-6 rounded-2xl bg-brand-surface/30 border border-brand-border/40 text-center hover:border-brand-accent/40 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">
+                  {item.metric}
+                </div>
+                <div className="text-[10px] md:text-xs text-brand-accent uppercase tracking-widest font-mono mb-2">
+                  {item.label}
+                </div>
+                <div className="text-xs text-brand-secondary">{item.description}</div>
+              </div>
+            ))}
           </div>
         </section>
 

@@ -3,133 +3,138 @@ import Link from 'next/link';
 import {
   ArrowLeft,
   ArrowRight,
-  Globe,
-  Smartphone,
-  Cloud,
-  Wrench,
-  Search,
-  Palette,
-  Code2,
+  Brain,
+  Cpu,
+  Workflow,
+  Mic,
+  Phone,
+  Hammer,
   Rocket,
-  LifeBuoy,
 } from 'lucide-react';
 import { FAQSection } from '@/components/FAQSection';
 
 export const metadata: Metadata = {
-  title: 'Custom Software Development | Production-Grade Apps & Platforms',
+  title: 'Hire an AI Engineer | Custom Models, LLMs & Intelligent Systems',
   description:
-    'Production-grade web applications, SaaS platforms, and mobile apps. From architecture to deployment — built to scale, not to demo. Custom software development by Walt Burge.',
+    'Looking to hire an AI engineer? I build custom AI models, fine-tune LLMs, and deploy intelligent systems for production. Based in Oxford, MS — working with clients nationwide.',
   openGraph: {
-    title: 'Custom Software Development | Production-Grade Apps & Platforms | Walt Burge',
+    title: 'Hire an AI Engineer | Custom Models, LLMs & Intelligent Systems | Walt Burge',
     description:
-      'Production-grade web applications, SaaS platforms, and mobile apps. From architecture to deployment — built to scale, not to demo.',
+      'Looking to hire an AI engineer? I build custom AI models, fine-tune LLMs, and deploy intelligent systems for production. Based in Oxford, MS — working with clients nationwide.',
+  },
+  alternates: {
+    canonical: 'https://waltburge.com/services/hire-ai-engineer',
   },
 };
 
-const offerings = [
+const capabilities = [
   {
-    icon: Globe,
-    title: 'Web Applications',
+    icon: Brain,
+    title: 'Custom Model Training',
     description:
-      'Full-featured web apps built with Next.js, React, and TypeScript. Responsive, fast, and designed around your business workflows.',
+      'Purpose-built AI models trained on your proprietary data. I handle data preparation, training pipeline, evaluation, and deployment — you own the model, not just an API subscription.',
   },
   {
-    icon: Smartphone,
-    title: 'Mobile Apps',
+    icon: Cpu,
+    title: 'LLM Fine-Tuning',
     description:
-      'Cross-platform mobile applications using React Native and Kotlin. Deliver a native experience on both iOS and Android from a single codebase.',
+      'Fine-tuned language models that understand your domain, your terminology, and your edge cases. Not prompt engineering on top of GPT — actual model training that produces a deployable asset.',
   },
   {
-    icon: Cloud,
-    title: 'SaaS Platforms',
+    icon: Workflow,
+    title: 'AI-Powered Features & Products',
     description:
-      'Multi-tenant SaaS products with user management, billing integration, analytics dashboards, and the scalability to grow with your customer base.',
+      'Intelligent features embedded into your existing software — smart search, automated classification, predictive analytics, and natural language interfaces that make your product smarter.',
   },
   {
-    icon: Wrench,
-    title: 'Internal Tools',
+    icon: Mic,
+    title: 'Intelligent Automation',
     description:
-      'Custom admin panels, CRMs, inventory systems, and workflow automation tools that eliminate manual processes and reduce overhead.',
+      'AI systems that automate the expensive, repetitive work in your business. Document processing, data extraction, estimation, customer routing — anything with a pattern, AI can learn.',
+  },
+];
+
+const proofPoints = [
+  {
+    metric: '18,000+',
+    label: 'Training Examples',
+    description: 'Custom dataset curated for ConstructionAI fine-tuned model',
+  },
+  {
+    metric: '$0.002',
+    label: 'Per Estimate',
+    description: 'Cost per AI-generated construction estimate in production',
+  },
+  {
+    metric: 'Seconds',
+    label: 'Not Days',
+    description: 'Estimate generation time vs. 3 days manually',
+  },
+  {
+    metric: 'Live',
+    label: 'In Production',
+    description: 'Active clients using AI systems on real business data',
   },
 ];
 
 const processSteps = [
   {
-    icon: Search,
+    icon: Phone,
     step: '01',
-    title: 'Discovery',
+    title: 'Discovery Call',
     description:
-      'We start by understanding your business, users, and goals. No assumptions — just clear questions and honest scoping.',
+      'We talk about your business, your data, and what you are trying to achieve. I will tell you honestly whether AI is the right solution — and if it is, what kind of model and infrastructure you need.',
   },
   {
-    icon: Palette,
+    icon: Hammer,
     step: '02',
-    title: 'Design',
+    title: 'Architecture & Build',
     description:
-      'Wireframes, prototypes, and user flows before a single line of code is written. You see exactly what you are getting.',
-  },
-  {
-    icon: Code2,
-    step: '03',
-    title: 'Development',
-    description:
-      'Agile sprints with regular demos. You stay in the loop and can course-correct as the product takes shape.',
+      'I design the data pipeline, train or fine-tune the model, build the integration layer, and test it against real-world scenarios. You see working demos throughout, not just a final reveal.',
   },
   {
     icon: Rocket,
-    step: '04',
-    title: 'Launch',
+    step: '03',
+    title: 'Deploy & Iterate',
     description:
-      'Thorough testing, performance optimization, and a smooth deployment to production. Your software goes live with confidence.',
+      'The system goes live in production with monitoring, logging, and a feedback loop. AI gets better with real data — I stick around to tune performance and handle edge cases as they surface.',
   },
-  {
-    icon: LifeBuoy,
-    step: '05',
-    title: 'Support',
-    description:
-      'Ongoing maintenance, monitoring, and feature development. We do not disappear after launch — your software keeps improving.',
-  },
-];
-
-const technologies = [
-  'Next.js',
-  'React',
-  'React Native',
-  'TypeScript',
-  'Kotlin',
-  'Spring Boot',
-  'PostgreSQL',
-  'Node.js',
-  'Tailwind CSS',
-  'Vercel',
-  'Docker',
-  'REST / GraphQL',
 ];
 
 const faqs = [
   {
-    question: 'How much does custom software cost?',
+    question: 'What kind of AI engineer are you?',
     answer:
-      'Every project is different, but most custom software engagements start in the $5,000-$25,000 range for an MVP. We scope every project before quoting, so you know exactly what you are paying for. There are no hidden fees and no surprise invoices.',
+      'I am a full-stack AI engineer — I handle everything from data preparation and model training to building the web application that wraps the model and deploying it to production. You do not need to hire a separate data scientist, backend engineer, and frontend developer. I cover the full pipeline.',
   },
   {
-    question: 'How long does it take to build custom software?',
+    question: 'Do you build AI wrappers or actual custom models?',
     answer:
-      'A focused MVP typically takes 6-12 weeks from kickoff to launch. Larger platforms with complex integrations can take 3-6 months. We break every project into milestones so you see measurable progress along the way.',
+      'Both, depending on what the problem requires. If a well-prompted API call solves your problem, I will tell you that and save you money. But my specialty is custom model training and fine-tuning — building AI that understands your specific domain better than any generic model can.',
   },
   {
-    question: 'What technologies do you use?',
+    question: 'What industries have you built AI for?',
     answer:
-      'Our core stack is Next.js, React, TypeScript, and PostgreSQL for web applications, and React Native or Kotlin for mobile. We choose technologies based on what is right for the project, not what is trendy.',
+      'Construction (custom fine-tuned estimation model with 18,000+ training examples), insurance (AI-powered voice systems), and general business automation. The techniques transfer across industries — if your business has data and repetitive expert decisions, AI can learn them.',
   },
   {
-    question: 'Do you offer ongoing support?',
+    question: 'How much does it cost to hire an AI engineer?',
     answer:
-      'Yes. Every project includes a support period after launch, and we offer monthly maintenance plans for businesses that need ongoing development, monitoring, and updates. Your software is never orphaned.',
+      'It depends on the scope. A focused AI integration might start at $8,000-$15,000. A fully custom-trained model with dedicated infrastructure is a larger investment, typically $20,000-$75,000+. I scope every project honestly and give you a fixed price before work begins.',
+  },
+  {
+    question: 'Can you work with my existing development team?',
+    answer:
+      'Absolutely. I can operate as an embedded AI engineer on your team, owning the model training and AI architecture while your developers handle the rest of the application. I document everything and build clean APIs so integration is straightforward.',
+  },
+  {
+    question: 'How long does a typical AI project take?',
+    answer:
+      'A focused AI feature or integration typically takes 4-8 weeks. A custom-trained model with production deployment takes 8-16 weeks depending on data complexity and accuracy requirements. I set clear milestones so you see progress throughout.',
   },
 ];
 
-export default function CustomSoftwarePage() {
+export default function HireAIEngineerPage() {
   return (
     <>
       {/* JSON-LD: Service */}
@@ -139,14 +144,15 @@ export default function CustomSoftwarePage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Service',
-            serviceType: 'Custom Software Development',
+            serviceType: 'AI Engineering & Custom Model Development',
             provider: {
               '@type': 'ProfessionalService',
               name: 'Walt Burge',
+              url: 'https://waltburge.com',
             },
-            areaServed: { '@type': 'State', name: 'Mississippi' },
+            areaServed: { '@type': 'Country', name: 'United States' },
             description:
-              'Custom web applications, mobile apps, and SaaS platforms built for businesses in Oxford, Mississippi and nationwide.',
+              'Custom AI model training, LLM fine-tuning, and intelligent automation systems. Full-stack AI engineering from data preparation to production deployment.',
           }),
         }}
       />
@@ -174,8 +180,8 @@ export default function CustomSoftwarePage() {
               {
                 '@type': 'ListItem',
                 position: 3,
-                name: 'Custom Software Development',
-                item: 'https://waltburge.com/services/custom-software',
+                name: 'Hire an AI Engineer',
+                item: 'https://waltburge.com/services/hire-ai-engineer',
               },
             ],
           }),
@@ -223,7 +229,7 @@ export default function CustomSoftwarePage() {
               Services
             </Link>
             <span>/</span>
-            <span className="text-brand-primary">Custom Software Development</span>
+            <span className="text-brand-primary">Hire an AI Engineer</span>
           </nav>
         </div>
 
@@ -234,54 +240,16 @@ export default function CustomSoftwarePage() {
           </div>
           <div className="relative">
             <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block">
-              Custom Software
+              AI Engineering
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-primary tracking-tighter leading-[0.95] mb-8">
-              Custom Software Development
+              Hire an AI Engineer Who Ships
             </h1>
             <p className="text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed">
-              Web applications, mobile apps, and SaaS platforms built for your specific business
-              needs. Full-stack development from a team based in Oxford, Mississippi that ships
-              real software for real businesses.
+              Custom AI models, fine-tuned LLMs, and intelligent systems built for production — not
+              demos. I train models on your data, build the infrastructure to serve them, and deploy
+              systems your team actually uses. Based in Oxford, MS. Working with clients nationwide.
             </p>
-          </div>
-        </section>
-
-        {/* Who This Is For */}
-        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
-          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
-            Is This You?
-          </span>
-          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-8">
-            Who This Is For
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            {[
-              {
-                title: 'Outgrowing off-the-shelf tools',
-                description: 'Your business has hit the ceiling of Shopify, Airtable, or whatever SaaS you duct-taped together. You need software built around your workflow, not the other way around.',
-              },
-              {
-                title: 'Need a technical cofounder, not a contractor',
-                description: 'You are building something real and need an engineer who thinks about architecture, scalability, and the business — not just tickets.',
-              },
-              {
-                title: 'Complex workflows that need custom automation',
-                description: 'Your processes are too nuanced for generic tools. You need systems that handle the edge cases your team deals with every day.',
-              },
-              {
-                title: 'Need an engineer who ships, not a consultant who advises',
-                description: 'You have been burned by agencies that deliver slide decks instead of software. You want working code in production, on a timeline.',
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="p-5 md:p-6 rounded-xl border border-brand-border/30 bg-brand-surface/20"
-              >
-                <h3 className="text-base md:text-lg font-bold text-brand-primary mb-2">{item.title}</h3>
-                <p className="text-brand-secondary text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -294,16 +262,16 @@ export default function CustomSoftwarePage() {
           </div>
         </div>
 
-        {/* What We Build */}
+        {/* What I Build */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
           <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
             01. Capabilities
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
-            What We Build
+            What I Build
           </h2>
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {offerings.map((item) => (
+            {capabilities.map((item) => (
               <div
                 key={item.title}
                 className="p-6 md:p-8 rounded-2xl border border-brand-border/40 bg-brand-surface/30 hover:border-brand-accent/40 hover:-translate-y-1 transition-all duration-300"
@@ -320,13 +288,45 @@ export default function CustomSoftwarePage() {
           </div>
         </section>
 
-        {/* Our Process */}
+        {/* Proof */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
           <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
-            02. Process
+            02. Proof
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-4">
+            Real Models. Real Production. Real Clients.
+          </h2>
+          <p className="text-brand-secondary text-lg max-w-2xl leading-relaxed mb-12">
+            I built ConstructionAI — a custom fine-tuned language model for construction cost
+            estimation — from the ground up. I also built AI voice systems for Lafayette Insurance
+            and delivered AI automation for businesses across multiple industries. These are not
+            side projects. They are production systems used by real companies on real data.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {proofPoints.map((item) => (
+              <div
+                key={item.label}
+                className="p-5 md:p-6 rounded-2xl bg-brand-surface/30 border border-brand-border/40 text-center hover:border-brand-accent/40 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">
+                  {item.metric}
+                </div>
+                <div className="text-[10px] md:text-xs text-brand-accent uppercase tracking-widest font-mono mb-2">
+                  {item.label}
+                </div>
+                <div className="text-xs text-brand-secondary">{item.description}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
+            03. Process
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
-            How We Work
+            How It Works
           </h2>
           <div className="space-y-8">
             {processSteps.map((step) => (
@@ -353,26 +353,6 @@ export default function CustomSoftwarePage() {
           </div>
         </section>
 
-        {/* Technologies */}
-        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
-          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
-            03. Stack
-          </span>
-          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
-            Technologies We Use
-          </h2>
-          <div className="flex flex-wrap gap-3">
-            {technologies.map((tech) => (
-              <span
-                key={tech}
-                className="px-4 py-2 rounded-full bg-brand-surface/50 border border-brand-border text-brand-secondary font-mono text-sm hover:border-brand-accent/50 hover:text-brand-accent transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </section>
-
         {/* FAQ Section */}
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
           <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-12">
@@ -385,17 +365,17 @@ export default function CustomSoftwarePage() {
         <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
           <div className="text-center">
             <h2 className="text-3xl md:text-5xl font-black text-brand-primary tracking-tighter mb-6">
-              Start Your Project
+              Ready to Build Something Real?
             </h2>
             <p className="text-brand-secondary text-lg mb-8 max-w-lg mx-auto">
-              Tell us what you need built and get a free, no-obligation consultation. We will
-              scope the work, give you an honest estimate, and show you what is possible.
+              Tell me about the problem you are solving. I will tell you honestly whether AI is the
+              right answer — and if it is, exactly how I would build it.
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-brand-base font-bold rounded-full hover:bg-brand-accent/90 transition-colors"
             >
-              Get a Free Consultation <ArrowRight size={18} />
+              Start a Conversation <ArrowRight size={18} />
             </Link>
           </div>
         </section>

@@ -16,13 +16,13 @@ import {
 import { FAQSection } from '@/components/FAQSection';
 
 export const metadata: Metadata = {
-  title: 'Web Design & Development | Websites for Local Businesses | Oxford, MS',
+  title: 'Web Design & Development | High-Performance Sites | Oxford, MS',
   description:
-    'Professional web design and development for businesses in Oxford, Mississippi. Mobile-friendly, SEO-optimized, fast-loading websites that bring in customers.',
+    'High-performance websites and web applications for businesses that take their online presence seriously. Next.js, SEO-optimized, sub-second load times. Web development by Walt Burge in Oxford, MS.',
   openGraph: {
-    title: 'Web Design & Development | Websites for Local Businesses | Oxford, MS',
+    title: 'Web Design & Development | High-Performance Sites | Oxford, MS | Walt Burge',
     description:
-      'Professional web design and development for businesses in Oxford, Mississippi. Mobile-friendly, SEO-optimized, fast-loading websites that bring in customers.',
+      'High-performance websites and web applications for businesses that take their online presence seriously. Next.js, SEO-optimized, sub-second load times.',
   },
 };
 

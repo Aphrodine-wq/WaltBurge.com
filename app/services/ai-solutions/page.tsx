@@ -13,13 +13,13 @@ import {
 import { FAQSection } from '@/components/FAQSection';
 
 export const metadata: Metadata = {
-  title: 'AI & Machine Learning Solutions | Chatbots & Automation | Mississippi',
+  title: 'Custom AI & Machine Learning Development | Fine-Tuned Models & Automation',
   description:
-    'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Walt Burge in Oxford, Mississippi.',
+    'Custom AI models, fine-tuned LLMs, intelligent automation, and AI-powered products. Not wrapper apps — real model training, real deployment, real results. AI development by Walt Burge.',
   openGraph: {
-    title: 'AI & Machine Learning Solutions | Chatbots & Automation | Mississippi',
+    title: 'Custom AI & Machine Learning Development | Fine-Tuned Models & Automation | Walt Burge',
     description:
-      'AI chatbots, custom model training, workflow automation, and intelligent business tools. AI solutions built by Walt Burge in Oxford, Mississippi.',
+      'Custom AI models, fine-tuned LLMs, intelligent automation, and AI-powered products. Not wrapper apps — real model training, real deployment, real results.',
   },
 };
 
@@ -211,6 +211,44 @@ export default function AISolutionsPage() {
               real business problems. Not AI for the sake of AI — practical systems that save
               time, cut costs, and give your team a measurable advantage.
             </p>
+          </div>
+        </section>
+
+        {/* Who This Is For */}
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24 border-t border-brand-border/20">
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
+            Is This You?
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-8">
+            Who This Is For
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+            {[
+              {
+                title: 'You need a custom AI model, not a ChatGPT wrapper',
+                description: 'Generic AI tools are not cutting it. You need a model trained on your data, your domain, and your terminology — one that actually understands your business.',
+              },
+              {
+                title: 'You want to automate a process that costs you real money',
+                description: 'There is a task in your business that eats hours every week and follows a pattern. AI can learn that pattern and do it in seconds.',
+              },
+              {
+                title: 'You are building an AI-powered product',
+                description: 'You have the idea and the market. You need an engineer who can train the model, build the infrastructure, and ship it to production.',
+              },
+              {
+                title: 'You tried AI solutions that did not deliver',
+                description: 'You have been sold "AI integration" that was just an API call with a prompt. You need someone who understands model training, fine-tuning, and what it takes to get real accuracy.',
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="p-5 md:p-6 rounded-xl border border-brand-border/30 bg-brand-surface/20"
+              >
+                <h3 className="text-base md:text-lg font-bold text-brand-primary mb-2">{item.title}</h3>
+                <p className="text-brand-secondary text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 

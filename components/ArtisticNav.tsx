@@ -1,25 +1,39 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Briefcase, Code, Mail, Sparkles, BookOpen } from 'lucide-react';
+import { Home, User, Briefcase, Code, Sparkles, BookOpen, Crosshair } from 'lucide-react';
 import { SectionId } from '../types';
+
+interface NavItem {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  href?: string; // if set, navigates to a page instead of scrolling
+  accent?: boolean; // if set, renders with accent styling
+}
 
 export const ArtisticNav: React.FC = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const router = useRouter();
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { id: SectionId.HERO, label: 'Home', icon: Home },
     { id: 'about', label: 'About', icon: User },
     { id: SectionId.PROJECTS, label: 'Projects', icon: Briefcase },
     { id: SectionId.SKILLS, label: 'Skills', icon: Code },
     { id: 'marketplace', label: 'Shop', icon: Sparkles },
     { id: SectionId.BLOG, label: 'Blog', icon: BookOpen },
-    { id: SectionId.CONTACT, label: 'Contact', icon: Mail },
+    { id: 'scope-builder', label: 'Scope Builder', icon: Crosshair, href: '/contact', accent: true },
   ];
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const handleClick = (item: NavItem) => {
+    if (item.href) {
+      router.push(item.href);
+    } else {
+      document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -33,13 +47,17 @@ export const ArtisticNav: React.FC = () => {
         {navItems.map((item, idx) => (
           <button
             key={item.id}
-            onClick={() => scrollTo(item.id)}
+            onClick={() => handleClick(item)}
             onMouseEnter={() => setHoveredIdx(idx)}
             onMouseLeave={() => setHoveredIdx(null)}
             aria-label={item.label}
-            className="relative flex flex-col items-center justify-center p-1.5 md:p-2 group"
+            className={`relative flex flex-col items-center justify-center p-1.5 md:p-2 group ${item.accent ? 'md:ml-2 md:pl-4 md:border-l md:border-white/10' : ''}`}
           >
-            <div className={`relative z-10 transition-all duration-150 ${hoveredIdx === idx ? 'text-white -translate-y-1' : 'text-white/60'}`}>
+            <div className={`relative z-10 transition-all duration-150 ${
+              item.accent
+                ? hoveredIdx === idx ? 'text-brand-accent -translate-y-1 scale-110' : 'text-brand-accent/70'
+                : hoveredIdx === idx ? 'text-white -translate-y-1' : 'text-white/60'
+            }`}>
               <item.icon strokeWidth={1.5} className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
             </div>
 
@@ -50,7 +68,7 @@ export const ArtisticNav: React.FC = () => {
                   animate={{ opacity: 1, y: 8 }}
                   exit={{ opacity: 0, y: 4 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full text-[10px] font-serif tracking-widest text-brand-accent whitespace-nowrap"
+                  className={`absolute top-full text-[10px] font-serif tracking-widest whitespace-nowrap ${item.accent ? 'text-brand-accent' : 'text-brand-accent'}`}
                 >
                   {item.label}
                 </motion.span>

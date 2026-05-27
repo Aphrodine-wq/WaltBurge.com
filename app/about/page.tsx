@@ -275,6 +275,46 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Working With Me */}
+        <section className="py-16 md:py-24 px-4 md:px-6">
+          <div className="max-w-6xl mx-auto">
+            <span className="font-mono text-xs text-brand-accent uppercase tracking-widest mb-8 block">
+              How I Work
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tight mb-12">
+              Working With Me
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+              {[
+                {
+                  title: 'Limited clients, full attention',
+                  description: 'I take on 2-3 clients at a time so every project gets my full attention. No juggling dozens of accounts. Your project is never on the back burner.',
+                },
+                {
+                  title: 'Deep-dive before a single line of code',
+                  description: 'Every engagement starts with a deep-dive into your business — not a template. I learn your domain, your constraints, and your goals before I architect anything.',
+                },
+                {
+                  title: 'Production systems, not prototypes',
+                  description: 'I build software that goes live and stays live. Real deployment, real monitoring, real users. If it is not production-grade, it is not done.',
+                },
+                {
+                  title: 'You work directly with me',
+                  description: 'No account managers, no handoffs, no game of telephone. You talk to the person writing the code. Every question gets an honest, technical answer.',
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="p-5 md:p-6 rounded-xl bg-brand-surface border border-brand-primary/5"
+                >
+                  <h3 className="text-base md:text-lg font-bold text-brand-primary mb-2">{item.title}</h3>
+                  <p className="text-brand-secondary text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Our Clients */}
         <section className="py-16 md:py-24 px-4 md:px-6 bg-brand-surface border-y border-brand-border/10">
           <div className="max-w-6xl mx-auto">

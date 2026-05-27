@@ -25,29 +25,33 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://waltburge.com'),
   title: {
     template: '%s | Walt Burge',
-    default: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
+    default: 'Walt Burge | AI Engineer & Custom Software Developer',
   },
   description:
-    'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Walt Burge.',
+    'Custom AI models, fine-tuned LLMs, and production-grade software for businesses that need real engineering. Construction technology, intelligent automation, and full-stack development by Walt Burge in Oxford, MS.',
   keywords: [
     'Walt Burge',
+    'custom AI model',
+    'hire AI engineer',
+    'custom LLM',
+    'full-stack developer for hire',
+    'construction technology developer',
+    'AI automation',
+    'custom software consultant',
     'custom software development',
     'AI solutions',
-    'web design',
     'Oxford Mississippi',
     'construction technology',
-    'web apps',
-    'AI automation',
+    'machine learning development',
+    'fractional CTO',
     'James Walton',
-    'Walt Burge',
-    'software developer Oxford MS',
   ],
   openGraph: {
     type: 'website',
     url: 'https://waltburge.com',
-    title: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
+    title: 'Walt Burge | AI Engineer & Custom Software Developer',
     description:
-      'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi. Construction technology, web apps, and AI automation by Walt Burge.',
+      'Custom AI models, fine-tuned LLMs, and production-grade software for businesses that need real engineering. Construction technology, intelligent automation, and full-stack development.',
     siteName: 'Walt Burge',
     images: [
       {
@@ -61,9 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Walt Burge | Custom Software & AI Solutions | Oxford, MS',
+    title: 'Walt Burge | AI Engineer & Custom Software Developer',
     description:
-      'Custom software development, AI solutions, and web design for businesses in Oxford, Mississippi.',
+      'Custom AI models, fine-tuned LLMs, and production-grade software. Construction technology, intelligent automation, and full-stack development.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -108,6 +112,10 @@ const jsonLd = {
     'AI Solutions',
     'Construction Technology',
     'Web Design',
+    'Custom AI Model Training',
+    'LLM Fine-Tuning',
+    'Machine Learning',
+    'Intelligent Automation',
   ],
 };
 
