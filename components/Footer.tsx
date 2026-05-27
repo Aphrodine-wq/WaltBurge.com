@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Github, Linkedin, Code2, Facebook, Instagram } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -34,7 +35,26 @@ export const Footer: React.FC = () => {
                     </span>
                 </div>
 
-                {/* Right: Social Links */}
+                {/* Quick Links */}
+                <div className="flex items-center gap-4 md:gap-6">
+                    <Link href="/hire" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Hire Me
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
+                    <Link href="/services" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Services
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
+                    <Link href="/work" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Work
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
+                    <Link href="/contact" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Scope Builder
+                    </Link>
+                </div>
+
+                {/* Social Links */}
                 <div className="flex items-center gap-6">
                     <a href="https://github.com/Aphrodine-wq" target="_blank" rel="noopener noreferrer" className="text-brand-secondary hover:text-brand-accent transition-colors">
                         <Github size={18} />

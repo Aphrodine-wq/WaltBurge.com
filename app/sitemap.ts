@@ -114,6 +114,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/hire`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
   ];
 
   const blogPosts = posts.map((post) => ({
