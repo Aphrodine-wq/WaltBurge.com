@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { posts } from '@/lib/blog-data';
+import { caseStudies } from '@/lib/case-studies';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://waltburge.com';
@@ -107,6 +108,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/work`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    },
   ];
 
   const blogPosts = posts.map((post) => ({
@@ -116,5 +123,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPosts];
+  const caseStudyPages = caseStudies.map((cs) => ({
+    url: `${baseUrl}/work/${cs.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...blogPosts, ...caseStudyPages];
 }

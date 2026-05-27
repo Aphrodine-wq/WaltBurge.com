@@ -14,6 +14,7 @@ import { ScrollProgress } from '../components/ScrollProgress';
 import { CustomCursor } from '../components/CustomCursor';
 import { ArtisticNav } from '../components/ArtisticNav';
 import { Marketplace } from '../components/Marketplace';
+import { LeadMagnet } from '../components/LeadMagnet';
 import { BlogPostDetail } from '../components/BlogPostDetail';
 import { TooltipProvider } from '../components/ui/tooltip';
 import { ContentSkeleton } from '../components/ui/content-skeleton';
@@ -146,6 +147,7 @@ export default function HomeClient() {
 
             <Marketplace />
             <Blog onPostClick={handlePostClick} />
+            <LeadMagnet />
           </main>
           <Contact />
           <Footer />

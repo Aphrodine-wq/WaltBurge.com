@@ -2,13 +2,272 @@ import { BlogPost } from '@/types';
 
 export const posts: BlogPost[] = [
   {
+    id: 'custom-software-cost-2026',
+    title: 'How Much Does Custom Software Cost in 2026?',
+    excerpt: 'The honest answer: it depends. But here are real numbers from real projects \u2014 not the vague "it varies" you get from most developers.',
+    date: '2026-05-27',
+    readTime: '8 min',
+    tags: ['Business', 'Software'],
+    featured: true,
+    content: `If you've ever Googled "how much does custom software cost," you got one of two answers: a vague "it depends" with no numbers, or a range so wide it's useless. Neither helps you make a real decision. So here's what I actually charge, what drives the number up or down, and how to avoid the most expensive mistake businesses make with software.
+
+## Why cost varies so much
+
+Three things determine what custom software costs: **complexity**, **features**, and **timeline**. A simple marketing website with five pages and a contact form is a fundamentally different project than a SaaS platform with user authentication, payment processing, and real-time dashboards. The work is different, the architecture is different, and the price reflects that.
+
+That said, you deserve real numbers. Here's what projects actually cost in 2026, based on my own work and industry benchmarks.
+
+## Real price ranges by project type
+
+**Simple Website** \u2014 $2K\u2013$8K
+A clean, fast, professional site with a handful of pages, a contact form, and maybe a blog. Designed, built, and deployed in 2\u20134 weeks. If this is what you need, don't let anyone talk you into a $30K "platform."
+
+**Web Application** \u2014 $10K\u2013$30K
+User accounts, dashboards, data management, integrations with your existing tools. This is where most small businesses land when they need something beyond a website but aren't building a product company.
+
+**SaaS Platform** \u2014 $25K\u2013$150K+
+A product you sell to other people. Multi-tenant architecture, subscription billing, onboarding flows, admin panels, API integrations. The range is wide because the simplest viable SaaS and an enterprise platform are very different animals.
+
+**AI / ML Integration** \u2014 $15K\u2013$100K
+Adding AI to your business \u2014 whether that's a custom-trained model, intelligent automation, document processing, or a chatbot that actually works. The cost depends heavily on whether you need a custom model or can leverage existing ones.
+
+**Mobile App** \u2014 $15K\u2013$50K
+A native or cross-platform mobile application. If you also need a web dashboard or admin panel, plan for the higher end.
+
+## What drives cost up
+
+Not all features are created equal. These are the things that reliably push a project toward the top of its range:
+
+- **Custom AI models** \u2014 training a model on your data is a different project than calling an API
+- **Real-time features** \u2014 live updates, collaborative editing, chat, notifications
+- **Complex integrations** \u2014 connecting to legacy systems, ERP software, or APIs with poor documentation
+- **Multi-platform delivery** \u2014 building for web, iOS, and Android simultaneously
+- **Compliance requirements** \u2014 HIPAA, SOC 2, or industry-specific regulations add engineering overhead
+
+## What drives cost down
+
+The flip side: some things make projects cheaper and faster without sacrificing quality.
+
+- **Clear scope** \u2014 knowing exactly what you need before we start eliminates the most expensive variable: change
+- **Existing design systems** \u2014 if you have a brand guide and design assets, we skip the discovery phase
+- **Phased delivery** \u2014 build the core first, learn from real users, then add features. This is almost always the right approach
+- **Proven patterns** \u2014 not every project needs a novel architecture. Most business problems have well-understood solutions
+
+## The hidden cost of going cheap
+
+Here's the most expensive mistake I see: businesses hire the cheapest developer they can find, get something that sort of works, outgrow it in six months, and then hire someone to rebuild it properly. **The rebuild costs 3x what doing it right the first time would have cost.** Not because the second developer is ripping you off, but because untangling bad architecture is genuinely harder than building clean architecture from scratch.
+
+Cheap software isn't cheap. It's a down payment on expensive software later.
+
+## My approach
+
+I don't give you a range you could drive a truck through. I give you a real number based on a real scope. Here's how that works:
+
+1. We talk for 30 minutes about what you need
+2. I scope the work and give you a fixed price
+3. You know exactly what you're getting and exactly what it costs before any work starts
+
+No hourly billing that creeps up. No surprise invoices. No "we'll figure it out as we go."
+
+**Ready to find out what your project would cost?** [Use my Project Scope Builder](/contact) to describe your project and get a real conversation started \u2014 not a sales pitch.`,
+  },
+  {
+    id: 'ai-construction-estimation-savings',
+    title: 'How AI Is Saving Construction Companies Thousands on Estimates',
+    excerpt: 'Contractors lose bids because estimation takes days. AI generates line-item estimates in seconds. Here are the real numbers on what that speed is worth.',
+    date: '2026-05-25',
+    readTime: '7 min',
+    tags: ['AI', 'Construction'],
+    content: `If you're a contractor, you know the cycle. A lead comes in. You drive out, measure the job, go back to the office, pull up a spreadsheet, price out materials, estimate labor hours, add your markup, format a proposal, and send it over. Two to three days later, the homeowner has already hired the guy who got his number in first.
+
+You didn't lose the job because your price was wrong. You lost it because your process was slow.
+
+## The old way is costing you jobs
+
+The traditional estimation process hasn't changed in decades. Spreadsheets. Gut feel. Pricing books that are six months out of date. A good estimator can produce accurate numbers, but accuracy doesn't matter if it takes three days and the competition does it in one.
+
+The math is brutal: if you're bidding five jobs per week and losing one to a faster competitor, that's $50K\u2013$200K+ in lost revenue per year, depending on your average job size. Not because you're bad at estimating. Because you're slow at it.
+
+## The new way: AI-powered estimation
+
+I built ConstructionAI specifically to solve this problem. It's a custom AI model trained on **18,000+ real construction estimates** \u2014 not a general-purpose chatbot with a construction prompt taped to it. It understands material costs, labor rates, waste factors, and pricing by trade at the line-item level.
+
+Here's what that means in practice: you describe a job, and the model generates a detailed, line-item estimate in **seconds**. Not a ballpark. Not a guess. A structured estimate with materials, quantities, labor hours, and market-adjusted pricing that you can hand directly to a client.
+
+## The numbers that matter
+
+Let's talk about what this actually costs and what it's actually worth.
+
+**Cost per estimate:** roughly **$0.002** \u2014 that's two-tenths of a cent. At that price, estimation is effectively free. You can estimate every lead that comes in, not just the ones that feel like they're worth the time.
+
+**Time saved per estimate:** from 2\u20133 days down to under a minute. Your estimator's time is now spent reviewing and adjusting AI output, not building estimates from scratch.
+
+**Revenue impact:** if faster turnaround helps you win just one additional job per week, the math speaks for itself. On residential remodels averaging $15K\u2013$40K, that's $780K\u2013$2M in additional revenue per year. Even if you win one extra job per month, you're looking at $180K\u2013$480K.
+
+## How it works (no technical degree required)
+
+You don't need to understand machine learning to use this. Here's the plain-English version:
+
+The AI model was trained on thousands of real construction projects \u2014 kitchens, bathrooms, roofing, framing, electrical, plumbing, you name it. It learned the relationships between job descriptions, material quantities, labor hours, and pricing. When you describe a new job, it recognizes the patterns and generates an estimate based on what similar jobs actually cost.
+
+It's not guessing. It's pattern-matching against a massive dataset of real work. And it gets better over time as more data feeds back into the training pipeline.
+
+## Beyond estimation
+
+Estimation is the entry point, but it's not the whole picture. The same AI infrastructure powers:
+
+- **Proposal generation** \u2014 turn an estimate into a professional, branded proposal in seconds
+- **Job tracking** \u2014 compare estimated costs to actual costs and improve your accuracy over time
+- **Client management** \u2014 automated follow-ups, status updates, and communication workflows
+
+The goal isn't to replace your expertise. It's to remove the bottleneck so your expertise can win more work.
+
+## Is this right for your business?
+
+If any of these sound familiar, the answer is probably yes:
+
+- You lose bids because you can't turn estimates around fast enough
+- Your best estimator is also your most expensive employee, and they're buried in spreadsheets
+- You're guessing on material costs because your pricing data is stale
+- You avoid bidding small jobs because the estimation overhead eats the margin
+
+**If you're a contractor losing bids because estimation takes too long, let's talk.** I built this because I came from the trades and watched this problem eat margins for years. [Reach out here](/contact) and I'll show you what AI estimation looks like on one of your real jobs.`,
+  },
+  {
+    id: 'outgrown-your-software',
+    title: '5 Signs Your Business Has Outgrown Its Software',
+    excerpt: 'Spreadsheets breaking, tools that don\'t talk to each other, workarounds for workarounds. Here\'s how to know when it\'s time for custom software.',
+    date: '2026-05-22',
+    readTime: '6 min',
+    tags: ['Business', 'Software'],
+    content: `Every business starts with off-the-shelf tools. Spreadsheets, a CRM, maybe a project management app. It works great \u2014 until it doesn't. The moment your process outgrows the tool, you start building workarounds. And workarounds compound. Here are five signs that your business has hit that wall, and what to do about it.
+
+## Sign 1: You're running your business on spreadsheets and they're breaking
+
+Spreadsheets are incredible tools. They're also not databases, not workflow engines, and not meant to be the backbone of a growing business. If you have a spreadsheet with 50+ columns, multiple people editing it simultaneously, or formulas that break when someone adds a row in the wrong place \u2014 you've outgrown it.
+
+The telltale sign: someone on your team is the "spreadsheet person" who understands how the formulas work, and everyone else is afraid to touch it. That's not a process. That's a single point of failure with a human face.
+
+## Sign 2: You're paying for 5 SaaS tools that don't talk to each other
+
+You've got a CRM for leads, a project management tool for jobs, an accounting platform for invoices, a scheduling tool for appointments, and a communication tool for your team. None of them share data. So someone on your team spends hours every week copying information from one system to another.
+
+You're paying five subscriptions and getting one-fifth of the value from each because they don't integrate. The irony: you're spending more per month on disconnected SaaS tools than a custom solution would cost you per month amortized over two years.
+
+## Sign 3: Your team has workarounds for workarounds
+
+This is the most insidious sign because it feels normal from the inside. "Oh, we just export that to CSV, clean it up in Excel, then re-import it." "We use this tool for intake but then switch to email for the actual work." "The system doesn't handle that, so we track it in a separate spreadsheet."
+
+Each workaround adds 5\u201315 minutes. Multiply that by every team member, every day, every week. You're burning hundreds of hours per year on process friction that custom software eliminates entirely.
+
+## Sign 4: You're losing customers because your process is too slow
+
+Your competitor sends a proposal in two hours. Yours takes two days. Your competitor has an online portal where clients can check status. Your clients call and email asking for updates. Your competitor's onboarding takes 10 minutes. Yours takes a week of back-and-forth emails.
+
+Speed is a feature. If your tools are slowing you down, they're costing you customers \u2014 and you'll never know exactly how many, because the ones you lose to slowness never tell you why.
+
+## Sign 5: You tried off-the-shelf and it doesn't fit your workflow
+
+You bought the industry-specific software. You did the implementation. You trained the team. And six months later, half of them are back to spreadsheets because the software doesn't match how your business actually works.
+
+Off-the-shelf software is built for the average business in your industry. If your process is your competitive advantage \u2014 if the way you do things is *why* clients choose you \u2014 then forcing that process into a generic tool destroys the advantage.
+
+## The fix: software built around YOUR process
+
+Custom software isn't about building something from scratch for the sake of it. It's about building something that fits your business exactly \u2014 your workflow, your team, your clients, your competitive advantage.
+
+The right custom solution:
+
+- **Replaces the spreadsheets** with a real system that multiple people can use without breaking things
+- **Connects your tools** or replaces the ones that don't integrate
+- **Eliminates the workarounds** by building the actual workflow into the software
+- **Speeds up your process** so you win more business
+- **Fits your way of working** instead of forcing you to change
+
+It's not always the right move. If a $50/month SaaS tool genuinely solves your problem, use it. But if you've been fighting your tools for six months or more, the cost of *not* building custom software is almost certainly higher than the cost of building it.
+
+**If any of these signs sound familiar, let's have a 30-minute call and figure out if custom software is the right move.** No pitch, no pressure \u2014 just an honest assessment of whether building something custom would actually solve your problem. [Book a call here](/contact).`,
+  },
+  {
+    id: 'non-technical-founder-guide',
+    title: 'What Every Non-Technical Founder Needs to Know Before Hiring a Developer',
+    excerpt: 'You don\'t need to learn to code. But you need to know what to look for \u2014 and what to run from. A plain-English guide to hiring your first developer.',
+    date: '2026-05-20',
+    readTime: '10 min',
+    tags: ['Business', 'Startup'],
+    content: `You have a business idea. You've validated the market. You know what needs to be built. Now you need someone to build it, and you've never hired a developer before. This is the most expensive decision you'll make early on, and the internet is full of conflicting advice. Here's what actually matters, from someone who builds software for founders every day.
+
+## You don't need to learn to code
+
+Let's get this out of the way first. You do not need to take a coding bootcamp before hiring a developer. You don't need to understand JavaScript or Python or databases. What you *do* need is enough literacy to evaluate whether someone is being straight with you. This post gives you that.
+
+## Red flags: run from these
+
+**They won't give you a fixed scope.** "We'll figure it out as we go" means "I don't know what this will cost and neither will you." Agile is a fine development methodology. "Agile" as an excuse to never commit to a deliverable or a price is a billing strategy, not a process.
+
+**They can't explain decisions in plain English.** If your developer can't tell you *why* they chose a particular technology in words you understand, one of two things is true: they don't actually understand their own decision, or they don't respect you enough to communicate clearly. Both are disqualifying.
+
+**They have no portfolio of shipped products.** Tutorials, side projects, and "I worked on a team that built..." are not the same as "I built this, it's live, here's the link." You want someone who has finished things and put them in front of real users.
+
+**They charge hourly with no cap.** Hourly billing without a ceiling is an open-ended commitment on your end. It means the developer has zero incentive to be efficient and you have no way to budget. Some developers charge hourly and do excellent work \u2014 but there should always be a scope and an estimate that serves as a cap.
+
+## Green flags: look for these
+
+**They show you real work.** Not mockups. Not "I could build something like this." Actual products that real people use. Ask for links. Click them. Use the product for five minutes.
+
+**They give clear timelines and budgets.** A good developer can tell you, within a reasonable range, what something will cost and how long it will take. If they can't, they either haven't done enough discovery or they're avoiding accountability.
+
+**They own the architecture decisions.** You're hiring them for their judgment, not just their hands. A good developer will push back if you ask for something that's technically unwise. You want that pushback. The developer who says yes to everything is the one who builds you something fragile.
+
+**They communicate proactively.** You shouldn't have to chase your developer for updates. A weekly summary of what was done, what's next, and whether anything is blocked should be the bare minimum. If you're always the one initiating contact, that's a problem.
+
+## What a good first call should look like
+
+The discovery call is where you find out if this person is the right fit. Here's what a good one includes:
+
+1. **They ask about your business**, not just your app. The best developers want to understand the problem you're solving, not just the features you want.
+2. **They challenge your assumptions.** Not to be difficult \u2014 to make sure you're building the right thing. If you say "I need a mobile app," a good developer asks "do you? Or would a responsive web app serve your users better and cost half as much?"
+3. **They explain their process.** How they scope work, how they communicate, how they handle changes, what happens if something goes wrong.
+4. **They give you a rough idea of cost and timeline** \u2014 even if it's a range. "I'd need to do a deeper discovery to give you a firm number, but projects like this typically run $X\u2013$Y over Z weeks."
+
+## MVP vs. full product: build small first
+
+The single most common mistake non-technical founders make is trying to build the whole vision at once. Don't. Build the **minimum viable product** \u2014 the smallest thing that delivers value to a real user \u2014 and put it in front of people.
+
+An MVP isn't a bad version of your product. It's the core of your product, built well, without the features you think you need but haven't proven yet. Build it, learn from real usage, then invest in the features that matter. This approach is cheaper, faster, and produces a better product than trying to build everything upfront.
+
+## Equity vs. cash: when to offer equity
+
+Short answer: almost never. Here's the longer version:
+
+Offer equity when you genuinely can't afford to pay for the work and the developer believes in the business enough to take the risk. This is rare and should be treated like bringing on a cofounder, not like a discount.
+
+Don't offer equity as a substitute for fair pay. "I'll give you 5% equity instead of paying you" usually means the developer does $50K of work for something that may never be worth anything. Good developers know this and will pass.
+
+If you have budget, pay cash. It's cleaner, it sets clear expectations, and it doesn't complicate your cap table.
+
+## The fractional CTO option
+
+If you need senior technical leadership but can't afford (or don't need) a full-time CTO, a fractional CTO is the move. This is someone who:
+
+- Defines your technical architecture
+- Evaluates and manages developers
+- Makes buy-vs-build decisions
+- Translates between business goals and technical execution
+- Shows up 10\u201320 hours a week instead of 50
+
+I do this for several companies. It gives you the strategic thinking without the full-time salary, and it means you have someone in your corner who understands both the technology and the business.
+
+**If you're a non-technical founder getting ready to hire your first developer, I'd rather you make a good decision than a fast one.** [Learn more about fractional CTO services](/services/fractional-cto) or [book a call](/contact) and I'll help you figure out the right path for your business.`,
+  },
+  {
     id: 'tessera-markdown-native-agents',
     title: 'Tessera: Why I\'m Writing AI Agents in Markdown',
     excerpt: 'Building an AI agent shouldn\'t require five frameworks, three vendor SDKs, and a vector DB you babysit. It should require markdown and a compiler that takes the boundaries seriously. So I built one.',
     date: '2026-05-23',
     readTime: '11 min',
     tags: ['AI', 'Tessera'],
-    featured: true,
+    featured: false,
     content: `Most agent frameworks start from the wrong place. They hand you a Python class, a vendor SDK, a vector database to babysit, and a prompt string that nobody can verify. The agent's behavior lives in five files and a developer's head. The friction between those two places is documentation that's always stale.
 
 Tessera starts somewhere else. You write an agent in a single markdown file \u2014 \`.t.md\` \u2014 and that one file is simultaneously the program, the spec, the docs, and a browsable note in your Obsidian vault. I call it the **soil thesis**: the syntax file and the developer's head should be the same file.

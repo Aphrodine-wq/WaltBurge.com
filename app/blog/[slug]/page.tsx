@@ -113,6 +113,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <BlogPostClient post={post} />
+
+      <section className="max-w-3xl mx-auto px-5 md:px-6 py-12 border-t border-brand-border/30">
+        <div className="p-8 rounded-2xl border border-brand-accent/20 bg-brand-surface/50 text-center">
+          <h3 className="text-xl font-bold text-brand-primary mb-2">Free AI Readiness Checklist</h3>
+          <p className="text-brand-secondary text-sm mb-4">15 questions to find out if AI can save your business time and money.</p>
+          <a href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-brand-base font-bold rounded-full text-sm hover:bg-brand-accent/90 transition-colors">
+            Get It Free
+          </a>
+        </div>
+      </section>
     </>
   );
 }

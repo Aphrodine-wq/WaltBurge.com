@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Briefcase, Code, Sparkles, BookOpen, Crosshair } from 'lucide-react';
+import { Home, User, Briefcase, Code, FolderOpen, BookOpen, Crosshair } from 'lucide-react';
 import { SectionId } from '../types';
 
 interface NavItem {
@@ -23,7 +23,7 @@ export const ArtisticNav: React.FC = () => {
     { id: 'about', label: 'About', icon: User },
     { id: SectionId.PROJECTS, label: 'Projects', icon: Briefcase },
     { id: SectionId.SKILLS, label: 'Skills', icon: Code },
-    { id: 'marketplace', label: 'Shop', icon: Sparkles },
+    { id: 'work', label: 'Work', icon: FolderOpen, href: '/work' },
     { id: SectionId.BLOG, label: 'Blog', icon: BookOpen },
     { id: 'scope-builder', label: 'Scope Builder', icon: Crosshair, href: '/contact', accent: true },
   ];
