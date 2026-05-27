@@ -49,6 +49,14 @@ export const Footer: React.FC = () => {
                         Work
                     </Link>
                     <span className="text-brand-border/50">|</span>
+                    <Link href="/products" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Products
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
+                    <Link href="/enterprise" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
+                        Enterprise
+                    </Link>
+                    <span className="text-brand-border/50">|</span>
                     <Link href="/contact" className="text-[10px] md:text-xs font-mono uppercase tracking-wider text-brand-secondary hover:text-brand-accent transition-colors">
                         Scope Builder
                     </Link>

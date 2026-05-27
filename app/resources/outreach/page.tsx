@@ -192,6 +192,84 @@ Services: Custom Software Development, AI & Machine Learning, SaaS Development, 
 
 Serving Oxford, MS, North Mississippi, Memphis metro, and clients nationwide.`}
         </Template>
+
+        {/* Template 8: Construction Tech Companies (Partnership/Acquisition) */}
+        <Template
+          title="Template 8: Construction Tech Companies (Partnership/Acquisition)"
+          subject="18,000+ construction training examples — interested in licensing?"
+        >
+{`Hi [Name],
+
+I saw [Company]'s work on AI-powered [estimation/project management/etc.] — impressive.
+
+I built ConstructionAI — a Llama 3.1 8B model fine-tuned on 18,000+ real construction project estimates. It generates detailed line-item estimates (materials, labor, waste factors, market-adjusted pricing) in seconds at $0.002 per inference. It's live in production for a contractor in Oxford, MS.
+
+I'm open to licensing the model, white-labeling the API, or exploring a deeper partnership. If [Company] is building estimation capabilities, it might save you months of data collection and training.
+
+Happy to do a quick demo or share accuracy benchmarks.
+
+Best,
+Walt Burge
+waltburge.com/products/construction-ai`}
+        </Template>
+
+        {/* Template 9: Enterprise Construction Companies ($100K+ deals) */}
+        <Template
+          title="Template 9: Enterprise Construction Companies ($100K+ deals)"
+          subject="AI estimation for [Company] — 3 days to 3 seconds"
+        >
+{`Hi [Name],
+
+I built an AI estimation platform that a contractor in Oxford, MS uses in production. It generates detailed line-item construction estimates — materials, labor, quantities, market-adjusted pricing — in seconds instead of days.
+
+The model is trained on 18,000+ real construction projects and runs at $0.002 per estimate. For a company like [Company] doing [X] bids per month, the ROI is significant.
+
+I build custom AI platforms for construction companies starting at $50K. Happy to show you a demo — 15 minutes, no commitment.
+
+Best,
+Walt Burge
+AI Engineer | Oxford, MS
+waltburge.com/products/construction-ai`}
+        </Template>
+
+        {/* Template 10: Mississippi Government Agencies */}
+        <Template
+          title="Template 10: Mississippi Government Agencies"
+          subject="AI & software development services — Mississippi-based vendor"
+        >
+{`Hi [Name],
+
+I'm Walt Burge, an AI engineer and software developer based in Oxford, Mississippi. I specialize in custom AI systems, web applications, and enterprise software development.
+
+I'm writing to introduce myself as a Mississippi-based IT vendor available for state contracts and RFP responses. Recent work includes a custom AI-powered estimation platform for a construction company, an AI voice system for an insurance company, and a multi-sided marketplace platform.
+
+I'd welcome the opportunity to discuss any upcoming IT projects or be added to your vendor list. Happy to provide a capability statement and past performance documentation.
+
+Best,
+Walt Burge
+waltburge.com/enterprise`}
+        </Template>
+
+        {/* Template 11: Acquire.com / Investor Outreach */}
+        <Template
+          title="Template 11: Acquire.com / Investor Outreach"
+          subject="Construction AI SaaS — 18K+ training examples, production deployed"
+        >
+{`ConstructionAI is a fine-tuned Llama 3.1 8B model that generates detailed construction cost estimates in seconds. Trained on 18,000+ curated examples with a distillation pipeline scaling to 500K+.
+
+Currently deployed in production for a contractor in Oxford, MS via MsHomePros (contractor platform) and integrated into FairTradeWorker (3-sided construction marketplace).
+
+Key metrics:
+- 18,000+ training examples
+- $0.002 per inference (RunPod Serverless)
+- ~88% accuracy on held-out real jobs
+- Seconds per estimate vs. 2-3 days manual
+
+Looking for: acquisition, investment, or strategic partnership with a construction tech company.
+
+Portfolio: waltburge.com/products/construction-ai
+Full case study: waltburge.com/work/constructionai`}
+        </Template>
       </div>
     </div>
   );
