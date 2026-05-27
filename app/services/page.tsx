@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Code2, Brain, HardHat, Globe } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Software Development Services | Walt Burge | Oxford, MS',
+  title: 'Software Development Services | Oxford, MS',
   description:
     'Custom software development, AI & machine learning solutions, construction technology, and web design services from Walt Burge in Oxford, Mississippi.',
   openGraph: {
-    title: 'Software Development Services | Walt Burge | Oxford, MS',
+    title: 'Software Development Services | Oxford, MS',
     description:
       'Custom software development, AI & machine learning solutions, construction technology, and web design services from Walt Burge in Oxford, Mississippi.',
   },

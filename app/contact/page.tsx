@@ -3,14 +3,14 @@ import Link from 'next/link';
 import ServiceRequestForm from './ServiceRequestForm';
 
 export const metadata: Metadata = {
-  title: 'Request a Service | Walt Burge | Oxford, MS',
+  title: 'Request a Service | Project Scope Builder | Oxford, MS',
   description:
     'Get a free consultation for your next software project. Use the live project scope builder to estimate complexity, timeline, and budget instantly. Custom software, AI solutions, and web design from Walt Burge in Oxford, Mississippi.',
   alternates: {
     canonical: 'https://waltburge.com/contact',
   },
   openGraph: {
-    title: 'Request a Service | Walt Burge | Oxford, MS',
+    title: 'Request a Service | Project Scope Builder | Oxford, MS',
     description:
       'Build your project brief with a live scope estimator. Custom software, AI solutions, construction tech, and web design from Walt Burge.',
   },

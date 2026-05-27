@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'About James Walton | Walt Burge | Oxford, MS',
+  title: 'About James Walton | Full-Stack Developer & AI Engineer | Oxford, MS',
   description:
     'Full-stack developer and AI engineer in Oxford, Mississippi. Building construction technology, custom software, and intelligent automation.',
   alternates: {

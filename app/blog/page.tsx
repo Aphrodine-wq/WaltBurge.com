@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { posts } from '@/lib/blog-data';
 
 export const metadata: Metadata = {
-  title: 'Blog | Walt Burge',
+  title: 'Blog | Build Log',
   description:
     'Notes on building software, training AI models, and construction technology.',
   alternates: {
