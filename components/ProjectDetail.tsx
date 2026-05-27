@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Project } from '../types';
 import { TechIcon, CategoryIcon } from './Projects';

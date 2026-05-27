@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionId } from '../types';
@@ -358,7 +359,7 @@ export const Skills: React.FC = React.memo(() => {
       scale: 1,
       transition: {
         duration: 0.5,
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 100,
         damping: 15
       }

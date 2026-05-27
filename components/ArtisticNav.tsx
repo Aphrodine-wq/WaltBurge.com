@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, Briefcase, Code, Mail, Sparkles, BookOpen } from 'lucide-react';

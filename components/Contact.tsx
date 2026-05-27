@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, ArrowUpRight, Copy, Send, AlertCircle, CheckCircle } from 'lucide-react';
@@ -125,8 +127,8 @@ export const Contact: React.FC = () => {
               Future.
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
-              Open for high-impact engineering roles and technical consulting.
-              If you're building something that requires bare-metal efficiency or agentic intelligence, let's talk.
+              Tell us about your project and we'll respond within 24 hours.
+              Whether you need custom software, AI solutions, or a new website — let's build it.
             </p>
           </motion.div>
 

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Component, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, RotateCw } from 'lucide-react';

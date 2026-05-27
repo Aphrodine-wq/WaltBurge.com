@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Github, Linkedin, Code2, Facebook, Instagram } from 'lucide-react';
 
@@ -18,6 +20,9 @@ export const Footer: React.FC = () => {
                     </div>
                     <p className="text-xs md:text-[10px] text-brand-secondary font-mono">
                         &copy; {currentYear} Walt Burge. All Systems Operational.
+                    </p>
+                    <p className="text-xs md:text-[10px] text-brand-secondary font-mono">
+                        Based in Oxford, Mississippi &bull; Serving Nationwide
                     </p>
                 </div>
 
@@ -40,7 +45,7 @@ export const Footer: React.FC = () => {
                     <a href="https://www.instagram.com/walt.burge" target="_blank" rel="noopener noreferrer" className="text-brand-secondary hover:text-brand-accent transition-colors">
                         <Instagram size={18} />
                     </a>
-                    <a href="#" className="text-brand-secondary hover:text-brand-accent transition-colors">
+                    <a href="https://www.linkedin.com/in/jameswalton" target="_blank" rel="noopener noreferrer" className="text-brand-secondary hover:text-brand-accent transition-colors">
                         <Linkedin size={18} />
                     </a>
                 </div>
