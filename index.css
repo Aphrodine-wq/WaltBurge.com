@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --bg-deep: 18 17 19;
-    --bg-nebula: 34 39 37;
-    --bg-surface: 34 39 37;
-    --text-glow: 249 249 249;
-    --text-primary: 249 249 249;
-    --text-secondary: 156 163 175;
-    --accent-color: 249 249 249;
-    --border-color: 60 65 60;
-    --aurora-teal: 249 249 249;
-    --aurora-purple: 156 163 175;
-    --aurora-pink: 229 231 235;
+    --bg-deep: 15 18 25;
+    --bg-nebula: 26 32 44;
+    --bg-surface: 26 32 44;
+    --text-glow: 241 245 249;
+    --text-primary: 241 245 249;
+    --text-secondary: 148 163 184;
+    --accent-color: 186 199 216;
+    --border-color: 51 65 85;
+    --aurora-teal: 186 199 216;
+    --aurora-purple: 148 163 184;
+    --aurora-pink: 226 232 240;
     --bg-primary: var(--bg-deep);
     --bg-secondary: var(--bg-nebula);
   }
