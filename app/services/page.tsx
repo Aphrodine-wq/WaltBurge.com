@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Code2, Brain, HardHat, Globe } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Code2, Brain, HardHat, Globe, Rocket, Crown, Workflow, Cpu } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Software Development Services | Oxford, MS',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-const services = [
+const coreServices = [
   {
     icon: Code2,
     title: 'Custom Software Development',
@@ -41,6 +41,41 @@ const services = [
     href: '/services/web-design',
     description:
       'Fast, mobile-friendly, SEO-optimized websites for local businesses in Oxford, MS and North Mississippi.',
+  },
+];
+
+const premiumServices = [
+  {
+    icon: Rocket,
+    title: 'SaaS Product Development',
+    href: '/services/saas-development',
+    price: 'From $25K',
+    description:
+      'Full-stack SaaS platforms from zero to production — architecture, billing, auth, dashboard, API, and deployment. Built to scale, not to demo.',
+  },
+  {
+    icon: Crown,
+    title: 'Fractional CTO & Technical Leadership',
+    href: '/services/fractional-cto',
+    price: '$5K-$15K/mo',
+    description:
+      'Senior technical leadership at a fraction of the cost. Architecture decisions, team building, tech stack strategy, and hands-on engineering.',
+  },
+  {
+    icon: Workflow,
+    title: 'AI-Powered Business Automation',
+    href: '/services/ai-automation',
+    price: 'From $15K',
+    description:
+      'Intelligent automation that replaces expensive manual processes with AI that works 24/7. Document processing, support bots, lead routing, and more.',
+  },
+  {
+    icon: Cpu,
+    title: 'Custom LLM Training & Fine-Tuning',
+    href: '/services/custom-llm-training',
+    price: 'From $25K',
+    description:
+      'Domain-specific language models trained on your data. Real fine-tuned models you own and control — not prompt engineering wrappers.',
   },
 ];
 
@@ -108,10 +143,13 @@ export default function ServicesPage() {
           </p>
         </section>
 
-        {/* Service Cards */}
+        {/* Core Service Cards */}
         <section className="max-w-5xl mx-auto px-6 pb-16 md:pb-24">
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block">
+            Core Services
+          </span>
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {services.map((service, index) => (
+            {coreServices.map((service, index) => (
               <Link
                 key={service.href}
                 href={service.href}
@@ -121,6 +159,54 @@ export default function ServicesPage() {
                   0{index + 1}
                 </span>
                 <div className="w-14 h-14 rounded-xl bg-brand-base border border-brand-border p-3 mb-6 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
+                  <service.icon className="w-7 h-7 text-brand-accent" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tighter mb-4 group-hover:text-brand-accent transition-colors">
+                  {service.title}
+                </h2>
+                <p className="text-brand-secondary leading-relaxed mb-6">
+                  {service.description}
+                </p>
+                <span className="inline-flex items-center gap-2 text-sm font-mono text-brand-accent uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Learn More <ArrowRight size={14} />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Divider */}
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="relative flex items-center">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent to-brand-border/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-brand-accent mx-4" />
+            <div className="flex-1 h-px bg-gradient-to-l from-transparent to-brand-border/30" />
+          </div>
+        </div>
+
+        {/* Premium Service Cards */}
+        <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
+            High-Impact Engagements
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-brand-primary tracking-tighter mb-4">
+            Premium Services
+          </h2>
+          <p className="text-brand-secondary text-lg max-w-2xl leading-relaxed mb-12">
+            Larger-scope engagements for businesses ready to invest in serious technical infrastructure,
+            AI capabilities, or executive-level engineering leadership.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+            {premiumServices.map((service, index) => (
+              <Link
+                key={service.href}
+                href={service.href}
+                className="group relative p-8 md:p-10 rounded-2xl border border-brand-accent/20 bg-brand-surface/30 hover:border-brand-accent/60 transition-all duration-300"
+              >
+                <span className="text-brand-accent/60 font-mono text-xs absolute top-6 right-6">
+                  {service.price}
+                </span>
+                <div className="w-14 h-14 rounded-xl bg-brand-base border border-brand-accent/30 p-3 mb-6 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
                   <service.icon className="w-7 h-7 text-brand-accent" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tighter mb-4 group-hover:text-brand-accent transition-colors">
