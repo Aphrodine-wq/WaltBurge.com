@@ -8,12 +8,13 @@ export const metadata: Metadata = {
 };
 
 interface TemplateProps {
+  number?: number;
   title: string;
   subject?: string;
   children: React.ReactNode;
 }
 
-function Template({ title, subject, children }: TemplateProps) {
+function Template({ number, title, subject, children }: TemplateProps) {
   return (
     <div className="mb-12">
       <h2 className="text-xl md:text-2xl font-bold text-brand-primary tracking-tight mb-2">
@@ -320,6 +321,134 @@ Best,
 Walt Burge
 waltburge.com/products/fairtradeworker
 waltburge.com/products/construction-ai`}
+        </Template>
+
+        {/* Template 14: Procore (specific) */}
+        <Template
+          number={14}
+          title="Procore — AI Estimation Acquisition Pitch"
+          subject="ConstructionAI — 18K training examples, production deployed, acquisition-ready"
+        >
+{`Hi,
+
+I saw Procore's acquisition of Datagrid — smart move bringing agentic AI in-house.
+
+I built something complementary: ConstructionAI, a fine-tuned Llama 3.1 8B that generates detailed construction cost estimates — line items, materials, labor, waste factors, market-adjusted pricing — in seconds. Trained on 18,000+ curated construction project examples. Deployed in production at $0.002 per inference.
+
+It currently powers FairTradeWorker, a 3-sided construction marketplace I built (homeowners, contractors, subcontractors) with QuickBooks-native payments and real-time bidding.
+
+Datagrid handles agentic workflows. ConstructionAI handles the estimation intelligence Procore doesn't have yet. Together they'd give Procore end-to-end AI for construction.
+
+I'm open to acquisition, integration partnership, or licensing. Happy to demo the model and share accuracy benchmarks.
+
+Walt Burge
+AI Engineer | Oxford, MS
+waltburge.com/products/construction-ai
+waltburge.com/investors`}
+        </Template>
+
+        {/* Template 15: XBuild (direct competitor) */}
+        <Template
+          number={15}
+          title="XBuild — Buy vs. Build Pitch"
+          subject="You raised $19M for AI estimation. I already built it."
+        >
+{`Hi,
+
+Congrats on the Series A. Building AI construction estimation from scratch is hard — I know because I did it.
+
+ConstructionAI is a fine-tuned Llama 3.1 8B trained on 18,000+ curated construction project examples. It generates detailed line-item estimates (materials, labor, quantities, waste factors) in seconds at $0.002 per inference. It's live in production for a contractor in Oxford, MS.
+
+I also built FairTradeWorker, a 3-sided construction marketplace that uses ConstructionAI for instant fair-price baselines.
+
+The 18,000+ training examples took months of distillation and curation. That's 6-12 months of data work your team could skip.
+
+Interested in exploring an acquisition, licensing deal, or data partnership? Happy to share benchmarks and demo the model.
+
+Walt Burge
+waltburge.com/products/construction-ai`}
+        </Template>
+
+        {/* Template 16: CEMEX Ventures / VC Cold Email */}
+        <Template
+          number={16}
+          title="Construction Tech VC — Seed Round Pitch"
+          subject="FairTradeWorker — AI-powered construction marketplace seeking $1-3M seed"
+        >
+{`Hi [Name],
+
+I'm raising a seed round for FairTradeWorker, an AI-powered construction marketplace.
+
+The platform connects homeowners, contractors, and subcontractors. AI-generated estimates give homeowners a fair-price baseline instantly. Contractors bid faster and win more jobs. Subcontractors get fair rates and direct access to work.
+
+What we've built:
+- ConstructionAI: fine-tuned Llama 3.1 8B on 18,000+ construction project examples ($0.002/inference)
+- 3-sided marketplace with QuickBooks-native payments and real-time WebSocket bidding
+- React Native mobile app (30+ screens)
+- 6 revenue streams including white-label licensing
+- Live in production with MHP Construction in Oxford, MS
+
+The moat is the training data — 18,000+ curated examples that took months to build. Scaling to 500K+.
+
+Looking for $1-3M seed to scale go-to-market in the Southeast and expand the training dataset.
+
+Would love 15 minutes to walk you through the platform and the AI.
+
+Walt Burge | Founder
+waltburge.com/investors
+waltburge.com/products/fairtradeworker`}
+        </Template>
+
+        {/* Template 17: Command Alkon (warm intro via grandad) */}
+        <Template
+          number={17}
+          title="Command Alkon — Warm Intro via Family Connection"
+          subject="[Grandad's Name] suggested I reach out — AI construction estimation"
+        >
+{`Hi [Name],
+
+[Grandad's Name], who served as VP of Marketing at Command Alkon, suggested I reach out.
+
+I built ConstructionAI — a fine-tuned AI model that generates detailed construction cost estimates in seconds. It's trained on 18,000+ real construction project examples and runs at $0.002 per estimate in production.
+
+I know Command Alkon's focus is heavy materials and concrete, but there could be synergy:
+- ConstructionAI could add estimation intelligence to Command Cloud
+- Material cost data from Command Alkon could make ConstructionAI more accurate
+- Or Thoma Bravo might be interested in the AI construction estimation space broadly
+
+I also built FairTradeWorker, a 3-sided construction marketplace using the AI. Open to partnership, integration, investment, or acquisition conversations.
+
+Would welcome the chance to demo what I've built.
+
+Best,
+Walt Burge
+AI Engineer | Oxford, MS
+waltburge.com/products/construction-ai`}
+        </Template>
+
+        {/* Template 18: Navitas Capital / Zigg Capital / Ironspring */}
+        <Template
+          number={18}
+          title="Construction Tech VC — Short Intro Email"
+          subject="AI construction marketplace — production deployed, seeking seed"
+        >
+{`Hi [Name],
+
+Quick intro: I'm Walt Burge, founder of FairTradeWorker — a 3-sided construction marketplace powered by a custom fine-tuned LLM for cost estimation.
+
+Key numbers:
+- 18,000+ AI training examples (scaling to 500K+)
+- $0.002 per estimate
+- 6 revenue streams
+- Live in production (Oxford, MS)
+- Seeking $1-3M seed
+
+If you're looking at construction tech deals, I'd value 15 minutes to walk you through it.
+
+waltburge.com/investors
+
+Best,
+Walt Burge`}
         </Template>
       </div>
     </div>
