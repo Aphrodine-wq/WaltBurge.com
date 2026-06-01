@@ -121,8 +121,8 @@ export const Contact: React.FC = () => {
             </span>
             <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter mb-8 leading-[0.9]">
               Let's <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-secondary to-brand-secondary/50">Build The</span> <br />
-              Future.
+              <span className="text-brand-secondary">Build The</span> <br />
+              Future<span className="text-brand-accent">.</span>
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
               Open for high-impact engineering roles and technical consulting.
@@ -144,7 +144,7 @@ export const Contact: React.FC = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
             </div>
@@ -157,7 +157,7 @@ export const Contact: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="your@email.com"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
             </div>
@@ -170,7 +170,7 @@ export const Contact: React.FC = () => {
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="What's this about?"
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
               />
             </div>
 
@@ -182,7 +182,7 @@ export const Contact: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Your message here..."
                 rows={5}
-                className="w-full bg-brand-dark/50 border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors resize-none"
+                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors resize-none"
                 required
               />
             </div>
@@ -192,7 +192,7 @@ export const Contact: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400"
+                className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-600"
               >
                 <AlertCircle size={18} />
                 <span className="text-sm">{errorMessage}</span>
@@ -204,7 +204,7 @@ export const Contact: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-400"
+                className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-600"
               >
                 <CheckCircle size={18} />
                 <span className="text-sm">Message sent successfully! I'll get back to you soon.</span>
@@ -215,11 +215,11 @@ export const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={formStatus === 'loading'}
-              className="w-full bg-brand-accent hover:bg-brand-accent/90 disabled:bg-brand-accent/50 text-brand-base font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-brand-accent hover:bg-brand-accent-hover disabled:bg-brand-accent/50 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 mt-2"
             >
               {formStatus === 'loading' ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-brand-base/30 border-t-brand-base rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   Sending...
                 </>
               ) : (
@@ -236,7 +236,7 @@ export const Contact: React.FC = () => {
               <div className="flex items-center justify-between gap-4">
                 <button
                   onClick={copyEmail}
-                  className="flex-1 p-3 bg-brand-dark/50 border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
+                  className="flex-1 p-3 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
                   title="Copy to clipboard"
                 >
                   {copied ? <span className="text-brand-accent">COPIED!</span> : 'jamesburge.mcm@gmail.com'}
@@ -245,7 +245,7 @@ export const Contact: React.FC = () => {
                   href="https://github.com/Aphrodine-wq"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-brand-dark/50 border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
+                  className="p-3 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
                 >
                   <Github size={20} />
                 </a>
@@ -262,7 +262,7 @@ export const Contact: React.FC = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="mt-24 pt-8 border-t border-brand-border/30 flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-[10px] font-mono text-brand-secondary uppercase tracking-widest text-center md:text-left"
         >
-          <span>© 2025 Walt Burge Systems. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Walt Burge Systems. All rights reserved.</span>
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
             System Operational

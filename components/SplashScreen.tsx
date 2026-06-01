@@ -3,23 +3,25 @@ import { motion } from 'framer-motion';
 
 export const SplashScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   useEffect(() => {
-    const timer = setTimeout(onComplete, 600);
+    const timer = setTimeout(onComplete, 700);
     return () => clearTimeout(timer);
   }, [onComplete]);
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#050505]"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-brand-base"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.4 }}
     >
-      <motion.div
-        className="w-2 h-2 bg-white rounded-full"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: [0, 1.2, 1], opacity: [0, 1, 1] }}
-        transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-      />
+      <motion.span
+        className="font-display font-black text-3xl md:text-4xl tracking-tighter text-brand-primary"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
+        Walt Burge<span className="text-brand-accent">.</span>
+      </motion.span>
     </motion.div>
   );
 };

@@ -87,10 +87,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
   }, [isChallengeOpen, isSolutionOpen]);
 
   return (
-    <div className="min-h-screen bg-brand-black text-brand-primary pt-16 md:pt-20 animate-fade-in transition-colors duration-300">
+    <div className="min-h-screen bg-brand-base text-brand-primary pt-16 md:pt-20 animate-fade-in transition-colors duration-300">
       
       {/* Navbar Overlay for Back Button */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center bg-brand-black/95 border-b border-brand-border">
+      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center bg-brand-base/95 border-b border-brand-border">
         <button 
           onClick={onBack}
           className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs md:text-sm group"
@@ -101,9 +101,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
       </div>
 
       {/* Hero Banner Carousel */}
-      <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden group bg-brand-dark">
+      <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden group bg-brand-muted">
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-black/50 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 pointer-events-none"></div>
         
         {/* Images */}
         {images.map((img, index) => (
@@ -114,7 +114,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                 <img 
                   src={img} 
                   alt={`${project.title} - Slide ${index + 1}`} 
-                  className="w-full h-full object-cover filter grayscale opacity-60"
+                  className="w-full h-full object-cover"
                 />
              </div>
         ))}
@@ -150,12 +150,12 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
 
         <div className="absolute bottom-0 left-0 w-full z-20 px-6 pb-12 md:pb-16 pointer-events-none">
           <div className="max-w-7xl mx-auto">
-            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full text-brand-accent text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent border border-transparent rounded-full text-white text-xs font-bold uppercase tracking-wide">
               <CategoryIcon category={project.category} />
               {project.category}
             </div>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 text-brand-primary">{project.title}</h1>
-            <p className="text-lg md:text-2xl text-brand-secondary max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none">
+            <h1 className="text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 text-white">{project.title}</h1>
+            <p className="text-lg md:text-2xl text-white/85 max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none">
               {project.description}
             </p>
           </div>
@@ -183,7 +183,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                
                {/* Challenge Card */}
-               <div ref={challengeRef} className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
+               <div ref={challengeRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500/10"></div>
                   <div 
                     ref={challengeBorderRef}
@@ -215,11 +215,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                </div>
                
                {/* Solution Card */}
-               <div ref={solutionRef} className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-success/10"></div>
+               <div ref={solutionRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500/10"></div>
                   <div 
                     ref={solutionBorderRef}
-                    className="absolute left-0 top-0 w-1 bg-brand-success transition-height duration-100 ease-linear"
+                    className="absolute left-0 top-0 w-1 bg-green-500 transition-height duration-100 ease-linear"
                     style={{ height: '0%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.5)' }}
                   ></div>
 
@@ -228,7 +228,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                     className="flex items-center justify-between w-full mb-4 group focus:outline-none"
                   >
                     <div className="flex items-center gap-3">
-                        <Lightbulb className="text-brand-success" size={24} />
+                        <Lightbulb className="text-green-600" size={24} />
                         <h3 className="text-lg md:text-xl font-bold text-brand-primary">The Solution</h3>
                     </div>
                     <ChevronDown 
@@ -252,7 +252,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
               <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-brand-primary">Key Features</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {project.features?.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 bg-brand-surface border border-brand-primary/5 rounded-lg hover:border-brand-accent/20 transition-colors group">
+                  <div key={idx} className="flex items-start gap-3 p-4 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent/20 transition-colors group">
                     <CheckCircle className="text-brand-accent shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
                     <span className="text-brand-secondary text-sm">{feature}</span>
                   </div>
@@ -264,7 +264,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
 
           {/* Right Column: Meta Data */}
           <div className="space-y-8">
-            <div className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 rounded-xl lg:sticky lg:top-24">
+            <div className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl lg:sticky lg:top-24">
               <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">Technologies</h3>
               
               <div className="flex flex-wrap gap-3 mb-8">
@@ -272,7 +272,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                   <button 
                     key={tech} 
                     onClick={() => onTechClick(tech)}
-                    className="flex items-center gap-2 px-3 py-2 bg-brand-black border border-brand-primary/10 rounded-lg hover:border-brand-accent hover:bg-brand-accent/10 transition-all cursor-pointer group text-left"
+                    className="flex items-center gap-2 px-3 py-2 bg-brand-base border border-brand-border rounded-lg hover:border-brand-accent hover:bg-brand-accent/10 transition-all cursor-pointer group text-left"
                   >
                     <TechIcon tag={tech} isActive={true} />
                     <span className="text-xs font-bold text-brand-secondary group-hover:text-brand-accent transition-colors">{tech}</span>
@@ -286,7 +286,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
               <div className="grid grid-cols-1 gap-4">
                 
                 {/* Lines of Code */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-primary/5 hover:border-brand-accent/20 transition-colors group">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
                    <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
                       <div className="p-2 rounded-md bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
                         <Code size={18} />
@@ -297,25 +297,25 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                 </div>
 
                 {/* Commits */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-primary/5 hover:border-brand-accent/20 transition-colors group">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
                    <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
-                      <div className="p-2 rounded-md bg-brand-purple/10 text-brand-purple border border-brand-purple/20">
+                      <div className="p-2 rounded-md bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
                         <GitCommit size={18} />
                       </div>
                       <span className="text-xs font-mono tracking-wide">Total Commits</span>
                    </div>
-                   <span className="font-mono font-bold text-brand-purple">{stats.commits}</span>
+                   <span className="font-mono font-bold text-brand-accent">{stats.commits}</span>
                 </div>
 
                 {/* Performance */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-primary/5 hover:border-brand-accent/20 transition-colors group">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
                    <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
-                      <div className="p-2 rounded-md bg-green-500/10 text-green-400 border border-green-500/20">
+                      <div className="p-2 rounded-md bg-green-500/10 text-green-600 border border-green-500/20">
                         <Zap size={18} />
                       </div>
                       <span className="text-xs font-mono tracking-wide">Runtime Perf</span>
                    </div>
-                   <span className="font-mono font-bold text-green-400">{stats.performance}</span>
+                   <span className="font-mono font-bold text-green-600">{stats.performance}</span>
                 </div>
 
               </div>
@@ -329,13 +329,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                         href={project.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-primary border border-brand-primary/10 font-bold text-sm rounded hover:bg-brand-accent hover:border-brand-accent hover:text-black transition-colors group"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-primary border border-brand-border font-bold text-sm rounded hover:bg-brand-accent hover:border-brand-accent hover:text-white transition-colors group"
                     >
                         <span>View Live Deployment</span>
                         <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
                 ) : (
-                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface/50 text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed border border-brand-primary/5">
+                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed border border-brand-border">
                         <span>Deployment Offline</span>
                         <ExternalLink size={16} />
                     </button>
@@ -346,13 +346,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                         href={project.repositoryUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-black border border-brand-primary/10 text-brand-primary font-bold text-sm rounded hover:bg-brand-surface transition-colors group"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-primary font-bold text-sm rounded hover:bg-brand-surface transition-colors group"
                     >
                         <span>Source Code</span>
                         <Github size={16} className="group-hover:rotate-12 transition-transform" />
                     </a>
                 ) : (
-                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-black border border-brand-primary/5 text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed">
+                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed">
                         <span>Source Private</span>
                         <Lock size={16} />
                     </button>

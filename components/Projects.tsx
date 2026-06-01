@@ -22,9 +22,9 @@ const getProjectImage = (id: string) => {
 const getGradientForProject = (id: string) => {
   // Strict Two-Tone Gradients: Onyx base with Jungle Green hints
   const gradients = [
-    'bg-gradient-to-br from-brand-base to-brand-accent/10',
-    'bg-gradient-to-br from-brand-base to-brand-accent/20',
-    'bg-gradient-to-br from-brand-base via-brand-base to-brand-accent/15',
+    'bg-brand-muted',
+    'bg-brand-accent/10',
+    'bg-brand-muted',
   ];
   let hash = 0;
   for (let i = 0; i < id.length; i++) {
@@ -453,7 +453,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
               key={project.id}
               variants={cardVariants}
               onClick={() => onProjectClick?.(project)}
-              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer border border-white/5 hover:border-brand-accent/30 h-[480px] w-full max-w-[400px] hover:-translate-y-1 transition-all duration-300"
+              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer border border-brand-border hover:border-brand-accent/40 h-[480px] w-full max-w-[400px] hover:-translate-y-1 transition-all duration-300"
             >
               {/* Full Picture Background */}
               <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -463,7 +463,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, a
 
               {/* Content Panel */}
               <div className="absolute inset-0 p-8 pb-10 flex flex-col justify-end items-center z-10 text-center">
-                <h3 className="text-2xl font-serif text-white leading-tight text-center mb-1">
+                <h3 className="text-2xl font-display font-bold text-white leading-tight text-center mb-1">
                   {project.title}
                 </h3>
                 <span className="text-brand-accent text-xs font-sans tracking-wide mb-3">

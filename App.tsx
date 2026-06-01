@@ -1,47 +1,54 @@
-import React, { useState, useEffect, lazy, Suspense, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
-import { Blog, posts as blogPosts } from './components/Blog';
+import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
 import { Marketplace } from './components/Marketplace';
-import { BlogPostDetail } from './components/BlogPostDetail';
 import { TooltipProvider } from './components/ui/tooltip';
 import { ContentSkeleton } from './components/ui/content-skeleton';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { Code2, Menu, X } from 'lucide-react';
-import { Button } from './components/ui/button';
+import { SplashScreen } from './components/SplashScreen';
+import { getPostBySlug } from './lib/blog';
 import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
-const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
 const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(module => ({ default: module.ProjectDetail })));
-import { SplashScreen } from './components/SplashScreen';
-
-// MobileBar removed by user request (cleaner UI)
-const MobileBar: React.FC = () => null;
+// Blog routes carry the markdown + syntax-highlight + giscus weight — split them
+// into their own chunks so the homepage bundle stays light.
+const BlogPostDetail = lazy(() => import('./components/BlogPostDetail').then(module => ({ default: module.BlogPostDetail })));
+const BlogIndex = lazy(() => import('./components/BlogIndex').then(module => ({ default: module.BlogIndex })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [showBlogIndex, setShowBlogIndex] = useState(false);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
-  // Blog post deep-linking: /blog/<slug> maps to an open post. Real, indexable
-  // URLs (Google ignores hash fragments) — the vercel.json rewrite serves the
-  // SPA for any non-/api path, so history.pushState routing works in prod.
+  // URL routing for a static SPA. The vercel.json rewrite serves index.html for
+  // any non-/api path, so history.pushState gives us real, indexable URLs:
+  //   /blog/<slug> → an open post   ·   /blog → the full index   ·   else → home.
   useEffect(() => {
     const syncFromPath = () => {
-      const match = window.location.pathname.match(/^\/blog\/(.+?)\/?$/);
-      const post = match ? blogPosts.find(p => p.id === match[1]) : undefined;
-      setSelectedPost(post ?? null);
+      const path = window.location.pathname;
+      const slugMatch = path.match(/^\/blog\/(.+?)\/?$/);
+      if (slugMatch) {
+        setSelectedPost(getPostBySlug(slugMatch[1]) ?? null);
+        setShowBlogIndex(false);
+      } else if (/^\/blog\/?$/.test(path)) {
+        setShowBlogIndex(true);
+        setSelectedPost(null);
+      } else {
+        setShowBlogIndex(false);
+        setSelectedPost(null);
+      }
     };
     syncFromPath();
     window.addEventListener('popstate', syncFromPath);
@@ -50,21 +57,32 @@ function App() {
 
   const handlePostClick = (post: BlogPost) => {
     setSelectedPost(post);
+    setShowBlogIndex(false);
     window.history.pushState(null, '', `/blog/${post.id}`);
+    window.scrollTo(0, 0);
   };
 
+  const openBlogIndex = () => {
+    setSelectedPost(null);
+    setShowBlogIndex(true);
+    window.history.pushState(null, '', '/blog');
+    window.scrollTo(0, 0);
+  };
+
+  // A post returns up one level to the blog index.
   const handlePostBack = () => {
     setSelectedPost(null);
+    setShowBlogIndex(true);
+    window.history.pushState(null, '', '/blog');
+  };
+
+  const handleBlogIndexBack = () => {
+    setShowBlogIndex(false);
     window.history.pushState(null, '', '/');
   };
 
-  const handleProjectClick = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const handleBackToHome = () => {
-    setSelectedProject(null);
-  };
+  const handleProjectClick = (project: Project) => setSelectedProject(project);
+  const handleBackToHome = () => setSelectedProject(null);
 
   const handleTechClickFromDetail = (tech: string) => {
     setActiveTechFilter(tech);
@@ -77,7 +95,7 @@ function App() {
   if (selectedProject) {
     return (
       <TooltipProvider>
-        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans">
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
           <CustomCursor />
           <Suspense fallback={null}>
             <ProjectDetail
@@ -95,9 +113,30 @@ function App() {
   if (selectedPost) {
     return (
       <TooltipProvider>
-        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans">
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
           <CustomCursor />
-          <BlogPostDetail post={selectedPost} onBack={handlePostBack} />
+          <Suspense fallback={null}>
+            <BlogPostDetail
+              post={selectedPost}
+              onBack={handlePostBack}
+              onPostClick={handlePostClick}
+              onTagClick={openBlogIndex}
+            />
+          </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
+  if (showBlogIndex) {
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+          <CustomCursor />
+          <Suspense fallback={null}>
+            <BlogIndex onPostClick={handlePostClick} onBack={handleBlogIndexBack} />
+          </Suspense>
           <Analytics />
         </div>
       </TooltipProvider>
@@ -106,7 +145,7 @@ function App() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent transition-colors duration-300 font-sans cursor-none-on-desktop">
+      <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
         <AnimatePresence mode="wait">
           {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
         </AnimatePresence>
@@ -115,8 +154,6 @@ function App() {
           <>
             <CustomCursor />
             <ScrollProgress />
-            {/* Navigation */}
-            <MobileBar />
             <ArtisticNav />
 
             <main className="relative z-10 w-full overflow-x-hidden">
@@ -135,12 +172,11 @@ function App() {
               </ErrorBoundary>
 
               <Marketplace />
-              <Blog onPostClick={handlePostClick} />
+              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
             </main>
             <Contact />
             <Footer />
             <Analytics />
-
           </>
         )}
       </div>

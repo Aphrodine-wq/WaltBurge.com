@@ -11,24 +11,25 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        display: ['Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
         brand: {
           base: 'rgb(var(--bg-primary) / <alpha-value>)',
+          muted: 'rgb(var(--bg-secondary) / <alpha-value>)',
           surface: 'rgb(var(--bg-surface) / <alpha-value>)',
           accent: 'rgb(var(--accent-color) / <alpha-value>)',
+          'accent-hover': 'rgb(var(--accent-hover) / <alpha-value>)',
           secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+          faint: 'rgb(var(--text-muted) / <alpha-value>)',
           border: 'rgb(var(--border-color) / <alpha-value>)',
           primary: 'rgb(var(--text-primary) / <alpha-value>)',
-        },
-        aurora: {
-          teal: 'rgb(var(--aurora-teal) / <alpha-value>)',
         },
       },
       backgroundImage: {
         'grid-pattern': "linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px), linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px)",
-        'radial-fade': 'radial-gradient(circle at center, rgba(var(--accent-color), 0.05) 0%, transparent 70%)',
+        'radial-fade': 'radial-gradient(circle at center, rgb(var(--accent-color) / 0.05) 0%, transparent 70%)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

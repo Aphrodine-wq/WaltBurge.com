@@ -36,4 +36,5 @@ export interface BlogPost {
   readTime: string;
   tags: string[];
   featured?: boolean;
+  author?: string;
 }

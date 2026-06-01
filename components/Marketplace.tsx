@@ -161,14 +161,14 @@ export const Marketplace: React.FC = () => {
                             >
                                 {product.popular && (
                                     <div className="absolute top-6 right-6">
-                                        <Badge className="bg-brand-accent border-none text-black font-bold shadow-lg">
+                                        <Badge className="bg-brand-accent border-none text-white font-bold shadow-lg">
                                             <Star size={10} className="mr-1 fill-current" /> POPULAR
                                         </Badge>
                                     </div>
                                 )}
 
                                 <div className="mb-8">
-                                    <div className="w-14 h-14 rounded-2xl bg-brand-base border border-brand-border flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-black transition-all duration-500 shadow-inner">
+                                    <div className="w-14 h-14 rounded-2xl bg-brand-base border border-brand-border flex items-center justify-center mb-6 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-500 shadow-inner">
                                         {product.type === 'Template' ? <Layout size={28} /> : <Package size={28} />}
                                     </div>
                                     <h3 className="text-2xl font-bold text-brand-primary mb-3">{product.title}</h3>
@@ -193,7 +193,7 @@ export const Marketplace: React.FC = () => {
                                 </div>
 
                                 {/* Animated Background Glow */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/0 via-transparent to-brand-purple/0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" />
+                                <div className="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                             </motion.div>
                         ))}
                     </AnimatePresence>
@@ -225,7 +225,7 @@ export const Marketplace: React.FC = () => {
                                 <div className="w-full md:w-1/2 bg-brand-base p-12 flex flex-col justify-center relative overflow-hidden">
                                     <div className="absolute inset-0 bg-mesh-gradient opacity-10" />
                                     <div className="relative z-10 space-y-8">
-                                        <div className="w-20 h-20 rounded-3xl bg-brand-accent flex items-center justify-center text-black shadow-2xl shadow-brand-accent/20">
+                                        <div className="w-20 h-20 rounded-3xl bg-brand-accent flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20">
                                             {selectedProduct.type === 'Template' ? <Layout size={40} /> : <Package size={40} />}
                                         </div>
                                         <div>
@@ -287,7 +287,7 @@ export const Marketplace: React.FC = () => {
                                             rel="noopener noreferrer"
                                             className="block"
                                         >
-                                            <Button className="w-full h-16 rounded-2xl bg-brand-primary text-brand-base text-lg font-black hover:bg-brand-accent hover:text-black transition-all group cursor-pointer">
+                                            <Button className="w-full h-16 rounded-2xl bg-brand-primary text-brand-base text-lg font-black hover:bg-brand-accent hover:text-white transition-all group cursor-pointer">
                                                 ACQUIRE ASSET
                                                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
                                             </Button>

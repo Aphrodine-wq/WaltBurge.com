@@ -4,25 +4,22 @@
 
 @layer base {
   :root {
-    --bg-deep: 18 17 19;
-    --bg-nebula: 34 39 37;
-    --bg-surface: 34 39 37;
-    --text-glow: 249 249 249;
-    --text-primary: 249 249 249;
-    --text-secondary: 156 163 175;
-    --accent-color: 249 249 249;
-    --border-color: 60 65 60;
-    --aurora-teal: 249 249 249;
-    --aurora-purple: 156 163 175;
-    --aurora-pink: 229 231 235;
-    --bg-primary: var(--bg-deep);
-    --bg-secondary: var(--bg-nebula);
+    /* Walt Builds brand — matches the business cards (cream / ink / cobalt) */
+    --bg-primary: 248 245 238;     /* #F8F5EE  cream paper — the page */
+    --bg-secondary: 241 236 224;   /* #F1ECE0  muted inset / alt sections */
+    --bg-surface: 255 255 255;     /* #FFFFFF  raised cards */
+    --text-primary: 26 26 26;      /* #1A1A1A  ink — primary text */
+    --text-secondary: 87 83 78;    /* #57534E  readable secondary (~7:1 on cream) */
+    --text-muted: 138 133 123;     /* #8A857B  micro-labels only — fails AA for body */
+    --accent-color: 37 99 235;     /* #2563EB  cobalt — the one accent */
+    --accent-hover: 29 78 216;     /* #1D4ED8  cobalt, pressed */
+    --border-color: 226 217 194;   /* #E2D9C2  tan hairline */
   }
 
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
-    background-color: rgb(var(--bg-deep));
+    background-color: rgb(var(--bg-primary));
   }
 
   @media (min-width: 768px) {
@@ -54,11 +51,15 @@
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     cursor: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
+  /* Headings carry the card's voice: heavy grotesque, tight tracking — no serif */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
   }
 
   button:focus-visible,
@@ -71,15 +72,9 @@
   }
 }
 
-@layer utilities {
-  .font-display {
-    font-family: 'Cinzel', serif;
-  }
-}
-
-/* Scrollbar */
+/* Scrollbar — ink on cream */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -87,10 +82,53 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(26, 26, 26, 0.18);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(26, 26, 26, 0.32);
 }
+
+/* Blog article — code panels + syntax highlighting, scoped to the article body */
+.article-body .article-pre {
+  background: #16150f;
+  border: 1px solid rgba(226, 217, 194, 0.14);
+  padding: 1.25rem 1.4rem;
+  color: #edeae0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.article-body .article-pre code {
+  font-family: 'JetBrains Mono', monospace;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  white-space: pre;
+}
+
+.article-body .hljs-comment,
+.article-body .hljs-quote { color: #8a857b; font-style: italic; }
+.article-body .hljs-keyword,
+.article-body .hljs-selector-tag,
+.article-body .hljs-literal,
+.article-body .hljs-section,
+.article-body .hljs-tag,
+.article-body .hljs-link { color: #9db4ff; }
+.article-body .hljs-string,
+.article-body .hljs-attr,
+.article-body .hljs-meta .hljs-string { color: #b5d99c; }
+.article-body .hljs-number,
+.article-body .hljs-built_in,
+.article-body .hljs-type,
+.article-body .hljs-attribute,
+.article-body .hljs-variable,
+.article-body .hljs-template-variable { color: #e0af68; }
+.article-body .hljs-title,
+.article-body .hljs-name,
+.article-body .hljs-selector-id,
+.article-body .hljs-selector-class { color: #7dcfff; }
+.article-body .hljs-emphasis { font-style: italic; }
+.article-body .hljs-strong { font-weight: 700; }

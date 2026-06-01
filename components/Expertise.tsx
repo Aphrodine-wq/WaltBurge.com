@@ -90,7 +90,7 @@ export const Expertise: React.FC = () => {
             <motion.div
               key={area.title}
               variants={itemVariants}
-              className="group relative p-6 md:p-8 rounded-2xl border border-brand-accent/20 bg-brand-surface/50 hover:border-brand-accent transition-colors duration-300 flex flex-col items-center text-center"
+              className="group relative p-6 md:p-8 rounded-2xl border border-brand-border bg-brand-surface hover:border-brand-accent hover:shadow-xl hover:shadow-brand-accent/5 transition-all duration-300 flex flex-col items-center text-center"
             >
               <div className="w-14 h-14 rounded-xl bg-brand-surface border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
                 <area.icon className="w-8 h-8 text-brand-accent" />
@@ -107,7 +107,7 @@ export const Expertise: React.FC = () => {
                 {area.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-xs px-3 py-1 rounded-full bg-brand-base/50 border border-brand-border text-brand-secondary font-mono group-hover:border-brand-accent/50 group-hover:text-brand-accent transition-colors"
+                    className="text-xs px-3 py-1 rounded-full bg-brand-muted border border-brand-border text-brand-secondary font-mono group-hover:border-brand-accent/50 group-hover:text-brand-accent transition-colors"
                   >
                     {skill}
                   </span>

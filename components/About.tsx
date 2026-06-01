@@ -40,19 +40,19 @@ export const About: React.FC = () => {
             </h2>
 
             <div className="grid grid-cols-2 gap-4 mt-8 mx-auto md:mx-0 max-w-sm md:max-w-none">
-              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+              <div className="p-4 md:p-5 bg-brand-muted rounded-xl border border-brand-border">
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">7mo</div>
                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Self-Taught</div>
               </div>
-              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+              <div className="p-4 md:p-5 bg-brand-muted rounded-xl border border-brand-border">
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">12+</div>
                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Projects Shipped</div>
               </div>
-              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+              <div className="p-4 md:p-5 bg-brand-muted rounded-xl border border-brand-border">
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">18K+</div>
                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">AI Training Examples</div>
               </div>
-              <div className="p-4 md:p-5 bg-brand-base/50 rounded-xl border border-brand-primary/5">
+              <div className="p-4 md:p-5 bg-brand-muted rounded-xl border border-brand-border">
                 <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">1</div>
                 <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">Custom LLM Trained</div>
               </div>
@@ -75,7 +75,7 @@ export const About: React.FC = () => {
 
               <div className="flex gap-4 md:gap-6 group">
                 <div className="hidden md:flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-accent font-bold font-mono text-sm">01</div>
+                  <div className="w-10 h-10 rounded-full bg-brand-muted border border-brand-border flex items-center justify-center text-brand-accent font-bold font-mono text-sm">01</div>
                   <div className="w-px h-full bg-brand-primary/10 my-2" />
                 </div>
                 <div className="flex-1">
@@ -88,7 +88,7 @@ export const About: React.FC = () => {
 
               <div className="flex gap-4 md:gap-6 group">
                 <div className="hidden md:flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-brand-purple font-bold font-mono text-sm">02</div>
+                  <div className="w-10 h-10 rounded-full bg-brand-muted border border-brand-border flex items-center justify-center text-brand-accent font-bold font-mono text-sm">02</div>
                   <div className="w-px h-full bg-brand-primary/10 my-2" />
                 </div>
                 <div className="flex-1">
@@ -101,7 +101,7 @@ export const About: React.FC = () => {
 
               <div className="flex gap-4 md:gap-6 group">
                 <div className="hidden md:flex flex-col items-center">
-                  <div className="w-10 h-10 rounded-full bg-brand-dark border border-brand-primary/10 flex items-center justify-center text-green-400 font-bold font-mono text-sm">03</div>
+                  <div className="w-10 h-10 rounded-full bg-brand-muted border border-brand-border flex items-center justify-center text-brand-accent font-bold font-mono text-sm">03</div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg md:text-xl font-bold text-brand-primary mb-3">Own Your Tools</h3>
