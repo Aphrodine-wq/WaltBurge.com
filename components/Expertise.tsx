@@ -72,10 +72,10 @@ export const Expertise: React.FC = () => {
             <span className="inline-block w-8 h-px bg-brand-accent ml-3" />
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 uppercase">
-            Domain <span className="text-brand-accent">Mastery</span>
+            The Engineering <span className="text-brand-accent">Behind It</span>
           </h2>
           <p className="text-lg text-brand-secondary max-w-2xl mx-auto">
-            Deep expertise across the full technology stack, from bare metal to AI
+            I build these systems myself, end to end &mdash; the depth that lets me ship real AI instead of reselling someone else&rsquo;s API
           </p>
         </motion.div>
 

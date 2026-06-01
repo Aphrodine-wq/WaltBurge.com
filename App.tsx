@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
+import { Specialties } from './components/Specialties';
 import { Expertise } from './components/Expertise';
 import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
@@ -159,6 +160,7 @@ function App() {
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
               <About />
+              <Specialties />
               <Expertise />
 
               <ErrorBoundary>

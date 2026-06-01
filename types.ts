@@ -21,6 +21,7 @@ export interface Project {
 export enum SectionId {
   HERO = 'hero',
   ABOUT = 'about',
+  SPECIALTIES = 'specialties',
   PROJECTS = 'projects',
   SKILLS = 'skills',
   BLOG = 'blog',

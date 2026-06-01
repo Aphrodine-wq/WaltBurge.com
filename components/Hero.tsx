@@ -33,7 +33,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8"
         >
-          Creative Development
+          AI Consultant · Oxford, MS
         </motion.span>
 
         <motion.h1
@@ -49,9 +49,9 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-sans text-lg md:text-xl text-brand-secondary max-w-xl leading-relaxed mb-12"
+          className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          Full-stack developer building construction technology, AI estimation models, and contractor marketplaces.
+          AI consultant for <span className="text-brand-primary font-semibold">healthcare, law, and construction</span>. I build the custom models, voice agents, and automations that bring you patients, cases, and bids &mdash; not slide decks.
         </motion.p>
 
         <motion.div

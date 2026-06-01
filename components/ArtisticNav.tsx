@@ -6,6 +6,7 @@ import { SectionId } from '../types';
 // Labeled business header. Logo left (with the card's cobalt period), links right,
 // Contact as the cobalt CTA. Solidifies on scroll. Blog promoted to a top-level link.
 const navItems = [
+  { id: SectionId.SPECIALTIES, label: 'Services' },
   { id: SectionId.PROJECTS, label: 'Work' },
   { id: SectionId.BLOG, label: 'Blog' },
   { id: 'marketplace', label: 'Shop' },
