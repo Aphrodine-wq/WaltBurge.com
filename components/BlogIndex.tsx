@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, BookOpen } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
 import { BlogPost } from '../types';
 import { getAllPosts, allTags } from '../lib/blog';
-import { PostCard } from './PostCard';
+import { PostCard, formatDate } from './PostCard';
 
 interface BlogIndexProps {
   onPostClick: (post: BlogPost) => void;
@@ -23,7 +23,34 @@ const FilterButton: React.FC<{ active: boolean; onClick: () => void; children: R
   </button>
 );
 
-// The full /blog destination — the blog as a first-class page, not a homepage section.
+// Editorial index row: date/meta column beside title + excerpt, hairline divider.
+const PostRow: React.FC<{ post: BlogPost; onClick: (p: BlogPost) => void; index: number }> = ({ post, onClick, index }) => (
+  <motion.button
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-40px' }}
+    transition={{ duration: 0.4, delay: (index % 6) * 0.04 }}
+    onClick={() => onClick(post)}
+    className="group w-full text-left py-8 md:py-9 border-b border-brand-border grid md:grid-cols-[170px_1fr] gap-3 md:gap-10 items-start"
+  >
+    <div className="flex md:flex-col flex-wrap items-center md:items-start gap-x-3 gap-y-1.5 md:gap-2 pt-1">
+      <span className="font-mono text-xs text-brand-secondary">{formatDate(post.date)}</span>
+      <span className="font-mono text-[11px] text-brand-accent uppercase tracking-wider">{post.tags[0]}</span>
+      <span className="font-mono text-xs text-brand-secondary">{post.readTime}</span>
+    </div>
+    <div>
+      <h3 className="text-xl md:text-3xl font-black text-brand-primary tracking-tight leading-tight group-hover:text-brand-accent transition-colors mb-3">
+        {post.title}
+      </h3>
+      <p className="text-brand-secondary text-base md:text-lg leading-relaxed max-w-2xl">{post.excerpt}</p>
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+        Read article <ArrowRight size={15} />
+      </span>
+    </div>
+  </motion.button>
+);
+
+// The full /blog destination — the blog as a first-class editorial page.
 export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const posts = getAllPosts();
@@ -55,15 +82,15 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
         </button>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-32 md:pt-40 pb-24">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-32 md:pt-40 pb-24">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-14 md:mb-20"
+          className="mb-12 md:mb-16"
         >
-          <span className="font-mono text-xs text-brand-accent uppercase tracking-widest">The Build Log</span>
+          <span className="font-mono text-xs text-brand-accent uppercase tracking-[0.22em]">The Build Log</span>
           <h1 className="mt-4 text-5xl md:text-8xl font-black text-brand-primary tracking-tighter leading-[0.95]">
             Writing<span className="text-brand-accent">.</span>
           </h1>
@@ -83,11 +110,14 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
 
         {featured && <PostCard post={featured} onClick={onPostClick} variant="featured" />}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {rest.map((post, i) => (
-            <PostCard key={post.id} post={post} onClick={onPostClick} index={i} />
-          ))}
-        </div>
+        {/* Editorial list */}
+        {rest.length > 0 && (
+          <div className="mt-4 border-t border-brand-border">
+            {rest.map((post, i) => (
+              <PostRow key={post.id} post={post} onClick={onPostClick} index={i} />
+            ))}
+          </div>
+        )}
 
         {filtered.length === 0 && (
           <div className="py-24 text-center border border-dashed border-brand-border rounded-xl">
