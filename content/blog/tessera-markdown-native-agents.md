@@ -4,7 +4,6 @@ slug: tessera-markdown-native-agents
 date: 2026-05-23
 readTime: 11 min
 tags: [AI, Tessera]
-featured: true
 author: James Walton
 excerpt: Building an AI agent shouldn't require five frameworks, three vendor SDKs, and a vector DB you babysit. It should require markdown and a compiler that takes the boundaries seriously. So I built one.
 ---
