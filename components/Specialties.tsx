@@ -10,36 +10,36 @@ const specialties = [
   {
     icon: HeartPulse,
     industry: 'Healthcare',
-    promise: 'AI that fills the schedule',
+    promise: 'Fills your schedule',
     description:
-      'A 24/7 AI front desk that answers insurance and "how do I get started" questions, captures after-hours patients, and an automated review engine that builds your local reputation. HIPAA-aware by design — it captures and routes, it never gives medical advice.',
-    chips: ['AI Front Desk', 'Patient Intake', 'Review Engine', 'HIPAA-aware'],
-    proof: 'Live for a Mississippi MAT clinic.',
+      'It answers your phone day and night, books new patients while you’re busy with the ones in front of you, and asks happy patients for reviews so more people find you. It never gives medical advice — it just makes sure nobody slips through.',
+    chips: ['Answers calls 24/7', 'Books patients', 'Builds reviews', 'HIPAA-safe'],
+    proof: 'Running now for a Mississippi clinic.',
   },
   {
     icon: Scale,
     industry: 'Law',
-    promise: 'AI that never misses a case',
+    promise: 'Never miss a case',
     description:
-      'Round-the-clock AI intake that triages case type and urgency, catches the 2 a.m. arrest and the weekend injury, captures conflict-check details, and books the consult. Bar-compliant — and it never gives legal advice. One missed call is a case walking to the firm down the street.',
-    chips: ['AI Intake', 'Case Triage', 'Conflict Capture', 'Bar-Compliant'],
-    proof: 'Built on a live AI voice-agent deployment.',
+      'When someone needs a lawyer at 2 a.m., it picks up, figures out the kind of case and how urgent it is, gathers the details, and books the consult. The next emergency becomes your client — not the firm down the street’s. It never gives legal advice.',
+    chips: ['Answers 24/7', 'Sorts urgent cases', 'Books consults', 'Bar-safe'],
+    proof: 'Built on a live voice-agent setup.',
   },
   {
     icon: HardHat,
     industry: 'Construction',
-    promise: 'AI that prices and wins work',
+    promise: 'Win more bids',
     description:
-      'Custom estimation models, voice-to-estimate agents, and lead-to-bid automation — built by someone who ran crews and wrote estimates by hand before writing code. ConstructionAI (a custom-trained model) and the FairTradeWorker marketplace are mine, not someone else’s API.',
-    chips: ['Custom LLM', 'Voice Estimates', 'Lead-to-Bid', 'Marketplace'],
-    proof: 'Custom construction LLM + live marketplace.',
+      'It prices jobs in minutes instead of late nights, turns a quick voice note into a real estimate, and follows up on every lead so none go cold. Built by someone who ran crews and wrote estimates by hand long before he wrote code.',
+    chips: ['Fast estimates', 'Voice-to-quote', 'Follows up leads', 'Built by a builder'],
+    proof: 'My own estimating tool + live marketplace.',
   },
 ];
 
 const ladder = [
-  { icon: Search, step: 'AI Audit', detail: 'I find the 3 tasks AI can kill in your business.' },
-  { icon: Wrench, step: 'Build & Install', detail: 'A fixed-scope system that ships, not a strategy deck.' },
-  { icon: RefreshCw, step: 'Manage & Grow', detail: 'Monthly tuning and reporting so it keeps paying off.' },
+  { icon: Search, step: 'Free audit', detail: 'I find the 3 jobs AI can take off your plate.' },
+  { icon: Wrench, step: 'Build & set up', detail: 'I build it and get it running — a working tool, not a slide deck.' },
+  { icon: RefreshCw, step: 'Keep it earning', detail: 'I tune it each month so it keeps paying for itself.' },
 ];
 
 export const Specialties: React.FC = () => {
@@ -71,8 +71,9 @@ export const Specialties: React.FC = () => {
             Built for <span className="text-brand-accent">Health, Law &amp; Construction</span>
           </h2>
           <p className="text-lg text-brand-secondary max-w-2xl mx-auto">
-            I don&rsquo;t resell ChatGPT. I build the custom models, voice agents, and automations that bring
-            you patients, cases, and bids &mdash; specialized for three industries I know cold.
+            I build smart tools that answer your phone, follow up with every lead, and take the busywork off
+            your plate &mdash; so you stop losing customers to whoever picks up first. Made for three
+            industries I know firsthand.
           </p>
         </motion.div>
 
