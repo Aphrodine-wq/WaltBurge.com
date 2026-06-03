@@ -95,15 +95,62 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
       setMeta('meta[name="description"]', post.excerpt),
       setMeta('meta[property="og:title"]', post.title),
       setMeta('meta[property="og:description"]', post.excerpt),
+      setMeta('meta[property="og:type"]', 'article'),
       setMeta('meta[name="twitter:title"]', post.title),
       setMeta('meta[name="twitter:description"]', post.excerpt),
     ];
 
+    // Canonical URL — dedups the SPA's hash/query variants to one indexable URL.
+    const url = `https://waltburge.com/blog/${post.id}`;
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const hadCanonical = !!canonical;
+    const prevHref = canonical?.getAttribute('href') ?? null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', url);
+
+    // Article + Breadcrumb JSON-LD so Google can render rich results and place
+    // the post in the site hierarchy. Google executes JS, so this is read.
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify([
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        dateModified: post.date,
+        articleSection: post.category,
+        keywords: post.tags.join(', '),
+        author: { '@type': 'Person', name: post.author || 'James Walton', url: 'https://waltburge.com' },
+        publisher: { '@type': 'Person', name: 'James Walton' },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        image: 'https://waltburge.com/og-image.png',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://waltburge.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://waltburge.com/blog' },
+          { '@type': 'ListItem', position: 3, name: post.title, item: url },
+        ],
+      },
+    ]);
+    document.head.appendChild(ld);
+
     return () => {
       document.title = prevTitle;
       restorers.forEach(restore => restore());
+      ld.remove();
+      if (hadCanonical && prevHref !== null) canonical!.setAttribute('href', prevHref);
+      else if (!hadCanonical) canonical!.remove();
     };
-  }, [post.id, post.title, post.excerpt]);
+  }, [post.id, post.title, post.excerpt, post.date, post.category, post.tags, post.author]);
 
   return (
     <div className="min-h-screen bg-brand-base text-brand-primary pt-16 md:pt-20 animate-fade-in">
