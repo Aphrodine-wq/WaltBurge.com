@@ -70,8 +70,16 @@ Tessera is the body. Around it live four neighbor systems, each useful on its ow
 
 No other agent framework I've seen does formal verification *before* the agent runs. That's the combination talking, not any one piece.
 
-## Where it's headed
+## Where it is now
 
-Nine substrates ship today: `logic`, `agent`, `memory:working`, `memory:workspace`, `memory:episodic`, `memory:semantic`, `prompt`, `tool`, and `neural`. More are coming — `policy`, `eval`, `identity`, `evolve`. It's pre-alpha. ~3.6K lines of Python, 33 tests passing, seven example agents you can run today.
+This post launched with nine substrates and thirty-three tests. As of `v0.1.0` it's **thirty substrates shipped and 316 tests green** — `logic`, `agent`, the full `memory:*` family, `prompt`, `tool`, `neural`, and a stack of cognitive-science substrates that used to be research code and are now first-class language features.
 
-The thesis is simple: writing an agent should feel like writing a note. The compiler does the rest.
+The most interesting additions are the ones that make an agent feel less like a script and more like a mind:
+
+- **`tsr:rl`** — a reinforcement-learning substrate. An agent can `rl_choose()` an action and `rl_reward()` the outcome, and it keeps a persisted Q-table per agent. It learns which move works without you rewriting its plan.
+- **Auto-recall (RAG built into the runtime)** — any agent with a `memory:semantic` or `memory:episodic` block gets the relevant facts and recent events pulled into *every* prompt automatically. It remembers without being told to look.
+- **Auto-confidence routing** — reasoning substrates write their own confidence, and a dual-process layer reads it to route the next step fast or slow. The agent decides for itself when to think harder.
+
+It's still early and it's still moving fast, but it's no longer pre-alpha — it runs real agents today, verified by AEON before a single line executes.
+
+The thesis hasn't changed: writing an agent should feel like writing a note. The compiler does the rest — there's just a lot more "rest" now.
