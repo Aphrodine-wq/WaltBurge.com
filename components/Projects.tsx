@@ -40,7 +40,7 @@ export const projects: Project[] = [
     title: 'FairTradeWorker',
     category: 'Web',
     description: 'Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.',
-    fullDescription: 'FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across three repos — Next.js frontend, Kotlin/Spring Boot backend with STOMP WebSocket realtime, and a React Native mobile app.',
+    fullDescription: 'FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across multiple repos — Next.js frontend, a Java/Spring Boot backend (ftw-svc) with STOMP WebSocket realtime, and a React Native mobile app.',
     challenge: 'Building a marketplace that handles the full lifecycle — from job posting through bidding, contract signing, milestone-based payments, and dispute resolution — while keeping contractors honest and homeowners protected.',
     solution: 'Three-tier architecture: homeowner posts job, contractor bids, subcontractor handles specialty work. QuickBooks handles all payment flows natively. ConstructionAI powers instant cost estimates so homeowners know what\'s fair before a single bid comes in.',
     features: [
@@ -51,12 +51,11 @@ export const projects: Project[] = [
       'Mobile app with 30+ screens (React Native/Expo)',
       '6 revenue streams including white-label licensing'
     ],
-    techStack: ['Next.js', 'TypeScript', 'Kotlin', 'React Native', 'PostgreSQL', 'Tailwind'],
+    techStack: ['Next.js', 'TypeScript', 'Java', 'Spring Boot', 'React Native', 'PostgreSQL'],
     tags: ['marketplace', 'full-stack', 'construction'],
     imageUrl: getProjectImage('fairtradeworker'),
     images: [],
-    link: 'https://fair-trade-worker.vercel.app',
-    repositoryUrl: 'https://github.com/Aphrodine-wq/fairtradeworker',
+    link: 'https://fairtradeworker.com',
     status: 'Live',
     year: '2025'
   },
@@ -79,8 +78,7 @@ export const projects: Project[] = [
     tags: ['saas', 'construction', 'ai-powered'],
     imageUrl: getProjectImage('mshomepros'),
     images: [],
-    link: 'https://mhpestimate.cloud',
-    repositoryUrl: 'https://github.com/Aphrodine-wq/MsHomePros',
+    link: 'https://mshomepros.com',
     status: 'Live',
     year: '2025'
   },
@@ -108,6 +106,30 @@ export const projects: Project[] = [
     year: '2025'
   },
   {
+    id: 'engram',
+    title: 'Engram',
+    category: 'AI',
+    description: 'Open-source screen memory — your computer reads and remembers everything on your screen, searchable forever, and nothing ever leaves your machine.',
+    fullDescription: 'Engram gives any computer a photographic memory. It reads the text off your screen with on-device OCR, redacts secrets, and stores it in a local searchable index — so you, or any AI agent, can search everything you have ever seen. One pip install, MIT licensed, and not a single pixel leaves your machine. It is the open-source core of the perception layer behind W.A.L.T.',
+    challenge: 'Microsoft promised this with Recall and pulled it; Rewind.ai built it and walked away. The same thing killed both: they sent your screen to the cloud. Nobody wants their entire screen history sitting on someone else\'s server.',
+    solution: 'Keep all of it local. Capture runs in-process, OCR and secret-redaction happen on-device, and everything lands in a local SQLite full-text index exposed over a REST API and an MCP server — so any AI agent can query your memory without a single network call.',
+    features: [
+      'One-command install: pip install engram-memory',
+      'Reads the text off your screen — stores no images',
+      'Secret redaction before anything is written',
+      'Full-text search across everything you have seen',
+      'REST API + MCP server so any AI agent can use it',
+      'MIT licensed, 100% local — nothing leaves your machine'
+    ],
+    techStack: ['Python', 'SQLite', 'OCR', 'MCP'],
+    tags: ['open-source', 'ai', 'local-first'],
+    imageUrl: getProjectImage('engram'),
+    images: [],
+    repositoryUrl: 'https://github.com/Aphrodine-wq/engram',
+    status: 'Live',
+    year: '2026'
+  },
+  {
     id: 'walt',
     title: 'W.A.L.T.',
     category: 'AI',
@@ -127,7 +149,6 @@ export const projects: Project[] = [
     tags: ['ai-platform', 'distributed', 'autonomous'],
     imageUrl: getProjectImage('walt'),
     images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/walt',
     status: 'Live',
     year: '2025'
   },
@@ -174,7 +195,6 @@ export const projects: Project[] = [
     tags: ['game-dev', 'ecs', 'survival'],
     imageUrl: getProjectImage('driftlands'),
     images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/driftlands',
     status: 'Beta',
     year: '2025'
   },
@@ -197,7 +217,6 @@ export const projects: Project[] = [
     tags: ['linux', 'os', 'gaming'],
     imageUrl: getProjectImage('wos'),
     images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/WOS',
     status: 'Beta',
     year: '2025'
   }
