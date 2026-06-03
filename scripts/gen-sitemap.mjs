@@ -7,6 +7,7 @@ import path from 'node:path';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BLOG_DIR = path.join(ROOT, 'content', 'blog');
+const SERVICES_DIR = path.join(ROOT, 'content', 'services');
 const ORIGIN = 'https://waltburge.com';
 
 // Minimal frontmatter read — we only need date + draft, and we own the format.
@@ -30,8 +31,20 @@ const posts = readdirSync(BLOG_DIR)
 
 const today = posts[0]?.date || '2026-06-01';
 
+// Service menu industries (commercial-intent pages — high SEO priority).
+const serviceSlugs = readdirSync(SERVICES_DIR)
+  .filter(f => f.endsWith('.md'))
+  .map(f => f.replace(/\.md$/, ''));
+
 const urls = [
   { loc: '/', lastmod: today, changefreq: 'weekly', priority: '1.0' },
+  { loc: '/services', lastmod: today, changefreq: 'weekly', priority: '0.9' },
+  ...serviceSlugs.map(slug => ({
+    loc: `/services/${slug}`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.8',
+  })),
   { loc: '/blog', lastmod: today, changefreq: 'weekly', priority: '0.9' },
   ...posts.map(p => ({
     loc: `/blog/${p.slug}`,

@@ -25,12 +25,15 @@ const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(modul
 // into their own chunks so the homepage bundle stays light.
 const BlogPostDetail = lazy(() => import('./components/BlogPostDetail').then(module => ({ default: module.BlogPostDetail })));
 const BlogIndex = lazy(() => import('./components/BlogIndex').then(module => ({ default: module.BlogIndex })));
+const ServicesPage = lazy(() => import('./components/ServicesPage').then(module => ({ default: module.ServicesPage })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [showBlogIndex, setShowBlogIndex] = useState(false);
+  const [showServices, setShowServices] = useState(false);
+  const [servicesSlug, setServicesSlug] = useState<string>('');
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -39,16 +42,25 @@ function App() {
   useEffect(() => {
     const syncFromPath = () => {
       const path = window.location.pathname;
-      const slugMatch = path.match(/^\/blog\/(.+?)\/?$/);
-      if (slugMatch) {
-        setSelectedPost(getPostBySlug(slugMatch[1]) ?? null);
+      const blogSlug = path.match(/^\/blog\/(.+?)\/?$/);
+      const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
+      if (services) {
+        setShowServices(true);
+        setServicesSlug(services[1] || '');
         setShowBlogIndex(false);
+        setSelectedPost(null);
+      } else if (blogSlug) {
+        setSelectedPost(getPostBySlug(blogSlug[1]) ?? null);
+        setShowBlogIndex(false);
+        setShowServices(false);
       } else if (/^\/blog\/?$/.test(path)) {
         setShowBlogIndex(true);
         setSelectedPost(null);
+        setShowServices(false);
       } else {
         setShowBlogIndex(false);
         setSelectedPost(null);
+        setShowServices(false);
       }
     };
     syncFromPath();
@@ -82,6 +94,27 @@ function App() {
     window.history.pushState(null, '', '/');
   };
 
+  const openServices = (slug?: string) => {
+    setShowServices(true);
+    setServicesSlug(slug || '');
+    setSelectedPost(null);
+    setShowBlogIndex(false);
+    setSelectedProject(null);
+    window.history.pushState(null, '', slug ? `/services/${slug}` : '/services');
+    window.scrollTo(0, 0);
+  };
+
+  const handleServicesBack = () => {
+    setShowServices(false);
+    window.history.pushState(null, '', '/');
+  };
+
+  // Switching industry on the menu updates the URL without a view change.
+  const handleServicesSelect = (slug: string) => {
+    setServicesSlug(slug);
+    window.history.replaceState(null, '', `/services/${slug}`);
+  };
+
   const handleProjectClick = (project: Project) => setSelectedProject(project);
   const handleBackToHome = () => setSelectedProject(null);
 
@@ -98,10 +131,11 @@ function App() {
   // mounts, when coming from a sub-page).
   const goToSection = (id: string) => {
     if (id === SectionId.BLOG) { openBlogIndex(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex;
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
+    setShowServices(false);
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -166,6 +200,25 @@ function App() {
     );
   }
 
+  if (showServices) {
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+          <CustomCursor />
+          <Suspense fallback={null}>
+            <ServicesPage
+              initialSlug={servicesSlug}
+              onBack={handleServicesBack}
+              onNavigate={goToSection}
+              onSelect={handleServicesSelect}
+            />
+          </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
@@ -182,7 +235,7 @@ function App() {
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
               <About />
-              <Specialties />
+              <Specialties onOpenMenu={() => openServices()} />
               <Expertise />
 
               <ErrorBoundary>

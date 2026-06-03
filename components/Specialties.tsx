@@ -42,7 +42,11 @@ const ladder = [
   { icon: RefreshCw, step: 'Keep it earning', detail: 'I tune it each month so it keeps paying for itself.' },
 ];
 
-export const Specialties: React.FC = () => {
+interface SpecialtiesProps {
+  onOpenMenu?: () => void;
+}
+
+export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
   const container = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -148,7 +152,7 @@ export const Specialties: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex justify-center mt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <button
               onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover rounded-full transition-colors duration-300"
@@ -157,6 +161,14 @@ export const Specialties: React.FC = () => {
                 Book a free AI audit
               </span>
             </button>
+            {onOpenMenu && (
+              <button
+                onClick={onOpenMenu}
+                className="font-sans text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors"
+              >
+                See the full service menu &rarr;
+              </button>
+            )}
           </div>
         </motion.div>
       </div>
