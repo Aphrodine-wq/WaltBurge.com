@@ -14,7 +14,10 @@ interface BlogProps {
 // of recent posts — the magazine pattern, not a sparse portfolio header.
 export const Blog: React.FC<BlogProps> = ({ onPostClick, onViewAll }) => {
   const posts = getAllPosts();
-  const featured = posts.find(p => p.featured) || posts[0];
+  // Homepage headliner: lead with the consciousness flagship — it's the clearest
+  // door into the AI ethics/consciousness arc. Falls back to newest featured.
+  const HERO_SLUG = 'i-dont-ask-if-my-ai-is-conscious';
+  const featured = posts.find(p => p.id === HERO_SLUG) || posts.find(p => p.featured) || posts[0];
   const recent = posts.filter(p => p.id !== featured?.id).slice(0, 4);
   const total = posts.length;
 
