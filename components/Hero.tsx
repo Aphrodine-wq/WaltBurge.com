@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Phone } from 'lucide-react';
 import { SectionId } from '../types';
 
 export const Hero: React.FC = () => {
@@ -74,6 +75,20 @@ export const Hero: React.FC = () => {
             </span>
           </button>
         </motion.div>
+
+        <motion.a
+          href="tel:+16622925533"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="group mt-6 inline-flex items-center gap-2.5 text-base font-medium text-brand-secondary hover:text-brand-primary transition-colors"
+        >
+          <Phone size={16} className="text-brand-accent" />
+          <span>
+            Your first phone call is <span className="text-brand-primary font-bold">free</span>
+            <span className="text-brand-faint"> — no pitch, no obligation.</span>
+          </span>
+        </motion.a>
       </motion.div>
 
       {/* Anchored baseline rule — a structural mark, not a floating accent. */}
