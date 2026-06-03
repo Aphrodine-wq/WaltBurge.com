@@ -13,6 +13,7 @@ interface ShopPageProps {
 const SystemCard: React.FC<{ s: AISystem; onOpen: (slug: string) => void; big?: boolean }> = ({ s, onOpen, big }) => {
   const inner = (
     <>
+      <span className="absolute top-0 left-0 w-0.5 h-full bg-brand-accent origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
       <h3 className={`font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors ${big ? 'text-2xl' : 'text-lg'}`}>{s.name}</h3>
       <p className="mt-2 text-brand-secondary text-[15px] leading-relaxed">{big ? s.summary : s.tagline}</p>
       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent md:opacity-0 md:group-hover:opacity-100 transition-opacity">
@@ -20,7 +21,7 @@ const SystemCard: React.FC<{ s: AISystem; onOpen: (slug: string) => void; big?: 
       </span>
     </>
   );
-  const cls = 'group block text-left w-full p-6 md:p-7 border border-brand-border bg-brand-surface hover:border-brand-accent transition-colors';
+  const cls = 'group relative block text-left w-full p-6 md:p-7 border border-brand-border bg-brand-surface hover:border-brand-accent transition-colors';
   return s.link ? (
     <a href={s.link} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
   ) : (

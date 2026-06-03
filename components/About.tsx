@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SectionId } from '../types';
+import { CountUp } from './CountUp';
 
 const stats = [
   { value: '7mo', label: 'Self-Taught' },
@@ -62,7 +63,7 @@ export const About: React.FC = () => {
             <div className="grid grid-cols-2 gap-px mt-10 border border-brand-border bg-brand-border">
               {stats.map(s => (
                 <div key={s.label} className="p-4 md:p-5 bg-brand-surface">
-                  <div className="text-2xl md:text-3xl font-black text-brand-primary mb-1">{s.value}</div>
+                  <CountUp value={s.value} className="block text-2xl md:text-3xl font-black text-brand-primary mb-1" />
                   <div className="text-[10px] text-brand-secondary uppercase tracking-widest font-mono">{s.label}</div>
                 </div>
               ))}

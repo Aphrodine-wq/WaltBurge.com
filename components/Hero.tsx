@@ -29,14 +29,17 @@ export const Hero: React.FC = () => {
           AI Consultant · Oxford, MS
         </motion.span>
 
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-black text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.95] tracking-tighter mb-8"
-        >
-          Walt Burge<span className="text-brand-accent">.</span>
-        </motion.h1>
+        {/* Mask reveal — the name slides up from a clipped baseline on load. */}
+        <div className="overflow-hidden pb-[0.12em] mb-8">
+          <motion.h1
+            initial={{ y: '115%' }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+            className="font-display font-black text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.95] tracking-tighter"
+          >
+            Walt Burge<span className="text-brand-accent">.</span>
+          </motion.h1>
+        </div>
 
         <motion.p
           initial={{ opacity: 0 }}

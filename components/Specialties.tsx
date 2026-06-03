@@ -92,7 +92,9 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
               variants={item}
               className="group relative p-7 md:p-8 border border-brand-border bg-brand-surface hover:border-brand-accent transition-all duration-300 flex flex-col"
             >
-              <div className="w-14 h-14 bg-brand-muted border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
+              {/* Accent edge wipes up on hover */}
+              <span className="absolute top-0 left-0 w-0.5 h-full bg-brand-accent origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
+              <div className="w-14 h-14 bg-brand-muted border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 group-hover:scale-105 transition-all duration-300">
                 <s.icon className="w-8 h-8 text-brand-accent" />
               </div>
 
