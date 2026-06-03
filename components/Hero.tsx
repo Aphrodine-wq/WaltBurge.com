@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
 import { SectionId } from '../types';
 
 export const Hero: React.FC = () => {
@@ -17,15 +16,9 @@ export const Hero: React.FC = () => {
       id={SectionId.HERO}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base"
     >
-      {/* Lightweight geometric accents — faint ink + one cobalt ring */}
-      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block">
-        <div className="absolute top-[20%] left-[10%] w-64 h-64 border border-brand-primary/[0.06] rounded-full" />
-        <div className="absolute bottom-[30%] right-[15%] w-48 h-48 border border-brand-accent/15 rounded-full" />
-      </div>
-
       <motion.div
         style={{ y: y1, opacity }}
-        className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto"
+        className="relative z-10 flex flex-col items-start text-left px-6 md:px-8 max-w-5xl w-full mx-auto"
       >
         <motion.span
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +42,7 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
+          className="font-sans text-lg md:text-xl text-brand-secondary max-w-xl leading-relaxed mb-12"
         >
           Custom AI for <span className="text-brand-primary font-semibold">healthcare, law, and construction</span> &mdash; built to bring you patients, cases, and bids.
         </motion.p>
@@ -62,7 +55,7 @@ export const Hero: React.FC = () => {
         >
           <button
             onClick={scrollToProjects}
-            className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover rounded-full transition-colors duration-300"
+            className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-white">
               View Portfolio
@@ -71,7 +64,7 @@ export const Hero: React.FC = () => {
 
           <button
             onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 rounded-full border border-brand-border hover:border-brand-accent bg-brand-surface transition-colors duration-300"
+            className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-brand-primary">
               Contact Me
@@ -80,16 +73,12 @@ export const Hero: React.FC = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <div className="w-px h-12 bg-brand-border" />
-        <ArrowDown size={16} className="text-brand-secondary" />
-      </motion.div>
+      {/* Anchored baseline rule — a structural mark, not a floating accent. */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <div className="max-w-5xl mx-auto px-6 md:px-8">
+          <div className="h-px bg-brand-border mb-12" />
+        </div>
+      </div>
     </section>
   );
 };

@@ -50,7 +50,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
         })}
         <button
           onClick={() => go(SectionId.CONTACT)}
-          className="px-5 py-2.5 rounded-full bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-tight transition-colors"
+          className="px-5 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-tight transition-colors"
         >
           Contact
         </button>
@@ -88,7 +88,7 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
               ))}
               <button
                 onClick={() => go(SectionId.CONTACT)}
-                className="mt-3 px-5 py-3 rounded-full bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
+                className="mt-3 px-5 py-3 bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
               >
                 Contact
               </button>

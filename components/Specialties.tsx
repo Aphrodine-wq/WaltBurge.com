@@ -64,17 +64,16 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 md:mb-20"
+          className="mb-16 md:mb-20 max-w-3xl"
         >
-          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 block">
-            <span className="inline-block w-8 h-px bg-brand-accent mr-3" />
+          <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="inline-block w-8 h-px bg-brand-accent" />
             AI Consultant · Oxford, MS
-            <span className="inline-block w-8 h-px bg-brand-accent ml-3" />
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 uppercase">
             Built for <span className="text-brand-accent">Health, Law &amp; Construction</span>
           </h2>
-          <p className="text-lg text-brand-secondary max-w-2xl mx-auto">
+          <p className="text-lg text-brand-secondary max-w-2xl">
             I build smart tools that answer your phone, follow up with every lead, and take the busywork off
             your plate &mdash; so you stop losing customers to whoever picks up first. Made for three
             industries I know firsthand.
@@ -92,9 +91,9 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             <motion.div
               key={s.industry}
               variants={item}
-              className="group relative p-7 md:p-8 rounded-2xl border border-brand-border bg-brand-surface hover:border-brand-accent hover:shadow-xl hover:shadow-brand-accent/5 transition-all duration-300 flex flex-col"
+              className="group relative p-7 md:p-8 border border-brand-border bg-brand-surface hover:border-brand-accent transition-all duration-300 flex flex-col"
             >
-              <div className="w-14 h-14 rounded-xl bg-brand-muted border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
+              <div className="w-14 h-14 bg-brand-muted border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 transition-colors">
                 <s.icon className="w-8 h-8 text-brand-accent" />
               </div>
 
@@ -110,7 +109,7 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
                 {s.chips.map((c) => (
                   <span
                     key={c}
-                    className="text-xs px-3 py-1 rounded-full bg-brand-muted border border-brand-border text-brand-secondary font-mono group-hover:border-brand-accent/50 group-hover:text-brand-accent transition-colors"
+                    className="text-xs px-3 py-1 bg-brand-muted border border-brand-border text-brand-secondary font-mono group-hover:border-brand-accent/50 group-hover:text-brand-accent transition-colors"
                   >
                     {c}
                   </span>
@@ -138,7 +137,7 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             {ladder.map((l, i) => (
               <div
                 key={l.step}
-                className="flex items-start gap-4 p-5 rounded-xl border border-brand-border bg-brand-surface"
+                className="flex items-start gap-4 p-5 border border-brand-border bg-brand-surface"
               >
                 <div className="flex items-center gap-2 shrink-0">
                   <span className="font-mono text-sm font-bold text-brand-accent">0{i + 1}</span>
@@ -152,10 +151,10 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 mt-10">
             <button
               onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover rounded-full transition-colors duration-300"
+              className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover transition-colors duration-300"
             >
               <span className="font-sans text-sm tracking-wide font-semibold text-white">
                 Book a free AI audit
