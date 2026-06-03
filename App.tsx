@@ -12,7 +12,6 @@ import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { ArtisticNav } from './components/ArtisticNav';
-import { Marketplace } from './components/Marketplace';
 import { TooltipProvider } from './components/ui/tooltip';
 import { ContentSkeleton } from './components/ui/content-skeleton';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -288,7 +287,6 @@ function App() {
 
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
-              <About />
               <Specialties onOpenMenu={() => openServices()} />
               <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
               <Expertise />
@@ -303,8 +301,8 @@ function App() {
                 </Suspense>
               </ErrorBoundary>
 
-              <Marketplace onBrowse={() => openShop()} />
               <FAQ />
+              <About />
             </main>
             <Contact />
             <Footer />
