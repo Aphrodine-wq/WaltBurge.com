@@ -10,113 +10,103 @@ interface BlogProps {
   onViewAll?: () => void;
 }
 
-// Editorial homepage module: a featured article beside a clean, date-led list
-// of recent posts — the magazine pattern, not a sparse portfolio header.
+// Homepage writing module — an editorial contents list, sharp and hairline-ruled
+// to match the rest of the site. A lead article, then a clean list of recent ones.
 export const Blog: React.FC<BlogProps> = ({ onPostClick, onViewAll }) => {
   const posts = getAllPosts();
-  // Homepage headliner: lead with the consciousness flagship — it's the clearest
-  // door into the AI ethics/consciousness arc. Falls back to newest featured.
+  // Lead with the consciousness flagship — the clearest door into the arc.
   const HERO_SLUG = 'i-dont-ask-if-my-ai-is-conscious';
   const featured = posts.find(p => p.id === HERO_SLUG) || posts.find(p => p.featured) || posts[0];
   const recent = posts.filter(p => p.id !== featured?.id).slice(0, 4);
   const total = posts.length;
 
+  const Meta: React.FC<{ post: BlogPost }> = ({ post }) => (
+    <div className="flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-wider text-brand-secondary">
+      <span className="text-brand-accent">{post.tags[0]}</span>
+      <span className="w-1 h-1 rounded-full bg-brand-border" />
+      <span>{formatDate(post.date)}</span>
+      <span className="w-1 h-1 rounded-full bg-brand-border" />
+      <span>{post.readTime}</span>
+    </div>
+  );
+
   return (
-    <section id={SectionId.BLOG} className="py-24 md:py-36 px-4 md:px-6 bg-brand-muted border-t border-brand-border">
-      <div className="max-w-7xl mx-auto">
-        {/* Header with rule */}
+    <section id={SectionId.BLOG} className="py-20 md:py-28 px-6 md:px-8 bg-brand-muted border-t border-brand-border">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 border-b border-brand-border pb-7 mb-12 md:mb-14"
+          className="flex items-end justify-between gap-5 border-b border-brand-border pb-5 mb-2"
         >
           <div>
-            <span className="font-mono text-xs text-brand-accent uppercase tracking-[0.22em]">Insights</span>
-            <h2 className="mt-3 text-4xl md:text-6xl font-black text-brand-primary tracking-tighter leading-none">
+            <span className="font-mono text-xs text-brand-accent uppercase tracking-[0.22em] flex items-center gap-3 mb-4">
+              <span className="w-8 h-px bg-brand-accent" /> Writing
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter leading-none">
               From the Build Log<span className="text-brand-accent">.</span>
             </h2>
           </div>
           <button
             onClick={onViewAll}
-            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors shrink-0 group"
+            className="hidden sm:inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors shrink-0 group pb-1"
           >
             All {total} articles
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1.45fr_1fr] gap-10 md:gap-14">
-          {/* Featured */}
-          {featured && (
-            <motion.article
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5 }}
-              onClick={() => onPostClick?.(featured)}
-              className="group cursor-pointer flex flex-col rounded-3xl bg-brand-surface border border-brand-border p-8 md:p-11 hover:border-brand-accent/40 hover:shadow-xl hover:shadow-brand-accent/5 transition-all"
-            >
-              <div className="flex flex-wrap items-center gap-2 mb-7">
-                <span className="px-3 py-1 rounded-full bg-brand-accent text-white text-[11px] font-semibold uppercase tracking-wider font-mono">Featured</span>
-                {featured.tags.map(t => (
-                  <span key={t} className="px-3 py-1 rounded-full border border-brand-border text-[11px] uppercase tracking-wider text-brand-secondary font-mono">{t}</span>
-                ))}
-              </div>
-
-              <h3 className="text-2xl md:text-4xl font-black text-brand-primary tracking-tight leading-[1.08] mb-5 group-hover:text-brand-accent transition-colors">
-                {featured.title}
-              </h3>
-
-              <p className="text-brand-secondary text-base md:text-lg leading-relaxed mb-8 flex-1">
-                {featured.excerpt}
-              </p>
-
-              <div className="flex items-center justify-between pt-6 border-t border-brand-border">
-                <span className="text-xs font-mono text-brand-secondary">{formatDate(featured.date)} · {featured.readTime}</span>
-                <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent group-hover:gap-2.5 transition-all">
-                  Read article <ArrowRight size={15} />
-                </span>
-              </div>
-            </motion.article>
-          )}
-
-          {/* Recent list */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+        {/* Lead article */}
+        {featured && (
+          <motion.button
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className="flex flex-col"
+            transition={{ duration: 0.5 }}
+            onClick={() => onPostClick?.(featured)}
+            className="group block w-full text-left py-9 border-b border-brand-border"
           >
-            {recent.map(post => (
-              <button
-                key={post.id}
-                onClick={() => onPostClick?.(post)}
-                className="group text-left py-6 border-b border-brand-border first:pt-0 transition-colors"
-              >
-                <div className="flex items-center gap-2.5 text-[11px] font-mono text-brand-secondary uppercase tracking-wider mb-2.5">
-                  <span className="text-brand-accent">{post.tags[0]}</span>
-                  <span className="w-1 h-1 rounded-full bg-brand-border" />
-                  <span>{formatDate(post.date)}</span>
-                  <span className="w-1 h-1 rounded-full bg-brand-border" />
-                  <span>{post.readTime}</span>
-                </div>
-                <h4 className="text-lg md:text-xl font-bold text-brand-primary leading-snug tracking-tight group-hover:text-brand-accent transition-colors">
-                  {post.title}
-                </h4>
-              </button>
-            ))}
+            <Meta post={featured} />
+            <h3 className="mt-3 text-2xl md:text-4xl font-black text-brand-primary tracking-tight leading-[1.05] max-w-3xl group-hover:text-brand-accent transition-colors">
+              {featured.title}
+            </h3>
+            <p className="mt-4 text-brand-secondary text-base md:text-lg leading-relaxed max-w-2xl">{featured.excerpt}</p>
+            <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent group-hover:gap-2.5 transition-all">
+              Read article <ArrowRight size={15} />
+            </span>
+          </motion.button>
+        )}
 
+        {/* Recent — two-column hairline list */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          className="grid sm:grid-cols-2 gap-x-10"
+        >
+          {recent.map(post => (
             <button
-              onClick={onViewAll}
-              className="mt-8 inline-flex sm:hidden items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-accent text-white text-sm font-semibold"
+              key={post.id}
+              onClick={() => onPostClick?.(post)}
+              className="group text-left py-6 border-b border-brand-border"
             >
-              All {total} articles <ArrowRight size={16} />
+              <Meta post={post} />
+              <h4 className="mt-2.5 text-lg md:text-xl font-bold text-brand-primary leading-snug tracking-tight group-hover:text-brand-accent transition-colors">
+                {post.title}
+              </h4>
             </button>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
+
+        <button
+          onClick={onViewAll}
+          className="mt-8 inline-flex sm:hidden items-center gap-2 text-sm font-semibold text-brand-accent"
+        >
+          All {total} articles <ArrowRight size={16} />
+        </button>
       </div>
     </section>
   );

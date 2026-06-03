@@ -289,6 +289,7 @@ function App() {
               <Hero />
               <About />
               <Specialties onOpenMenu={() => openServices()} />
+              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
               <Expertise />
 
               <ErrorBoundary>
@@ -302,7 +303,6 @@ function App() {
               </ErrorBoundary>
 
               <Marketplace onBrowse={() => openShop()} />
-              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
             </main>
             <Contact />
             <Footer />
