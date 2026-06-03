@@ -7,6 +7,7 @@ import { Specialties } from './components/Specialties';
 import { Expertise } from './components/Expertise';
 import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
+import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
@@ -303,6 +304,7 @@ function App() {
               </ErrorBoundary>
 
               <Marketplace onBrowse={() => openShop()} />
+              <FAQ />
             </main>
             <Contact />
             <Footer />
