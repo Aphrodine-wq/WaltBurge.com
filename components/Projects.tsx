@@ -174,51 +174,6 @@ export const projects: Project[] = [
     images: [],
     status: 'Beta',
     year: '2026'
-  },
-  {
-    id: 'driftlands',
-    title: 'Driftlands',
-    category: 'Game Dev',
-    description: 'Survival crafting game built in Rust and Bevy — 27K lines of code, targeting Steam Early Access.',
-    fullDescription: 'Driftlands is a survival crafting game built from scratch in Rust using the Bevy 0.15 ECS game engine. 47 source files, 43 plugins, covering terrain generation, inventory systems, crafting, day/night cycles, and procedural world building. Pixel art assets generated via ComfyUI pipeline on a GPU server.',
-    challenge: 'Building a full game in Rust with an ECS engine that\'s still evolving. No Unity safety net, no C# scripting shortcuts — just systems, components, and queries.',
-    solution: 'Leaned into Bevy\'s plugin architecture. Each game system (inventory, crafting, terrain, lighting) is an isolated plugin with clean boundaries. Pixel art pipeline runs on vast.ai with ComfyUI for consistent asset generation.',
-    features: [
-      'Procedural terrain generation',
-      'Full inventory and crafting system',
-      'Day/night cycle with dynamic lighting',
-      'ECS architecture with 43 Bevy plugins',
-      'ComfyUI pixel art generation pipeline',
-      'Custom keybinding and settings system'
-    ],
-    techStack: ['Rust', 'Bevy'],
-    tags: ['game-dev', 'ecs', 'survival'],
-    imageUrl: getProjectImage('driftlands'),
-    images: [],
-    status: 'Beta',
-    year: '2025'
-  },
-  {
-    id: 'wos',
-    title: 'WOS',
-    category: 'Systems',
-    description: 'Custom Linux distribution built on Nobara — gaming, AI development, and cybersecurity in one OS.',
-    fullDescription: 'WOS is a custom Linux distribution based on Nobara (Fedora) designed for three workflows: gaming, AI/ML development, and cybersecurity. Ships with a custom AI-powered terminal shell (powered by a fine-tuned Qwen 2B model), pre-configured GPU drivers, and curated tooling for each domain.',
-    challenge: 'Switching between gaming, AI work, and security research means juggling different OS configs, driver versions, and tool sets. No existing distro optimizes for all three.',
-    solution: 'Built on Nobara\'s gaming-optimized Fedora base, then layered AI development tools and security frameworks on top. The AI terminal shell (liai) runs a locally fine-tuned 2B parameter model for instant command assistance.',
-    features: [
-      'AI-powered terminal shell (fine-tuned Qwen 2B)',
-      'Pre-configured AMD GPU drivers for gaming + ML',
-      'Curated cybersecurity toolkit',
-      'Custom system configuration and theming',
-      'Omarchy desktop environment'
-    ],
-    techStack: ['Rust', 'Python', 'Bash'],
-    tags: ['linux', 'os', 'gaming'],
-    imageUrl: getProjectImage('wos'),
-    images: [],
-    status: 'Beta',
-    year: '2025'
   }
 ];
 
