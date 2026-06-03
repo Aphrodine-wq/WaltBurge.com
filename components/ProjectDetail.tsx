@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Project } from '../types';
 import { TechIcon, CategoryIcon } from './Projects';
+import { NavLinks } from './NavLinks';
 import { ArrowLeft, ExternalLink, Github, CheckCircle, AlertTriangle, Lightbulb, Terminal, ChevronDown, Activity, GitCommit, FileCode, ChevronLeft, ChevronRight, Lock, Zap, Code } from 'lucide-react';
 
 interface ProjectDetailProps {
   project: Project;
   onBack: () => void;
   onTechClick: (tech: string) => void;
+  onNavigate: (id: string) => void;
 }
 
-export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, onTechClick }) => {
+export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, onTechClick, onNavigate }) => {
   const challengeRef = useRef<HTMLDivElement>(null);
   const challengeBorderRef = useRef<HTMLDivElement>(null);
   const solutionRef = useRef<HTMLDivElement>(null);
@@ -90,14 +92,15 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
     <div className="min-h-screen bg-brand-base text-brand-primary pt-16 md:pt-20 animate-fade-in transition-colors duration-300">
       
       {/* Navbar Overlay for Back Button */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center bg-brand-base/95 border-b border-brand-border">
-        <button 
+      <div className="fixed top-0 left-0 w-full z-50 px-6 h-16 md:h-20 flex items-center justify-between bg-brand-base/95 border-b border-brand-border">
+        <button
           onClick={onBack}
           className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs md:text-sm group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to System
         </button>
+        <NavLinks onNavigate={onNavigate} />
       </div>
 
       {/* Hero Banner Carousel */}

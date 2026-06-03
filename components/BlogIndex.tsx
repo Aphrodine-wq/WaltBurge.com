@@ -4,10 +4,12 @@ import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
 import { BlogPost, BlogCategory } from '../types';
 import { getAllPosts, sections } from '../lib/blog';
 import { PostCard, formatDate } from './PostCard';
+import { NavLinks } from './NavLinks';
 
 interface BlogIndexProps {
   onPostClick: (post: BlogPost) => void;
   onBack: () => void;
+  onNavigate: (id: string) => void;
 }
 
 const FilterButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
@@ -51,7 +53,7 @@ const PostRow: React.FC<{ post: BlogPost; onClick: (p: BlogPost) => void; index:
 );
 
 // The full /blog destination — the blog as a first-class editorial page.
-export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => {
+export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack, onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState<BlogCategory | null>(null);
   const posts = getAllPosts();
 
@@ -72,7 +74,7 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
   return (
     <div className="min-h-screen bg-brand-base text-brand-primary">
       {/* Top bar */}
-      <div className="fixed top-0 left-0 w-full z-50 px-5 md:px-8 h-16 md:h-20 flex items-center bg-brand-base/85 backdrop-blur-md border-b border-brand-border">
+      <div className="fixed top-0 left-0 w-full z-50 px-5 md:px-8 h-16 md:h-20 flex items-center justify-between bg-brand-base/85 backdrop-blur-md border-b border-brand-border">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs md:text-sm group"
@@ -80,6 +82,7 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to site
         </button>
+        <NavLinks onNavigate={onNavigate} />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 pt-32 md:pt-40 pb-24">

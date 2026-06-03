@@ -93,6 +93,26 @@ function App() {
     }, 100);
   };
 
+  // Global nav: works from any view. Blog routes to the full index; every other
+  // item returns to the homepage and scrolls to its section (after the home view
+  // mounts, when coming from a sub-page).
+  const goToSection = (id: string) => {
+    if (id === SectionId.BLOG) { openBlogIndex(); return; }
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex;
+    setSelectedProject(null);
+    setSelectedPost(null);
+    setShowBlogIndex(false);
+    if (!wasHome) window.history.pushState(null, '', '/');
+    const scrollToSection = () => {
+      if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
+      else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
+    if (wasHome) scrollToSection();
+    else requestAnimationFrame(() => setTimeout(scrollToSection, 80));
+  };
+
+  const goHome = () => goToSection(SectionId.HERO);
+
   if (selectedProject) {
     return (
       <TooltipProvider>
@@ -103,6 +123,7 @@ function App() {
               project={selectedProject}
               onBack={handleBackToHome}
               onTechClick={handleTechClickFromDetail}
+              onNavigate={goToSection}
             />
           </Suspense>
           <Analytics />
@@ -122,6 +143,7 @@ function App() {
               onBack={handlePostBack}
               onPostClick={handlePostClick}
               onTagClick={openBlogIndex}
+              onNavigate={goToSection}
             />
           </Suspense>
           <Analytics />
@@ -136,7 +158,7 @@ function App() {
         <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
           <CustomCursor />
           <Suspense fallback={null}>
-            <BlogIndex onPostClick={handlePostClick} onBack={handleBlogIndexBack} />
+            <BlogIndex onPostClick={handlePostClick} onBack={handleBlogIndexBack} onNavigate={goToSection} />
           </Suspense>
           <Analytics />
         </div>
@@ -155,7 +177,7 @@ function App() {
           <>
             <CustomCursor />
             <ScrollProgress />
-            <ArtisticNav />
+            <ArtisticNav onNavigate={goToSection} onHome={goHome} />
 
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />

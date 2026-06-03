@@ -8,12 +8,14 @@ import { BlogPost } from '../types';
 import { getAdjacentPosts, getRelatedPosts } from '../lib/blog';
 import { PostCard } from './PostCard';
 import { Comments } from './Comments';
+import { NavLinks } from './NavLinks';
 
 interface BlogPostDetailProps {
   post: BlogPost;
   onBack: () => void;
   onPostClick?: (post: BlogPost) => void;
   onTagClick?: (tag: string) => void;
+  onNavigate: (id: string) => void;
 }
 
 const formatDateLong = (dateStr: string) => {
@@ -60,7 +62,7 @@ const mdComponents: Components = {
   },
 };
 
-export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, onPostClick, onTagClick }) => {
+export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, onPostClick, onTagClick, onNavigate }) => {
   const [copied, setCopied] = useState(false);
   const { prev, next } = getAdjacentPosts(post.id);
   const related = getRelatedPosts(post, 3);
@@ -163,12 +165,15 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           Back to Blog
         </button>
-        <button
-          onClick={copyLink}
-          className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs"
-        >
-          {copied ? <><Check size={15} /> Copied</> : <><Link2 size={15} /> Share</>}
-        </button>
+        <div className="flex items-center gap-6">
+          <button
+            onClick={copyLink}
+            className="hidden sm:flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs"
+          >
+            {copied ? <><Check size={15} /> Copied</> : <><Link2 size={15} /> Share</>}
+          </button>
+          <NavLinks onNavigate={onNavigate} />
+        </div>
       </div>
 
       <article className="max-w-2xl mx-auto px-5 md:px-6 py-12 md:py-20">
