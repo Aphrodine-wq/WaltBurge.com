@@ -91,7 +91,6 @@ export const ShopSystemDetail: React.FC<ShopSystemDetailProps> = ({ system, onBa
           </h1>
           <p className="mt-4 text-xl md:text-2xl font-light text-brand-primary leading-snug">{system.tagline}</p>
           <p className="mt-5 text-brand-secondary text-base md:text-lg leading-relaxed">{system.summary}</p>
-          <div className="mt-6 font-mono text-sm text-brand-accent">{system.priceFrom}</div>
         </motion.div>
 
         {/* What's included */}
@@ -169,7 +168,6 @@ export const ShopSystemDetail: React.FC<ShopSystemDetailProps> = ({ system, onBa
                 >
                   <div className="font-bold text-brand-primary group-hover:text-brand-accent transition-colors">{r.name}</div>
                   <div className="mt-1 text-sm text-brand-secondary">{r.tagline}</div>
-                  <div className="mt-2 font-mono text-xs text-brand-accent">{r.priceFrom}</div>
                 </button>
               ))}
             </div>

@@ -13,10 +13,7 @@ interface ShopPageProps {
 const SystemCard: React.FC<{ s: AISystem; onOpen: (slug: string) => void; big?: boolean }> = ({ s, onOpen, big }) => {
   const inner = (
     <>
-      <div className="flex items-baseline justify-between gap-3">
-        <h3 className={`font-black text-brand-primary tracking-tight ${big ? 'text-2xl' : 'text-lg'}`}>{s.name}</h3>
-        <span className="font-mono text-xs text-brand-accent whitespace-nowrap">{s.priceFrom}</span>
-      </div>
+      <h3 className={`font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors ${big ? 'text-2xl' : 'text-lg'}`}>{s.name}</h3>
       <p className="mt-2 text-brand-secondary text-[15px] leading-relaxed">{big ? s.summary : s.tagline}</p>
       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent md:opacity-0 md:group-hover:opacity-100 transition-opacity">
         {s.link ? 'Open' : 'View'} {s.link ? <ArrowUpRight size={15} /> : <ArrowRight size={15} />}
@@ -78,8 +75,8 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onBack, onNavigate, onOpenSy
             AI systems, off the shelf<span className="text-brand-accent">.</span>
           </h1>
           <p className="mt-5 text-brand-secondary text-base md:text-lg max-w-2xl leading-relaxed">
-            Buy the outcome, not a slide deck. Pick a system, book a call, and I build and install it. Every price is a
-            starting point — the estimate and the audit are free.
+            Buy the outcome, not a slide deck. Each one is a real system I build and install for your business —
+            scoped to exactly what you need. Tell me the problem; the call and the estimate are free.
           </p>
         </motion.div>
 

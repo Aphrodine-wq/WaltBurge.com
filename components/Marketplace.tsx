@@ -39,10 +39,7 @@ export const Marketplace: React.FC<MarketplaceProps> = ({ onBrowse }) => {
               onClick={onBrowse}
               className="group text-left bg-brand-base p-6 md:p-8 hover:bg-brand-surface transition-colors"
             >
-              <div className="flex items-baseline justify-between gap-3">
-                <h3 className="text-xl font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors">{e.name}</h3>
-                <span className="font-mono text-xs text-brand-accent whitespace-nowrap">{e.priceFrom}</span>
-              </div>
+              <h3 className="text-xl font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors">{e.name}</h3>
               <p className="mt-2 text-brand-secondary text-[15px] leading-relaxed">{e.tagline}</p>
             </button>
           ))}
