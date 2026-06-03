@@ -4,6 +4,7 @@ slug: the-brain-architecture
 date: 2026-06-02
 readTime: 13 min
 tags: [AI, WALT, Systems, Architecture]
+category: AI
 featured: true
 author: James Walton
 excerpt: Most people rent their AI. I built one I own — a persistent system that remembers every project, heals itself, and wakes up already knowing what I'm working on. Here's how it's wired, layer by layer.

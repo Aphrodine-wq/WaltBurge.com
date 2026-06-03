@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
-import { BlogPost } from '../types';
-import { getAllPosts, allTags } from '../lib/blog';
+import { BlogPost, BlogCategory } from '../types';
+import { getAllPosts, sections } from '../lib/blog';
 import { PostCard, formatDate } from './PostCard';
 
 interface BlogIndexProps {
@@ -52,7 +52,7 @@ const PostRow: React.FC<{ post: BlogPost; onClick: (p: BlogPost) => void; index:
 
 // The full /blog destination — the blog as a first-class editorial page.
 export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => {
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<BlogCategory | null>(null);
   const posts = getAllPosts();
 
   useEffect(() => {
@@ -63,8 +63,8 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
   }, []);
 
   const filtered = useMemo(
-    () => (activeTag ? posts.filter(p => p.tags.includes(activeTag)) : posts),
-    [activeTag, posts]
+    () => (activeCategory ? posts.filter(p => p.category === activeCategory) : posts),
+    [activeCategory, posts]
   );
   const featured = filtered.find(p => p.featured) || filtered[0];
   const rest = filtered.filter(p => p.id !== featured?.id);
@@ -99,10 +99,16 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
           </p>
 
           <div className="mt-10 flex flex-wrap gap-2">
-            <FilterButton active={!activeTag} onClick={() => setActiveTag(null)}>All</FilterButton>
-            {allTags.map(tag => (
-              <FilterButton key={tag} active={activeTag === tag} onClick={() => setActiveTag(activeTag === tag ? null : tag)}>
-                {tag}
+            <FilterButton active={!activeCategory} onClick={() => setActiveCategory(null)}>
+              All <span className="opacity-60">{posts.length}</span>
+            </FilterButton>
+            {sections.map(({ category, count }) => (
+              <FilterButton
+                key={category}
+                active={activeCategory === category}
+                onClick={() => setActiveCategory(activeCategory === category ? null : category)}
+              >
+                {category} <span className="opacity-60">{count}</span>
               </FilterButton>
             ))}
           </div>
@@ -122,9 +128,9 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack }) => 
         {filtered.length === 0 && (
           <div className="py-24 text-center border border-dashed border-brand-border rounded-xl">
             <BookOpen size={40} className="mx-auto mb-4 text-brand-secondary" />
-            <p className="text-brand-secondary font-mono text-lg">No posts tagged "{activeTag}".</p>
-            <button onClick={() => setActiveTag(null)} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider font-mono">
-              Clear filter
+            <p className="text-brand-secondary font-mono text-lg">Nothing in {activeCategory} yet.</p>
+            <button onClick={() => setActiveCategory(null)} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider font-mono">
+              Show all
             </button>
           </div>
         )}

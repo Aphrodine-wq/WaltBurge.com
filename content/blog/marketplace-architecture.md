@@ -4,6 +4,7 @@ slug: marketplace-architecture
 date: 2026-03-14
 readTime: 9 min
 tags: [Architecture, FTW]
+category: Construction
 author: James Walton
 excerpt: Homeowners, contractors, and subcontractors all have different incentives. The bidding system, payment flows, and trust mechanics that make it work — and the one feature everyone expects that I deliberately left out.
 ---

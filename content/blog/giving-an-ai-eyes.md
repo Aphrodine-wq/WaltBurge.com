@@ -4,6 +4,7 @@ slug: giving-an-ai-eyes
 date: 2026-06-02
 readTime: 9 min
 tags: [AI, WALT, Systems]
+category: AI
 author: James Walton
 excerpt: I built an AI that watches my screen — what I'm working on, when I'm focused, when I've drifted. Around 30,000 lines of code and 64 tools later, here's what it's like to be seen by your own software, and why I'd build it again.
 ---

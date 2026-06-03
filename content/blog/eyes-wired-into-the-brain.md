@@ -4,6 +4,7 @@ slug: eyes-wired-into-the-brain
 date: 2026-06-03
 readTime: 8 min
 tags: [AI, WALT, Systems]
+category: AI
 author: James Walton
 featured: true
 excerpt: For a year my AI could see my screen and could remember things — but the eyes and the memory were never connected. Seeing piled up in one database, unread. This morning I built the bridge: perception that files itself into structured memory, the way a person notices a few things a minute instead of recording every frame. And because it was already watching, it caught me building it.

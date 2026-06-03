@@ -4,6 +4,7 @@ slug: tessera-verify-before-run
 date: 2026-05-19
 readTime: 10 min
 tags: [AI, Tessera, Systems]
+category: AI
 author: James Walton
 excerpt: Every other agent framework runs the agent and watches what happens. Tessera lowers the agent to an intermediate representation and runs 73 formal-verification engines against it first — catching capability leaks and PII egress before they hit production.
 ---

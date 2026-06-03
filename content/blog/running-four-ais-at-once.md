@@ -4,6 +4,7 @@ slug: running-four-ais-at-once
 date: 2026-06-02
 readTime: 8 min
 tags: [AI, Development]
+category: AI
 author: James Walton
 excerpt: Claude, Codex, Gemini, and MiniMax — four different models, wired so I can route a task to the best one, run them in parallel, or have them check each other's work. Here's why one model is rarely the right answer.
 ---

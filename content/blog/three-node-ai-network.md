@@ -4,6 +4,7 @@ slug: three-node-ai-network
 date: 2026-06-02
 readTime: 10 min
 tags: [AI, WALT, Systems]
+category: AI
 author: James Walton
 excerpt: A Mac for development, a mini PC as the always-on nerve hub, and a GPU workstation for the heavy lifting. How I wired them together with a file-backed event bus so the brain never goes dark.
 ---

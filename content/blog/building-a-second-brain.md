@@ -4,6 +4,7 @@ slug: building-a-second-brain
 date: 2026-06-02
 readTime: 10 min
 tags: [AI, WALT, Development]
+category: AI
 author: James Walton
 excerpt: The architecture post made it sound clean. It wasn't. Here's the honest version — the thing that grew instead of being designed, the war stories, and the trap I almost didn't see.
 ---

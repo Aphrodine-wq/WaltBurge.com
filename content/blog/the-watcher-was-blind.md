@@ -4,6 +4,7 @@ slug: the-watcher-was-blind
 date: 2026-06-03
 readTime: 6 min
 tags: [AI, WALT, macOS]
+category: AI
 author: James Walton
 featured: false
 excerpt: The same morning I open-sourced Engram, I noticed my own screen-memory database was full of nothing. Every frame for who-knows-how-long had hashed identical. The watcher had Screen Recording permission and was still seeing a blank desktop. The reason is a macOS internals gotcha I'd never have guessed, and the fix was one function call.

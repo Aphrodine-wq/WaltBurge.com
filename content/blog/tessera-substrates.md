@@ -4,6 +4,7 @@ slug: tessera-substrates
 date: 2026-05-21
 readTime: 9 min
 tags: [AI, Tessera, Architecture]
+category: AI
 author: James Walton
 excerpt: You don't write "an agent that uses LLMs and has memory and learns things." You write tsr:agent for action, tsr:memory for recall, tsr:prompt for LLM calls. The compiler enforces the boundaries. The architecture becomes legible.
 ---

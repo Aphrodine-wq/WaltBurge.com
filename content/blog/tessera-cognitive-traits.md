@@ -4,6 +4,7 @@ slug: tessera-cognitive-traits
 date: 2026-05-17
 readTime: 8 min
 tags: [AI, Tessera]
+category: AI
 author: James Walton
 excerpt: Default LLM agents reason one way: confident, sequential, local to the prompt. Tessera lets you install reasoning postures — productive doubt, cross-domain scanning, compulsive verification — as first-class, inspectable code instead of buried prompt tricks.
 ---

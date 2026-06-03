@@ -4,6 +4,7 @@ slug: give-your-ai-a-memory
 date: 2026-06-02
 readTime: 11 min
 tags: [AI, Development, Systems]
+category: AI
 author: James Walton
 excerpt: The single highest-leverage thing you can do with an AI assistant is stop it from forgetting you. Here's the exact pattern I use — a memory file it reads at the start of every session — built step by step so you can copy it today.
 ---

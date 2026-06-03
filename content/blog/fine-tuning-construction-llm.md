@@ -4,6 +4,7 @@ slug: fine-tuning-construction-llm
 date: 2026-04-06
 readTime: 12 min
 tags: [AI, ConstructionAI]
+category: Construction
 author: James Walton
 excerpt: No existing AI understands construction pricing at the line-item level. So I built one — 18,000+ training examples, custom distillation pipeline, deployed on RunPod for $0.002 per estimate.
 ---

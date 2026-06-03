@@ -4,6 +4,7 @@ slug: building-with-ai-not-around-it
 date: 2026-03-28
 readTime: 6 min
 tags: [AI, Development]
+category: AI
 author: James Walton
 excerpt: Most developers use AI as autocomplete. I use it as a cofounder. The difference is whether you let it shape architecture or just fill in blanks.
 ---

@@ -28,6 +28,9 @@ export enum SectionId {
   CONTACT = 'contact'
 }
 
+// Top-level blog sections. Law Practice lands here once that work begins.
+export type BlogCategory = 'AI' | 'Construction' | 'Law';
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -35,6 +38,7 @@ export interface BlogPost {
   content?: string;
   date: string;
   readTime: string;
+  category: BlogCategory;
   tags: string[];
   featured?: boolean;
   author?: string;

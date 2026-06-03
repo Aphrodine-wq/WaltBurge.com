@@ -4,6 +4,7 @@ slug: overnight-autonomous-runner
 date: 2026-03-08
 readTime: 8 min
 tags: [Systems, Automation]
+category: AI
 author: James Walton
 excerpt: My overnight runner executes multi-project work queues autonomously — building features, running verification, rolling back on failure. 1,600 lines of bash that changed everything, and the guardrails that keep it from changing everything for the worse.
 ---

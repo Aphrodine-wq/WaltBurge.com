@@ -4,6 +4,7 @@ slug: gpu-rig-pixel-art
 date: 2026-06-02
 readTime: 7 min
 tags: [AI, Systems]
+category: AI
 author: James Walton
 excerpt: I don't own a GPU farm. I rent one by the hour when I need it — eight cards, 128GB of VRAM — spin up the image pipeline, make what I need, and tear it down before it costs real money. Here's the setup and the math.
 ---

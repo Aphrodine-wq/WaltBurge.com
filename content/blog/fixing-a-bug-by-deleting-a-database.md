@@ -4,6 +4,7 @@ slug: fixing-a-bug-by-deleting-a-database
 date: 2026-06-03
 readTime: 5 min
 tags: [FairTradeWorker, Architecture, Security]
+category: Construction
 author: James Walton
 featured: false
 excerpt: FairTradeWorker had two databases that both thought they owned notifications. The web layer wrote to its own Prisma copy and forwarded to the real backend, which meant two sources of truth, a double-write bug, and a path-traversal hole. The fix wasn't to patch any of that. It was to make the web layer stop owning the data at all.

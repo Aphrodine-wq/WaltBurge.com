@@ -4,6 +4,7 @@ slug: formal-verification-team-of-one
 date: 2026-06-02
 readTime: 10 min
 tags: [AI, Systems, Development]
+category: AI
 author: James Walton
 excerpt: Formal verification has a reputation as something only PhD teams at aerospace companies use. I'm a self-taught construction guy shipping solo, and I built a verification layer into my workflow. Here's why, and how it actually pays off.
 ---

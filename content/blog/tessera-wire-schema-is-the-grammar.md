@@ -4,6 +4,7 @@ slug: tessera-wire-schema-is-the-grammar
 date: 2026-06-03
 readTime: 10 min
 tags: [AI, Tessera, Development]
+category: AI
 author: James Walton
 excerpt: Every agent framework hopes the model returns valid JSON and writes a retry loop for when it doesn't. I built the opposite — a wire format where the schema *is* the decoding grammar, so a malformed tool call isn't unlikely, it's unrepresentable.
 ---

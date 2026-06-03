@@ -4,6 +4,7 @@ slug: build-your-own-model
 date: 2026-06-02
 readTime: 9 min
 tags: [AI, ConstructionAI, Development]
+category: AI
 author: James Walton
 excerpt: The easy path was a few cents per call to someone else's model. I fine-tuned my own instead — and the reasons have almost nothing to do with the per-call price.
 ---

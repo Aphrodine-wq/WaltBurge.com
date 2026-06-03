@@ -4,6 +4,7 @@ slug: self-taught-7-months
 date: 2026-04-10
 readTime: 8 min
 tags: [Career, Construction]
+category: Construction
 author: James Walton
 excerpt: I spent years in construction before writing my first line of code. Here's what building houses taught me about building software — and why the transition wasn't as far as people think.
 ---

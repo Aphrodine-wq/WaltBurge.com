@@ -4,6 +4,7 @@ slug: thinking-in-a-zettelkasten
 date: 2026-06-02
 readTime: 8 min
 tags: [Systems, Development]
+category: AI
 author: James Walton
 excerpt: I keep a couple hundred atomic notes, each one idea, all linked to each other. It started as a way to remember things. It turned into the way I actually think.
 ---

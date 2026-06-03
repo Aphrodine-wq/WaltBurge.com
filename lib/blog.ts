@@ -1,4 +1,4 @@
-import { BlogPost } from '../types';
+import { BlogPost, BlogCategory } from '../types';
 
 // Posts live as markdown files in /content/blog. Vite inlines them as raw
 // strings at build time, so the blog stays a static SPA — no CMS, no backend.
@@ -60,6 +60,13 @@ interface ParsedPost {
   draft: boolean;
 }
 
+const CATEGORIES: BlogCategory[] = ['AI', 'Construction', 'Law'];
+
+function asCategory(v: string | string[] | boolean | undefined): BlogCategory {
+  const s = asString(v);
+  return (CATEGORIES as string[]).includes(s) ? (s as BlogCategory) : 'AI';
+}
+
 function buildPost(path: string, raw: string): ParsedPost {
   const { data, content } = parseFrontmatter(raw);
   const slug = asString(data.slug) || path.split('/').pop()!.replace(/\.md$/, '');
@@ -74,6 +81,7 @@ function buildPost(path: string, raw: string): ParsedPost {
       content: body || undefined,
       date: asString(data.date),
       readTime: asString(data.readTime) || (body ? computeReadTime(body) : ''),
+      category: asCategory(data.category),
       tags: Array.isArray(data.tags) ? data.tags : [],
       featured: data.featured === true,
       author: asString(data.author, 'James Walton'),
@@ -100,6 +108,22 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export const allTags: string[] = Array.from(new Set(all.flatMap(p => p.tags)));
+
+// Sections, in display order, with their post counts. Only sections that
+// actually have posts surface — Law stays hidden until the first Law post lands.
+export interface BlogSection {
+  category: BlogCategory;
+  count: number;
+}
+
+export const sections: BlogSection[] = CATEGORIES.map(category => ({
+  category,
+  count: all.filter(p => p.category === category).length,
+})).filter(s => s.count > 0);
+
+export function getPostsByCategory(category: BlogCategory): BlogPost[] {
+  return all.filter(p => p.category === category);
+}
 
 // Adjacent posts in reverse-chronological order, for prev/next navigation.
 export function getAdjacentPosts(slug: string): { prev?: BlogPost; next?: BlogPost } {

@@ -4,6 +4,7 @@ slug: engram-open-source-screen-memory
 date: 2026-06-03
 readTime: 9 min
 tags: [AI, WALT, Open Source]
+category: AI
 author: James Walton
 featured: true
 excerpt: For a year my AI has been able to search everything I've ever seen on my screen — every error, every doc, every message — because it reads the text off my display and remembers it. I just open-sourced the engine. It's called Engram, it's one pip install, and nothing it sees ever leaves your machine.
