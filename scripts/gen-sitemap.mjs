@@ -8,6 +8,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BLOG_DIR = path.join(ROOT, 'content', 'blog');
 const SERVICES_DIR = path.join(ROOT, 'content', 'services');
+const SHOP_FILE = path.join(ROOT, 'content', 'shop', 'systems.json');
 const ORIGIN = 'https://waltburge.com';
 
 // Minimal frontmatter read — we only need date + draft, and we own the format.
@@ -36,11 +37,21 @@ const serviceSlugs = readdirSync(SERVICES_DIR)
   .filter(f => f.endsWith('.md'))
   .map(f => f.replace(/\.md$/, ''));
 
+// Shop AI systems (commercial-intent product pages).
+const shopSlugs = JSON.parse(readFileSync(SHOP_FILE, 'utf8')).map(s => s.slug);
+
 const urls = [
   { loc: '/', lastmod: today, changefreq: 'weekly', priority: '1.0' },
   { loc: '/services', lastmod: today, changefreq: 'weekly', priority: '0.9' },
   ...serviceSlugs.map(slug => ({
     loc: `/services/${slug}`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.8',
+  })),
+  { loc: '/shop', lastmod: today, changefreq: 'weekly', priority: '0.9' },
+  ...shopSlugs.map(slug => ({
+    loc: `/shop/${slug}`,
     lastmod: today,
     changefreq: 'monthly',
     priority: '0.8',

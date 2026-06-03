@@ -17,6 +17,7 @@ import { ContentSkeleton } from './components/ui/content-skeleton';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { SplashScreen } from './components/SplashScreen';
 import { getPostBySlug } from './lib/blog';
+import { getSystem } from './lib/shop';
 import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
@@ -26,6 +27,8 @@ const ProjectDetail = lazy(() => import('./components/ProjectDetail').then(modul
 const BlogPostDetail = lazy(() => import('./components/BlogPostDetail').then(module => ({ default: module.BlogPostDetail })));
 const BlogIndex = lazy(() => import('./components/BlogIndex').then(module => ({ default: module.BlogIndex })));
 const ServicesPage = lazy(() => import('./components/ServicesPage').then(module => ({ default: module.ServicesPage })));
+const ShopPage = lazy(() => import('./components/ShopPage').then(module => ({ default: module.ShopPage })));
+const ShopSystemDetail = lazy(() => import('./components/ShopSystemDetail').then(module => ({ default: module.ShopSystemDetail })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -34,6 +37,8 @@ function App() {
   const [showBlogIndex, setShowBlogIndex] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const [servicesSlug, setServicesSlug] = useState<string>('');
+  const [showShop, setShowShop] = useState(false);
+  const [shopSlug, setShopSlug] = useState<string>('');
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -44,23 +49,23 @@ function App() {
       const path = window.location.pathname;
       const blogSlug = path.match(/^\/blog\/(.+?)\/?$/);
       const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
-      if (services) {
+      const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
+      // Reset every view, then set the one this path selects.
+      setSelectedPost(null);
+      setSelectedProject(null);
+      setShowBlogIndex(false);
+      setShowServices(false);
+      setShowShop(false);
+      if (shop) {
+        setShowShop(true);
+        setShopSlug(shop[1] || '');
+      } else if (services) {
         setShowServices(true);
         setServicesSlug(services[1] || '');
-        setShowBlogIndex(false);
-        setSelectedPost(null);
       } else if (blogSlug) {
         setSelectedPost(getPostBySlug(blogSlug[1]) ?? null);
-        setShowBlogIndex(false);
-        setShowServices(false);
       } else if (/^\/blog\/?$/.test(path)) {
         setShowBlogIndex(true);
-        setSelectedPost(null);
-        setShowServices(false);
-      } else {
-        setShowBlogIndex(false);
-        setSelectedPost(null);
-        setShowServices(false);
       }
     };
     syncFromPath();
@@ -115,6 +120,28 @@ function App() {
     window.history.replaceState(null, '', `/services/${slug}`);
   };
 
+  const openShop = (slug?: string) => {
+    setShowShop(true);
+    setShopSlug(slug || '');
+    setSelectedPost(null);
+    setSelectedProject(null);
+    setShowBlogIndex(false);
+    setShowServices(false);
+    window.history.pushState(null, '', slug ? `/shop/${slug}` : '/shop');
+    window.scrollTo(0, 0);
+  };
+
+  // From a system detail, back goes up to the shop index.
+  const handleShopBack = () => {
+    setShopSlug('');
+    if (shopSlug) {
+      window.history.pushState(null, '', '/shop');
+    } else {
+      setShowShop(false);
+      window.history.pushState(null, '', '/');
+    }
+  };
+
   const handleProjectClick = (project: Project) => setSelectedProject(project);
   const handleBackToHome = () => setSelectedProject(null);
 
@@ -131,11 +158,13 @@ function App() {
   // mounts, when coming from a sub-page).
   const goToSection = (id: string) => {
     if (id === SectionId.BLOG) { openBlogIndex(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices;
+    if (id === 'marketplace') { openShop(); return; }
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
     setShowServices(false);
+    setShowShop(false);
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -219,6 +248,30 @@ function App() {
     );
   }
 
+  if (showShop) {
+    const system = shopSlug ? getSystem(shopSlug) : undefined;
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+          <CustomCursor />
+          <Suspense fallback={null}>
+            {system ? (
+              <ShopSystemDetail
+                system={system}
+                onBack={handleShopBack}
+                onNavigate={goToSection}
+                onOpenSystem={openShop}
+              />
+            ) : (
+              <ShopPage onBack={handleShopBack} onNavigate={goToSection} onOpenSystem={openShop} />
+            )}
+          </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
@@ -248,7 +301,7 @@ function App() {
                 </Suspense>
               </ErrorBoundary>
 
-              <Marketplace />
+              <Marketplace onBrowse={() => openShop()} />
               <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
             </main>
             <Contact />

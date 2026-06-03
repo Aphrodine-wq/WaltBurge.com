@@ -1,55 +1,60 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Package, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { engines } from '../lib/shop';
 
-const categories = ['Next.js templates', 'React components', 'Tailwind UI kits', 'Landing pages'];
+interface MarketplaceProps {
+  onBrowse?: () => void;
+}
 
-// Honest "coming soon" — production templates pulled from real work. No fake
-// inventory, no placeholder products: an intentional pre-launch panel.
-export const Marketplace: React.FC = () => {
-  const goContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-
+// Homepage Shop teaser — previews the three Engines and sends people to the full
+// /shop catalog. Sharp, left-aligned, cream/cobalt (refined-minimal direction).
+export const Marketplace: React.FC<MarketplaceProps> = ({ onBrowse }) => {
   return (
-    <section id="marketplace" className="py-24 md:py-32 px-4 md:px-6 bg-brand-base border-t border-brand-border relative overflow-hidden">
-      <div className="absolute -top-10 -right-10 opacity-[0.04] pointer-events-none text-brand-accent hidden md:block">
-        <Package size={360} strokeWidth={1} />
-      </div>
-
-      <div className="max-w-3xl mx-auto text-center relative z-10">
+    <section id="marketplace" className="py-20 md:py-32 px-6 md:px-8 bg-brand-base border-t border-brand-border">
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-3xl"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-mono uppercase tracking-wider mb-7">
-            <Package size={14} /> Shop
+          <span className="font-mono text-xs text-brand-accent uppercase tracking-widest flex items-center gap-3 mb-5">
+            <span className="w-8 h-px bg-brand-accent" /> Shop
           </span>
-
-          <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 leading-[0.95]">
-            Templates &amp; components<span className="text-brand-accent">.</span>
+          <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter leading-[0.95]">
+            AI systems you can buy<span className="text-brand-accent">.</span>
           </h2>
-
-          <p className="text-brand-secondary text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            Production-ready templates and UI components, pulled straight from real projects — typed, accessible, and built to ship. Launching soon.
+          <p className="mt-5 text-brand-secondary text-lg max-w-2xl leading-relaxed">
+            Packaged AI systems — named, priced, and built to install. Buy the outcome, not a slide deck.
           </p>
-
-          <div className="flex flex-wrap justify-center gap-2.5 mb-12">
-            {categories.map(c => (
-              <span key={c} className="px-4 py-2 rounded-full bg-brand-surface border border-brand-border text-sm font-mono text-brand-secondary">
-                {c}
-              </span>
-            ))}
-          </div>
-
-          <button
-            onClick={goContact}
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold transition-colors group"
-          >
-            Get notified at launch
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </button>
         </motion.div>
+
+        {/* The three Engines */}
+        <div className="grid md:grid-cols-3 gap-px bg-brand-border border border-brand-border mt-10">
+          {engines.map(e => (
+            <button
+              key={e.slug}
+              onClick={onBrowse}
+              className="group text-left bg-brand-base p-6 md:p-8 hover:bg-brand-surface transition-colors"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <h3 className="text-xl font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors">{e.name}</h3>
+                <span className="font-mono text-xs text-brand-accent whitespace-nowrap">{e.priceFrom}</span>
+              </div>
+              <p className="mt-2 text-brand-secondary text-[15px] leading-relaxed">{e.tagline}</p>
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={onBrowse}
+          className="group mt-10 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors"
+        >
+          Browse the full shop
+          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+        </button>
       </div>
     </section>
   );
