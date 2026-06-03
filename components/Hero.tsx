@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          AI consultant for <span className="text-brand-primary font-semibold">healthcare, law, and construction</span>. I build the custom models, voice agents, and automations that bring you patients, cases, and bids &mdash; not slide decks.
+          Custom AI for <span className="text-brand-primary font-semibold">healthcare, law, and construction</span> &mdash; built to bring you patients, cases, and bids.
         </motion.p>
 
         <motion.div
