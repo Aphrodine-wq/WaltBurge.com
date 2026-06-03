@@ -1,0 +1,46 @@
+[
+  {
+    "slug": "ai-for-healthcare-oxford-ms",
+    "industry": "Healthcare Practices",
+    "h1": "AI for Healthcare Practices in Oxford, MS",
+    "intro": "I build and install AI front-desk systems for clinics and practices in Oxford, Mississippi — answering every call, booking patients around the clock, and turning visits into reviews. HIPAA-aware, owned by you, built local.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-appointment-scheduler", "ai-review-responder"],
+    "faqs": [
+      { "q": "Do you only work with clinics in Oxford, MS?", "a": "I'm based in Oxford and work with practices across Oxford, Tupelo, Batesville, the Memphis metro, and North Mississippi — and remotely anywhere." },
+      { "q": "Is it HIPAA-safe?", "a": "Yes. The system captures and routes, never gives medical advice, and is built HIPAA-aware from the start." },
+      { "q": "How much does an AI front desk cost?", "a": "It depends on what you need. The first call and the estimate are free, and I scope the build to your budget." }
+    ],
+    "seoTitle": "AI for Healthcare Practices in Oxford, MS — AI Receptionist & Patient Intake",
+    "seoDescription": "Custom AI front-desk systems for clinics and medical practices in Oxford, Mississippi — 24/7 AI receptionist, patient booking, and reviews. HIPAA-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-law-firms-oxford-ms",
+    "industry": "Law Firms",
+    "h1": "AI for Law Firms in Oxford, MS",
+    "intro": "I build 24/7 AI intake and document systems for law firms in Oxford, Mississippi — so you never miss a case, even at 2 a.m. Bar-aware, owned by you, built local.",
+    "systemSlugs": ["intake-engine", "ai-intake-triage", "ai-document-drafting", "ai-phone-agent"],
+    "servicesSlug": "legal-business",
+    "faqs": [
+      { "q": "Do you only work with firms in Oxford, MS?", "a": "I'm based in Oxford and work with firms across Oxford, Tupelo, Batesville, the Memphis metro, and North Mississippi — and remotely anywhere." },
+      { "q": "Is the intake bar-compliant?", "a": "Yes. It captures intake and conflict-check details and never gives legal advice — the line stays with your attorneys." },
+      { "q": "How much does AI legal intake cost?", "a": "It depends on the system. The first call and the estimate are free, scoped to your firm." }
+    ],
+    "seoTitle": "AI for Law Firms in Oxford, MS — 24/7 AI Legal Intake & Case Triage",
+    "seoDescription": "Custom AI intake and document systems for law firms in Oxford, Mississippi — 24/7 case intake, triage, and drafting. Bar-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-contractors-oxford-ms",
+    "industry": "Contractors",
+    "h1": "AI for Contractors in Oxford, MS",
+    "intro": "I build AI estimating and lead systems for contractors in Oxford, Mississippi — price jobs in minutes and chase every lead. Built by someone who ran crews here long before he wrote code.",
+    "systemSlugs": ["bid-engine", "ai-quote-generator", "ai-phone-agent", "ai-lead-nurture"],
+    "servicesSlug": "construction",
+    "faqs": [
+      { "q": "Do you only work with contractors in Oxford, MS?", "a": "I'm based in Oxford and work with contractors across Oxford, Tupelo, Batesville, the Memphis metro, and North Mississippi — and remotely anywhere." },
+      { "q": "Will it know my local pricing?", "a": "Yes — the estimating model is tuned to your pricing and your market, not a generic average." },
+      { "q": "How much does an AI estimating system cost?", "a": "It depends on the build. The first call and the estimate are free, scoped to your shop." }
+    ],
+    "seoTitle": "AI for Contractors in Oxford, MS — AI Estimating & Lead Follow-Up",
+    "seoDescription": "Custom AI estimating and lead systems for contractors in Oxford, Mississippi — voice-to-estimate and lead-to-bid follow-up. Built by a former builder. Walt Burge."
+  }
+]

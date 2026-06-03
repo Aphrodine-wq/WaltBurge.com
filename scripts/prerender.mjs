@@ -90,5 +90,11 @@ for (const s of systems) {
   routes.push([`/shop/${s.slug}`, `${s.seoTitle}${SUFFIX}`, s.seoDescription]);
 }
 
+// Local Oxford, MS industry landing pages
+const localPages = JSON.parse(readFileSync(path.join(ROOT, 'content', 'local', 'pages.json'), 'utf8'));
+for (const p of localPages) {
+  routes.push([`/${p.slug}`, `${p.seoTitle}${SUFFIX}`, p.seoDescription]);
+}
+
 for (const [route, title, description] of routes) emit(route, title, description);
 console.log(`prerendered ${routes.length} routes`);

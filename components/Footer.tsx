@@ -1,11 +1,24 @@
 import React from 'react';
 import { Github, Facebook, Instagram, Mail, Phone } from 'lucide-react';
+import { localPages } from '../lib/local';
 
 export const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
 
     return (
         <footer className="py-12 bg-brand-base border-t border-brand-border relative">
+            {/* Local SEO links — keyword-rich anchors to the Oxford, MS pages */}
+            <div className="max-w-7xl mx-auto px-6 mb-10 pb-10 border-b border-brand-border">
+                <span className="font-mono text-xs uppercase tracking-widest text-brand-secondary">AI Consultant · Serving Oxford, MS</span>
+                <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+                    {localPages.map(p => (
+                        <a key={p.slug} href={`/${p.slug}`} className="text-sm text-brand-secondary hover:text-brand-accent transition-colors">
+                            {p.h1}
+                        </a>
+                    ))}
+                </div>
+            </div>
+
             <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
 
                 {/* Left: Brand & Copyright */}

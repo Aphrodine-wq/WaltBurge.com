@@ -18,6 +18,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { SplashScreen } from './components/SplashScreen';
 import { getPostBySlug } from './lib/blog';
 import { getSystem } from './lib/shop';
+import { localSlugs, getLocalPage } from './lib/local';
 import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
@@ -29,6 +30,7 @@ const BlogIndex = lazy(() => import('./components/BlogIndex').then(module => ({ 
 const ServicesPage = lazy(() => import('./components/ServicesPage').then(module => ({ default: module.ServicesPage })));
 const ShopPage = lazy(() => import('./components/ShopPage').then(module => ({ default: module.ShopPage })));
 const ShopSystemDetail = lazy(() => import('./components/ShopSystemDetail').then(module => ({ default: module.ShopSystemDetail })));
+const LocalLandingPage = lazy(() => import('./components/LocalLandingPage').then(module => ({ default: module.LocalLandingPage })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -39,6 +41,7 @@ function App() {
   const [servicesSlug, setServicesSlug] = useState<string>('');
   const [showShop, setShowShop] = useState(false);
   const [shopSlug, setShopSlug] = useState<string>('');
+  const [localSlug, setLocalSlug] = useState<string>('');
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -50,13 +53,18 @@ function App() {
       const blogSlug = path.match(/^\/blog\/(.+?)\/?$/);
       const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
       const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
+      const local = path.match(/^\/([a-z0-9-]+)\/?$/);
+      const localHit = local && localSlugs.includes(local[1]) ? local[1] : '';
       // Reset every view, then set the one this path selects.
       setSelectedPost(null);
       setSelectedProject(null);
       setShowBlogIndex(false);
       setShowServices(false);
       setShowShop(false);
-      if (shop) {
+      setLocalSlug('');
+      if (localHit) {
+        setLocalSlug(localHit);
+      } else if (shop) {
         setShowShop(true);
         setShopSlug(shop[1] || '');
       } else if (services) {
@@ -131,6 +139,22 @@ function App() {
     window.scrollTo(0, 0);
   };
 
+  const openLocal = (slug: string) => {
+    setLocalSlug(slug);
+    setSelectedPost(null);
+    setSelectedProject(null);
+    setShowBlogIndex(false);
+    setShowServices(false);
+    setShowShop(false);
+    window.history.pushState(null, '', `/${slug}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleLocalBack = () => {
+    setLocalSlug('');
+    window.history.pushState(null, '', '/');
+  };
+
   // From a system detail, back goes up to the shop index.
   const handleShopBack = () => {
     setShopSlug('');
@@ -159,12 +183,13 @@ function App() {
   const goToSection = (id: string) => {
     if (id === SectionId.BLOG) { openBlogIndex(); return; }
     if (id === 'marketplace') { openShop(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop;
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
     setShowServices(false);
     setShowShop(false);
+    setLocalSlug('');
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -246,6 +271,23 @@ function App() {
         </div>
       </TooltipProvider>
     );
+  }
+
+  if (localSlug) {
+    const page = getLocalPage(localSlug);
+    if (page) {
+      return (
+        <TooltipProvider>
+          <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+            <CustomCursor />
+            <Suspense fallback={null}>
+              <LocalLandingPage page={page} onBack={handleLocalBack} onNavigate={goToSection} onOpenSystem={openShop} />
+            </Suspense>
+            <Analytics />
+          </div>
+        </TooltipProvider>
+      );
+    }
   }
 
   if (showShop) {
