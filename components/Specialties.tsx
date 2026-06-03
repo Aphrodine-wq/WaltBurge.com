@@ -12,7 +12,7 @@ const specialties = [
     industry: 'Healthcare',
     promise: 'Fills your schedule',
     description:
-      'It answers your phone day and night, books new patients while you’re busy with the ones in front of you, and asks happy patients for reviews so more people find you. It never gives medical advice — it just makes sure nobody slips through.',
+      'Answers every call, books patients day and night, and turns happy ones into reviews.',
     chips: ['Answers calls 24/7', 'Books patients', 'Builds reviews', 'HIPAA-safe'],
     proof: 'Running now for a Mississippi clinic.',
   },
@@ -21,7 +21,7 @@ const specialties = [
     industry: 'Law',
     promise: 'Never miss a case',
     description:
-      'When someone needs a lawyer at 2 a.m., it picks up, figures out the kind of case and how urgent it is, gathers the details, and books the consult. The next emergency becomes your client — not the firm down the street’s. It never gives legal advice.',
+      'Picks up at 2 a.m., triages the case, and books the consult — before the firm down the street does.',
     chips: ['Answers 24/7', 'Sorts urgent cases', 'Books consults', 'Bar-safe'],
     proof: 'Built on a live voice-agent setup.',
   },
@@ -30,16 +30,16 @@ const specialties = [
     industry: 'Construction',
     promise: 'Win more bids',
     description:
-      'It prices jobs in minutes instead of late nights, turns a quick voice note into a real estimate, and follows up on every lead so none go cold. Built by someone who ran crews and wrote estimates by hand long before he wrote code.',
+      'Prices jobs in minutes, turns a voice note into an estimate, and chases every lead so none go cold.',
     chips: ['Fast estimates', 'Voice-to-quote', 'Follows up leads', 'Built by a builder'],
     proof: 'My own estimating tool + live marketplace.',
   },
 ];
 
 const ladder = [
-  { icon: Search, step: 'Free audit', detail: 'I find the 3 jobs AI can take off your plate.' },
-  { icon: Wrench, step: 'Build & set up', detail: 'I build it and get it running — a working tool, not a slide deck.' },
-  { icon: RefreshCw, step: 'Keep it earning', detail: 'I tune it each month so it keeps paying for itself.' },
+  { icon: Search, step: 'Free audit', detail: 'Find the 3 jobs AI can take off your plate.' },
+  { icon: Wrench, step: 'Build & set up', detail: 'A working tool, shipped — not a slide deck.' },
+  { icon: RefreshCw, step: 'Keep it earning', detail: 'Monthly tuning so it keeps paying off.' },
 ];
 
 interface SpecialtiesProps {
@@ -74,9 +74,8 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             Built for <span className="text-brand-accent">Health, Law &amp; Construction</span>
           </h2>
           <p className="text-lg text-brand-secondary max-w-2xl">
-            I build smart tools that answer your phone, follow up with every lead, and take the busywork off
-            your plate &mdash; so you stop losing customers to whoever picks up first. Made for three
-            industries I know firsthand.
+            AI that answers your phone, works every lead, and kills the busywork &mdash; so no customer slips
+            to whoever picks up first.
           </p>
         </motion.div>
 
