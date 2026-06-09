@@ -15,7 +15,7 @@ interface BlogIndexProps {
 const FilterButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
   <button
     onClick={onClick}
-    className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider border transition-all ${
+    className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-colors ${
       active
         ? 'bg-brand-accent border-brand-accent text-white'
         : 'bg-brand-surface border-brand-border text-brand-secondary hover:border-brand-accent/40 hover:text-brand-primary'
@@ -129,7 +129,7 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack, onNav
         )}
 
         {filtered.length === 0 && (
-          <div className="py-24 text-center border border-dashed border-brand-border rounded-xl">
+          <div className="py-24 text-center border border-dashed border-brand-border">
             <BookOpen size={40} className="mx-auto mb-4 text-brand-secondary" />
             <p className="text-brand-secondary font-mono text-lg">Nothing in {activeCategory} yet.</p>
             <button onClick={() => setActiveCategory(null)} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider font-mono">

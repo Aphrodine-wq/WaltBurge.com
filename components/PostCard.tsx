@@ -24,14 +24,14 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onClick, variant = 'st
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="group mb-10 md:mb-14 p-8 md:p-14 rounded-3xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 hover:shadow-xl hover:shadow-brand-accent/5 transition-all cursor-pointer"
+        className="group mb-10 md:mb-14 p-8 md:p-14 bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-colors cursor-pointer"
       >
         <div className="flex flex-wrap gap-2 mb-8">
-          <span className="px-3.5 py-1.5 rounded-full bg-brand-accent text-white text-[11px] uppercase tracking-wider font-mono font-semibold">
+          <span className="px-3 py-1 bg-brand-accent text-white text-[11px] uppercase tracking-wider font-mono font-semibold">
             Featured
           </span>
           {post.tags.map(tag => (
-            <span key={tag} className="px-3.5 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-[11px] uppercase tracking-wider text-brand-accent font-mono">
+            <span key={tag} className="px-3 py-1 border border-brand-accent/30 text-[11px] uppercase tracking-wider text-brand-accent font-mono">
               {tag}
             </span>
           ))}
@@ -65,12 +65,12 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onClick, variant = 'st
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: (index % 4) * 0.06 }}
-      className="group p-7 md:p-9 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 hover:shadow-xl hover:shadow-brand-accent/5 transition-all cursor-pointer flex flex-col justify-between min-h-[260px]"
+      className="group p-7 md:p-9 bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-colors cursor-pointer flex flex-col justify-between min-h-[260px]"
     >
       <div>
         <div className="flex flex-wrap gap-2 mb-5">
           {post.tags.map(tag => (
-            <span key={tag} className="px-3 py-1 rounded-full bg-brand-muted border border-brand-border text-[11px] uppercase tracking-wider text-brand-secondary font-mono">
+            <span key={tag} className="px-3 py-1 border border-brand-border text-[11px] uppercase tracking-wider text-brand-secondary font-mono">
               {tag}
             </span>
           ))}

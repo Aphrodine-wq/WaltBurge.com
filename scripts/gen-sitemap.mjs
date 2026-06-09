@@ -9,6 +9,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BLOG_DIR = path.join(ROOT, 'content', 'blog');
 const SERVICES_DIR = path.join(ROOT, 'content', 'services');
 const SHOP_FILE = path.join(ROOT, 'content', 'shop', 'systems.json');
+const WORK_FILE = path.join(ROOT, 'content', 'work', 'items.json');
 const LOCAL_FILE = path.join(ROOT, 'content', 'local', 'pages.json');
 const ORIGIN = 'https://waltburge.com';
 
@@ -41,6 +42,9 @@ const serviceSlugs = readdirSync(SERVICES_DIR)
 // Shop AI systems (commercial-intent product pages).
 const shopSlugs = JSON.parse(readFileSync(SHOP_FILE, 'utf8')).map(s => s.slug);
 
+// Selected work — portfolio + client case studies.
+const workSlugs = JSON.parse(readFileSync(WORK_FILE, 'utf8')).map(w => w.slug);
+
 // Local industry landing pages (Oxford, MS — high-intent local SEO).
 const localSlugs = JSON.parse(readFileSync(LOCAL_FILE, 'utf8')).map(p => p.slug);
 
@@ -60,6 +64,13 @@ const urls = [
     changefreq: 'monthly',
     priority: '0.8',
   })),
+  { loc: '/work', lastmod: today, changefreq: 'weekly', priority: '0.9' },
+  ...workSlugs.map(slug => ({
+    loc: `/work/${slug}`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.8',
+  })),
   ...localSlugs.map(slug => ({
     loc: `/${slug}`,
     lastmod: today,
@@ -73,7 +84,6 @@ const urls = [
     changefreq: 'monthly',
     priority: p.featured === 'true' ? '0.9' : '0.8',
   })),
-  { loc: '/#projects', lastmod: today, changefreq: 'monthly', priority: '0.7' },
   { loc: '/#about', lastmod: today, changefreq: 'monthly', priority: '0.6' },
   { loc: '/#contact', lastmod: today, changefreq: 'monthly', priority: '0.5' },
 ];

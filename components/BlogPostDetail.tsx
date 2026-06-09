@@ -45,7 +45,7 @@ const mdComponents: Components = {
   hr: () => <hr className="my-12 border-brand-border" />,
   strong: ({ children }) => <strong className="text-brand-primary font-bold">{children}</strong>,
   em: ({ children }) => <em className="italic">{children}</em>,
-  pre: ({ children }) => <pre className="article-pre my-8 rounded-2xl overflow-x-auto">{children}</pre>,
+  pre: ({ children }) => <pre className="article-pre my-8 overflow-x-auto">{children}</pre>,
   code: ({ className, children }) => {
     // Block code is fenced (has a language class) or spans multiple lines;
     // everything else is inline. Newline check avoids depending on node.position.
@@ -55,7 +55,7 @@ const mdComponents: Components = {
       return <code className={className}>{children}</code>;
     }
     return (
-      <code className="px-1.5 py-0.5 rounded bg-brand-muted border border-brand-border text-brand-accent font-mono text-[0.85em]">
+      <code className="px-1.5 py-0.5 bg-brand-muted border border-brand-border text-brand-accent font-mono text-[0.85em]">
         {children}
       </code>
     );
@@ -189,7 +189,7 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
               <button
                 key={tag}
                 onClick={() => onTagClick?.(tag)}
-                className="px-3.5 py-1.5 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-xs uppercase tracking-wider text-brand-accent font-mono hover:bg-brand-accent/20 transition-colors"
+                className="px-3 py-1 border border-brand-accent/30 text-xs uppercase tracking-wider text-brand-accent font-mono hover:bg-brand-accent/10 transition-colors"
               >
                 {tag}
               </button>
@@ -238,7 +238,7 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
             {prev ? (
               <button
                 onClick={() => onPostClick?.(prev)}
-                className="group text-left p-5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 transition-colors"
+                className="group text-left p-5 bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-colors"
               >
                 <span className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-brand-secondary mb-2">
                   <ArrowLeft size={13} /> Older
@@ -249,7 +249,7 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
             {next && (
               <button
                 onClick={() => onPostClick?.(next)}
-                className="group text-left sm:text-right p-5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-accent/40 transition-colors"
+                className="group text-left sm:text-right p-5 bg-brand-surface border border-brand-border hover:border-brand-accent/50 transition-colors"
               >
                 <span className="flex items-center sm:justify-end gap-1.5 text-[11px] font-mono uppercase tracking-wider text-brand-secondary mb-2">
                   Newer <ArrowRight size={13} />

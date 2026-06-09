@@ -90,6 +90,14 @@ for (const s of systems) {
   routes.push([`/shop/${s.slug}`, `${s.seoTitle}${SUFFIX}`, s.seoDescription]);
 }
 
+// Selected work — portfolio + client case studies
+const workItems = JSON.parse(readFileSync(path.join(ROOT, 'content', 'work', 'items.json'), 'utf8'));
+routes.push(['/work', `Selected Work — Products, Platforms & AI${SUFFIX}`,
+  'Selected work by Walt Burge: construction marketplaces, custom AI models, developer platforms, and client builds — shipped end to end from Oxford, MS.']);
+for (const w of workItems) {
+  routes.push([`/work/${w.slug}`, `${w.seoTitle || w.title}${SUFFIX}`, w.seoDescription || w.summary || w.description || '']);
+}
+
 // Local Oxford, MS industry landing pages
 const localPages = JSON.parse(readFileSync(path.join(ROOT, 'content', 'local', 'pages.json'), 'utf8'));
 for (const p of localPages) {

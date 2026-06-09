@@ -18,6 +18,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { SplashScreen } from './components/SplashScreen';
 import { getPostBySlug } from './lib/blog';
 import { getSystem } from './lib/shop';
+import { getWorkItem } from './lib/work';
 import { localSlugs, getLocalPage } from './lib/local';
 import { SectionId, Project, BlogPost } from './types';
 
@@ -53,6 +54,7 @@ function App() {
       const blogSlug = path.match(/^\/blog\/(.+?)\/?$/);
       const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
       const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
+      const work = path.match(/^\/work(?:\/(.+?))?\/?$/);
       const local = path.match(/^\/([a-z0-9-]+)\/?$/);
       const localHit = local && localSlugs.includes(local[1]) ? local[1] : '';
       // Reset every view, then set the one this path selects.
@@ -62,7 +64,11 @@ function App() {
       setShowServices(false);
       setShowShop(false);
       setLocalSlug('');
-      if (localHit) {
+      if (work) {
+        // /work/<slug> opens the case study; bare /work is the homepage section.
+        if (work[1]) setSelectedProject(getWorkItem(work[1]) ?? null);
+        else setTimeout(() => document.getElementById(SectionId.PROJECTS)?.scrollIntoView({ behavior: 'smooth' }), 400);
+      } else if (localHit) {
         setLocalSlug(localHit);
       } else if (shop) {
         setShowShop(true);
@@ -166,12 +172,21 @@ function App() {
     }
   };
 
-  const handleProjectClick = (project: Project) => setSelectedProject(project);
-  const handleBackToHome = () => setSelectedProject(null);
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    window.history.pushState(null, '', `/work/${project.slug || project.id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleBackToHome = () => {
+    setSelectedProject(null);
+    window.history.pushState(null, '', '/');
+  };
 
   const handleTechClickFromDetail = (tech: string) => {
     setActiveTechFilter(tech);
     setSelectedProject(null);
+    window.history.pushState(null, '', '/');
     setTimeout(() => {
       document.getElementById(SectionId.PROJECTS)?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
@@ -337,6 +352,7 @@ function App() {
                 <Suspense fallback={<div className="py-24 md:py-32 px-6 max-w-7xl mx-auto"><ContentSkeleton count={3} variant="grid" /></div>}>
                   <Projects
                     onProjectClick={handleProjectClick}
+                    onOpenServices={() => openServices()}
                     activeFilter={activeTechFilter}
                     onFilterChange={setActiveTechFilter}
                   />

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Project } from '../types';
 import { TechIcon, CategoryIcon } from './Projects';
+import { kindLabel } from '../lib/work';
 import { NavLinks } from './NavLinks';
-import { ArrowLeft, ExternalLink, Github, CheckCircle, AlertTriangle, Lightbulb, Terminal, ChevronDown, Activity, GitCommit, FileCode, ChevronLeft, ChevronRight, Lock, Zap, Code } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, CheckCircle, AlertTriangle, Lightbulb, Terminal, ChevronDown, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
 
 interface ProjectDetailProps {
   project: Project;
@@ -20,16 +21,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
   const [isChallengeOpen, setIsChallengeOpen] = useState(true);
   const [isSolutionOpen, setIsSolutionOpen] = useState(true);
 
-  // Carousel State
-  const images = project.images && project.images.length > 0 ? project.images : [project.imageUrl];
+  // Carousel State — only real images. Most items have no cover; the hero
+  // degrades to a clean banner rather than a broken <img>.
+  const images = (project.images && project.images.length > 0
+    ? project.images
+    : project.imageUrl ? [project.imageUrl] : []);
+  // If the cover fails to load (most items ship without one), fall back to the
+  // clean cream banner instead of a broken <img>. Mirrors the card grid.
+  const [heroError, setHeroError] = useState(false);
+  const hasImages = images.length > 0 && !heroError;
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Placeholder stats
-  const stats = {
-    loc: '24.5k',
-    commits: '1,240',
-    performance: '98ms'
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,25 +99,31 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
           className="flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors font-mono uppercase tracking-wider text-xs md:text-sm group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          Back to System
+          Back to Work
         </button>
         <NavLinks onNavigate={onNavigate} />
       </div>
 
       {/* Hero Banner Carousel */}
-      <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden group bg-brand-muted">
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 pointer-events-none"></div>
-        
+      <div className="relative h-[42vh] md:h-[52vh] w-full overflow-hidden group bg-brand-muted">
+        {/* Flat scrim over images so the title stays readable — no gradient. */}
+        {hasImages && <div className="absolute inset-0 bg-black/45 z-10 pointer-events-none"></div>}
+
+        {/* Hairline grid for the no-image case */}
+        {!hasImages && (
+          <div className="absolute inset-0 opacity-50 bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:24px_24px]" />
+        )}
+
         {/* Images */}
-        {images.map((img, index) => (
-             <div 
-                key={index} 
+        {!heroError && images.map((img, index) => (
+             <div
+                key={index}
                 className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 z-1' : 'opacity-0 z-0'}`}
              >
-                <img 
-                  src={img} 
-                  alt={`${project.title} - Slide ${index + 1}`} 
+                <img
+                  src={img}
+                  alt={`${project.title} - Slide ${index + 1}`}
+                  onError={() => setHeroError(true)}
                   className="w-full h-full object-cover"
                 />
              </div>
@@ -127,13 +134,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             <>
                 <button 
                     onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
+                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
                 >
                     <ChevronLeft size={20} className="md:w-6 md:h-6" />
                 </button>
                 <button 
                     onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
+                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
                 >
                     <ChevronRight size={20} className="md:w-6 md:h-6" />
                 </button>
@@ -144,22 +151,22 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                         <button
                             key={idx}
                             onClick={() => setCurrentSlide(idx)}
-                            className={`h-2 rounded-full transition-all duration-300 ${idx === currentSlide ? 'bg-brand-accent w-8' : 'bg-white/30 hover:bg-white/60 w-2'}`}
+                            className={`h-2 transition-all duration-300 ${idx === currentSlide ? 'bg-brand-accent w-8' : 'bg-white/30 hover:bg-white/60 w-2'}`}
                         />
                     ))}
                 </div>
             </>
         )}
 
-        <div className="absolute bottom-0 left-0 w-full z-20 px-6 pb-12 md:pb-16 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full z-20 px-6 pb-10 md:pb-14 pointer-events-none">
           <div className="max-w-7xl mx-auto">
-            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent border border-transparent rounded-full text-white text-xs font-bold uppercase tracking-wide">
+            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent text-white text-xs font-bold uppercase tracking-wide">
               <CategoryIcon category={project.category} />
-              {project.category}
+              {project.kind ? kindLabel[project.kind] : project.category}
             </div>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 text-white">{project.title}</h1>
-            <p className="text-lg md:text-2xl text-white/85 max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none">
-              {project.description}
+            <h1 className={`text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 ${hasImages ? 'text-white' : 'text-brand-primary'}`}>{project.title}</h1>
+            <p className={`text-lg md:text-2xl max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none ${hasImages ? 'text-white/85' : 'text-brand-secondary'}`}>
+              {project.summary || project.description}
             </p>
           </div>
         </div>
@@ -175,7 +182,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             {/* Overview */}
             <div className="prose prose-invert max-w-none">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-brand-primary flex items-center gap-3">
-                <Terminal className="text-brand-accent" /> System Overview
+                <Terminal className="text-brand-accent" /> Overview
               </h2>
               <p className="text-brand-secondary text-base md:text-lg leading-relaxed font-light">
                 {project.fullDescription || `This project showcases advanced techniques in ${project.category}.`}
@@ -186,7 +193,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                
                {/* Challenge Card */}
-               <div ref={challengeRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
+               <div ref={challengeRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 relative overflow-hidden pl-8 md:pl-10">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500/10"></div>
                   <div 
                     ref={challengeBorderRef}
@@ -218,7 +225,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                </div>
                
                {/* Solution Card */}
-               <div ref={solutionRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl relative overflow-hidden pl-8 md:pl-10">
+               <div ref={solutionRef} className="bg-brand-surface border border-brand-border p-6 md:p-8 relative overflow-hidden pl-8 md:pl-10">
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500/10"></div>
                   <div 
                     ref={solutionBorderRef}
@@ -255,7 +262,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
               <h3 className="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-brand-primary">Key Features</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {project.features?.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-4 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent/20 transition-colors group">
+                  <div key={idx} className="flex items-start gap-3 p-4 bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
                     <CheckCircle className="text-brand-accent shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
                     <span className="text-brand-secondary text-sm">{feature}</span>
                   </div>
@@ -267,7 +274,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
 
           {/* Right Column: Meta Data */}
           <div className="space-y-8">
-            <div className="bg-brand-surface border border-brand-border p-6 md:p-8 rounded-xl lg:sticky lg:top-24">
+            <div className="bg-brand-surface border border-brand-border p-6 md:p-8 lg:sticky lg:top-24">
               <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">Technologies</h3>
               
               <div className="flex flex-wrap gap-3 mb-8">
@@ -275,7 +282,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                   <button 
                     key={tech} 
                     onClick={() => onTechClick(tech)}
-                    className="flex items-center gap-2 px-3 py-2 bg-brand-base border border-brand-border rounded-lg hover:border-brand-accent hover:bg-brand-accent/10 transition-all cursor-pointer group text-left"
+                    className="flex items-center gap-2 px-3 py-2 bg-brand-base border border-brand-border hover:border-brand-accent hover:bg-brand-accent/10 transition-all cursor-pointer group text-left"
                   >
                     <TechIcon tag={tech} isActive={true} />
                     <span className="text-xs font-bold text-brand-secondary group-hover:text-brand-accent transition-colors">{tech}</span>
@@ -283,47 +290,37 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                 ))}
               </div>
 
-              {/* Project Metrics / Statistics */}
-              <div className="h-px w-full bg-brand-primary/10 my-8"></div>
-              <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">System Metrics</h3>
-              <div className="grid grid-cols-1 gap-4">
-                
-                {/* Lines of Code */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
-                   <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
-                      <div className="p-2 rounded-md bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
-                        <Code size={18} />
-                      </div>
-                      <span className="text-xs font-mono tracking-wide">Lines of Code</span>
-                   </div>
-                   <span className="font-mono font-bold text-brand-accent">{stats.loc}</span>
-                </div>
+              {/* Project meta — real catalog facts, not invented metrics. */}
+              <div className="h-px w-full bg-brand-border my-8"></div>
+              <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">Details</h3>
+              <dl className="space-y-3 text-sm">
+                {project.status && (
+                  <div className="flex items-center justify-between">
+                    <dt className="font-mono text-xs uppercase tracking-wide text-brand-secondary">Status</dt>
+                    <dd className="font-mono font-bold text-brand-accent">{project.status}</dd>
+                  </div>
+                )}
+                {project.year && (
+                  <div className="flex items-center justify-between">
+                    <dt className="font-mono text-xs uppercase tracking-wide text-brand-secondary">Year</dt>
+                    <dd className="font-mono font-bold text-brand-primary">{project.year}</dd>
+                  </div>
+                )}
+                {project.kind && (
+                  <div className="flex items-center justify-between">
+                    <dt className="font-mono text-xs uppercase tracking-wide text-brand-secondary">Type</dt>
+                    <dd className="font-mono font-bold text-brand-primary">{kindLabel[project.kind]}</dd>
+                  </div>
+                )}
+                {project.client && (
+                  <div className="flex items-center justify-between">
+                    <dt className="font-mono text-xs uppercase tracking-wide text-brand-secondary">Client</dt>
+                    <dd className="font-mono font-bold text-brand-primary text-right">{project.client.name}{project.client.location ? ` · ${project.client.location}` : ''}</dd>
+                  </div>
+                )}
+              </dl>
 
-                {/* Commits */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
-                   <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
-                      <div className="p-2 rounded-md bg-brand-accent/10 text-brand-accent border border-brand-accent/20">
-                        <GitCommit size={18} />
-                      </div>
-                      <span className="text-xs font-mono tracking-wide">Total Commits</span>
-                   </div>
-                   <span className="font-mono font-bold text-brand-accent">{stats.commits}</span>
-                </div>
-
-                {/* Performance */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-brand-surface border border-brand-border hover:border-brand-accent/20 transition-colors group">
-                   <div className="flex items-center gap-3 text-brand-secondary group-hover:text-brand-primary transition-colors">
-                      <div className="p-2 rounded-md bg-green-500/10 text-green-600 border border-green-500/20">
-                        <Zap size={18} />
-                      </div>
-                      <span className="text-xs font-mono tracking-wide">Runtime Perf</span>
-                   </div>
-                   <span className="font-mono font-bold text-green-600">{stats.performance}</span>
-                </div>
-
-              </div>
-
-              <div className="h-px w-full bg-brand-primary/10 my-8"></div>
+              <div className="h-px w-full bg-brand-border my-8"></div>
 
               <h3 className="text-sm font-mono uppercase tracking-widest text-brand-secondary mb-6">Project Links</h3>
               <div className="space-y-4">
@@ -332,13 +329,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                         href={project.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-primary border border-brand-border font-bold text-sm rounded hover:bg-brand-accent hover:border-brand-accent hover:text-white transition-colors group"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-primary border border-brand-border font-bold text-sm hover:bg-brand-accent hover:border-brand-accent hover:text-white transition-colors group"
                     >
                         <span>View Live Deployment</span>
                         <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
                     </a>
                 ) : (
-                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed border border-brand-border">
+                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-surface text-brand-secondary/50 font-bold text-sm cursor-not-allowed border border-brand-border">
                         <span>Deployment Offline</span>
                         <ExternalLink size={16} />
                     </button>
@@ -349,13 +346,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                         href={project.repositoryUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-primary font-bold text-sm rounded hover:bg-brand-surface transition-colors group"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-primary font-bold text-sm hover:bg-brand-surface transition-colors group"
                     >
                         <span>Source Code</span>
                         <Github size={16} className="group-hover:rotate-12 transition-transform" />
                     </a>
                 ) : (
-                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-secondary/50 font-bold text-sm rounded cursor-not-allowed">
+                    <button disabled className="flex items-center justify-between w-full px-4 py-3 bg-brand-base border border-brand-border text-brand-secondary/50 font-bold text-sm cursor-not-allowed">
                         <span>Source Private</span>
                         <Lock size={16} />
                     </button>

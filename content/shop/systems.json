@@ -432,6 +432,62 @@
     "seoTitle": "AI Call Summary & Coaching — Summaries and Rep Coaching",
     "seoDescription": "AI that summarizes calls, extracts action items, and coaches your team. Built by Walt Burge."
   },
+  {
+    "slug": "ai-social-content-engine",
+    "name": "AI Social & Marketing Content",
+    "tagline": "Fills your content calendar on autopilot.",
+    "kind": "tool",
+    "industry": "any",
+    "category": "Marketing & SEO",
+    "priceFrom": "$2,800+",
+    "summary": "An AI that writes your social posts, email campaigns, and promos in your brand voice — a full content calendar drafted and scheduled, so marketing happens even on your busiest week.",
+    "includes": ["On-brand posts across your channels", "Email and promo campaign drafts", "Content calendar, scheduled ahead", "Trained on your voice and offers"],
+    "outcomes": ["Consistent presence without the time sink", "Marketing that runs while you work"],
+    "seoTitle": "AI Social & Marketing Content Engine — On-Brand Posts on Autopilot",
+    "seoDescription": "An AI that writes and schedules on-brand social posts, emails, and promos for your business. Built and installed by Walt Burge."
+  },
+  {
+    "slug": "ai-invoice-ap-automation",
+    "name": "AI Invoice & AP Automation",
+    "tagline": "Reads every invoice, kills the data entry.",
+    "kind": "tool",
+    "industry": "any",
+    "category": "Documents",
+    "priceFrom": "$3,900+",
+    "summary": "An AI that reads incoming invoices and bills, pulls the line items clean, matches them to POs, and pushes structured data into your accounting system — no more hand-keying paper.",
+    "includes": ["Invoice and bill data extraction", "PO and receipt matching", "Push to QuickBooks or your ledger", "Exception flagging for review"],
+    "outcomes": ["Hours of data entry gone", "Cleaner books, fewer errors"],
+    "seoTitle": "AI Invoice & AP Automation — Read Invoices, Skip the Data Entry",
+    "seoDescription": "AI that reads invoices and bills, extracts clean line items, and syncs to your accounting system. Built and installed by Walt Burge."
+  },
+  {
+    "slug": "ai-scheduling-dispatch",
+    "name": "AI Scheduling & Dispatch",
+    "tagline": "Books the job and routes the crew.",
+    "kind": "tool",
+    "industry": "any",
+    "category": "Automation",
+    "priceFrom": "$4,200+",
+    "summary": "An AI that books jobs, assigns the right tech or crew, and optimizes the route — so the schedule fills itself and nobody's driving across the county twice in one day.",
+    "includes": ["Automated job booking and confirmation", "Crew and technician assignment", "Route optimization", "Reminders and no-show recovery"],
+    "outcomes": ["Fuller days, less windshield time", "A schedule that runs itself"],
+    "seoTitle": "AI Scheduling & Dispatch — Book Jobs and Route Crews Automatically",
+    "seoDescription": "AI that books jobs, assigns crews, and optimizes routes for service businesses. Built and installed by Walt Burge."
+  },
+  {
+    "slug": "ai-onboarding-agent",
+    "name": "AI Onboarding & Training Agent",
+    "tagline": "Trains new hires off your own playbook.",
+    "kind": "tool",
+    "industry": "any",
+    "category": "Automation",
+    "priceFrom": "$3,500+",
+    "summary": "An AI trained on your processes and documents that walks new hires through onboarding and answers their questions on demand — so your best people stop repeating themselves and new staff get up to speed faster.",
+    "includes": ["Trained on your SOPs and docs", "Interactive onboarding walkthroughs", "On-demand answers for staff", "Always current as your process changes"],
+    "outcomes": ["New hires productive sooner", "Your team's knowledge, captured"],
+    "seoTitle": "AI Onboarding & Training Agent — Get New Hires Up to Speed Fast",
+    "seoDescription": "An AI trained on your processes that onboards new hires and answers staff questions on demand. Built and installed by Walt Burge."
+  },
 
   {
     "slug": "engram",

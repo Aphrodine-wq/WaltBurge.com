@@ -1,181 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Project, SectionId } from '../types';
-import { Badge } from './ui/badge';
-import { Skeleton } from './ui/skeleton';
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
+import { workItems, kindLabel } from '../lib/work';
 import {
-  ExternalLink, Github, Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
-  Binary, Box, Cloud, Code2, Command, Cpu, Database, FileCode, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
-  Image as ImageIcon, X, Filter, Calendar, Circle
+  Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
+  Binary, Box, Cloud, Code2, Command, Cpu, Database, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
+  X, Filter
 } from 'lucide-react';
 
-// --- Image Handling Helper ---
-const getProjectImage = (id: string) => {
-  // Map IDs to specific files in public/assets/projects
-  switch (id) {
-    case 'fairtradeworker': return '/assets/projects/fairtradeworker/fairtradeworker.png';
-    default: return `/assets/projects/${id}/cover.png`;
-  }
-};
-
-const getGradientForProject = (id: string) => {
-  // Strict Two-Tone Gradients: Onyx base with Jungle Green hints
-  const gradients = [
-    'bg-brand-muted',
-    'bg-brand-accent/10',
-    'bg-brand-muted',
-  ];
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = id.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const index = Math.abs(hash) % gradients.length;
-  return gradients[index];
-};
-
-export const projects: Project[] = [
-  {
-    id: 'fairtradeworker',
-    title: 'FairTradeWorker',
-    category: 'Web',
-    description: 'Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.',
-    fullDescription: 'FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across multiple repos — Next.js frontend, a Java/Spring Boot backend (ftw-svc) with STOMP WebSocket realtime, and a React Native mobile app.',
-    challenge: 'Building a marketplace that handles the full lifecycle — from job posting through bidding, contract signing, milestone-based payments, and dispute resolution — while keeping contractors honest and homeowners protected.',
-    solution: 'Three-tier architecture: homeowner posts job, contractor bids, subcontractor handles specialty work. QuickBooks handles all payment flows natively. ConstructionAI powers instant cost estimates so homeowners know what\'s fair before a single bid comes in.',
-    features: [
-      'QuickBooks-native invoicing and payout',
-      'AI-powered cost estimation via ConstructionAI',
-      'Real-time bidding with STOMP WebSocket',
-      'Three-role system: homeowner, contractor, subcontractor',
-      'Mobile app with 30+ screens (React Native/Expo)',
-      '6 revenue streams including white-label licensing'
-    ],
-    techStack: ['Next.js', 'TypeScript', 'Java', 'Spring Boot', 'React Native', 'PostgreSQL'],
-    tags: ['marketplace', 'full-stack', 'construction'],
-    imageUrl: getProjectImage('fairtradeworker'),
-    images: [],
-    link: 'https://fairtradeworker.com',
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'mshomepros',
-    title: 'MsHomePros',
-    category: 'Web',
-    description: 'Contractor business platform — estimation, proposals, tracking, and payments powered by ConstructionAI.',
-    fullDescription: 'MsHomePros is a contractor-facing business management platform. Contractors generate AI-powered estimates, create professional proposals, track jobs, and manage client relationships. The estimation engine runs on a custom fine-tuned LLM deployed on RunPod Serverless.',
-    challenge: 'Construction contractors still price jobs on gut feel and napkin math. Getting accurate, professional estimates out the door fast is the difference between winning and losing bids.',
-    solution: 'ConstructionAI generates line-item estimates in seconds. The platform wraps that in professional PDF proposals, job tracking, and client management — everything a contractor needs to run their business from one place.',
-    features: [
-      'AI-powered line-item estimation',
-      'Professional PDF proposal generation',
-      'Job tracking and scheduling',
-      'Client relationship management',
-      'Real contractor in production (MHP Construction, Oxford MS)'
-    ],
-    techStack: ['Next.js', 'TypeScript', 'Python', 'Tailwind', 'PostgreSQL'],
-    tags: ['saas', 'construction', 'ai-powered'],
-    imageUrl: getProjectImage('mshomepros'),
-    images: [],
-    link: 'https://mshomepros.com',
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'constructionai',
-    title: 'ConstructionAI',
-    category: 'AI',
-    description: 'Fine-tuned Llama 3.1 8B for construction cost estimation — 18,000+ training examples, deployed on RunPod.',
-    fullDescription: 'ConstructionAI is a custom fine-tuned large language model built specifically for construction cost estimation. Trained on 18,000+ curated examples covering residential and commercial trades, it generates detailed line-item estimates with material quantities, labor hours, and market-adjusted pricing. Currently scaling to 500K+ training examples via synthetic data distillation.',
-    challenge: 'No existing AI model understands construction pricing at the line-item level. Generic LLMs hallucinate costs and miss trade-specific nuances like regional labor rates, material waste factors, and code requirements.',
-    solution: 'Built a full training pipeline: curated real-world estimation data, generated synthetic examples via distillation from larger models, fine-tuned Llama 3.1 8B with custom hyperparameters, and deployed on RunPod Serverless at ~$0.002 per estimate.',
-    features: [
-      'Line-item cost breakdowns by trade',
-      'Material quantity and waste calculations',
-      'Regional labor rate adjustment',
-      'RunPod Serverless deployment (~$0.002/estimate)',
-      '8 specialized tool functions',
-      'Scaling to 500K+ training examples (v5 pipeline)'
-    ],
-    techStack: ['Python', 'PyTorch', 'Llama', 'RunPod'],
-    tags: ['llm', 'fine-tuning', 'construction'],
-    imageUrl: getProjectImage('constructionai'),
-    images: [],
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'engram',
-    title: 'Engram',
-    category: 'AI',
-    description: 'Open-source screen memory — your computer reads and remembers everything on your screen, searchable forever, and nothing ever leaves your machine.',
-    fullDescription: 'Engram gives any computer a photographic memory. It reads the text off your screen with on-device OCR, redacts secrets, and stores it in a local searchable index — so you, or any AI agent, can search everything you have ever seen. One pip install, MIT licensed, and not a single pixel leaves your machine. It is the open-source core of the perception layer behind W.A.L.T.',
-    challenge: 'Microsoft promised this with Recall and pulled it; Rewind.ai built it and walked away. The same thing killed both: they sent your screen to the cloud. Nobody wants their entire screen history sitting on someone else\'s server.',
-    solution: 'Keep all of it local. Capture runs in-process, OCR and secret-redaction happen on-device, and everything lands in a local SQLite full-text index exposed over a REST API and an MCP server — so any AI agent can query your memory without a single network call.',
-    features: [
-      'One-command install: pip install engram-memory',
-      'Reads the text off your screen — stores no images',
-      'Secret redaction before anything is written',
-      'Full-text search across everything you have seen',
-      'REST API + MCP server so any AI agent can use it',
-      'MIT licensed, 100% local — nothing leaves your machine'
-    ],
-    techStack: ['Python', 'SQLite', 'OCR', 'MCP'],
-    tags: ['open-source', 'ai', 'local-first'],
-    imageUrl: getProjectImage('engram'),
-    images: [],
-    repositoryUrl: 'https://github.com/Aphrodine-wq/engram',
-    status: 'Live',
-    year: '2026'
-  },
-  {
-    id: 'walt',
-    title: 'W.A.L.T.',
-    category: 'AI',
-    description: 'Distributed AI platform spanning three machines — 20 AGI layers, 73-engine verification, screen vision, and autonomous execution.',
-    fullDescription: 'W.A.L.T. is a unified AI platform that turns Claude Code into something closer to a full operating system. It runs across three networked machines (Mac, Mini PC, GPU workstation) and includes screen understanding (Claude Eyes — 64 MCP tools), formal code verification (AEON — 73 engines), autonomous overnight execution, persistent goal tracking, an immune system for self-healing, and a file-backed event bus (Nerve) connecting 20 AGI-inspired layers.',
-    challenge: 'AI assistants are stateless and reactive. They forget everything between sessions, can\'t see your screen, can\'t verify their own code, and can\'t work while you sleep.',
-    solution: 'Built persistence, perception, and autonomy from scratch. Nerve connects all subsystems via pub/sub events. Eyes reads the screen. AEON verifies code formally. The overnight runner executes multi-project work queues autonomously. Goals persist across sessions with velocity tracking.',
-    features: [
-      'Claude Eyes: 64 MCP tools for screen + webcam understanding',
-      'AEON: 73-engine formal verification (22 cybersecurity)',
-      'Nerve: file-backed pub/sub event bus across all layers',
-      'Overnight runner: autonomous multi-project execution',
-      '20 AGI layers: goals, immune, memory, metacognition, and more',
-      '3-node distributed network (Mac + Mini PC + GPU workstation)'
-    ],
-    techStack: ['TypeScript', 'Python', 'Rust', 'Node.js'],
-    tags: ['ai-platform', 'distributed', 'autonomous'],
-    imageUrl: getProjectImage('walt'),
-    images: [],
-    status: 'Live',
-    year: '2025'
-  },
-  {
-    id: 'tessera',
-    title: 'Tessera',
-    category: 'AI',
-    description: 'A markdown-native programming language for AI agents — write agents in .t.md files, verify them formally before they run, and execute them on real LLM, LangChain, and PyTorch backends.',
-    fullDescription: 'Tessera is a programming language where the markdown file IS the program. Each .t.md file is simultaneously a runnable agent, a browsable Obsidian note, and a formally-verifiable safety boundary. Agents are written as substrate-tagged code fences — logic, agent, memory, prompt, tool, neural — and the compiler enforces the boundaries between them. It lives at the center of a five-system ecosystem: AEON verifies the agent, Synapse persists its memory, Obsidian is where it\'s written, and Ollama/Anthropic/LangChain/PyTorch do the heavy lifting.',
-    challenge: 'Building an AI agent shouldn\'t require five frameworks, three vendor SDKs, and a vector database to babysit. Agent behavior ends up scattered across files and prompt strings nobody can read or verify — and there\'s no way to prove an agent is safe before you run it in production.',
-    solution: 'Make markdown the substrate. A .t.md file compiles to a Substrate IR that AEON\'s 73 engines verify the same way they verify Python or Rust — catching capability leaks and PII egress before the agent ever runs. Substrate fences declare named modes of thinking; capability grants in frontmatter propagate to every region and are enforced at compile, spawn, and runtime.',
-    features: [
-      'Write agents in .t.md files — markdown is the source of truth',
-      '9 shipped substrates: logic, agent, 4 memory kinds, prompt, tool, neural',
-      'Formal verification via AEON before the agent runs (73 engines)',
-      'Capability gating enforced at compile, spawn, and runtime',
-      'Synapse-backed semantic memory + Obsidian vault discovery',
-      'Cognitive traits — installable reasoning postures as first-class code'
-    ],
-    techStack: ['Python', 'PyTorch', 'Ollama', 'LangChain', 'Markdown'],
-    tags: ['agent-language', 'compiler', 'ai-platform'],
-    imageUrl: getProjectImage('tessera'),
-    images: [],
-    status: 'Beta',
-    year: '2026'
-  }
-];
+// Re-exported as the catalog so existing references keep working. The data now
+// lives in content/work/items.json (single source of truth) via lib/work.
+export const projects: Project[] = workItems;
 
 export const CategoryIcon = ({ category }: { category: string }) => {
   switch (category) {
@@ -203,9 +38,9 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
     ? "bg-brand-accent/20 border-brand-accent text-brand-accent"
     : "bg-brand-surface text-brand-secondary border-brand-border group-hover/icon:text-brand-accent group-hover/icon:border-brand-accent/50";
 
-  if (tag === 'C++') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C++</div>;
-  if (tag === 'C') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C</div>;
-  if (tag === 'C#') return <div className={`font-mono font-bold text-[10px] px-1 rounded border transition-colors ${customTextClass}`}>C#</div>;
+  if (tag === 'C++') return <div className={`font-mono font-bold text-[10px] px-1 border transition-colors ${customTextClass}`}>C++</div>;
+  if (tag === 'C') return <div className={`font-mono font-bold text-[10px] px-1 border transition-colors ${customTextClass}`}>C</div>;
+  if (tag === 'C#') return <div className={`font-mono font-bold text-[10px] px-1 border transition-colors ${customTextClass}`}>C#</div>;
 
   switch (tag) {
     case 'Assembly': return <Binary size={size} className={`${colorClass} ${baseClass}`} />;
@@ -240,69 +75,24 @@ export const TechIcon = ({ tag, isActive }: { tag: string, isActive?: boolean })
   }
 };
 
+// Refined-minimal fallback for items without a cover image — which is most of
+// them. A cream panel with a hairline grid, the project's monogram, and a single
+// cobalt accent. Sharp corners, no gradients, no white-on-dark "AI look".
 const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => {
-  // Generate deterministic abstract patterns based on project ID
-  const seed = project.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-
-  // Pattern Types: 0: Grid, 1: Concentric, 2: Particles
-  const type = seed % 3;
-
+  const monogram = project.title.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase();
   return (
-    <div className={`h-full w-full relative overflow-hidden bg-brand-surface group/image`}>
-
-      {/* Base Gradient / Mesh */}
-      <div className={`absolute inset-0 opacity-20 ${getGradientForProject(project.id)}`} />
-
-      {/* Pattern Overlay */}
-      <div className="absolute inset-0 opacity-30">
-        {type === 0 && (
-          <div className="w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
-        )}
-        {type === 1 && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[150%] h-[150%] border border-brand-accent/10 rounded-full" />
-            <div className="w-[100%] h-[100%] border border-brand-accent/15 rounded-full" />
-            <div className="w-[50%] h-[50%] border border-brand-accent/20 rounded-full" />
-          </div>
-        )}
-        {type === 2 && (
-          <div className="absolute top-10 right-10 w-32 h-32 bg-brand-accent/10 rounded-full" />
-        )}
-      </div>
-
-      {/* Central Abstract Icon/UI Representation */}
+    <div className="h-full w-full relative overflow-hidden bg-brand-base">
+      {/* Hairline grid */}
+      <div className="absolute inset-0 opacity-[0.5] bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:22px_22px]" />
+      {/* Monogram */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative z-10 p-6 rounded-2xl bg-white/5 border border-white/10">
-          <div className="w-16 h-16 flex items-center justify-center text-brand-primary">
-            {project.category === 'Systems' && <Cpu size={32} />}
-            {project.category === 'Tools' && <Terminal size={32} />}
-            {project.category === 'Web' && <Layout size={32} />}
-            {project.category === 'AI' && <BrainCircuit size={32} />}
-            {project.category === 'Game Dev' && <Gamepad size={32} />}
-          </div>
-          {/* Mock UI Lines */}
-          <div className="space-y-2 mt-4 w-24 opacity-50">
-            <div className="h-1 bg-current rounded-full w-3/4" />
-            <div className="h-1 bg-current rounded-full w-full" />
-            <div className="h-1 bg-current rounded-full w-1/2" />
-          </div>
-        </div>
+        <span className="font-display font-black text-6xl text-brand-primary/15 tracking-tighter select-none">
+          {monogram}
+        </span>
       </div>
-
-      {/* Hover Reveal Overlay */}
-      <div className="absolute inset-0 bg-brand-surface/40 group-hover/card:bg-transparent transition-all duration-500" />
-
-      {/* Category Badge - Top Right */}
-      <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-300 flex flex-col items-end gap-2">
-        <div className="bg-black/70 border border-white/10 uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
-          <CategoryIcon category={project.category} />
-          <span className="ml-2">{project.category}</span>
-        </div>
-      </div>
-
-      {/* Year Badge - Top Left */}
-      <div className="absolute top-4 left-4 z-20 opacity-60 font-mono text-xs tracking-widest text-brand-secondary">
-        {project.year}
+      {/* Category icon, single cobalt accent */}
+      <div className="absolute bottom-4 left-4 text-brand-accent">
+        <CategoryIcon category={project.category} />
       </div>
     </div>
   );
@@ -311,161 +101,191 @@ const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => 
 const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
   const [hasError, setHasError] = useState(false);
 
-  if (hasError) {
+  if (hasError || !project.imageUrl) {
     return <AbstractProjectVisual project={project} />;
   }
 
   return (
-    <div className="h-full w-full relative group/image bg-brand-surface">
-      <img
-        src={project.imageUrl}
-        alt={project.title}
-        loading="lazy"
-        decoding="async"
-        onError={() => setHasError(true)}
-        className="w-full h-full object-cover transform scale-100 group-hover/card:scale-105 transition-transform duration-500 ease-out"
-      />
-
-      {/* Category Badge - Top Right */}
-      <div className="absolute top-4 right-4 z-20 translate-y-[-10px] opacity-0 group-hover/card:translate-y-0 group-hover/card:opacity-100 transition-all duration-200 flex flex-col items-end gap-2">
-        <div className="bg-black/70 border border-white/10 uppercase tracking-wide px-3 py-1.5 text-xs text-brand-primary rounded-full flex items-center">
-          <CategoryIcon category={project.category} />
-          <span className="ml-2">{project.category}</span>
-        </div>
-      </div>
-    </div>
+    <img
+      src={project.imageUrl}
+      alt={project.title}
+      loading="lazy"
+      decoding="async"
+      onError={() => setHasError(true)}
+      className="w-full h-full object-cover transform scale-100 group-hover/card:scale-[1.03] transition-transform duration-500 ease-out"
+    />
   );
 });
 
 interface ProjectsProps {
   onProjectClick?: (project: Project) => void;
+  onOpenServices?: () => void;
   activeFilter: string | null;
   onFilterChange: (filter: string | null) => void;
 }
 
-export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, activeFilter, onFilterChange }) => {
+// Kind chips, in display order. 'all' clears the kind filter.
+const KIND_CHIPS: { key: Project['kind'] | 'all'; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'product', label: kindLabel.product },
+  { key: 'platform', label: kindLabel.platform },
+  { key: 'oss', label: kindLabel.oss },
+  { key: 'client', label: kindLabel.client },
+];
 
-  const filteredProjects = useMemo(() => activeFilter
-    ? projects.filter(project => project.techStack.includes(activeFilter))
-    : projects, [activeFilter]);
+export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, onOpenServices, activeFilter, onFilterChange }) => {
+  // Kind filter is local to the section; the tech filter (activeFilter) arrives
+  // as a prop when a user clicks a tech tag on a detail page. They compose.
+  const [kindFilter, setKindFilter] = useState<Project['kind'] | 'all'>('all');
 
-  const toggleFilter = (tech: string) => {
-    onFilterChange(activeFilter === tech ? null : tech);
-  };
+  const filteredProjects = useMemo(() => workItems.filter(p =>
+    (kindFilter === 'all' || p.kind === kindFilter) &&
+    (!activeFilter || p.techStack.includes(activeFilter))
+  ), [kindFilter, activeFilter]);
+
+  // Only show kind chips that actually have items.
+  const availableKinds = useMemo(() => new Set(workItems.map(p => p.kind)), []);
 
   const clearFilter = () => onFilterChange(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
   };
-
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4 }
-    }
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } }
   };
 
   return (
-    <section id={SectionId.PROJECTS} className="py-20 md:py-32 px-4 md:px-6 bg-brand-base relative border-t border-brand-border/10 transition-colors duration-300">
-
+    <section id={SectionId.PROJECTS} className="py-20 md:py-32 px-4 md:px-6 bg-brand-base relative border-t border-brand-border/40">
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header — left-aligned, with the construction-to-code throughline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-20 gap-6 text-center md:text-left"
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mb-10 md:mb-14"
         >
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter">
-              Selected Works
-            </h2>
-            <div className="h-1 w-20 bg-brand-accent rounded-full mx-auto md:mx-0"></div>
-          </div>
-          <div className="hidden md:block">
-            <div className="flex items-center gap-2 text-xs font-mono text-brand-secondary border border-brand-border px-4 py-2 rounded-full bg-brand-surface/50">
-              <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-              ALL SYSTEMS OPERATIONAL
-            </div>
-          </div>
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent mb-4">Selected Work</div>
+          <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter leading-[0.95]">
+            Built from the<br />job site up<span className="text-brand-accent">.</span>
+          </h2>
+          <p className="mt-5 text-base md:text-lg text-brand-secondary leading-relaxed">
+            Seven months self-taught, out of construction and into code — now a full portfolio of products,
+            platforms, and AI shipped end to end. A few of them below.
+          </p>
         </motion.div>
 
-        {/* Active Filter Indicator */}
-        {activeFilter && (
-          <div className="flex items-center gap-3 mb-8 animate-fade-in">
-            <div className="flex items-center gap-2 text-sm text-brand-accent">
-              <Filter size={16} />
-              <span className="font-mono uppercase tracking-wider">Filtered by:</span>
-            </div>
+        {/* Kind filter chips */}
+        <div className="flex flex-wrap items-center gap-2 mb-8">
+          {KIND_CHIPS.filter(c => c.key === 'all' || availableKinds.has(c.key as Project['kind'])).map(chip => {
+            const active = kindFilter === chip.key;
+            return (
+              <button
+                key={chip.key}
+                onClick={() => setKindFilter(chip.key)}
+                className={`px-4 py-1.5 text-xs font-mono uppercase tracking-wider border transition-colors ${
+                  active
+                    ? 'border-brand-accent text-brand-accent bg-brand-accent/5'
+                    : 'border-brand-border text-brand-secondary hover:border-brand-accent/50 hover:text-brand-primary'
+                }`}
+              >
+                {chip.label}
+              </button>
+            );
+          })}
+
+          {/* Tech filter indicator (set from a detail page) */}
+          {activeFilter && (
             <button
               onClick={clearFilter}
-              className="flex items-center gap-2 px-3 py-1 bg-brand-accent/10 text-brand-accent rounded-full border border-brand-accent/20 hover:bg-brand-accent/20 transition-colors text-xs font-bold uppercase tracking-wide"
+              className="ml-auto flex items-center gap-2 px-3 py-1.5 bg-brand-accent/10 text-brand-accent border border-brand-accent/30 hover:bg-brand-accent/20 transition-colors text-xs font-mono uppercase tracking-wider"
             >
-              {activeFilter} <X size={14} />
+              <Filter size={13} /> {activeFilter} <X size={13} />
             </button>
-          </div>
-        )}
+          )}
+        </div>
 
+        {/* Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
         >
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <motion.div
               key={project.id}
               variants={cardVariants}
               onClick={() => onProjectClick?.(project)}
-              className="group/card relative bg-brand-surface rounded-[2rem] overflow-hidden cursor-pointer border border-brand-border hover:border-brand-accent/40 h-[480px] w-full max-w-[400px] hover:-translate-y-1 transition-all duration-300"
+              className="group/card relative flex flex-col bg-brand-surface border border-brand-border hover:border-brand-accent/50 cursor-pointer transition-colors duration-300"
             >
-              {/* Full Picture Background */}
-              <div className="absolute inset-0 w-full h-full overflow-hidden">
+              {/* Cover */}
+              <div className="relative h-44 overflow-hidden border-b border-brand-border bg-brand-base">
                 <ProjectCardImage project={project} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-              </div>
-
-              {/* Content Panel */}
-              <div className="absolute inset-0 p-8 pb-10 flex flex-col justify-end items-center z-10 text-center">
-                <h3 className="text-2xl font-display font-bold text-white leading-tight text-center mb-1">
-                  {project.title}
-                </h3>
-                <span className="text-brand-accent text-xs font-sans tracking-wide mb-3">
+                {/* Year — mono micro-label */}
+                <span className="absolute top-3 left-3 font-mono text-[10px] tracking-widest text-brand-secondary bg-brand-surface/80 px-1.5 py-0.5">
                   {project.year}
                 </span>
+              </div>
 
-                <p className="text-white/80 text-sm leading-relaxed font-sans mb-4 line-clamp-2 max-w-xs text-center">
-                  {project.description}
+              {/* Body — left-aligned on cream */}
+              <div className="flex flex-col flex-1 p-6">
+                <div className="flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-brand-accent">
+                  <CategoryIcon category={project.category} />
+                  <span>{project.kind ? kindLabel[project.kind] : project.category}</span>
+                </div>
+                <h3 className="text-xl font-display font-bold text-brand-primary leading-tight mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-brand-secondary leading-relaxed mb-4 line-clamp-2">
+                  {project.summary || project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 justify-center">
+                <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1.5">
                   {project.techStack.slice(0, 3).map((tech) => (
-                    <span key={tech} className="px-3 py-1 rounded-full bg-white/10 text-[10px] text-white tracking-wide font-sans border border-white/20">
+                    <span key={tech} className="font-mono text-[10px] uppercase tracking-wider text-brand-muted">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
+
+              {/* Accent-edge wipe on hover */}
+              <span className="absolute bottom-0 left-0 h-0.5 w-full bg-brand-accent origin-left scale-x-0 group-hover/card:scale-x-100 transition-transform duration-300 ease-out" />
             </motion.div>
           ))}
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div className="py-20 text-center border border-dashed border-brand-border rounded-xl">
-            <p className="text-brand-secondary font-mono">No projects found with filter "{activeFilter}".</p>
-            <button onClick={clearFilter} className="mt-4 text-brand-accent hover:underline text-sm uppercase tracking-wider">Clear Filter</button>
+          <div className="py-20 text-center border border-dashed border-brand-border">
+            <p className="text-brand-secondary font-mono text-sm">Nothing matches that filter.</p>
+            <button onClick={() => { setKindFilter('all'); clearFilter(); }} className="mt-4 text-brand-accent hover:underline text-xs font-mono uppercase tracking-wider">Reset</button>
           </div>
         )}
+
+        {/* Consulting cross-link — the practice that ships this work */}
+        <div className="mt-16 md:mt-20 border border-brand-border bg-brand-surface p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="max-w-xl">
+            <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight leading-tight">
+              Need this built for your business<span className="text-brand-accent">?</span>
+            </h3>
+            <p className="mt-3 text-brand-secondary leading-relaxed">
+              Websites, automations, and custom AI — built to own, by the person writing the code. See the full service menu.
+            </p>
+          </div>
+          <a
+            href="/services"
+            onClick={(e) => { if (onOpenServices) { e.preventDefault(); onOpenServices(); } }}
+            className="group/cta inline-flex items-center gap-2 shrink-0 bg-brand-accent text-white px-6 py-3 font-bold text-sm uppercase tracking-wider hover:bg-brand-accent-hover transition-colors"
+          >
+            View Services
+            <ArrowRight size={16} className="group-hover/cta:translate-x-1 transition-transform" />
+          </a>
+        </div>
       </div>
     </section>
   );
