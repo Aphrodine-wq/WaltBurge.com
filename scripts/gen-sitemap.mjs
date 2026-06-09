@@ -13,6 +13,9 @@ const WORK_FILE = path.join(ROOT, 'content', 'work', 'items.json');
 const LOCAL_FILE = path.join(ROOT, 'content', 'local', 'pages.json');
 const ORIGIN = 'https://waltburge.com';
 
+// Conversion landing pages for the priority verticals (lib/practice.ts).
+const practiceSlugs = ['for-doctors', 'for-lawyers'];
+
 // Minimal frontmatter read — we only need date + draft, and we own the format.
 function frontmatter(raw) {
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -76,6 +79,12 @@ const urls = [
     lastmod: today,
     changefreq: 'monthly',
     priority: '0.85',
+  })),
+  ...practiceSlugs.map(slug => ({
+    loc: `/${slug}`,
+    lastmod: today,
+    changefreq: 'monthly',
+    priority: '0.9',
   })),
   { loc: '/blog', lastmod: today, changefreq: 'weekly', priority: '0.9' },
   ...posts.map(p => ({

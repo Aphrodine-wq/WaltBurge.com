@@ -104,5 +104,11 @@ for (const p of localPages) {
   routes.push([`/${p.slug}`, `${p.seoTitle}${SUFFIX}`, p.seoDescription]);
 }
 
+// Conversion landing pages for the priority verticals (kept in sync with lib/practice.ts).
+routes.push(['/for-doctors', `AI for Doctors in Private Practice — Never Miss a Patient Call${SUFFIX}`,
+  'AI front-desk systems for private medical practices: 24/7 call answering, patient booking, and recall. HIPAA-aware, owned by you. Built by Walt Burge, Oxford MS.']);
+routes.push(['/for-lawyers', `AI for Lawyers in Private Practice — Never Miss a Case Again${SUFFIX}`,
+  'AI intake systems for private-practice attorneys: 24/7 call answering, case triage, and booked consults. Bar-aware, owned by you. Built by Walt Burge, Oxford MS.']);
+
 for (const [route, title, description] of routes) emit(route, title, description);
 console.log(`prerendered ${routes.length} routes`);

@@ -20,6 +20,7 @@ import { getPostBySlug } from './lib/blog';
 import { getSystem } from './lib/shop';
 import { getWorkItem } from './lib/work';
 import { localSlugs, getLocalPage } from './lib/local';
+import { getVertical } from './lib/practice';
 import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
@@ -32,6 +33,9 @@ const ServicesPage = lazy(() => import('./components/ServicesPage').then(module 
 const ShopPage = lazy(() => import('./components/ShopPage').then(module => ({ default: module.ShopPage })));
 const ShopSystemDetail = lazy(() => import('./components/ShopSystemDetail').then(module => ({ default: module.ShopSystemDetail })));
 const LocalLandingPage = lazy(() => import('./components/LocalLandingPage').then(module => ({ default: module.LocalLandingPage })));
+const PrivatePracticePage = lazy(() => import('./components/PrivatePracticePage').then(module => ({ default: module.PrivatePracticePage })));
+const HowItWorks = lazy(() => import('./components/HowItWorks').then(module => ({ default: module.HowItWorks })));
+const WhyWaltBuilds = lazy(() => import('./components/WhyWaltBuilds').then(module => ({ default: module.WhyWaltBuilds })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -43,6 +47,7 @@ function App() {
   const [showShop, setShowShop] = useState(false);
   const [shopSlug, setShopSlug] = useState<string>('');
   const [localSlug, setLocalSlug] = useState<string>('');
+  const [practiceSlug, setPracticeSlug] = useState<string>('');
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -55,6 +60,7 @@ function App() {
       const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
       const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
       const work = path.match(/^\/work(?:\/(.+?))?\/?$/);
+      const practice = path.match(/^\/(for-doctors|for-lawyers)\/?$/);
       const local = path.match(/^\/([a-z0-9-]+)\/?$/);
       const localHit = local && localSlugs.includes(local[1]) ? local[1] : '';
       // Reset every view, then set the one this path selects.
@@ -64,7 +70,10 @@ function App() {
       setShowServices(false);
       setShowShop(false);
       setLocalSlug('');
-      if (work) {
+      setPracticeSlug('');
+      if (practice) {
+        setPracticeSlug(practice[1]);
+      } else if (work) {
         // /work/<slug> opens the case study; bare /work is the homepage section.
         if (work[1]) setSelectedProject(getWorkItem(work[1]) ?? null);
         else setTimeout(() => document.getElementById(SectionId.PROJECTS)?.scrollIntoView({ behavior: 'smooth' }), 400);
@@ -161,6 +170,23 @@ function App() {
     window.history.pushState(null, '', '/');
   };
 
+  const openPractice = (slug: string) => {
+    setPracticeSlug(slug);
+    setSelectedPost(null);
+    setSelectedProject(null);
+    setShowBlogIndex(false);
+    setShowServices(false);
+    setShowShop(false);
+    setLocalSlug('');
+    window.history.pushState(null, '', `/${slug}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handlePracticeBack = () => {
+    setPracticeSlug('');
+    window.history.pushState(null, '', '/');
+  };
+
   // From a system detail, back goes up to the shop index.
   const handleShopBack = () => {
     setShopSlug('');
@@ -198,13 +224,14 @@ function App() {
   const goToSection = (id: string) => {
     if (id === SectionId.BLOG) { openBlogIndex(); return; }
     if (id === 'marketplace') { openShop(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug;
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug && !practiceSlug;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
     setShowServices(false);
     setShowShop(false);
     setLocalSlug('');
+    setPracticeSlug('');
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -288,6 +315,28 @@ function App() {
     );
   }
 
+  if (practiceSlug) {
+    const vertical = getVertical(practiceSlug);
+    if (vertical) {
+      return (
+        <TooltipProvider>
+          <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+            <CustomCursor />
+            <Suspense fallback={null}>
+              <PrivatePracticePage
+                vertical={vertical}
+                onBack={handlePracticeBack}
+                onNavigate={goToSection}
+                onOpenSystem={openShop}
+              />
+            </Suspense>
+            <Analytics />
+          </div>
+        </TooltipProvider>
+      );
+    }
+  }
+
   if (localSlug) {
     const page = getLocalPage(localSlug);
     if (page) {
@@ -345,6 +394,7 @@ function App() {
             <main className="relative z-10 w-full overflow-x-hidden">
               <Hero />
               <Specialties onOpenMenu={() => openServices()} />
+              <Suspense fallback={null}><HowItWorks /></Suspense>
               <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
               <Expertise />
 
@@ -359,6 +409,7 @@ function App() {
                 </Suspense>
               </ErrorBoundary>
 
+              <Suspense fallback={null}><WhyWaltBuilds /></Suspense>
               <FAQ />
               <About />
             </main>

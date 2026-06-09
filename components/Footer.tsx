@@ -7,9 +7,18 @@ export const Footer: React.FC = () => {
 
     return (
         <footer className="py-12 bg-brand-base border-t border-brand-border relative">
+            {/* Conversion pages for the priority verticals */}
+            <div className="max-w-7xl mx-auto px-6 mb-10 pb-10 border-b border-brand-border">
+                <span className="font-mono text-xs uppercase tracking-widest text-brand-secondary">For Private Practices</span>
+                <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
+                    <a href="/for-doctors" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors">AI for Doctors in Private Practice</a>
+                    <a href="/for-lawyers" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors">AI for Lawyers in Private Practice</a>
+                </div>
+            </div>
+
             {/* Local SEO links — keyword-rich anchors to the Oxford, MS pages */}
             <div className="max-w-7xl mx-auto px-6 mb-10 pb-10 border-b border-brand-border">
-                <span className="font-mono text-xs uppercase tracking-widest text-brand-secondary">AI Consultant · Serving Oxford, MS</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-brand-secondary">AI Consultant · Serving North Mississippi</span>
                 <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
                     {localPages.map(p => (
                         <a key={p.slug} href={`/${p.slug}`} className="text-sm text-brand-secondary hover:text-brand-accent transition-colors">
