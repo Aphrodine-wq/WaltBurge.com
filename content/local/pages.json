@@ -553,5 +553,95 @@
     ],
     "seoTitle": "AI for Real Estate in New Albany, MS — Instant Lead Response & Showings",
     "seoDescription": "AI lead-response systems for real estate agents in New Albany, Mississippi — instant replies, buyer qualifying, and booked showings. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-oxford-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in Oxford, MS",
+    "intro": "A home-care agency lives and dies on two phones: the family calling at 9 p.m. about mom, and the caregiver who didn't show. I build AI intake and recruiting systems for Oxford home health and senior-care agencies — capturing every family inquiry, booking the assessment, and screening caregivers so shifts get filled. HIPAA-aware, EVV-ready, and owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you only work with agencies in Oxford, MS?", "a": "I'm based in Oxford and build for home health, home care, and senior-living agencies across Oxford, Tupelo, the Memphis metro, and North Mississippi — and remotely anywhere." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes. It's HIPAA-aware from the first commit with BAAs in place, and the caregiver workflow is built EVV-ready where Medicaid requires electronic visit verification." },
+      { "q": "Can it actually help with caregiver recruiting?", "a": "Yes — the recruiting agent screens applicants, answers their questions, and books interviews automatically, so open shifts get filled instead of sitting in an inbox. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in Oxford, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in Oxford, Mississippi — 24/7 family inquiry capture, booked assessments, filled shifts. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-tupelo-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in Tupelo, MS",
+    "intro": "Tupelo is the medical hub of North Mississippi, and the home-care agencies feeding off its hospital and discharge planners compete for both clients and caregivers. I build AI intake and recruiting systems for Tupelo home health and senior-care agencies — capturing every family inquiry and referral, booking the assessment, and screening caregivers so shifts get filled. HIPAA-aware, EVV-ready, owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you work with Tupelo and Lee County agencies?", "a": "Yes — I'm based in Oxford, an hour from Tupelo, and build for home-care and senior-living agencies across Lee County, North Mississippi, and remotely." },
+      { "q": "Can it capture hospital and discharge-planner referrals?", "a": "Yes. A referral-source intake flow captures the referral, checks eligibility, and routes it the moment it comes in, so you stop losing discharges to whoever responded first." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes — HIPAA-aware from the first commit with BAAs in place, and EVV-ready where Medicaid requires it. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in Tupelo, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in Tupelo, Mississippi — 24/7 inquiry capture, referral intake, filled shifts. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-southaven-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in Southaven, MS",
+    "intro": "DeSoto County's aging population and Memphis-metro overflow keep home-care agencies in Southaven, Olive Branch, and Hernando slammed — and competing with the whole metro for caregivers. I build AI intake and recruiting systems for DeSoto County agencies that capture every family inquiry, book the assessment, and screen caregivers so shifts get filled. HIPAA-aware, EVV-ready, owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you cover DeSoto County and the Memphis metro?", "a": "Yes — I build for home-care and senior-living agencies across Southaven, Olive Branch, Hernando, the Memphis metro, and North Mississippi, plus remotely." },
+      { "q": "Can it help fill caregiver shifts?", "a": "Yes. The recruiting agent screens applicants and books interviews automatically, so you fill shifts instead of losing caregivers to the agency across the state line." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes — HIPAA-aware from the first commit with BAAs in place, and EVV-ready where Medicaid requires it. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in Southaven, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in Southaven and DeSoto County, Mississippi — inquiry capture, filled shifts. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-starkville-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in Starkville, MS",
+    "intro": "Starkville and Oktibbeha County home-care agencies serve an aging local base while competing for caregivers in a college-town labor market that empties every summer. I build AI intake and recruiting systems for Starkville agencies that capture every family inquiry, book the assessment, and screen caregivers so shifts get filled. HIPAA-aware, EVV-ready, owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you work with Starkville and Oktibbeha County agencies?", "a": "Yes — I'm based in Oxford and build for home-care and senior-living agencies across Starkville, North Mississippi, and remotely." },
+      { "q": "Can it help with the caregiver labor crunch?", "a": "Yes. The recruiting agent screens applicants and books interviews around the clock, so a thin local labor market doesn't leave shifts unfilled." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes — HIPAA-aware from the first commit with BAAs in place, and EVV-ready where Medicaid requires it. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in Starkville, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in Starkville, Mississippi — inquiry capture, booked assessments, filled shifts. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-batesville-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in Batesville, MS",
+    "intro": "Batesville and Panola County home-care agencies cover a lot of rural ground along the I-55 corridor, usually with a small office that can't catch every after-hours call. I build AI intake and recruiting systems for Batesville agencies that capture every family inquiry, book the assessment, and screen caregivers so shifts get filled. HIPAA-aware, EVV-ready, owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you work with Batesville and Panola County agencies?", "a": "Yes — I'm in Oxford, a half hour from Batesville, and build for home-care and senior-living agencies across Panola County, North Mississippi, and remotely." },
+      { "q": "Can it cover a wide rural service area?", "a": "Yes. The AI answers and qualifies every inquiry no matter how spread out your clients are, and routes the ones that fit your coverage area to your team." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes — HIPAA-aware from the first commit with BAAs in place, and EVV-ready where Medicaid requires it. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in Batesville, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in Batesville, Mississippi — inquiry capture, booked assessments, filled shifts. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-health-new-albany-ms",
+    "industry": "Home Health & Senior Care",
+    "h1": "AI for Home Health & Senior Care in New Albany, MS",
+    "intro": "New Albany and Union County home-care agencies serve a steady aging local base with small offices that can't always answer a 9 p.m. call about a parent. I build AI intake and recruiting systems for New Albany agencies that capture every family inquiry, book the assessment, and screen caregivers so shifts get filled. HIPAA-aware, EVV-ready, owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-intake-triage", "ai-lead-nurture"],
+    "servicesSlug": "home-health",
+    "faqs": [
+      { "q": "Do you work with New Albany and Union County agencies?", "a": "Yes — I'm in Oxford, about 45 minutes from New Albany, and build for home-care and senior-living agencies across Union County, North Mississippi, and remotely." },
+      { "q": "Can it capture after-hours family inquiries?", "a": "Yes. The AI answers 24/7, qualifies the care level and payer, and books the assessment, so a late-night call becomes a client instead of a voicemail." },
+      { "q": "Is it HIPAA-safe, and does it handle EVV?", "a": "Yes — HIPAA-aware from the first commit with BAAs in place, and EVV-ready where Medicaid requires it. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Health & Senior Care in New Albany, MS — Intake & Recruiting",
+    "seoDescription": "Custom AI intake and caregiver-recruiting systems for home health and senior-care agencies in New Albany, Mississippi — inquiry capture, booked assessments, filled shifts. HIPAA-aware. Walt Burge."
   }
 ]
