@@ -26,6 +26,7 @@ export interface Project {
   seoDescription?: string;// per-page meta description for prerender
   client?: { name: string; location?: string }; // case studies (kind: 'client')
   featured?: boolean;
+  draft?: boolean;        // scaffolded but not live — hidden from app, sitemap, prerender
 }
 
 export enum SectionId {

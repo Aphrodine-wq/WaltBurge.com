@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, ArrowUpRight, Copy, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { SectionId } from '../types';
+import { trackEvent } from '../lib/track';
+import { getLeadContext, getUtm, clearLeadContext } from '../lib/leadContext';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = React.useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    company: '',
     subject: '',
     message: ''
   });
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  // Honeypot — bots fill it, humans never see it. See lib/leadContext + api/lead.
+  const [hp, setHp] = useState('');
+  const [leadNote, setLeadNote] = useState('');
+
+  // Carry funnel context into the form: if the visitor came from a vertical page
+  // or ran the calculator, default the subject and show a short note — so they
+  // know we have the thread, and so the lead arrives with that context attached.
+  useEffect(() => {
+    const ctx = getLeadContext();
+    if (!ctx.vertical && !ctx.annualLoss) return;
+    const labels: Record<string, string> = { doctors: 'private practice', lawyers: 'law firm' };
+    const v = ctx.vertical ? labels[ctx.vertical] || ctx.vertical : '';
+    setFormData(prev => ({
+      ...prev,
+      subject: prev.subject || (v ? `AI for my ${v}` : 'Booking a free call'),
+    }));
+    if (ctx.annualLoss && ctx.annualLoss > 0) {
+      setLeadNote(`From your estimate: about $${Math.round(ctx.annualLoss).toLocaleString('en-US')}/yr walking out the door. Let's talk about catching it.`);
+    } else if (v) {
+      setLeadNote(`Following up on AI for your ${v}.`);
+    }
+  }, []);
 
   const copyEmail = () => {
     navigator.clipboard.writeText('jamesburge.mcm@gmail.com');
@@ -41,15 +67,18 @@ export const Contact: React.FC = () => {
 
     if (!validateForm()) {
       setFormStatus('error');
+      trackEvent('form_submit_error', { reason: 'validation' });
       return;
     }
 
     setFormStatus('loading');
     setErrorMessage('');
 
+    const ctx = getLeadContext();
     try {
-      // Using Formspree for email handling
-      const response = await fetch('https://formspree.io/f/xyzgwdzk', {
+      // Our own endpoint: validates, persists to the CRM store, and forwards to
+      // email — so the lead is captured, not just emailed. See api/lead.js.
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,21 +86,33 @@ export const Contact: React.FC = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
           subject: formData.subject || 'No subject',
-          message: formData.message
+          message: formData.message,
+          vertical: ctx.vertical || '',
+          sourcePage: ctx.sourcePage || (typeof window !== 'undefined' ? window.location.pathname : ''),
+          annualLoss: ctx.annualLoss || 0,
+          utm: getUtm(),
+          _hp: hp,
         })
       });
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+        setLeadNote('');
+        clearLeadContext();
+        trackEvent('form_submit_success', { vertical: ctx.vertical || 'none' });
         setTimeout(() => setFormStatus('idle'), 3000);
       } else {
-        throw new Error('Failed to send message');
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to send message');
       }
     } catch (error) {
       setFormStatus('error');
-      setErrorMessage('Failed to send message. Please try again or email directly.');
+      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message. Please try again or email directly.');
+      trackEvent('form_submit_error', { reason: 'network' });
     }
   };
 
@@ -121,12 +162,12 @@ export const Contact: React.FC = () => {
             </span>
             <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter mb-8 leading-[0.9]">
               Let's <br />
-              <span className="text-brand-secondary">Build The</span> <br />
-              Future<span className="text-brand-accent">.</span>
+              <span className="text-brand-secondary">Build</span> <br />
+              Yours<span className="text-brand-accent">.</span>
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
-              Open for high-impact engineering roles and technical consulting.
-              If you're building something that requires bare-metal efficiency or agentic intelligence, let's talk.
+              Tell me what's eating your time — the missed calls, the paperwork, the leads going cold.
+              The first call and the estimate are free, and you'll talk to the person who builds it, not a sales rep.
             </p>
           </motion.div>
 
@@ -136,6 +177,26 @@ export const Contact: React.FC = () => {
             onSubmit={handleSubmit}
             className="flex flex-col gap-6 md:pt-10"
           >
+            {/* Funnel context — only shows when the visitor arrived from a
+                vertical page or used the calculator. */}
+            {leadNote && (
+              <div className="p-3 bg-brand-accent/10 border border-brand-accent/30 text-sm text-brand-primary">
+                {leadNote}
+              </div>
+            )}
+
+            {/* Honeypot — visually hidden, off the tab order. Bots fill it. */}
+            <input
+              type="text"
+              name="_hp"
+              tabIndex={-1}
+              autoComplete="off"
+              value={hp}
+              onChange={(e) => setHp(e.target.value)}
+              aria-hidden="true"
+              className="absolute left-[-9999px] w-px h-px opacity-0"
+            />
+
             {/* Name Input */}
             <div>
               <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Name</label>
@@ -144,7 +205,7 @@ export const Contact: React.FC = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Your name"
-                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
             </div>
@@ -157,9 +218,33 @@ export const Contact: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="your@email.com"
-                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
                 required
               />
+            </div>
+
+            {/* Phone + Company (both optional, both map to the CRM lead) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Phone (Optional)</label>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  placeholder="(662) 000-0000"
+                  className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-mono text-brand-secondary uppercase tracking-widest mb-2 block">Business (Optional)</label>
+                <input
+                  type="text"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  placeholder="Your business name"
+                  className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                />
+              </div>
             </div>
 
             {/* Subject Input */}
@@ -170,7 +255,7 @@ export const Contact: React.FC = () => {
                 value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="What's this about?"
-                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
+                className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors"
               />
             </div>
 
@@ -182,7 +267,7 @@ export const Contact: React.FC = () => {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Your message here..."
                 rows={5}
-                className="w-full bg-brand-surface border border-brand-border rounded-lg px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors resize-none"
+                className="w-full bg-brand-surface border border-brand-border px-4 py-3 text-brand-primary placeholder-brand-secondary/70 focus:outline-none focus:border-brand-accent transition-colors resize-none"
                 required
               />
             </div>
@@ -192,7 +277,7 @@ export const Contact: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-600"
+                className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/30 text-red-600"
               >
                 <AlertCircle size={18} />
                 <span className="text-sm">{errorMessage}</span>
@@ -204,7 +289,7 @@ export const Contact: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg text-green-600"
+                className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 text-green-600"
               >
                 <CheckCircle size={18} />
                 <span className="text-sm">Message sent successfully! I'll get back to you soon.</span>
@@ -215,7 +300,7 @@ export const Contact: React.FC = () => {
             <button
               type="submit"
               disabled={formStatus === 'loading'}
-              className="w-full bg-brand-accent hover:bg-brand-accent-hover disabled:bg-brand-accent/50 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-brand-accent hover:bg-brand-accent-hover disabled:bg-brand-accent/50 text-white font-bold py-3 px-6 transition-all flex items-center justify-center gap-2 mt-2"
             >
               {formStatus === 'loading' ? (
                 <>
@@ -236,7 +321,7 @@ export const Contact: React.FC = () => {
               <div className="flex items-center justify-between gap-4">
                 <button
                   onClick={copyEmail}
-                  className="flex-1 p-3 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
+                  className="flex-1 p-3 bg-brand-surface border border-brand-border hover:border-brand-accent transition-colors text-brand-primary font-mono text-xs"
                   title="Copy to clipboard"
                 >
                   {copied ? <span className="text-brand-accent">COPIED!</span> : 'jamesburge.mcm@gmail.com'}
@@ -245,7 +330,7 @@ export const Contact: React.FC = () => {
                   href="https://github.com/Aphrodine-wq"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-brand-surface border border-brand-border rounded-lg hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
+                  className="p-3 bg-brand-surface border border-brand-border hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
                 >
                   <Github size={20} />
                 </a>

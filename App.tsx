@@ -21,6 +21,7 @@ import { getSystem } from './lib/shop';
 import { getWorkItem } from './lib/work';
 import { localSlugs, getLocalPage } from './lib/local';
 import { getVertical } from './lib/practice';
+import { captureUtm } from './lib/leadContext';
 import { SectionId, Project, BlogPost } from './types';
 
 const Projects = lazy(() => import('./components/Projects').then(module => ({ default: module.Projects })));
@@ -54,6 +55,9 @@ function App() {
   // any non-/api path, so history.pushState gives us real, indexable URLs:
   //   /blog/<slug> → an open post   ·   /blog → the full index   ·   else → home.
   useEffect(() => {
+    // Stash UTM params once on landing so a lead submitted pages later still
+    // carries its original attribution.
+    captureUtm();
     const syncFromPath = () => {
       const path = window.location.pathname;
       const blogSlug = path.match(/^\/blog\/(.+?)\/?$/);

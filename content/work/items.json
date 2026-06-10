@@ -307,5 +307,59 @@
     "year": "2025",
     "seoTitle": "Case Study — AI Estimation for MHP Construction, Oxford MS",
     "seoDescription": "How Walt Burge built and deployed a custom AI estimation platform for MHP Construction, a licensed contractor in Oxford, Mississippi — live in production."
+  },
+  {
+    "id": "case-study-scaffold-1",
+    "slug": "case-study-scaffold-1",
+    "title": "TODO — Client Name",
+    "kind": "client",
+    "draft": true,
+    "category": "Web",
+    "summary": "TODO — one-line result, e.g. 'A North MS [trade] capturing every after-hours call with a custom AI front desk.'",
+    "description": "TODO — one-line result for the card.",
+    "client": { "name": "TODO — Client / Business name", "location": "TODO — City, MS" },
+    "fullDescription": "TODO — 2-3 sentences: who the client is, what was built, and that it's in production. Keep James's voice; no invented metrics.",
+    "challenge": "TODO — the real problem in the client's words (missed calls, slow estimates, paperwork, etc.).",
+    "solution": "TODO — what was built and how it changed the day-to-day.",
+    "features": [
+      "TODO — capability 1",
+      "TODO — capability 2",
+      "TODO — capability 3"
+    ],
+    "techStack": ["TODO"],
+    "tags": ["case-study"],
+    "imageUrl": "/assets/projects/REPLACE/cover.png",
+    "images": [],
+    "status": "Live",
+    "year": "2026",
+    "seoTitle": "TODO — Case Study Title | Walt Burge",
+    "seoDescription": "TODO — meta description with the result + city, MS for local SEO."
+  },
+  {
+    "id": "case-study-scaffold-2",
+    "slug": "case-study-scaffold-2",
+    "title": "TODO — Client Name",
+    "kind": "client",
+    "draft": true,
+    "category": "Web",
+    "summary": "TODO — one-line result for the card.",
+    "description": "TODO — one-line result for the card.",
+    "client": { "name": "TODO — Client / Business name", "location": "TODO — City, MS" },
+    "fullDescription": "TODO — 2-3 sentences in James's voice; verified facts only.",
+    "challenge": "TODO — the real problem.",
+    "solution": "TODO — what was built.",
+    "features": [
+      "TODO — capability 1",
+      "TODO — capability 2",
+      "TODO — capability 3"
+    ],
+    "techStack": ["TODO"],
+    "tags": ["case-study"],
+    "imageUrl": "/assets/projects/REPLACE/cover.png",
+    "images": [],
+    "status": "Live",
+    "year": "2026",
+    "seoTitle": "TODO — Case Study Title | Walt Burge",
+    "seoDescription": "TODO — meta description with the result + city, MS."
   }
 ]

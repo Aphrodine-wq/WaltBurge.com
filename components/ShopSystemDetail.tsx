@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { AISystem, systems, industryMenuSlug } from '../lib/shop';
 import { NavLinks } from './NavLinks';
+import { setLeadContext } from '../lib/leadContext';
+import { trackEvent } from '../lib/track';
 
 interface ShopSystemDetailProps {
   system: AISystem;
@@ -137,7 +139,11 @@ export const ShopSystemDetail: React.FC<ShopSystemDetailProps> = ({ system, onBa
               <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight">Want {system.name} in your business?</h3>
               <p className="mt-3 text-brand-secondary max-w-xl">Book a free call. I'll scope it to what you actually need and give you a real number — no obligation.</p>
               <button
-                onClick={() => onNavigate('contact')}
+                onClick={() => {
+                  setLeadContext({ vertical: system.industry || '', sourcePage: `/shop/${system.slug}` });
+                  trackEvent('cta_click', { location: 'shop-system', system: system.slug });
+                  onNavigate('contact');
+                }}
                 className="mt-6 px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
               >
                 Book a call about {system.name}

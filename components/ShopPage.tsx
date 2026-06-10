@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { engines, toolsByCategory, digital, AISystem } from '../lib/shop';
 import { NavLinks } from './NavLinks';
+import { setLeadContext } from '../lib/leadContext';
+import { trackEvent } from '../lib/track';
 
 interface ShopPageProps {
   onBack: () => void;
@@ -134,7 +136,11 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onBack, onNavigate, onOpenSy
           <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight">Not sure which system fits?</h3>
           <p className="mt-3 text-brand-secondary max-w-xl">Tell me the task. I'll tell you straight what to build — or whether you even need a custom system at all. The audit is free.</p>
           <button
-            onClick={() => onNavigate('contact')}
+            onClick={() => {
+              setLeadContext({ sourcePage: '/shop' });
+              trackEvent('cta_click', { location: 'shop-index', label: 'book-a-free-call' });
+              onNavigate('contact');
+            }}
             className="mt-6 px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
           >
             Book a free call

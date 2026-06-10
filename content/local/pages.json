@@ -253,5 +253,305 @@
     ],
     "seoTitle": "AI for Contractors in New Albany, MS — AI Estimating & Lead Follow-Up",
     "seoDescription": "Custom AI estimating and lead systems for contractors in New Albany, Mississippi — voice-to-estimate and lead follow-up. Built by a former builder. Walt Burge."
+  },
+  {
+    "slug": "ai-for-dental-practices-tupelo-ms",
+    "industry": "Dental Practices",
+    "h1": "AI for Dental Practices in Tupelo, MS",
+    "intro": "Tupelo dental offices compete for the same patients across Lee County while the front desk juggles a full waiting room. I build AI front-desk systems for Tupelo practices that fill the schedule, work the hygiene recall list, and answer the phone while your team is chairside — HIPAA-aware and built to be yours.",
+    "systemSlugs": ["patient-engine", "ai-appointment-scheduler", "ai-voice-receptionist", "ai-review-responder"],
+    "servicesSlug": "dental",
+    "faqs": [
+      { "q": "Do you work with dental offices around Tupelo?", "a": "Yes — I'm based in Oxford, an hour from Tupelo, and build for practices across Lee County, North Mississippi, and remotely." },
+      { "q": "Can it handle hygiene recall and no-show gaps?", "a": "Yes. It works the recall list, fills last-minute openings, and confirms appointments so the chair isn't sitting empty." },
+      { "q": "Is patient data safe?", "a": "Yes — HIPAA-aware from the first commit, with BAAs in place. The AI books and routes; it never gives clinical advice." }
+    ],
+    "seoTitle": "AI for Dental Practices in Tupelo, MS — Scheduling, Recall & Reviews",
+    "seoDescription": "Custom AI front-desk systems for dental practices in Tupelo, Mississippi — 24/7 booking, hygiene recall, and review generation. HIPAA-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-real-estate-tupelo-ms",
+    "industry": "Real Estate Agents",
+    "h1": "AI for Real Estate in Tupelo, MS",
+    "intro": "Tupelo buyers and renters call three agents and sign with whoever answers first. I build AI lead systems for Tupelo agents and teams that respond in seconds, qualify the buyer, and book the showing before the lead goes cold — so you stop losing deals to a slow callback.",
+    "systemSlugs": ["ai-lead-nurture", "ai-phone-agent", "ai-chatbot", "ai-review-responder"],
+    "servicesSlug": "real-estate",
+    "faqs": [
+      { "q": "Do you work with agents across Lee County?", "a": "Yes — I'm in Oxford, an hour from Tupelo, and build for agents and brokerages across Lee County, North Mississippi, and remotely." },
+      { "q": "Can it follow up on portal leads instantly?", "a": "Yes. The moment a Zillow or portal lead comes in, it responds, qualifies, and routes the hot ones to you." },
+      { "q": "How much does it cost?", "a": "It scales to your volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Real Estate in Tupelo, MS — Instant Lead Response & Showings",
+    "seoDescription": "AI lead-response systems for real estate agents in Tupelo, Mississippi — instant replies, buyer qualifying, and booked showings. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-accounting-firms-tupelo-ms",
+    "industry": "Accounting & Bookkeeping Firms",
+    "h1": "AI for Accounting Firms in Tupelo, MS",
+    "intro": "Tax season buries every Tupelo accounting firm in the same thing — documents, intake, and questions that pull staff off billable work. I build AI systems that pull data straight out of statements and forms, triage client email, and answer the phone, so your people bill hours instead of chasing paperwork.",
+    "systemSlugs": ["ai-document-drafting", "ai-data-extraction", "ai-email-triage", "ai-phone-agent"],
+    "servicesSlug": "accounting-financial",
+    "faqs": [
+      { "q": "Do you work with firms around Tupelo and Lee County?", "a": "Yes — based in Oxford, an hour away, building for firms across Lee County, North Mississippi, and remotely." },
+      { "q": "Can it pull numbers out of statements and receipts?", "a": "Yes. The data-extraction system reads statements, invoices, and forms and outputs clean, structured data your team can use." },
+      { "q": "Is client financial data kept private?", "a": "Yes — I build owned systems that keep your client data in your control, not fed into someone else's product." }
+    ],
+    "seoTitle": "AI for Accounting Firms in Tupelo, MS — Document & Intake Automation",
+    "seoDescription": "AI document extraction and intake automation for accounting and bookkeeping firms in Tupelo, Mississippi — less paperwork, more billable hours. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-services-oxford-ms",
+    "industry": "Home Service Pros",
+    "h1": "AI for Home Service Pros in Oxford, MS",
+    "intro": "HVAC, plumbing, and electrical calls in Oxford come in while you're under a house or up on a roof — and the customer who doesn't get an answer dials the next number. I build AI phone and lead systems for Oxford home-service pros that answer every call, book the job, and follow up on every quote, so you stop bleeding work to voicemail.",
+    "systemSlugs": ["ai-phone-agent", "ai-lead-nurture", "ai-quote-generator", "ai-review-responder"],
+    "servicesSlug": "home-services",
+    "faqs": [
+      { "q": "Do you work with trades outside Oxford?", "a": "Yes — I'm in Oxford and build for HVAC, plumbing, electrical, and home-service pros across North Mississippi and remotely." },
+      { "q": "Can it book jobs while I'm on a call?", "a": "Yes. The AI answers every call at once, captures the job, and books it to your schedule so nothing slips while you're working." },
+      { "q": "How much does it cost?", "a": "It scales to your call volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Service Pros in Oxford, MS — 24/7 Call Answering & Booking",
+    "seoDescription": "AI phone and lead systems for HVAC, plumbing, and electrical pros in Oxford, Mississippi — answer every call, book the job, follow up on every quote. Walt Burge."
+  },
+  {
+    "slug": "ai-for-veterinary-clinics-oxford-ms",
+    "industry": "Veterinary Clinics",
+    "h1": "AI for Veterinary Clinics in Oxford, MS",
+    "intro": "An Oxford vet clinic's phone rings off the hook while the team is in an exam room or holding a nervous dog. I build AI front-desk systems for Oxford veterinary practices that answer every call, book appointments around the clock, and work the reminder list — so the team stays with the patients and no client gets sent to voicemail.",
+    "systemSlugs": ["patient-engine", "ai-appointment-scheduler", "ai-voice-receptionist", "ai-review-responder"],
+    "servicesSlug": "veterinary",
+    "faqs": [
+      { "q": "Do you work with clinics outside Oxford?", "a": "Yes — based in Oxford, building for veterinary clinics across North Mississippi and remotely." },
+      { "q": "Can it handle appointment reminders and recalls?", "a": "Yes. It books, confirms, and works the vaccine and wellness reminder list so the schedule stays full." },
+      { "q": "How much does an AI front desk cost?", "a": "It depends on what you need. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Veterinary Clinics in Oxford, MS — AI Receptionist & Booking",
+    "seoDescription": "Custom AI front-desk systems for veterinary clinics in Oxford, Mississippi — 24/7 call answering, appointment booking, and reminders. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-restaurants-oxford-ms",
+    "industry": "Restaurants",
+    "h1": "AI for Restaurants in Oxford, MS",
+    "intro": "Game weekends fill the Square and the phone never stops — reservations, takeout, and catering questions piling up while every server is on the floor. I build AI phone and chat systems for Oxford restaurants that answer every call, take reservations and orders, and field the same five questions, so the house keeps moving and you stop missing covers.",
+    "systemSlugs": ["ai-phone-agent", "ai-chatbot", "ai-review-responder", "ai-lead-nurture"],
+    "servicesSlug": "hospitality",
+    "faqs": [
+      { "q": "Do you work with restaurants beyond the Square?", "a": "Yes — I'm in Oxford and build for restaurants and hospitality businesses across North Mississippi and remotely." },
+      { "q": "Can it take reservations and answer the phone on a game weekend?", "a": "Yes. The AI answers unlimited calls at once, takes reservations and takeout orders, and answers hours-and-menu questions so your staff stays on the floor." },
+      { "q": "How much does it cost?", "a": "It scales to your volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Restaurants in Oxford, MS — Reservations, Takeout & Phone",
+    "seoDescription": "AI phone and chat systems for restaurants in Oxford, Mississippi — 24/7 reservations, takeout orders, and FAQs that keep staff on the floor. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-dental-practices-southaven-ms",
+    "industry": "Dental Practices",
+    "h1": "AI for Dental Practices in Southaven, MS",
+    "intro": "Southaven and DeSoto County dental offices compete with the whole Memphis metro for patients, and the one who answers first wins the new family. I build AI front-desk systems for DeSoto County practices that fill the schedule, work the hygiene recall list, and answer the phone while your team is chairside — HIPAA-aware and owned by you.",
+    "systemSlugs": ["patient-engine", "ai-appointment-scheduler", "ai-voice-receptionist", "ai-review-responder"],
+    "servicesSlug": "dental",
+    "faqs": [
+      { "q": "Do you cover Southaven, Olive Branch, and Hernando?", "a": "Yes — I build for dental offices across DeSoto County, the Memphis metro, and North Mississippi, plus remotely." },
+      { "q": "Can it handle hygiene recall and no-show gaps?", "a": "Yes. It works the recall list, fills last-minute openings, and confirms appointments so the chair isn't sitting empty." },
+      { "q": "Is patient data safe?", "a": "Yes — HIPAA-aware from the first commit, with BAAs in place. The AI books and routes; it never gives clinical advice." }
+    ],
+    "seoTitle": "AI for Dental Practices in Southaven, MS — Scheduling, Recall & Reviews",
+    "seoDescription": "Custom AI front-desk systems for dental practices in Southaven and DeSoto County, Mississippi — 24/7 booking, hygiene recall, and reviews. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-real-estate-southaven-ms",
+    "industry": "Real Estate Agents",
+    "h1": "AI for Real Estate in Southaven, MS",
+    "intro": "DeSoto County is the fastest-moving housing market in Mississippi, fed by buyers crossing from the Memphis metro who call once and move on if nobody answers. I build AI lead systems for Southaven agents and teams that respond in seconds, qualify the buyer, and book the showing before the lead goes cold.",
+    "systemSlugs": ["ai-lead-nurture", "ai-phone-agent", "ai-chatbot", "ai-review-responder"],
+    "servicesSlug": "real-estate",
+    "faqs": [
+      { "q": "Do you cover DeSoto County and the Memphis metro?", "a": "Yes — I build for agents and brokerages across Southaven, Olive Branch, Hernando, the Memphis metro, and North Mississippi, plus remotely." },
+      { "q": "Can it follow up on portal leads instantly?", "a": "Yes. The moment a lead comes in, it responds, qualifies, and routes the hot ones to you so you stop losing buyers across the state line." },
+      { "q": "How much does it cost?", "a": "It scales to your volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Real Estate in Southaven, MS — Instant Lead Response & Showings",
+    "seoDescription": "AI lead-response systems for real estate agents in Southaven and DeSoto County, Mississippi — instant replies, buyer qualifying, and booked showings. Walt Burge."
+  },
+  {
+    "slug": "ai-for-accounting-firms-southaven-ms",
+    "industry": "Accounting & Bookkeeping Firms",
+    "h1": "AI for Accounting Firms in Southaven, MS",
+    "intro": "Southaven and DeSoto County accounting firms grow off Memphis-metro clients and a flood of tax-season paperwork that pulls staff off billable work. I build AI systems that pull data straight out of statements and forms, triage client email, and answer the phone, so your people bill hours instead of chasing documents.",
+    "systemSlugs": ["ai-document-drafting", "ai-data-extraction", "ai-email-triage", "ai-phone-agent"],
+    "servicesSlug": "accounting-financial",
+    "faqs": [
+      { "q": "Do you cover DeSoto County and the Memphis metro?", "a": "Yes — I build for firms across Southaven, Olive Branch, Hernando, the Memphis metro, and North Mississippi, plus remotely." },
+      { "q": "Can it pull numbers out of statements and receipts?", "a": "Yes. The data-extraction system reads statements, invoices, and forms and outputs clean, structured data your team can use." },
+      { "q": "Is client financial data kept private?", "a": "Yes — I build owned systems that keep your client data in your control, not fed into someone else's product." }
+    ],
+    "seoTitle": "AI for Accounting Firms in Southaven, MS — Document & Intake Automation",
+    "seoDescription": "AI document extraction and intake automation for accounting firms in Southaven and DeSoto County, Mississippi — less paperwork, more billable hours. Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-services-southaven-ms",
+    "industry": "Home Service Pros",
+    "h1": "AI for Home Service Pros in Southaven, MS",
+    "intro": "DeSoto County's growth keeps HVAC, plumbing, and electrical crews slammed, and the call you miss on a job site goes straight to a Memphis-metro competitor. I build AI phone and lead systems for Southaven home-service pros that answer every call, book the job, and follow up on every quote — so you stop bleeding work to voicemail.",
+    "systemSlugs": ["ai-phone-agent", "ai-lead-nurture", "ai-quote-generator", "ai-review-responder"],
+    "servicesSlug": "home-services",
+    "faqs": [
+      { "q": "Do you cover Southaven, Olive Branch, and Hernando?", "a": "Yes — I build for home-service pros across DeSoto County, the Memphis metro, and North Mississippi, plus remotely." },
+      { "q": "Can it book jobs while I'm on a call?", "a": "Yes. The AI answers every call at once, captures the job, and books it to your schedule so nothing slips while you're working." },
+      { "q": "How much does it cost?", "a": "It scales to your call volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Service Pros in Southaven, MS — 24/7 Call Answering & Booking",
+    "seoDescription": "AI phone and lead systems for HVAC, plumbing, and electrical pros in Southaven and DeSoto County, Mississippi — answer every call, book the job. Walt Burge."
+  },
+  {
+    "slug": "ai-for-law-firms-starkville-ms",
+    "industry": "Law Firms",
+    "h1": "AI for Law Firms in Starkville, MS",
+    "intro": "Starkville firms field cases tied to Mississippi State, Oktibbeha County, and a town that empties and fills with the academic calendar — and the case that calls at 9 p.m. signs with whoever answers. I build 24/7 AI intake and document systems for Starkville firms so an after-hours call becomes a booked consult instead of a Monday voicemail.",
+    "systemSlugs": ["intake-engine", "ai-intake-triage", "ai-document-drafting", "ai-phone-agent"],
+    "servicesSlug": "legal-business",
+    "faqs": [
+      { "q": "Do you work with Starkville and Oktibbeha County firms?", "a": "Yes — I'm based in Oxford and build for firms across Starkville, North Mississippi, and remotely." },
+      { "q": "Is the intake bar-compliant?", "a": "Yes. It captures intake and conflict details and never gives legal advice — judgment stays with your attorneys." },
+      { "q": "How much does AI legal intake cost?", "a": "It depends on the system. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Law Firms in Starkville, MS — 24/7 AI Legal Intake & Triage",
+    "seoDescription": "Custom AI intake and document systems for law firms in Starkville, Mississippi — 24/7 case intake, triage, and drafting. Bar-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-dental-practices-starkville-ms",
+    "industry": "Dental Practices",
+    "h1": "AI for Dental Practices in Starkville, MS",
+    "intro": "Starkville dental offices ride the same MSU calendar everything else in town does — student rushes, faculty families, and call spikes the front desk can't always catch. I build AI front-desk systems for Starkville practices that fill the schedule, work the hygiene recall list, and answer the phone while your team is chairside — HIPAA-aware and owned by you.",
+    "systemSlugs": ["patient-engine", "ai-appointment-scheduler", "ai-voice-receptionist", "ai-review-responder"],
+    "servicesSlug": "dental",
+    "faqs": [
+      { "q": "Do you work with Starkville and Oktibbeha County offices?", "a": "Yes — based in Oxford, building for dental practices across Starkville, North Mississippi, and remotely." },
+      { "q": "Can it handle student-season call spikes?", "a": "Yes — the AI answers unlimited calls at once, so a back-to-school rush doesn't mean missed patients or an empty chair." },
+      { "q": "Is patient data safe?", "a": "Yes — HIPAA-aware from the first commit, with BAAs in place. The AI books and routes; it never gives clinical advice." }
+    ],
+    "seoTitle": "AI for Dental Practices in Starkville, MS — Scheduling, Recall & Reviews",
+    "seoDescription": "Custom AI front-desk systems for dental practices in Starkville, Mississippi — 24/7 booking, hygiene recall, and reviews that handle MSU-season spikes. Walt Burge."
+  },
+  {
+    "slug": "ai-for-accounting-firms-starkville-ms",
+    "industry": "Accounting & Bookkeeping Firms",
+    "h1": "AI for Accounting Firms in Starkville, MS",
+    "intro": "Starkville accounting firms serve Mississippi State, local business owners, and a tax-season crush of documents that pulls staff off billable work. I build AI systems that pull data straight out of statements and forms, triage client email, and answer the phone, so your people bill hours instead of chasing paperwork.",
+    "systemSlugs": ["ai-document-drafting", "ai-data-extraction", "ai-email-triage", "ai-phone-agent"],
+    "servicesSlug": "accounting-financial",
+    "faqs": [
+      { "q": "Do you work with Starkville-area firms?", "a": "Yes — based in Oxford, building for firms across Starkville, Oktibbeha County, North Mississippi, and remotely." },
+      { "q": "Can it pull numbers out of statements and receipts?", "a": "Yes. The data-extraction system reads statements, invoices, and forms and outputs clean, structured data your team can use." },
+      { "q": "Is client financial data kept private?", "a": "Yes — I build owned systems that keep your client data in your control, not fed into someone else's product." }
+    ],
+    "seoTitle": "AI for Accounting Firms in Starkville, MS — Document & Intake Automation",
+    "seoDescription": "AI document extraction and intake automation for accounting firms in Starkville, Mississippi — less paperwork, more billable hours. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-home-services-starkville-ms",
+    "industry": "Home Service Pros",
+    "h1": "AI for Home Service Pros in Starkville, MS",
+    "intro": "Between student housing, faculty homes, and steady residential work, Starkville HVAC, plumbing, and electrical crews stay busy enough that calls slip through while you're on a job. I build AI phone and lead systems for Starkville home-service pros that answer every call, book the job, and follow up on every quote — so you stop bleeding work to voicemail.",
+    "systemSlugs": ["ai-phone-agent", "ai-lead-nurture", "ai-quote-generator", "ai-review-responder"],
+    "servicesSlug": "home-services",
+    "faqs": [
+      { "q": "Do you work with Starkville-area trades?", "a": "Yes — based in Oxford, building for home-service pros across Starkville, Oktibbeha County, North Mississippi, and remotely." },
+      { "q": "Can it book jobs while I'm on a call?", "a": "Yes. The AI answers every call at once, captures the job, and books it to your schedule so nothing slips while you're working." },
+      { "q": "How much does it cost?", "a": "It scales to your call volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Home Service Pros in Starkville, MS — 24/7 Call Answering & Booking",
+    "seoDescription": "AI phone and lead systems for HVAC, plumbing, and electrical pros in Starkville, Mississippi — answer every call, book the job, follow up on every quote. Walt Burge."
+  },
+  {
+    "slug": "ai-for-healthcare-batesville-ms",
+    "industry": "Healthcare Practices",
+    "h1": "AI for Healthcare Practices in Batesville, MS",
+    "intro": "Batesville practices serve Panola County and the I-55 corridor between Oxford and the Memphis metro, often with a lean front desk covering a lot of ground. I build AI receptionist and patient-intake systems for Batesville practices that answer every call and book patients around the clock — HIPAA-aware and owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-appointment-scheduler", "ai-review-responder"],
+    "servicesSlug": "healthcare",
+    "faqs": [
+      { "q": "Do you work with Batesville and Panola County practices?", "a": "Yes — I'm in Oxford, a half hour from Batesville, and build for practices across Panola County, North Mississippi, and remotely." },
+      { "q": "Is it HIPAA-safe?", "a": "Yes. It captures and routes, never gives medical advice, and is HIPAA-aware from the start." },
+      { "q": "How much does an AI front desk cost?", "a": "It depends on what you need. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Healthcare Practices in Batesville, MS — AI Receptionist & Intake",
+    "seoDescription": "Custom AI front-desk systems for medical practices in Batesville, Mississippi — 24/7 AI receptionist, patient booking, and reviews. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-law-firms-batesville-ms",
+    "industry": "Law Firms",
+    "h1": "AI for Law Firms in Batesville, MS",
+    "intro": "Batesville firms cover Panola County from a spot on I-55 close to both Oxford and the Memphis metro, where a missed after-hours call is a case that drives somewhere else. I build 24/7 AI intake and document systems for Batesville firms so a 9 p.m. call becomes a booked consult instead of a Monday voicemail.",
+    "systemSlugs": ["intake-engine", "ai-intake-triage", "ai-document-drafting", "ai-phone-agent"],
+    "servicesSlug": "legal-business",
+    "faqs": [
+      { "q": "Do you work with Batesville and Panola County firms?", "a": "Yes — I'm in Oxford, a half hour from Batesville, and build for firms across Panola County, North Mississippi, and remotely." },
+      { "q": "Is the intake bar-compliant?", "a": "Yes. It captures intake and conflict details and never gives legal advice — judgment stays with your attorneys." },
+      { "q": "How much does AI legal intake cost?", "a": "It depends on the system. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Law Firms in Batesville, MS — 24/7 AI Legal Intake & Triage",
+    "seoDescription": "Custom AI intake and document systems for law firms in Batesville, Mississippi — 24/7 case intake, triage, and drafting. Bar-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-real-estate-batesville-ms",
+    "industry": "Real Estate Agents",
+    "h1": "AI for Real Estate in Batesville, MS",
+    "intro": "Batesville agents work Panola County and the I-55 corridor, where buyers commuting between Oxford and the Memphis metro call once and move on if nobody picks up. I build AI lead systems for Batesville agents that respond in seconds, qualify the buyer, and book the showing before the lead goes cold.",
+    "systemSlugs": ["ai-lead-nurture", "ai-phone-agent", "ai-chatbot", "ai-review-responder"],
+    "servicesSlug": "real-estate",
+    "faqs": [
+      { "q": "Do you work with Panola County agents?", "a": "Yes — I'm in Oxford, a half hour from Batesville, and build for agents across Panola County, North Mississippi, and remotely." },
+      { "q": "Can it follow up on portal leads instantly?", "a": "Yes. The moment a lead comes in, it responds, qualifies, and routes the hot ones to you." },
+      { "q": "How much does it cost?", "a": "It scales to your volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Real Estate in Batesville, MS — Instant Lead Response & Showings",
+    "seoDescription": "AI lead-response systems for real estate agents in Batesville, Mississippi — instant replies, buyer qualifying, and booked showings. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-healthcare-new-albany-ms",
+    "industry": "Healthcare Practices",
+    "h1": "AI for Healthcare Practices in New Albany, MS",
+    "intro": "New Albany and Union County practices serve a steady local base and the families around the industry near the Toyota plant, usually with a small front desk that can't catch every call. I build AI receptionist and patient-intake systems for New Albany practices that answer every call and book patients around the clock — HIPAA-aware and owned by you.",
+    "systemSlugs": ["patient-engine", "ai-voice-receptionist", "ai-appointment-scheduler", "ai-review-responder"],
+    "servicesSlug": "healthcare",
+    "faqs": [
+      { "q": "Do you work with New Albany and Union County practices?", "a": "Yes — I'm in Oxford, about 45 minutes from New Albany, and build for practices across Union County, North Mississippi, and remotely." },
+      { "q": "Is it HIPAA-safe?", "a": "Yes. It captures and routes, never gives medical advice, and is HIPAA-aware from the start." },
+      { "q": "How much does an AI front desk cost?", "a": "It depends on what you need. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Healthcare Practices in New Albany, MS — AI Receptionist & Intake",
+    "seoDescription": "Custom AI front-desk systems for medical practices in New Albany, Mississippi — 24/7 AI receptionist, patient booking, and reviews. HIPAA-aware. Walt Burge."
+  },
+  {
+    "slug": "ai-for-law-firms-new-albany-ms",
+    "industry": "Law Firms",
+    "h1": "AI for Law Firms in New Albany, MS",
+    "intro": "New Albany firms cover Union County and the steady work around the Toyota corridor, where the case that calls after hours signs with whoever answers. I build 24/7 AI intake and document systems for New Albany firms so an after-hours call becomes a booked consult instead of a voicemail nobody hears until Monday.",
+    "systemSlugs": ["intake-engine", "ai-intake-triage", "ai-document-drafting", "ai-phone-agent"],
+    "servicesSlug": "legal-business",
+    "faqs": [
+      { "q": "Do you work with New Albany and Union County firms?", "a": "Yes — I'm in Oxford, about 45 minutes from New Albany, and build for firms across Union County, North Mississippi, and remotely." },
+      { "q": "Is the intake bar-compliant?", "a": "Yes. It captures intake and conflict details and never gives legal advice — judgment stays with your attorneys." },
+      { "q": "How much does AI legal intake cost?", "a": "It depends on the system. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Law Firms in New Albany, MS — 24/7 AI Legal Intake & Triage",
+    "seoDescription": "Custom AI intake and document systems for law firms in New Albany, Mississippi — 24/7 case intake, triage, and drafting. Bar-aware. Built by Walt Burge."
+  },
+  {
+    "slug": "ai-for-real-estate-new-albany-ms",
+    "industry": "Real Estate Agents",
+    "h1": "AI for Real Estate in New Albany, MS",
+    "intro": "New Albany agents work Union County and the housing tied to the Toyota corridor, where out-of-town buyers call once and move on if nobody answers. I build AI lead systems for New Albany agents that respond in seconds, qualify the buyer, and book the showing before the lead goes cold.",
+    "systemSlugs": ["ai-lead-nurture", "ai-phone-agent", "ai-chatbot", "ai-review-responder"],
+    "servicesSlug": "real-estate",
+    "faqs": [
+      { "q": "Do you work with Union County agents?", "a": "Yes — I'm in Oxford, about 45 minutes from New Albany, and build for agents across Union County, North Mississippi, and remotely." },
+      { "q": "Can it follow up on portal leads instantly?", "a": "Yes. The moment a lead comes in, it responds, qualifies, and routes the hot ones to you." },
+      { "q": "How much does it cost?", "a": "It scales to your volume. The first call and the estimate are free." }
+    ],
+    "seoTitle": "AI for Real Estate in New Albany, MS — Instant Lead Response & Showings",
+    "seoDescription": "AI lead-response systems for real estate agents in New Albany, Mississippi — instant replies, buyer qualifying, and booked showings. Built by Walt Burge."
   }
 ]

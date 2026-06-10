@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { PracticeVertical } from '../lib/practice';
+import { setLeadContext } from '../lib/leadContext';
+import { trackEvent } from '../lib/track';
 
 interface RevenueCalculatorProps {
   calc: PracticeVertical['calc'];
@@ -42,9 +44,24 @@ export const RevenueCalculator: React.FC<RevenueCalculatorProps> = ({ calc, onBo
   const [missed, setMissed] = useState(calc.defaultMissed);
   const [value, setValue] = useState(calc.defaultValue);
   const [rate, setRate] = useState(calc.defaultRate);
+  const [touched, setTouched] = useState(false);
 
   const annualLost = useMemo(() => missed * 52 * value * (Math.min(100, Math.max(0, rate)) / 100), [missed, value, rate]);
   const lostPerYear = useMemo(() => missed * 52 * (Math.min(100, Math.max(0, rate)) / 100), [missed, rate]);
+
+  // Fire one interact event the first time they touch a field — engagement
+  // signal without spamming on every keystroke.
+  const mark = () => {
+    if (!touched) { setTouched(true); trackEvent('calculator_interact'); }
+  };
+
+  // Carry the visitor's own number into the lead context so the Contact form
+  // and the CRM lead both see the estimate that motivated the call.
+  const handleBook = () => {
+    setLeadContext({ annualLoss: annualLost, missed, value, rate });
+    trackEvent('calculator_result', { annualLoss: Math.round(annualLost), missed });
+    onBook();
+  };
 
   return (
     <section className="border border-brand-border bg-brand-surface">
@@ -56,9 +73,9 @@ export const RevenueCalculator: React.FC<RevenueCalculatorProps> = ({ calc, onBo
         <div className="mt-8 grid md:grid-cols-[1fr_1fr] gap-8 md:gap-12 items-start">
           {/* Inputs */}
           <div className="space-y-6">
-            <Field label={calc.unitLabel} value={missed} min={0} max={500} step={1} onChange={setMissed} />
-            <Field label={calc.valueLabel} hint={calc.valueHint} prefix="$" value={value} min={0} max={1000000} step={100} onChange={setValue} />
-            <Field label={calc.rateLabel} prefix="%" value={rate} min={0} max={100} step={5} onChange={setRate} />
+            <Field label={calc.unitLabel} value={missed} min={0} max={500} step={1} onChange={(n) => { mark(); setMissed(n); }} />
+            <Field label={calc.valueLabel} hint={calc.valueHint} prefix="$" value={value} min={0} max={1000000} step={100} onChange={(n) => { mark(); setValue(n); }} />
+            <Field label={calc.rateLabel} prefix="%" value={rate} min={0} max={100} step={5} onChange={(n) => { mark(); setRate(n); }} />
           </div>
 
           {/* Result */}
@@ -74,7 +91,7 @@ export const RevenueCalculator: React.FC<RevenueCalculatorProps> = ({ calc, onBo
               year going to whoever answered first. A system that catches those calls usually pays for itself in weeks.
             </p>
             <button
-              onClick={onBook}
+              onClick={handleBook}
               className="group mt-6 inline-flex items-center gap-2 bg-brand-accent text-white px-6 py-3 font-bold text-sm uppercase tracking-wider hover:bg-brand-accent-hover transition-colors"
             >
               Stop the leak — book a free call

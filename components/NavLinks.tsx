@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { SectionId } from '../types';
+import { trackEvent } from '../lib/track';
 
 // The single source of nav truth. Lives in the homepage header AND in every
 // sub-page bar (blog, post, project), so navigation is the same everywhere and
@@ -48,11 +49,20 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
             </button>
           );
         })}
+        <a
+          href="tel:+16622925533"
+          onClick={() => trackEvent('phone_click', { location: 'header' })}
+          className="hidden lg:flex items-center gap-1.5 font-sans text-sm font-medium text-brand-secondary hover:text-brand-accent transition-colors"
+          aria-label="Call or text (662) 292-5533"
+        >
+          <Phone size={15} />
+          (662) 292-5533
+        </a>
         <button
-          onClick={() => go(SectionId.CONTACT)}
+          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'book-a-free-call' }); go(SectionId.CONTACT); }}
           className="px-5 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-tight transition-colors"
         >
-          Contact
+          Book a free call
         </button>
       </div>
 
@@ -87,11 +97,18 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
                 </button>
               ))}
               <button
-                onClick={() => go(SectionId.CONTACT)}
+                onClick={() => { trackEvent('cta_click', { location: 'mobile-menu', label: 'book-a-free-call' }); go(SectionId.CONTACT); }}
                 className="mt-3 px-5 py-3 bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
               >
-                Contact
+                Book a free call
               </button>
+              <a
+                href="tel:+16622925533"
+                onClick={() => { setMenuOpen(false); trackEvent('phone_click', { location: 'mobile-menu' }); }}
+                className="mt-2 px-5 py-3 border border-brand-border text-brand-primary text-base font-semibold text-center transition-colors flex items-center justify-center gap-2"
+              >
+                <Phone size={16} /> Call or text (662) 292-5533
+              </a>
             </div>
           </motion.div>
         )}

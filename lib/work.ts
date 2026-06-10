@@ -4,7 +4,10 @@ import { Project } from '../types';
 // Selected works — the portfolio. The catalog is one JSON file
 // (content/work/items.json) read by the app, the sitemap generator, and the
 // prerender step — single source of truth, no drift. Same pattern as lib/shop.ts.
-export const workItems = itemsData as Project[];
+// Drafts are scaffolded case studies awaiting real numbers — kept out of the
+// live portfolio (and the sitemap/prerender) until flipped. Same idea as the
+// blog's `draft` frontmatter flag.
+export const workItems = (itemsData as Project[]).filter(w => !w.draft);
 
 export const workSlugs = workItems.map(w => w.slug!).filter(Boolean);
 

@@ -45,8 +45,9 @@ const serviceSlugs = readdirSync(SERVICES_DIR)
 // Shop AI systems (commercial-intent product pages).
 const shopSlugs = JSON.parse(readFileSync(SHOP_FILE, 'utf8')).map(s => s.slug);
 
-// Selected work — portfolio + client case studies.
-const workSlugs = JSON.parse(readFileSync(WORK_FILE, 'utf8')).map(w => w.slug);
+// Selected work — portfolio + client case studies. Drafts (scaffolded case
+// studies awaiting real numbers) stay out of the sitemap.
+const workSlugs = JSON.parse(readFileSync(WORK_FILE, 'utf8')).filter(w => !w.draft).map(w => w.slug);
 
 // Local industry landing pages (Oxford, MS — high-intent local SEO).
 const localSlugs = JSON.parse(readFileSync(LOCAL_FILE, 'utf8')).map(p => p.slug);

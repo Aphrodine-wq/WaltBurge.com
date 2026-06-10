@@ -7,6 +7,8 @@ import { RevenueCalculator } from './RevenueCalculator';
 import { HowItWorks } from './HowItWorks';
 import { WhyWaltBuilds } from './WhyWaltBuilds';
 import { NavLinks } from './NavLinks';
+import { setLeadContext } from '../lib/leadContext';
+import { trackEvent } from '../lib/track';
 
 interface PrivatePracticePageProps {
   vertical: PracticeVertical;
@@ -18,7 +20,13 @@ interface PrivatePracticePageProps {
 export const PrivatePracticePage: React.FC<PrivatePracticePageProps> = ({ vertical, onBack, onNavigate, onOpenSystem }) => {
   const [open, setOpen] = useState<number | null>(0);
   const systems = vertical.systemSlugs.map(getSystem).filter(Boolean) as NonNullable<ReturnType<typeof getSystem>>[];
-  const book = () => onNavigate('contact');
+  // Stamp the funnel context (which vertical, what page) so the lead arrives
+  // tagged. 'for-doctors' → 'doctors' to match the Contact form's labels.
+  const book = () => {
+    setLeadContext({ vertical: vertical.slug.replace(/^for-/, ''), sourcePage: `/${vertical.slug}` });
+    trackEvent('cta_click', { location: 'practice', vertical: vertical.slug });
+    onNavigate('contact');
+  };
 
   // Per-page SEO: title/meta/canonical + Service & FAQ JSON-LD. Mirrors
   // LocalLandingPage so a shared link previews this page, not the homepage.
@@ -26,6 +34,7 @@ export const PrivatePracticePage: React.FC<PrivatePracticePageProps> = ({ vertic
     const prevTitle = document.title;
     document.title = `${vertical.seoTitle} | Walt Burge`;
     window.scrollTo(0, 0);
+    trackEvent('practice_page_view', { vertical: vertical.slug });
 
     const setMeta = (sel: string, val: string) => {
       const el = document.querySelector<HTMLMetaElement>(sel);

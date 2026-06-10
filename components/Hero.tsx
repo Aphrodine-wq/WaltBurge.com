@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Phone } from 'lucide-react';
 import { SectionId } from '../types';
+import { trackEvent } from '../lib/track';
 
 export const Hero: React.FC = () => {
   const { scrollY } = useScroll();
@@ -67,7 +68,7 @@ export const Hero: React.FC = () => {
           </button>
 
           <button
-            onClick={() => document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'contact' }); document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' }); }}
             className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-brand-primary">
@@ -78,6 +79,7 @@ export const Hero: React.FC = () => {
 
         <motion.a
           href="tel:+16622925533"
+          onClick={() => trackEvent('phone_click', { location: 'hero' })}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}

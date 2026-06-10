@@ -1,11 +1,14 @@
 // Per-route static HTML so every page ships its own crawler-visible <title>,
-// description, canonical, and OG tags — not the homepage's. Runs as `postbuild`,
-// after `vite build`, writing dist/<route>/index.html variants of dist/index.html.
+// description, canonical, OG tags — AND its own JSON-LD structured data. Runs as
+// `postbuild`, after `vite build`, writing dist/<route>/index.html variants of
+// dist/index.html.
 //
-// This is a META prerender: it swaps the head tags per route (what crawlers and
-// social link-unfurlers read) while the SPA still hydrates and renders the body.
-// Vercel serves the static file before the SPA catch-all rewrite, so each URL
-// gets the right meta with zero routing changes.
+// Two things happen per route: (1) the head meta tags are swapped (what crawlers
+// and social unfurlers read), and (2) a route-typed application/ld+json block is
+// injected before </head> — BlogPosting, Service, SoftwareApplication,
+// LocalBusiness (with geo), each wrapped in a BreadcrumbList. Vercel serves the
+// static file before the SPA catch-all rewrite, so each URL gets the right head
+// with zero routing changes.
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -16,6 +19,8 @@ const ORIGIN = 'https://waltburge.com';
 const SUFFIX = ' | Walt Burge';
 
 const template = readFileSync(path.join(DIST, 'index.html'), 'utf8');
+
+const AUTHOR = { '@type': 'Person', name: 'Walt Burge', url: ORIGIN };
 
 function esc(s = '') {
   return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -33,8 +38,55 @@ function frontmatter(raw) {
   return data;
 }
 
-// Swap the head tags that carry per-page SEO signal.
-function render({ route, title, description }) {
+// Schema.org helpers ────────────────────────────────────────────────────────
+
+// Breadcrumb trail. Pass [name, route] pairs from home down to the page.
+function crumbs(pairs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: pairs.map(([name, route], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item: `${ORIGIN}${route}`,
+    })),
+  };
+}
+
+function faqPage(faqs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+}
+
+// North MS towns the local pages target, with geo for LocalBusiness schema.
+const TOWNS = {
+  oxford: { name: 'Oxford', lat: 34.3665, lng: -89.5192 },
+  tupelo: { name: 'Tupelo', lat: 34.2576, lng: -88.7034 },
+  southaven: { name: 'Southaven', lat: 34.9889, lng: -90.0126 },
+  starkville: { name: 'Starkville', lat: 33.4504, lng: -88.8184 },
+  batesville: { name: 'Batesville', lat: 34.312, lng: -89.9462 },
+  'new-albany': { name: 'New Albany', lat: 34.4943, lng: -89.0066 },
+};
+
+// Match the town by known suffix — industry slugs also contain hyphens
+// (real-estate, new-albany), so a regex would be ambiguous. endsWith is exact.
+function townForSlug(slug) {
+  for (const key of Object.keys(TOWNS)) {
+    if (slug.endsWith(`-${key}-ms`)) return TOWNS[key];
+  }
+  return null;
+}
+
+// Inject the head: swap meta tags, then add the per-page JSON-LD before </head>.
+function render({ route, title, description, jsonLd }) {
   const url = `${ORIGIN}${route}`;
   let html = template;
   const subs = [
@@ -49,13 +101,22 @@ function render({ route, title, description }) {
     [/(<meta name="twitter:description" content=")[\s\S]*?(")/, `$1${esc(description)}$2`],
   ];
   for (const [re, rep] of subs) html = html.replace(re, rep);
+
+  if (jsonLd) {
+    const list = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+    // Escape "<" so a stray "</script>" in any text can't break out of the tag.
+    const blocks = list
+      .map(o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`)
+      .join('\n    ');
+    html = html.replace('</head>', `    ${blocks}\n  </head>`);
+  }
   return html;
 }
 
-function emit(route, title, description) {
+function emit(route, title, description, jsonLd) {
   const dir = path.join(DIST, route.replace(/^\//, ''));
   mkdirSync(dir, { recursive: true });
-  writeFileSync(path.join(dir, 'index.html'), render({ route, title, description }));
+  writeFileSync(path.join(dir, 'index.html'), render({ route, title, description, jsonLd }));
 }
 
 const routes = [];
@@ -67,7 +128,25 @@ for (const f of readdirSync(path.join(ROOT, 'content', 'blog')).filter(f => f.en
   const fm = frontmatter(readFileSync(path.join(ROOT, 'content', 'blog', f), 'utf8'));
   if (fm.draft === 'true') continue;
   const slug = fm.slug || f.replace(/\.md$/, '');
-  routes.push([`/blog/${slug}`, `${fm.title || slug}${SUFFIX}`, fm.excerpt || '']);
+  const route = `/blog/${slug}`;
+  const title = fm.title || slug;
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description: fm.excerpt || '',
+      url: `${ORIGIN}${route}`,
+      mainEntityOfPage: `${ORIGIN}${route}`,
+      ...(fm.date ? { datePublished: fm.date, dateModified: fm.date } : {}),
+      author: AUTHOR,
+      publisher: AUTHOR,
+      ...(fm.category ? { articleSection: fm.category } : {}),
+      image: `${ORIGIN}/og-image.png`,
+    },
+    crumbs([['Home', '/'], ['Blog', '/blog'], [title, route]]),
+  ];
+  routes.push([route, `${title}${SUFFIX}`, fm.excerpt || '', ld]);
 }
 
 // Services index + industry menus
@@ -78,8 +157,22 @@ for (const f of readdirSync(path.join(ROOT, 'content', 'services')).filter(f => 
   const raw = readFileSync(path.join(ROOT, 'content', 'services', f), 'utf8');
   const m = raw.match(/^###\s+(.+?)\s+Services\.?\s*$/m);
   const industry = m ? m[1].trim() : slug;
-  routes.push([`/services/${slug}`, `${industry} Software & AI Services${SUFFIX}`,
-    `Custom software and AI for ${industry.toLowerCase()} — websites, automations, integrations, and AI systems, built and owned. Walt Builds, Oxford MS.`]);
+  const route = `/services/${slug}`;
+  const desc = `Custom software and AI for ${industry.toLowerCase()} — websites, automations, integrations, and AI systems, built and owned. Walt Builds, Oxford MS.`;
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: `${industry} Software & AI Services`,
+      description: desc,
+      serviceType: `${industry} AI & software`,
+      provider: AUTHOR,
+      areaServed: { '@type': 'State', name: 'Mississippi' },
+      url: `${ORIGIN}${route}`,
+    },
+    crumbs([['Home', '/'], ['Services', '/services'], [industry, route]]),
+  ];
+  routes.push([route, `${industry} Software & AI Services${SUFFIX}`, desc, ld]);
 }
 
 // Shop index + AI systems
@@ -87,28 +180,73 @@ const systems = JSON.parse(readFileSync(path.join(ROOT, 'content', 'shop', 'syst
 routes.push(['/shop', `Shop — AI Systems You Can Buy${SUFFIX}`,
   'Productized AI systems built and installed for your business: AI receptionists, intake, estimating, document drafting, and more. Walt Builds, Oxford MS.']);
 for (const s of systems) {
-  routes.push([`/shop/${s.slug}`, `${s.seoTitle}${SUFFIX}`, s.seoDescription]);
+  const route = `/shop/${s.slug}`;
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: s.name,
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Cloud',
+      description: s.seoDescription,
+      author: AUTHOR,
+      url: `${ORIGIN}${route}`,
+    },
+    crumbs([['Home', '/'], ['Shop', '/shop'], [s.name, route]]),
+  ];
+  routes.push([route, `${s.seoTitle}${SUFFIX}`, s.seoDescription, ld]);
 }
 
-// Selected work — portfolio + client case studies
+// Selected work — portfolio + client case studies (skip scaffolded drafts).
 const workItems = JSON.parse(readFileSync(path.join(ROOT, 'content', 'work', 'items.json'), 'utf8'));
 routes.push(['/work', `Selected Work — Products, Platforms & AI${SUFFIX}`,
   'Selected work by Walt Burge: construction marketplaces, custom AI models, developer platforms, and client builds — shipped end to end from Oxford, MS.']);
 for (const w of workItems) {
-  routes.push([`/work/${w.slug}`, `${w.seoTitle || w.title}${SUFFIX}`, w.seoDescription || w.summary || w.description || '']);
+  if (w.draft) continue;
+  const route = `/work/${w.slug}`;
+  const title = w.seoTitle || w.title;
+  const desc = w.seoDescription || w.summary || w.description || '';
+  const ld = [crumbs([['Home', '/'], ['Work', '/work'], [w.title, route]])];
+  routes.push([route, `${title}${SUFFIX}`, desc, ld]);
 }
 
-// Local Oxford, MS industry landing pages
+// Local industry landing pages — LocalBusiness w/ geo + FAQ + breadcrumb.
 const localPages = JSON.parse(readFileSync(path.join(ROOT, 'content', 'local', 'pages.json'), 'utf8'));
 for (const p of localPages) {
-  routes.push([`/${p.slug}`, `${p.seoTitle}${SUFFIX}`, p.seoDescription]);
+  const route = `/${p.slug}`;
+  const town = townForSlug(p.slug);
+  const local = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: `Walt Burge — ${p.industry} AI${town ? `, ${town.name} MS` : ''}`,
+    description: p.seoDescription,
+    url: `${ORIGIN}${route}`,
+    telephone: '+1-662-292-5533',
+    email: 'jamesburge.mcm@gmail.com',
+    priceRange: '$$',
+    provider: AUTHOR,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: town ? town.name : 'Oxford',
+      addressRegion: 'MS',
+      addressCountry: 'US',
+    },
+    areaServed: town ? { '@type': 'City', name: `${town.name}, Mississippi` } : { '@type': 'State', name: 'Mississippi' },
+    ...(town ? { geo: { '@type': 'GeoCoordinates', latitude: town.lat, longitude: town.lng } } : {}),
+  };
+  const ld = [local];
+  if (Array.isArray(p.faqs) && p.faqs.length) ld.push(faqPage(p.faqs));
+  ld.push(crumbs([['Home', '/'], [p.h1, route]]));
+  routes.push([route, `${p.seoTitle}${SUFFIX}`, p.seoDescription, ld]);
 }
 
 // Conversion landing pages for the priority verticals (kept in sync with lib/practice.ts).
 routes.push(['/for-doctors', `AI for Doctors in Private Practice — Never Miss a Patient Call${SUFFIX}`,
-  'AI front-desk systems for private medical practices: 24/7 call answering, patient booking, and recall. HIPAA-aware, owned by you. Built by Walt Burge, Oxford MS.']);
+  'AI front-desk systems for private medical practices: 24/7 call answering, patient booking, and recall. HIPAA-aware, owned by you. Built by Walt Burge, Oxford MS.',
+  [crumbs([['Home', '/'], ['AI for Doctors', '/for-doctors']])]]);
 routes.push(['/for-lawyers', `AI for Lawyers in Private Practice — Never Miss a Case Again${SUFFIX}`,
-  'AI intake systems for private-practice attorneys: 24/7 call answering, case triage, and booked consults. Bar-aware, owned by you. Built by Walt Burge, Oxford MS.']);
+  'AI intake systems for private-practice attorneys: 24/7 call answering, case triage, and booked consults. Bar-aware, owned by you. Built by Walt Burge, Oxford MS.',
+  [crumbs([['Home', '/'], ['AI for Lawyers', '/for-lawyers']])]]);
 
-for (const [route, title, description] of routes) emit(route, title, description);
+for (const [route, title, description, jsonLd] of routes) emit(route, title, description, jsonLd);
 console.log(`prerendered ${routes.length} routes`);

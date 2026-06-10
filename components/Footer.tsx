@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Facebook, Instagram, Mail, Phone } from 'lucide-react';
 import { localPages } from '../lib/local';
+import { trackEvent } from '../lib/track';
 
 export const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
@@ -46,7 +47,7 @@ export const Footer: React.FC = () => {
                         <Mail size={15} />
                         jamesburge.mcm@gmail.com
                     </a>
-                    <a href="tel:+16622925533" className="flex items-center gap-2 text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
+                    <a href="tel:+16622925533" onClick={() => trackEvent('phone_click', { location: 'footer' })} className="flex items-center gap-2 text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
                         <Phone size={15} />
                         (662) 292-5533
                     </a>
