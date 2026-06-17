@@ -72,6 +72,38 @@
   }
 }
 
+/* Print — the résumé page saves to a clean one-/two-page PDF (cmd+P). Chrome
+   (nav, back, cursor, "save as PDF" button) carries Tailwind's `print:hidden`.
+   Here we just force a white page with ink text and sane margins. */
+@media print {
+  @page {
+    margin: 0.55in;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    cursor: auto !important;
+  }
+
+  /* Print colors as authored — borders, the cobalt accent, muted labels. */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Don't break a work entry or a skill row across pages. */
+  section,
+  .grid {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
 /* Scrollbar — ink on cream */
 ::-webkit-scrollbar {
   width: 8px;

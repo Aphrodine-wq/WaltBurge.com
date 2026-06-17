@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Project, SectionId } from '../types';
 import { workItems, kindLabel } from '../lib/work';
 import {
-  Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight,
+  Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight, ArrowUpRight, Github,
   Binary, Box, Cloud, Code2, Command, Cpu, Database, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
   X, Filter
 } from 'lucide-react';
@@ -119,6 +119,7 @@ const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
 
 interface ProjectsProps {
   onProjectClick?: (project: Project) => void;
+  onOpenResume?: () => void;
   onOpenServices?: () => void;
   activeFilter: string | null;
   onFilterChange: (filter: string | null) => void;
@@ -133,7 +134,7 @@ const KIND_CHIPS: { key: Project['kind'] | 'all'; label: string }[] = [
   { key: 'client', label: kindLabel.client },
 ];
 
-export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, onOpenServices, activeFilter, onFilterChange }) => {
+export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, onOpenResume, onOpenServices, activeFilter, onFilterChange }) => {
   // Kind filter is local to the section; the tech filter (activeFilter) arrives
   // as a prop when a user clicks a tech tag on a detail page. They compose.
   const [kindFilter, setKindFilter] = useState<Project['kind'] | 'all'>('all');
@@ -251,6 +252,36 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, o
                       {tech}
                     </span>
                   ))}
+
+                  {/* Live + source links — stop the card's detail click. */}
+                  {(project.link || project.repositoryUrl) && (
+                    <span className="ml-auto flex items-center gap-2.5">
+                      {project.repositoryUrl && (
+                        <a
+                          href={project.repositoryUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`${project.title} source code`}
+                          className="text-brand-secondary hover:text-brand-accent transition-colors"
+                        >
+                          <Github size={14} />
+                        </a>
+                      )}
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          aria-label={`${project.title} live site`}
+                          className="text-brand-secondary hover:text-brand-accent transition-colors"
+                        >
+                          <ArrowUpRight size={15} />
+                        </a>
+                      )}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -267,22 +298,30 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, o
           </div>
         )}
 
-        {/* Consulting cross-link — the practice that ships this work */}
+        {/* Hiring cross-link — the full picture for a recruiter or hiring manager */}
         <div className="mt-16 md:mt-20 border border-brand-border bg-brand-surface p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="max-w-xl">
             <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight leading-tight">
-              Need this built for your business<span className="text-brand-accent">?</span>
+              Want the full picture<span className="text-brand-accent">?</span>
             </h3>
             <p className="mt-3 text-brand-secondary leading-relaxed">
-              Websites, automations, and custom AI — built to own, by the person writing the code. See the full service menu.
+              The résumé — skills, selected work, and how I got here in seven months. Open to engineering roles.
+              {' '}
+              <a
+                href="/services"
+                onClick={(e) => { if (onOpenServices) { e.preventDefault(); onOpenServices(); } }}
+                className="text-brand-secondary underline decoration-brand-border hover:text-brand-accent hover:decoration-brand-accent transition-colors"
+              >
+                I also build software for businesses.
+              </a>
             </p>
           </div>
           <a
-            href="/services"
-            onClick={(e) => { if (onOpenServices) { e.preventDefault(); onOpenServices(); } }}
+            href="/resume"
+            onClick={(e) => { if (onOpenResume) { e.preventDefault(); onOpenResume(); } }}
             className="group/cta inline-flex items-center gap-2 shrink-0 bg-brand-accent text-white px-6 py-3 font-bold text-sm uppercase tracking-wider hover:bg-brand-accent-hover transition-colors"
           >
-            View Services
+            View Résumé
             <ArrowRight size={16} className="group-hover/cta:translate-x-1 transition-transform" />
           </a>
         </div>

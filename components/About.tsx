@@ -5,7 +5,7 @@ import { CountUp } from './CountUp';
 
 const stats = [
   { value: '7mo', label: 'Self-Taught' },
-  { value: '12+', label: 'Projects Shipped' },
+  { value: '11', label: 'Systems Shipped' },
   { value: '18K+', label: 'AI Training Examples' },
   { value: '1', label: 'Custom LLM Trained' },
 ];
@@ -97,8 +97,8 @@ export const About: React.FC = () => {
               variants={item}
               className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs text-brand-secondary uppercase tracking-widest"
             >
-              <span>Based in North Mississippi</span>
-              <span>Open for collaborations</span>
+              <span>Based in North Mississippi · Remote-friendly</span>
+              <span>Open to AI / ML roles</span>
             </motion.div>
           </div>
         </motion.div>

@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Phone } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { SectionId } from '../types';
 import { trackEvent } from '../lib/track';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenResume: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -28,7 +32,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8"
         >
-          AI Consultant · Oxford, MS
+          AI Developer · Data Science & Learning Systems · Oxford, MS · Remote-friendly
         </motion.span>
 
         {/* Mask reveal — the name slides up from a clipped baseline on load. */}
@@ -47,9 +51,9 @@ export const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="font-sans text-lg md:text-xl text-brand-secondary max-w-xl leading-relaxed mb-12"
+          className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          Custom AI for <span className="text-brand-primary font-semibold">healthcare, law, and construction</span> &mdash; built to bring you patients, cases, and bids.
+          I taught myself to code seven months ago. Since then I&rsquo;ve trained a <span className="text-brand-primary font-semibold">custom LLM</span>, built the <span className="text-brand-primary font-semibold">data and training pipeline</span> behind it, and shipped 11 production systems that put real AI in front of real users.
         </motion.p>
 
         <motion.div
@@ -59,38 +63,44 @@ export const Hero: React.FC = () => {
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center w-full sm:w-auto px-4 sm:px-0"
         >
           <button
-            onClick={scrollToProjects}
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'see-the-work' }); scrollToProjects(); }}
             className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-white">
-              View Portfolio
+              See the work
             </span>
           </button>
 
           <button
-            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'contact' }); document.getElementById(SectionId.CONTACT)?.scrollIntoView({ behavior: 'smooth' }); }}
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'resume' }); onOpenResume(); }}
             className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-brand-primary">
-              Contact Me
+              Résumé
             </span>
           </button>
         </motion.div>
 
-        <motion.a
-          href="tel:+16622925533"
-          onClick={() => trackEvent('phone_click', { location: 'hero' })}
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="group mt-6 inline-flex items-center gap-2.5 text-base font-medium text-brand-secondary hover:text-brand-primary transition-colors"
+          className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-2 text-base font-medium text-brand-secondary"
         >
-          <Phone size={16} className="text-brand-accent" />
           <span>
-            Your first phone call is <span className="text-brand-primary font-bold">free</span>
-            <span className="text-brand-faint"> — no pitch, no obligation.</span>
+            Open to <span className="text-brand-primary font-semibold">AI / ML engineering</span> roles.
           </span>
-        </motion.a>
+          <a
+            href="https://github.com/Aphrodine-wq"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent('cta_click', { location: 'hero', label: 'github' })}
+            className="inline-flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors"
+          >
+            <Github size={16} className="text-brand-accent" />
+            <span>GitHub</span>
+          </a>
+        </motion.div>
       </motion.div>
 
       {/* Anchored baseline rule — a structural mark, not a floating accent. */}

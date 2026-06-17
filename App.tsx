@@ -3,7 +3,6 @@ import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Specialties } from './components/Specialties';
 import { Expertise } from './components/Expertise';
 import { Blog } from './components/Blog';
 import { Contact } from './components/Contact';
@@ -35,8 +34,7 @@ const ShopPage = lazy(() => import('./components/ShopPage').then(module => ({ de
 const ShopSystemDetail = lazy(() => import('./components/ShopSystemDetail').then(module => ({ default: module.ShopSystemDetail })));
 const LocalLandingPage = lazy(() => import('./components/LocalLandingPage').then(module => ({ default: module.LocalLandingPage })));
 const PrivatePracticePage = lazy(() => import('./components/PrivatePracticePage').then(module => ({ default: module.PrivatePracticePage })));
-const HowItWorks = lazy(() => import('./components/HowItWorks').then(module => ({ default: module.HowItWorks })));
-const WhyWaltBuilds = lazy(() => import('./components/WhyWaltBuilds').then(module => ({ default: module.WhyWaltBuilds })));
+const ResumePage = lazy(() => import('./components/ResumePage').then(module => ({ default: module.ResumePage })));
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -49,6 +47,7 @@ function App() {
   const [shopSlug, setShopSlug] = useState<string>('');
   const [localSlug, setLocalSlug] = useState<string>('');
   const [practiceSlug, setPracticeSlug] = useState<string>('');
+  const [showResume, setShowResume] = useState(false);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -64,6 +63,7 @@ function App() {
       const services = path.match(/^\/services(?:\/(.+?))?\/?$/);
       const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
       const work = path.match(/^\/work(?:\/(.+?))?\/?$/);
+      const resume = path.match(/^\/resume\/?$/);
       const practice = path.match(/^\/(for-doctors|for-lawyers)\/?$/);
       const local = path.match(/^\/([a-z0-9-]+)\/?$/);
       const localHit = local && localSlugs.includes(local[1]) ? local[1] : '';
@@ -75,7 +75,10 @@ function App() {
       setShowShop(false);
       setLocalSlug('');
       setPracticeSlug('');
-      if (practice) {
+      setShowResume(false);
+      if (resume) {
+        setShowResume(true);
+      } else if (practice) {
         setPracticeSlug(practice[1]);
       } else if (work) {
         // /work/<slug> opens the case study; bare /work is the homepage section.
@@ -191,6 +194,24 @@ function App() {
     window.history.pushState(null, '', '/');
   };
 
+  const openResume = () => {
+    setShowResume(true);
+    setSelectedPost(null);
+    setSelectedProject(null);
+    setShowBlogIndex(false);
+    setShowServices(false);
+    setShowShop(false);
+    setLocalSlug('');
+    setPracticeSlug('');
+    window.history.pushState(null, '', '/resume');
+    window.scrollTo(0, 0);
+  };
+
+  const handleResumeBack = () => {
+    setShowResume(false);
+    window.history.pushState(null, '', '/');
+  };
+
   // From a system detail, back goes up to the shop index.
   const handleShopBack = () => {
     setShopSlug('');
@@ -204,6 +225,7 @@ function App() {
 
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
+    setShowResume(false);
     window.history.pushState(null, '', `/work/${project.slug || project.id}`);
     window.scrollTo(0, 0);
   };
@@ -228,7 +250,9 @@ function App() {
   const goToSection = (id: string) => {
     if (id === SectionId.BLOG) { openBlogIndex(); return; }
     if (id === 'marketplace') { openShop(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug && !practiceSlug;
+    if (id === 'services') { openServices(); return; }
+    if (id === 'resume') { openResume(); return; }
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug && !practiceSlug && !showResume;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
@@ -236,6 +260,7 @@ function App() {
     setShowShop(false);
     setLocalSlug('');
     setPracticeSlug('');
+    setShowResume(false);
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -382,6 +407,20 @@ function App() {
     );
   }
 
+  if (showResume) {
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+          <CustomCursor />
+          <Suspense fallback={null}>
+            <ResumePage onBack={handleResumeBack} onNavigate={goToSection} onProjectClick={handleProjectClick} />
+          </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
@@ -396,16 +435,14 @@ function App() {
             <ArtisticNav onNavigate={goToSection} onHome={goHome} />
 
             <main className="relative z-10 w-full overflow-x-hidden">
-              <Hero />
-              <Specialties onOpenMenu={() => openServices()} />
-              <Suspense fallback={null}><HowItWorks /></Suspense>
-              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
-              <Expertise />
+              <Hero onOpenResume={openResume} />
 
+              {/* Proof leads — the work, then the depth behind it. */}
               <ErrorBoundary>
                 <Suspense fallback={<div className="py-24 md:py-32 px-6 max-w-7xl mx-auto"><ContentSkeleton count={3} variant="grid" /></div>}>
                   <Projects
                     onProjectClick={handleProjectClick}
+                    onOpenResume={openResume}
                     onOpenServices={() => openServices()}
                     activeFilter={activeTechFilter}
                     onFilterChange={setActiveTechFilter}
@@ -413,7 +450,8 @@ function App() {
                 </Suspense>
               </ErrorBoundary>
 
-              <Suspense fallback={null}><WhyWaltBuilds /></Suspense>
+              <Expertise />
+              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
               <FAQ />
               <About />
             </main>

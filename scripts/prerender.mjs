@@ -197,6 +197,30 @@ for (const s of systems) {
   routes.push([route, `${s.seoTitle}${SUFFIX}`, s.seoDescription, ld]);
 }
 
+// Résumé — recruiter-facing landing. ProfilePage wrapping the Person, plus a
+// breadcrumb, so the page that lands a job is its own crawlable, structured URL.
+routes.push(['/resume', `Résumé — AI Developer (Data Science & Learning Systems)${SUFFIX}`,
+  'Walt Burge — AI developer in Oxford, MS, focused on data science and AI learning systems. Self-taught in seven months; trained a custom LLM end to end and built the tooling and agent systems around it. Skills, selected work, and contact. Open to AI / ML roles.',
+  [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      mainEntity: {
+        '@type': 'Person',
+        name: 'Walt Burge',
+        alternateName: 'James Walton',
+        jobTitle: 'AI Developer',
+        url: `${ORIGIN}/resume`,
+        email: 'jamesburge.mcm@gmail.com',
+        telephone: '+1-662-292-5533',
+        sameAs: ['https://github.com/Aphrodine-wq'],
+        knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'Data Science', 'LLM Fine-Tuning', 'Model Distillation', 'Dataset Curation', 'PyTorch', 'Llama', 'RAG', 'Embeddings', 'LangChain', 'MCP', 'Agentic AI', 'Python'],
+        address: { '@type': 'PostalAddress', addressLocality: 'Oxford', addressRegion: 'MS', addressCountry: 'US' },
+      },
+    },
+    crumbs([['Home', '/'], ['Résumé', '/resume']]),
+  ]]);
+
 // Selected work — portfolio + client case studies (skip scaffolded drafts).
 const workItems = JSON.parse(readFileSync(path.join(ROOT, 'content', 'work', 'items.json'), 'utf8'));
 routes.push(['/work', `Selected Work — Products, Platforms & AI${SUFFIX}`,
