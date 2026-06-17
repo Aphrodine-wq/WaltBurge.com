@@ -8,11 +8,11 @@ import { trackEvent } from '../lib/track';
 // sub-page bar (blog, post, project), so navigation is the same everywhere and
 // a reader is never stranded one "back" link from the rest of the site.
 export const NAV_ITEMS = [
-  { id: SectionId.SPECIALTIES, label: 'Services' },
   { id: SectionId.PROJECTS, label: 'Work' },
+  { id: SectionId.SKILLS, label: 'Skills' },
   { id: SectionId.BLOG, label: 'Blog' },
-  { id: 'marketplace', label: 'Shop' },
   { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
 ];
 
 interface NavLinksProps {
@@ -59,10 +59,10 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
           (662) 292-5533
         </a>
         <button
-          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'book-a-free-call' }); go(SectionId.CONTACT); }}
+          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'resume' }); go('resume'); }}
           className="px-5 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-tight transition-colors"
         >
-          Book a free call
+          Résumé
         </button>
       </div>
 
@@ -97,10 +97,10 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
                 </button>
               ))}
               <button
-                onClick={() => { trackEvent('cta_click', { location: 'mobile-menu', label: 'book-a-free-call' }); go(SectionId.CONTACT); }}
+                onClick={() => { trackEvent('cta_click', { location: 'mobile-menu', label: 'resume' }); go('resume'); }}
                 className="mt-3 px-5 py-3 bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
               >
-                Book a free call
+                Résumé
               </button>
               <a
                 href="tel:+16622925533"

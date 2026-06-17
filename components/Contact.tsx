@@ -158,16 +158,15 @@ export const Contact: React.FC = () => {
           <motion.div variants={itemVariants} className="text-center md:text-left">
             <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-6 block flex items-center gap-2">
               <span className="w-8 h-px bg-brand-accent"></span>
-              04. Initialize Connection
+              Get in touch
             </span>
             <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter mb-8 leading-[0.9]">
               Let's <br />
-              <span className="text-brand-secondary">Build</span> <br />
-              Yours<span className="text-brand-accent">.</span>
+              <span className="text-brand-secondary">Talk</span><span className="text-brand-accent">.</span>
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
-              Tell me what's eating your time — the missed calls, the paperwork, the leads going cold.
-              The first call and the estimate are free, and you'll talk to the person who builds it, not a sales rep.
+              Hiring, building something, or just want to compare notes — reach out. You'll talk to the
+              person who writes the code, not a recruiter. The résumé and GitHub are a click away.
             </p>
           </motion.div>
 
