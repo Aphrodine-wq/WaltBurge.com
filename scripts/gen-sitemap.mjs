@@ -95,7 +95,6 @@ const urls = [
     changefreq: 'monthly',
     priority: p.featured === 'true' ? '0.9' : '0.8',
   })),
-  { loc: '/#about', lastmod: today, changefreq: 'monthly', priority: '0.6' },
   { loc: '/#contact', lastmod: today, changefreq: 'monthly', priority: '0.5' },
 ];
 

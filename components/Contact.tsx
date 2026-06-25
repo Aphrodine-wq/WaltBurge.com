@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Github, ArrowUpRight, Copy, Send, AlertCircle, CheckCircle } from 'lucide-react';
+import { Phone, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import { SectionId } from '../types';
 import { trackEvent } from '../lib/track';
-import { getLeadContext, getUtm, clearLeadContext } from '../lib/leadContext';
+import { getLeadContext, getUtm, clearLeadContext, LEAD_CONTEXT_EVENT } from '../lib/leadContext';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = React.useState(false);
@@ -24,20 +24,27 @@ export const Contact: React.FC = () => {
   // Carry funnel context into the form: if the visitor came from a vertical page
   // or ran the calculator, default the subject and show a short note — so they
   // know we have the thread, and so the lead arrives with that context attached.
+  // Runs on mount AND when context changes, because the homepage calculator and
+  // this form share a page (the form is already mounted when the estimate lands).
   useEffect(() => {
-    const ctx = getLeadContext();
-    if (!ctx.vertical && !ctx.annualLoss) return;
-    const labels: Record<string, string> = { doctors: 'private practice', lawyers: 'law firm' };
-    const v = ctx.vertical ? labels[ctx.vertical] || ctx.vertical : '';
-    setFormData(prev => ({
-      ...prev,
-      subject: prev.subject || (v ? `AI for my ${v}` : 'Booking a free call'),
-    }));
-    if (ctx.annualLoss && ctx.annualLoss > 0) {
-      setLeadNote(`From your estimate: about $${Math.round(ctx.annualLoss).toLocaleString('en-US')}/yr walking out the door. Let's talk about catching it.`);
-    } else if (v) {
-      setLeadNote(`Following up on AI for your ${v}.`);
-    }
+    const applyContext = () => {
+      const ctx = getLeadContext();
+      if (!ctx.vertical && !ctx.annualLoss) return;
+      const labels: Record<string, string> = { doctors: 'private practice', lawyers: 'law firm' };
+      const v = ctx.vertical ? labels[ctx.vertical] || ctx.vertical : '';
+      setFormData(prev => ({
+        ...prev,
+        subject: prev.subject || (v ? `AI for my ${v}` : 'Booking a free call'),
+      }));
+      if (ctx.annualLoss && ctx.annualLoss > 0) {
+        setLeadNote(`From your estimate: about $${Math.round(ctx.annualLoss).toLocaleString('en-US')}/yr walking out the door. Let's talk about catching it.`);
+      } else if (v) {
+        setLeadNote(`Following up on AI for your ${v}.`);
+      }
+    };
+    applyContext();
+    window.addEventListener(LEAD_CONTEXT_EVENT, applyContext);
+    return () => window.removeEventListener(LEAD_CONTEXT_EVENT, applyContext);
   }, []);
 
   const copyEmail = () => {
@@ -165,8 +172,8 @@ export const Contact: React.FC = () => {
               <span className="text-brand-secondary">Talk</span><span className="text-brand-accent">.</span>
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
-              Hiring, building something, or just want to compare notes — reach out. You'll talk to the
-              person who writes the code, not a recruiter. The résumé and GitHub are a click away.
+              Tell me where your business is losing time or missing calls. The first call and the estimate
+              are free — and you'll talk to the person who builds it, not a sales rep.
             </p>
           </motion.div>
 
@@ -309,7 +316,7 @@ export const Contact: React.FC = () => {
               ) : (
                 <>
                   <Send size={18} />
-                  Send Message
+                  Book my free call
                 </>
               )}
             </button>
@@ -326,12 +333,12 @@ export const Contact: React.FC = () => {
                   {copied ? <span className="text-brand-accent">COPIED!</span> : 'jamesburge.mcm@gmail.com'}
                 </button>
                 <a
-                  href="https://github.com/Aphrodine-wq"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="tel:+16622925533"
+                  onClick={() => trackEvent('phone_click', { location: 'contact' })}
                   className="p-3 bg-brand-surface border border-brand-border hover:border-brand-accent transition-colors text-brand-secondary hover:text-brand-accent"
+                  aria-label="Call or text (662) 292-5533"
                 >
-                  <Github size={20} />
+                  <Phone size={20} />
                 </a>
               </div>
             </div>

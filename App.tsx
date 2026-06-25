@@ -2,9 +2,11 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Expertise } from './components/Expertise';
-import { Blog } from './components/Blog';
+import { Specialties } from './components/Specialties';
+import { HowItWorks } from './components/HowItWorks';
+import { WhyWaltBuilds } from './components/WhyWaltBuilds';
+import { RevenueCalculator } from './components/RevenueCalculator';
+import { EngineeringCredibility } from './components/EngineeringCredibility';
 import { Contact } from './components/Contact';
 import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
@@ -19,7 +21,7 @@ import { getPostBySlug } from './lib/blog';
 import { getSystem } from './lib/shop';
 import { getWorkItem } from './lib/work';
 import { localSlugs, getLocalPage } from './lib/local';
-import { getVertical } from './lib/practice';
+import { getVertical, SMB_CALC } from './lib/practice';
 import { captureUtm } from './lib/leadContext';
 import { SectionId, Project, BlogPost } from './types';
 
@@ -435,9 +437,15 @@ function App() {
             <ArtisticNav onNavigate={goToSection} onHome={goHome} />
 
             <main className="relative z-10 w-full overflow-x-hidden">
-              <Hero onOpenResume={openResume} />
+              {/* Services-first funnel: hook → who it's for → process → proof →
+                  cost of doing nothing → risk reversal → objections → who builds
+                  it (secondary trust) → book. */}
+              <Hero onOpenResume={openResume} onBookCall={() => goToSection(SectionId.CONTACT)} />
 
-              {/* Proof leads — the work, then the depth behind it. */}
+              <Specialties onOpenMenu={() => openServices()} />
+
+              <HowItWorks />
+
               <ErrorBoundary>
                 <Suspense fallback={<div className="py-24 md:py-32 px-6 max-w-7xl mx-auto"><ContentSkeleton count={3} variant="grid" /></div>}>
                   <Projects
@@ -450,10 +458,20 @@ function App() {
                 </Suspense>
               </ErrorBoundary>
 
-              <Expertise />
-              <Blog onPostClick={handlePostClick} onViewAll={openBlogIndex} />
+              {/* The cost of doing nothing — runs on the visitor's own numbers and
+                  carries the estimate into the lead. */}
+              <section id={SectionId.CALC} className="py-20 md:py-28 px-4 md:px-6 bg-brand-muted border-t border-brand-border/40">
+                <div className="max-w-5xl mx-auto">
+                  <div className="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent mb-6">
+                    The cost of doing nothing
+                  </div>
+                  <RevenueCalculator calc={SMB_CALC} onBook={() => goToSection(SectionId.CONTACT)} />
+                </div>
+              </section>
+
+              <WhyWaltBuilds />
               <FAQ />
-              <About />
+              <EngineeringCredibility onOpenResume={openResume} />
             </main>
             <Contact />
             <Footer />

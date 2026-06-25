@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github } from 'lucide-react';
 import { SectionId } from '../types';
 import { trackEvent } from '../lib/track';
 
 interface HeroProps {
   onOpenResume: () => void;
+  onBookCall: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -20,7 +20,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
   return (
     <section
       id={SectionId.HERO}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-brand-base"
+      className="relative min-h-screen flex flex-col items-center justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-brand-base"
     >
       <motion.div
         style={{ y: y1, opacity }}
@@ -32,18 +32,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           transition={{ duration: 0.8 }}
           className="font-mono text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8"
         >
-          AI Developer · Data Science & Learning Systems · Oxford, MS · Remote-friendly
+          AI &amp; Software for Local Business · Oxford &amp; North Mississippi
         </motion.span>
 
-        {/* Mask reveal — the name slides up from a clipped baseline on load. */}
+        {/* Mask reveal — the headline slides up from a clipped baseline on load. */}
         <div className="overflow-hidden pb-[0.12em] mb-8">
           <motion.h1
             initial={{ y: '115%' }}
             animate={{ y: 0 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
-            className="font-display font-black text-6xl md:text-8xl lg:text-9xl text-brand-primary leading-[0.95] tracking-tighter"
+            className="font-display font-black text-5xl md:text-7xl lg:text-8xl text-brand-primary leading-[0.95] tracking-tighter"
           >
-            Walt Burge<span className="text-brand-accent">.</span>
+            Never miss another customer<span className="text-brand-accent">.</span>
           </motion.h1>
         </div>
 
@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          I taught myself to code seven months ago. Since then I&rsquo;ve trained a <span className="text-brand-primary font-semibold">custom LLM</span>, built the <span className="text-brand-primary font-semibold">data and training pipeline</span> behind it, and shipped 11 production systems that put real AI in front of real users.
+          I build custom <span className="text-brand-primary font-semibold">AI and software</span> for Oxford-area businesses &mdash; a <span className="text-brand-primary font-semibold">24/7 receptionist</span> that answers every call, follow-up that works every lead, and tools built around how you already run things. Owned by you, not rented. One person, start to finish.
         </motion.p>
 
         <motion.div
@@ -63,20 +63,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center w-full sm:w-auto px-4 sm:px-0"
         >
           <button
-            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'see-the-work' }); scrollToProjects(); }}
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'book-call' }); onBookCall(); }}
             className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-white">
-              See the work
+              Book a free call
             </span>
           </button>
 
           <button
-            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'resume' }); onOpenResume(); }}
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'see-the-work' }); scrollToProjects(); }}
             className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface transition-colors duration-300"
           >
             <span className="font-sans text-sm tracking-wide font-semibold text-brand-primary">
-              Résumé
+              See the work
             </span>
           </button>
         </motion.div>
@@ -85,21 +85,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-5 gap-y-2 text-base font-medium text-brand-secondary"
+          className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-3 gap-y-2 text-base font-medium text-brand-secondary"
         >
           <span>
-            Open to <span className="text-brand-primary font-semibold">AI / ML engineering</span> roles.
+            Built by an engineer who trained a <span className="text-brand-primary font-semibold">custom AI model</span> and ships production software &mdash; including live tools for MHP Construction in Oxford.
           </span>
-          <a
-            href="https://github.com/Aphrodine-wq"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackEvent('cta_click', { location: 'hero', label: 'github' })}
-            className="inline-flex items-center gap-2 text-brand-secondary hover:text-brand-accent transition-colors"
+          <button
+            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'resume' }); onOpenResume(); }}
+            className="shrink-0 text-brand-accent hover:text-brand-accent-hover font-semibold transition-colors"
           >
-            <Github size={16} className="text-brand-accent" />
-            <span>GitHub</span>
-          </a>
+            See the r&eacute;sum&eacute; &rarr;
+          </button>
         </motion.div>
       </motion.div>
 

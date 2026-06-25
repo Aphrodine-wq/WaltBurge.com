@@ -14,6 +14,10 @@ export interface LeadContext {
 }
 
 const KEY = 'wb_lead_ctx';
+// Fired whenever lead context changes, so an already-mounted Contact form (e.g.
+// the homepage calculator and Contact live on the same page) can refresh its
+// estimate note instead of only reading context once at mount.
+export const LEAD_CONTEXT_EVENT = 'wb:lead-context';
 const UTM_KEY = 'wb_utm';
 const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
 
@@ -30,6 +34,7 @@ export function setLeadContext(patch: LeadContext): void {
   if (!s) return;
   try {
     s.setItem(KEY, JSON.stringify({ ...getLeadContext(), ...patch }));
+    window.dispatchEvent(new Event(LEAD_CONTEXT_EVENT));
   } catch {
     /* storage full / blocked — context is a nicety, not load-bearing */
   }

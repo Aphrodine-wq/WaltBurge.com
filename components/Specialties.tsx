@@ -68,14 +68,14 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
         >
           <span className="text-brand-accent font-mono text-xs uppercase tracking-widest mb-4 flex items-center gap-3">
             <span className="inline-block w-8 h-px bg-brand-accent" />
-            AI Consultant · Oxford, MS
+            Custom AI · Oxford, MS
           </span>
           <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 uppercase">
-            Built for <span className="text-brand-accent">Health, Law &amp; Construction</span>
+            Built for businesses that <span className="text-brand-accent">live on the phone</span>
           </h2>
           <p className="text-lg text-brand-secondary max-w-2xl">
-            AI that answers your phone, works every lead, and kills the busywork &mdash; so no customer slips
-            to whoever picks up first.
+            Clinic, firm, job site, or shop &mdash; if a missed call is a lost customer, I build the AI that
+            catches it, works every lead, and kills the busywork. Here&rsquo;s where I&rsquo;ve already proven it.
           </p>
         </motion.div>
 
@@ -158,7 +158,7 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
               className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover transition-colors duration-300"
             >
               <span className="font-sans text-sm tracking-wide font-semibold text-white">
-                Book a free AI audit
+                Book a free call
               </span>
             </button>
             {onOpenMenu && (

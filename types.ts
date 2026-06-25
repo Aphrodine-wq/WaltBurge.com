@@ -33,7 +33,9 @@ export enum SectionId {
   HERO = 'hero',
   ABOUT = 'about',
   SPECIALTIES = 'specialties',
+  HOW = 'how-it-works',
   PROJECTS = 'projects',
+  CALC = 'calculator',
   SKILLS = 'skills',
   BLOG = 'blog',
   CONTACT = 'contact'

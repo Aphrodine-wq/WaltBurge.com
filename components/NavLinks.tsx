@@ -8,11 +8,11 @@ import { trackEvent } from '../lib/track';
 // sub-page bar (blog, post, project), so navigation is the same everywhere and
 // a reader is never stranded one "back" link from the rest of the site.
 export const NAV_ITEMS = [
+  { id: SectionId.SPECIALTIES, label: 'Services' },
   { id: SectionId.PROJECTS, label: 'Work' },
-  { id: SectionId.SKILLS, label: 'Skills' },
+  { id: SectionId.HOW, label: 'How it works' },
+  { id: 'faq', label: 'FAQ' },
   { id: SectionId.BLOG, label: 'Blog' },
-  { id: 'about', label: 'About' },
-  { id: 'services', label: 'Services' },
 ];
 
 interface NavLinksProps {
@@ -49,6 +49,12 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
             </button>
           );
         })}
+        <button
+          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'resume' }); go('resume'); }}
+          className="font-sans text-sm font-medium text-brand-secondary hover:text-brand-primary transition-colors"
+        >
+          Résumé
+        </button>
         <a
           href="tel:+16622925533"
           onClick={() => trackEvent('phone_click', { location: 'header' })}
@@ -59,10 +65,10 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
           (662) 292-5533
         </a>
         <button
-          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'resume' }); go('resume'); }}
+          onClick={() => { trackEvent('cta_click', { location: 'header', label: 'book-call' }); go(SectionId.CONTACT); }}
           className="px-5 py-2.5 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-tight transition-colors"
         >
-          Résumé
+          Book a free call
         </button>
       </div>
 
@@ -98,9 +104,15 @@ export const NavLinks: React.FC<NavLinksProps> = ({ onNavigate, activeId }) => {
               ))}
               <button
                 onClick={() => { trackEvent('cta_click', { location: 'mobile-menu', label: 'resume' }); go('resume'); }}
-                className="mt-3 px-5 py-3 bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
+                className="text-left py-3 font-sans text-base font-medium text-brand-secondary hover:text-brand-primary border-b border-brand-border/50 transition-colors"
               >
                 Résumé
+              </button>
+              <button
+                onClick={() => { trackEvent('cta_click', { location: 'mobile-menu', label: 'book-call' }); go(SectionId.CONTACT); }}
+                className="mt-3 px-5 py-3 bg-brand-accent hover:bg-brand-accent-hover text-white text-base font-semibold text-center transition-colors"
+              >
+                Book a free call
               </button>
               <a
                 href="tel:+16622925533"

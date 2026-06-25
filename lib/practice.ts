@@ -104,3 +104,19 @@ export const practiceSlugs = verticals.map(v => v.slug);
 export function getVertical(slug: string): PracticeVertical | undefined {
   return verticals.find(v => v.slug === slug);
 }
+
+// Generic "cost of doing nothing" config for the homepage calculator — no
+// vertical, framed for any local business that lives or dies on the phone. The
+// RevenueCalculator on /for-doctors and /for-lawyers uses each vertical's own
+// calc; this is the all-comers version.
+export const SMB_CALC: PracticeVertical['calc'] = {
+  heading: 'What are missed calls costing your business?',
+  unitLabel: 'calls a week that go unanswered or to voicemail',
+  valueLabel: 'average value of a new customer (first year)',
+  rateLabel: 'percent of those callers who would have bought',
+  resultNoun: 'customers',
+  defaultMissed: 12,
+  defaultValue: 800,
+  defaultRate: 30,
+  valueHint: 'Count the first year of business a new customer brings, not just one sale.',
+};
