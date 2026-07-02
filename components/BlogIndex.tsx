@@ -98,7 +98,7 @@ export const BlogIndex: React.FC<BlogIndexProps> = ({ onPostClick, onBack, onNav
             Writing<span className="text-brand-accent">.</span>
           </h1>
           <p className="mt-6 text-brand-secondary text-lg md:text-xl max-w-2xl leading-relaxed">
-            Notes on building products, training models, and figuring out software engineering from scratch — in public, as I go.
+            Notes on building products and training models — in public, as I go.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-2">

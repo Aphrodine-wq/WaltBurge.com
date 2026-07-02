@@ -172,8 +172,7 @@ export const Contact: React.FC = () => {
               <span className="text-brand-secondary">Talk</span><span className="text-brand-accent">.</span>
             </h2>
             <p className="text-brand-secondary text-lg font-light leading-relaxed max-w-md">
-              Tell me where your business is losing time or missing calls. The first call and the estimate
-              are free — and you'll talk to the person who builds it, not a sales rep.
+              Tell me where your business is losing time. The first call and the estimate are free.
             </p>
           </motion.div>
 

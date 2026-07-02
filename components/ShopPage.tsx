@@ -78,8 +78,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({ onBack, onNavigate, onOpenSy
             AI systems, off the shelf<span className="text-brand-accent">.</span>
           </h1>
           <p className="mt-5 text-brand-secondary text-base md:text-lg max-w-2xl leading-relaxed">
-            Buy the outcome, not a slide deck. Each one is a real system I build and install for your business —
-            scoped to exactly what you need. Tell me the problem; the call and the estimate are free.
+            Real systems, built and installed for your business. The call and the estimate are free.
           </p>
         </motion.div>
 

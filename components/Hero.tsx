@@ -53,7 +53,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          I build custom <span className="text-brand-primary font-semibold">AI and software</span> for Oxford-area businesses &mdash; a <span className="text-brand-primary font-semibold">24/7 receptionist</span> that answers every call, follow-up that works every lead, and tools built around how you already run things. Owned by you, not rented. One person, start to finish.
+          Custom <span className="text-brand-primary font-semibold">AI and software</span> for local business. Owned by you, not rented.
         </motion.p>
 
         <motion.div
@@ -88,7 +88,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
           className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-3 gap-y-2 text-base font-medium text-brand-secondary"
         >
           <span>
-            Built by an engineer who trained a <span className="text-brand-primary font-semibold">custom AI model</span> and ships production software &mdash; including live tools for MHP Construction in Oxford.
+            Live in production for <span className="text-brand-primary font-semibold">MHP Construction</span>, Oxford.
           </span>
           <button
             onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'resume' }); onOpenResume(); }}

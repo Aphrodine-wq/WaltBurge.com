@@ -174,8 +174,7 @@ export const Projects: React.FC<ProjectsProps> = React.memo(({ onProjectClick, o
             Built from the<br />job site up<span className="text-brand-accent">.</span>
           </h2>
           <p className="mt-5 text-base md:text-lg text-brand-secondary leading-relaxed">
-            Seven months self-taught, out of construction and into code — now a full portfolio of products,
-            platforms, and AI shipped end to end. A few of them below.
+            Products, platforms, and AI — shipped end to end.
           </p>
         </motion.div>
 

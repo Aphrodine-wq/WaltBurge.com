@@ -94,8 +94,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ initialSlug, onBack,
             {menu.industry}<span className="text-brand-accent">.</span>
           </h1>
           <p className="mt-5 text-brand-secondary text-base md:text-lg max-w-2xl leading-relaxed">
-            Real software, shipped and owned — not rented. Every price is a starting point; the estimate and the
-            audit are free. Pick your industry:
+            Real software, shipped and owned. The estimate and the audit are free.
           </p>
         </motion.div>
 
