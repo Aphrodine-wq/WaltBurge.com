@@ -18,8 +18,19 @@
       "Mobile app with 30+ screens (React Native/Expo)",
       "6 revenue streams including white-label licensing"
     ],
-    "techStack": ["Next.js", "TypeScript", "Java", "Spring Boot", "React Native", "PostgreSQL"],
-    "tags": ["marketplace", "full-stack", "construction"],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "React Native",
+      "PostgreSQL"
+    ],
+    "tags": [
+      "marketplace",
+      "full-stack",
+      "construction"
+    ],
     "imageUrl": "/assets/projects/fairtradeworker/fairtradeworker.png",
     "images": [],
     "link": "https://fairtradeworker.com",
@@ -47,8 +58,18 @@
       "Client relationship management",
       "Real contractor in production (MHP Construction, Oxford MS)"
     ],
-    "techStack": ["Next.js", "TypeScript", "Python", "Tailwind", "PostgreSQL"],
-    "tags": ["saas", "construction", "ai-powered"],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Python",
+      "Tailwind",
+      "PostgreSQL"
+    ],
+    "tags": [
+      "saas",
+      "construction",
+      "ai-powered"
+    ],
     "imageUrl": "/assets/projects/mshomepros/cover.png",
     "images": [],
     "link": "https://mshomepros.com",
@@ -77,8 +98,17 @@
       "8 specialized tool functions",
       "Scaling to 500K+ training examples (v5 pipeline)"
     ],
-    "techStack": ["Python", "PyTorch", "Llama", "RunPod"],
-    "tags": ["llm", "fine-tuning", "construction"],
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "Llama",
+      "RunPod"
+    ],
+    "tags": [
+      "llm",
+      "fine-tuning",
+      "construction"
+    ],
     "imageUrl": "/assets/projects/constructionai/cover.png",
     "images": [],
     "status": "Live",
@@ -106,8 +136,17 @@
       "ConstructionAI estimates in-app",
       "Built for App Store release"
     ],
-    "techStack": ["React Native", "TypeScript", "Java", "Spring Boot"],
-    "tags": ["mobile", "marketplace", "construction"],
+    "techStack": [
+      "React Native",
+      "TypeScript",
+      "Java",
+      "Spring Boot"
+    ],
+    "tags": [
+      "mobile",
+      "marketplace",
+      "construction"
+    ],
     "imageUrl": "/assets/projects/ftw-mobile/cover.png",
     "images": [],
     "status": "Beta",
@@ -133,8 +172,14 @@
       "CLI plus pipeline integration",
       "Correctness and safety in one pass"
     ],
-    "techStack": ["Python"],
-    "tags": ["verification", "security", "tooling"],
+    "techStack": [
+      "Python"
+    ],
+    "tags": [
+      "verification",
+      "security",
+      "tooling"
+    ],
     "imageUrl": "/assets/projects/aeon/cover.png",
     "images": [],
     "status": "Beta",
@@ -160,8 +205,17 @@
       "Electron + Next.js desktop app",
       "The pipeline behind ConstructionAI, productized"
     ],
-    "techStack": ["TypeScript", "Next.js", "Node.js", "Python"],
-    "tags": ["ai", "tooling", "desktop"],
+    "techStack": [
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "Python"
+    ],
+    "tags": [
+      "ai",
+      "tooling",
+      "desktop"
+    ],
     "imageUrl": "/assets/projects/forge/cover.png",
     "images": [],
     "status": "Beta",
@@ -188,8 +242,17 @@
       "REST API + MCP server so any AI agent can use it",
       "MIT licensed, 100% local — nothing leaves your machine"
     ],
-    "techStack": ["Python", "SQLite", "OCR", "MCP"],
-    "tags": ["open-source", "ai", "local-first"],
+    "techStack": [
+      "Python",
+      "SQLite",
+      "OCR",
+      "MCP"
+    ],
+    "tags": [
+      "open-source",
+      "ai",
+      "local-first"
+    ],
     "imageUrl": "/assets/projects/engram/cover.png",
     "images": [],
     "repositoryUrl": "https://github.com/Aphrodine-wq/engram",
@@ -217,8 +280,18 @@
       "Synapse-backed semantic memory + Obsidian vault discovery",
       "Cognitive traits — installable reasoning postures as first-class code"
     ],
-    "techStack": ["Python", "PyTorch", "Ollama", "LangChain", "Markdown"],
-    "tags": ["agent-language", "compiler", "ai-platform"],
+    "techStack": [
+      "Python",
+      "PyTorch",
+      "Ollama",
+      "LangChain",
+      "Markdown"
+    ],
+    "tags": [
+      "agent-language",
+      "compiler",
+      "ai-platform"
+    ],
     "imageUrl": "/assets/projects/tessera/cover.png",
     "images": [],
     "status": "Beta",
@@ -245,8 +318,17 @@
       "20 AGI layers: goals, immune, memory, metacognition, and more",
       "3-node distributed network (Mac + Mini PC + GPU workstation)"
     ],
-    "techStack": ["TypeScript", "Python", "Rust", "Node.js"],
-    "tags": ["ai-platform", "distributed", "autonomous"],
+    "techStack": [
+      "TypeScript",
+      "Python",
+      "Rust",
+      "Node.js"
+    ],
+    "tags": [
+      "ai-platform",
+      "distributed",
+      "autonomous"
+    ],
     "imageUrl": "/assets/projects/walt/cover.png",
     "images": [],
     "status": "Live",
@@ -272,8 +354,17 @@
       "Automatic recall of relevant prior context",
       "Lifecycle hooks that sync memory across sessions"
     ],
-    "techStack": ["TypeScript", "Node.js", "MCP", "Python"],
-    "tags": ["ai", "memory", "mcp"],
+    "techStack": [
+      "TypeScript",
+      "Node.js",
+      "MCP",
+      "Python"
+    ],
+    "tags": [
+      "ai",
+      "memory",
+      "mcp"
+    ],
     "imageUrl": "/assets/projects/twin-brain/cover.png",
     "images": [],
     "status": "Live",
@@ -289,7 +380,10 @@
     "category": "Web",
     "summary": "A real Oxford, MS contractor running on a custom AI estimation platform built for their business.",
     "description": "A real Oxford, MS contractor running on a custom AI estimation platform built for their business.",
-    "client": { "name": "MHP Construction", "location": "Oxford, MS" },
+    "client": {
+      "name": "MHP Construction",
+      "location": "Oxford, MS"
+    },
     "fullDescription": "MHP Construction is a licensed contractor in Oxford, Mississippi running the MsHomePros platform in production — the first real-world deployment of the ConstructionAI estimation engine. The work covers the full build: an AI estimator tuned to their pricing, professional proposal generation, and job tracking, delivered as a working tool a contractor actually uses to win and run jobs.",
     "challenge": "A working contractor needed to turn around accurate, professional estimates faster than pricing by hand — without learning a complicated piece of software.",
     "solution": "Deployed the MsHomePros platform with ConstructionAI behind it, tuned to their real pricing, so estimates and proposals go out in minutes instead of evenings.",
@@ -299,8 +393,16 @@
       "Job tracking built around how they actually work",
       "Live, in-production use by a licensed Oxford contractor"
     ],
-    "techStack": ["Next.js", "Python", "PostgreSQL"],
-    "tags": ["case-study", "construction", "ai-powered"],
+    "techStack": [
+      "Next.js",
+      "Python",
+      "PostgreSQL"
+    ],
+    "tags": [
+      "case-study",
+      "construction",
+      "ai-powered"
+    ],
     "imageUrl": "/assets/projects/mhp-construction/cover.png",
     "images": [],
     "status": "Live",
@@ -309,57 +411,81 @@
     "seoDescription": "How Walt Burge built and deployed a custom AI estimation platform for MHP Construction, a licensed contractor in Oxford, Mississippi — live in production."
   },
   {
-    "id": "case-study-scaffold-1",
-    "slug": "case-study-scaffold-1",
-    "title": "TODO — Client Name",
+    "id": "compliant-intake-oxford",
+    "slug": "compliant-intake-case-study",
+    "title": "Compliant Patient Intake",
     "kind": "client",
-    "draft": true,
     "category": "Web",
-    "summary": "TODO — one-line result, e.g. 'A North MS [trade] capturing every after-hours call with a custom AI front desk.'",
-    "description": "TODO — one-line result for the card.",
-    "client": { "name": "TODO — Client / Business name", "location": "TODO — City, MS" },
-    "fullDescription": "TODO — 2-3 sentences: who the client is, what was built, and that it's in production. Keep James's voice; no invented metrics.",
-    "challenge": "TODO — the real problem in the client's words (missed calls, slow estimates, paperwork, etc.).",
-    "solution": "TODO — what was built and how it changed the day-to-day.",
+    "summary": "A Suboxone & psychiatric practice's online intake rebuilt HIPAA / 42 CFR Part 2 compliant — PHI leak killed, five clinical measures, secure staff portal.",
+    "description": "A Suboxone & psychiatric practice's online intake rebuilt HIPAA / 42 CFR Part 2 compliant — PHI leak killed, five clinical measures, secure staff portal.",
+    "client": {
+      "name": "Behavioral-health practice",
+      "location": "Oxford, MS"
+    },
+    "fullDescription": "A working Suboxone and psychiatric practice in Oxford, Mississippi was collecting full patient intakes — including PHQ-9 depression scores and substance-use history — through a website form that emailed everything to a personal inbox with no BAA. That's a real HIPAA and 42 CFR Part 2 exposure, and it's the exact gap most healthcare websites have. The work: rebuild the intake path end to end so patients complete the same branded forms, but every byte of PHI lands on BAA-covered infrastructure instead of an email thread.",
+    "challenge": "The practice's online intake was shipping protected health information — clinical screening scores and full intake PDFs — through a consumer email service to a personal inbox. No BAA anywhere on the path, on a form patients used every day.",
+    "solution": "Rebuilt the intake to submit to a secure API on BAA-covered AWS infrastructure. Office notifications are PHI-free (an opaque intake ID only); staff read full records in an authenticated portal with per-user accounts. Self-scheduling hands off to the practice's patient portal, and the branded five-measure clinical intake the practice wanted stayed exactly as designed.",
     "features": [
-      "TODO — capability 1",
-      "TODO — capability 2",
-      "TODO — capability 3"
+      "Five clinical measures: PHQ-9, GAD-7, MDQ, PCL-C, ASRS",
+      "PHI stored only on BAA-covered infrastructure",
+      "PHI-free staff notifications with opaque intake IDs",
+      "Authenticated staff portal with per-user accounts",
+      "Patient self-scheduling hand-off"
     ],
-    "techStack": ["TODO"],
-    "tags": ["case-study"],
-    "imageUrl": "/assets/projects/REPLACE/cover.png",
+    "techStack": [
+      "React",
+      "TypeScript",
+      "AWS"
+    ],
+    "tags": [
+      "case-study",
+      "healthcare",
+      "hipaa-compliance"
+    ],
+    "imageUrl": "/assets/projects/compliant-intake-oxford/cover.png",
     "images": [],
     "status": "Live",
     "year": "2026",
-    "seoTitle": "TODO — Case Study Title | Walt Burge",
-    "seoDescription": "TODO — meta description with the result + city, MS for local SEO."
+    "seoTitle": "Case Study — HIPAA-Compliant Patient Intake, Oxford MS",
+    "seoDescription": "How Walt Burge rebuilt a behavioral-health practice's patient intake to be HIPAA and 42 CFR Part 2 compliant — killing a PHI leak and shipping a secure staff portal, in Oxford, MS."
   },
   {
-    "id": "case-study-scaffold-2",
-    "slug": "case-study-scaffold-2",
-    "title": "TODO — Client Name",
+    "id": "northms-homepros",
+    "slug": "northms-homepros-case-study",
+    "title": "North Mississippi Home Pros",
     "kind": "client",
-    "draft": true,
     "category": "Web",
-    "summary": "TODO — one-line result for the card.",
-    "description": "TODO — one-line result for the card.",
-    "client": { "name": "TODO — Client / Business name", "location": "TODO — City, MS" },
-    "fullDescription": "TODO — 2-3 sentences in James's voice; verified facts only.",
-    "challenge": "TODO — the real problem.",
-    "solution": "TODO — what was built.",
+    "summary": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — 21-project curated gallery and lead capture.",
+    "description": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — 21-project curated gallery and lead capture.",
+    "client": {
+      "name": "North Mississippi Home Pros",
+      "location": "Oxford, MS"
+    },
+    "fullDescription": "North Mississippi Home Pros is a licensed contractor in Oxford, Mississippi whose public web presence was a dated WordPress install — slow, template-bound, and hard to keep current. The work: migrate the whole site to a custom Next.js build with a curated portfolio of their real projects, sharper brand and hero, and lead capture wired in. It's the public-facing half of a client relationship that also runs on the MsHomePros estimation platform.",
+    "challenge": "An aging WordPress site that didn't match the quality of the company's actual work — slow to load, locked to a template, and painful to update with new projects.",
+    "solution": "Migrated WordPress to a custom Next.js build: rebuilt header and hero, curated and audited all 21 portfolio projects into a clean gallery, added lead capture, and cut the pages that weren't earning their place.",
     "features": [
-      "TODO — capability 1",
-      "TODO — capability 2",
-      "TODO — capability 3"
+      "Full WordPress-to-Next.js migration",
+      "Curated 21-project portfolio gallery",
+      "Lead capture built in",
+      "Fast static delivery on Vercel"
     ],
-    "techStack": ["TODO"],
-    "tags": ["case-study"],
-    "imageUrl": "/assets/projects/REPLACE/cover.png",
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Vercel"
+    ],
+    "tags": [
+      "case-study",
+      "construction",
+      "web"
+    ],
+    "imageUrl": "/assets/projects/northms-homepros/cover.png",
     "images": [],
+    "link": "https://northmshomepros.com",
     "status": "Live",
     "year": "2026",
-    "seoTitle": "TODO — Case Study Title | Walt Burge",
-    "seoDescription": "TODO — meta description with the result + city, MS."
+    "seoTitle": "Case Study — Custom Next.js Site for North Mississippi Home Pros, Oxford MS",
+    "seoDescription": "How Walt Burge migrated North Mississippi Home Pros from WordPress to a custom Next.js brand site with a curated project gallery and lead capture — Oxford, MS."
   }
 ]
