@@ -59,10 +59,11 @@ export const ArtisticNav: React.FC<ArtisticNavProps> = ({ onNavigate, onHome }) 
       <div className="max-w-7xl mx-auto px-5 md:px-8 h-16 md:h-20 flex items-center justify-between">
         <button
           onClick={onHome}
-          className="font-display text-xl md:text-2xl font-extrabold tracking-tight text-brand-primary hover:text-brand-accent transition-colors"
+          className="flex items-center gap-2.5 font-display text-xl md:text-2xl font-extrabold tracking-tight text-brand-primary hover:text-brand-accent transition-colors"
           aria-label="Walt Burge — home"
         >
-          Walt Burge<span className="text-brand-accent">.</span>
+          <img src="/brand/mark.svg" alt="" aria-hidden="true" className="w-6 h-6 md:w-7 md:h-7" />
+          <span>Walt Burge<span className="text-brand-accent">.</span></span>
         </button>
 
         <NavLinks onNavigate={onNavigate} activeId={activeId} />
