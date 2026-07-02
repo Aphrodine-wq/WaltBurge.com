@@ -32,7 +32,10 @@
       "construction"
     ],
     "imageUrl": "/assets/projects/fairtradeworker/fairtradeworker.png",
-    "images": [],
+    "images": [
+      "/assets/projects/fairtradeworker/fairtradeworker.png",
+      "/assets/projects/fairtradeworker/live-home.png"
+    ],
     "link": "https://fairtradeworker.com",
     "status": "Live",
     "year": "2025",
