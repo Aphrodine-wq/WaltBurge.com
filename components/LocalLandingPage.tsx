@@ -106,12 +106,20 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
             {page.h1}<span className="text-brand-accent">.</span>
           </h1>
           <p className="mt-5 text-brand-secondary text-base md:text-lg max-w-2xl leading-relaxed">{page.intro}</p>
-          <button
-            onClick={() => onNavigate('contact')}
-            className="mt-7 px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
-          >
-            Book a free call
-          </button>
+          <div className="mt-7 flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => onNavigate('contact')}
+              className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
+            >
+              Book a free call
+            </button>
+            <button
+              onClick={() => onNavigate('audit')}
+              className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface text-brand-primary text-sm font-semibold tracking-wide transition-colors"
+            >
+              Get a free audit
+            </button>
+          </div>
         </motion.div>
 
         {/* Systems */}
@@ -159,12 +167,20 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
         <div className="mt-16 pt-10 border-t border-brand-border">
           <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight">Let's build something in Oxford.</h3>
           <p className="mt-3 text-brand-secondary max-w-xl">Tell me the problem. The call and the estimate are free — and I'm right here in town.</p>
-          <button
-            onClick={() => onNavigate('contact')}
-            className="mt-6 px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
-          >
-            Book a free call
-          </button>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => onNavigate('contact')}
+              className="px-8 py-4 bg-brand-accent hover:bg-brand-accent-hover text-white text-sm font-semibold tracking-wide transition-colors"
+            >
+              Book a free call
+            </button>
+            <button
+              onClick={() => onNavigate('audit')}
+              className="px-8 py-4 border border-brand-border hover:border-brand-accent bg-brand-surface text-brand-primary text-sm font-semibold tracking-wide transition-colors"
+            >
+              Get a free audit
+            </button>
+          </div>
           <p className="mt-6 text-sm text-brand-secondary flex flex-wrap gap-x-6 gap-y-2">
             <button onClick={() => onOpenSystem(featured[0]?.slug)} className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
               Browse all AI systems <ArrowRight size={14} />

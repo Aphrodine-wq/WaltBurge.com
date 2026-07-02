@@ -7,6 +7,10 @@ import { SectionId } from '../types';
 // JSON-LD, so Google's rich-snippet text always matches what's on screen.
 const faqs = [
   {
+    q: 'What does the free audit include?',
+    a: 'A one-page review of your website in plain English: whether your forms handle client or patient data safely, how fast your site loads and how Google sees it, and where visitors give up before contacting you. Delivered within two business days — free, no strings.',
+  },
+  {
     q: 'What does an AI consultant do?',
     a: 'I build and install custom AI systems for your business — a 24/7 AI receptionist, automated lead follow-up, custom-trained models, and more. Not advice and slide decks; working software you own.',
   },
