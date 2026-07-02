@@ -69,6 +69,7 @@ const urls = [
     priority: '0.8',
   })),
   { loc: '/resume', lastmod: today, changefreq: 'monthly', priority: '0.9' },
+  { loc: '/audit', lastmod: today, changefreq: 'monthly', priority: '0.9' },
   { loc: '/work', lastmod: today, changefreq: 'weekly', priority: '0.9' },
   ...workSlugs.map(slug => ({
     loc: `/work/${slug}`,

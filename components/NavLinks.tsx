@@ -13,6 +13,7 @@ export const NAV_ITEMS = [
   { id: SectionId.HOW, label: 'How it works' },
   { id: 'faq', label: 'FAQ' },
   { id: SectionId.BLOG, label: 'Blog' },
+  { id: 'audit', label: 'Free audit' },
 ];
 
 interface NavLinksProps {

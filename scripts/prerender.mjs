@@ -208,7 +208,7 @@ routes.push(['/resume', `Résumé — AI Developer (Data Science & Learning Syst
       mainEntity: {
         '@type': 'Person',
         name: 'Walt Burge',
-        alternateName: 'James Walton',
+        alternateName: 'James Burge',
         jobTitle: 'AI Developer',
         url: `${ORIGIN}/resume`,
         email: 'jamesburge.mcm@gmail.com',
@@ -219,6 +219,13 @@ routes.push(['/resume', `Résumé — AI Developer (Data Science & Learning Syst
       },
     },
     crumbs([['Home', '/'], ['Résumé', '/resume']]),
+  ]]);
+
+// Free audit — the lead-magnet landing page.
+routes.push(['/audit', `Free Website & Intake Audit — Oxford, MS${SUFFIX}`,
+  'Get a free one-page audit of your business website from Walt Burge in Oxford, MS — forms and patient-data compliance, speed and search, and where you are losing leads. Plain English, two business days, no strings.',
+  [
+    crumbs([['Home', '/'], ['Free audit', '/audit']]),
   ]]);
 
 // Selected work — portfolio + client case studies (skip scaffolded drafts).

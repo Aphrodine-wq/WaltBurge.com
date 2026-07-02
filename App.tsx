@@ -1,5 +1,4 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Hero } from './components/Hero';
 import { Specialties } from './components/Specialties';
@@ -16,7 +15,6 @@ import { ArtisticNav } from './components/ArtisticNav';
 import { TooltipProvider } from './components/ui/tooltip';
 import { ContentSkeleton } from './components/ui/content-skeleton';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { SplashScreen } from './components/SplashScreen';
 import { getPostBySlug } from './lib/blog';
 import { getSystem } from './lib/shop';
 import { getWorkItem } from './lib/work';
@@ -37,9 +35,9 @@ const ShopSystemDetail = lazy(() => import('./components/ShopSystemDetail').then
 const LocalLandingPage = lazy(() => import('./components/LocalLandingPage').then(module => ({ default: module.LocalLandingPage })));
 const PrivatePracticePage = lazy(() => import('./components/PrivatePracticePage').then(module => ({ default: module.PrivatePracticePage })));
 const ResumePage = lazy(() => import('./components/ResumePage').then(module => ({ default: module.ResumePage })));
+const AuditPage = lazy(() => import('./components/AuditPage').then(module => ({ default: module.AuditPage })));
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [showBlogIndex, setShowBlogIndex] = useState(false);
@@ -50,6 +48,7 @@ function App() {
   const [localSlug, setLocalSlug] = useState<string>('');
   const [practiceSlug, setPracticeSlug] = useState<string>('');
   const [showResume, setShowResume] = useState(false);
+  const [showAudit, setShowAudit] = useState(false);
   const [activeTechFilter, setActiveTechFilter] = useState<string | null>(null);
 
   // URL routing for a static SPA. The vercel.json rewrite serves index.html for
@@ -66,6 +65,7 @@ function App() {
       const shop = path.match(/^\/shop(?:\/(.+?))?\/?$/);
       const work = path.match(/^\/work(?:\/(.+?))?\/?$/);
       const resume = path.match(/^\/resume\/?$/);
+      const audit = path.match(/^\/audit\/?$/);
       const practice = path.match(/^\/(for-doctors|for-lawyers)\/?$/);
       const local = path.match(/^\/([a-z0-9-]+)\/?$/);
       const localHit = local && localSlugs.includes(local[1]) ? local[1] : '';
@@ -78,7 +78,10 @@ function App() {
       setLocalSlug('');
       setPracticeSlug('');
       setShowResume(false);
-      if (resume) {
+      setShowAudit(false);
+      if (audit) {
+        setShowAudit(true);
+      } else if (resume) {
         setShowResume(true);
       } else if (practice) {
         setPracticeSlug(practice[1]);
@@ -198,6 +201,7 @@ function App() {
 
   const openResume = () => {
     setShowResume(true);
+    setShowAudit(false);
     setSelectedPost(null);
     setSelectedProject(null);
     setShowBlogIndex(false);
@@ -211,6 +215,25 @@ function App() {
 
   const handleResumeBack = () => {
     setShowResume(false);
+    window.history.pushState(null, '', '/');
+  };
+
+  const openAudit = () => {
+    setShowAudit(true);
+    setShowResume(false);
+    setSelectedPost(null);
+    setSelectedProject(null);
+    setShowBlogIndex(false);
+    setShowServices(false);
+    setShowShop(false);
+    setLocalSlug('');
+    setPracticeSlug('');
+    window.history.pushState(null, '', '/audit');
+    window.scrollTo(0, 0);
+  };
+
+  const handleAuditBack = () => {
+    setShowAudit(false);
     window.history.pushState(null, '', '/');
   };
 
@@ -228,6 +251,7 @@ function App() {
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
     setShowResume(false);
+    setShowAudit(false);
     window.history.pushState(null, '', `/work/${project.slug || project.id}`);
     window.scrollTo(0, 0);
   };
@@ -254,7 +278,8 @@ function App() {
     if (id === 'marketplace') { openShop(); return; }
     if (id === 'services') { openServices(); return; }
     if (id === 'resume') { openResume(); return; }
-    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug && !practiceSlug && !showResume;
+    if (id === 'audit') { openAudit(); return; }
+    const wasHome = !selectedProject && !selectedPost && !showBlogIndex && !showServices && !showShop && !localSlug && !practiceSlug && !showResume && !showAudit;
     setSelectedProject(null);
     setSelectedPost(null);
     setShowBlogIndex(false);
@@ -263,6 +288,7 @@ function App() {
     setLocalSlug('');
     setPracticeSlug('');
     setShowResume(false);
+    setShowAudit(false);
     if (!wasHome) window.history.pushState(null, '', '/');
     const scrollToSection = () => {
       if (id === SectionId.HERO) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -409,6 +435,21 @@ function App() {
     );
   }
 
+  if (showAudit) {
+    return (
+      <TooltipProvider>
+        <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
+          <CustomCursor />
+          <ArtisticNav onNavigate={goToSection} onHome={goHome} />
+          <Suspense fallback={null}>
+            <AuditPage onBack={handleAuditBack} onNavigate={goToSection} />
+          </Suspense>
+          <Analytics />
+        </div>
+      </TooltipProvider>
+    );
+  }
+
   if (showResume) {
     return (
       <TooltipProvider>
@@ -426,12 +467,10 @@ function App() {
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-brand-base text-brand-primary selection:bg-brand-accent/20 selection:text-brand-accent font-sans">
-        <AnimatePresence mode="wait">
-          {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
-        </AnimatePresence>
-
-        {!showSplash && (
-          <>
+        {/* Splash is static HTML in index.html — it paints before any JS loads
+            and never unmounts page content, so LCP lands on the real hero
+            instead of waiting out the splash timer. */}
+        <>
             <CustomCursor />
             <ScrollProgress />
             <ArtisticNav onNavigate={goToSection} onHome={goHome} />
@@ -477,7 +516,6 @@ function App() {
             <Footer />
             <Analytics />
           </>
-        )}
       </div>
     </TooltipProvider>
   );
