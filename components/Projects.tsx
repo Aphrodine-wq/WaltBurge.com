@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Project, SectionId } from '../types';
 import { workItems, kindLabel } from '../lib/work';
 import {

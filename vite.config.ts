@@ -1,6 +1,39 @@
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { readdirSync, readFileSync } from 'node:fs';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+
+// virtual:blog-meta — frontmatter-only view of content/blog/*.md, so the entry
+// bundle ships post METADATA without inlining 388KB of post bodies (bodies load
+// lazily per-post via the non-eager glob in lib/blog.ts). Parsing stays in
+// lib/blog.ts; this module only splits the frontmatter block from the body and
+// precomputes readTime (which needs the body text lib/blog.ts no longer has).
+function blogMetaPlugin(): Plugin {
+  const VIRTUAL = 'virtual:blog-meta';
+  const RESOLVED = '\0' + VIRTUAL;
+  const DIR = path.resolve(__dirname, 'content/blog');
+  return {
+    name: 'blog-meta',
+    resolveId(id) {
+      return id === VIRTUAL ? RESOLVED : undefined;
+    },
+    load(id) {
+      if (id !== RESOLVED) return;
+      const entries = readdirSync(DIR)
+        .filter((f) => f.endsWith('.md'))
+        .map((f) => {
+          const raw = readFileSync(path.join(DIR, f), 'utf8');
+          const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+          const header = match ? `---\n${match[1]}\n---\n` : '';
+          const body = (match ? match[2] : raw).trim();
+          const words = body.split(/\s+/).filter(Boolean).length;
+          const readTime = body ? `${Math.max(1, Math.round(words / 220))} min` : '';
+          return { file: f, header, readTime, hasBody: body.length > 0 };
+        });
+      return `export default ${JSON.stringify(entries)};`;
+    },
+  };
+}
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -9,7 +42,7 @@ export default defineConfig(({ mode }) => {
         port: 3000,
         host: '0.0.0.0',
       },
-      plugins: [react()],
+      plugins: [react(), blogMetaPlugin()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
@@ -22,16 +55,12 @@ export default defineConfig(({ mode }) => {
       build: {
         rollupOptions: {
           output: {
-            // Keep the markdown/syntax-highlight/comments stack and framer-motion
-            // out of the homepage bundle. Blog routes are already React.lazy, so
-            // these only load when a post is opened.
-            manualChunks(id) {
-              if (!id.includes('node_modules')) return;
-              if (/react-markdown|remark|rehype|micromark|mdast|hast|unist|unified|vfile|property-information|character-entit|@giscus|lowlight|highlight\.js|web-namespaces|space-separated|comma-separated|html-void/.test(id)) return 'blog';
-              if (id.includes('framer-motion')) return 'motion';
-              // react/react-dom are left to Rollup's default chunking — forcing
-              // them into their own chunk creates a vendor↔blog circular import.
-            },
+            // No manualChunks: the markdown/comments stack and framer-motion are
+            // both kept off the homepage by dynamic imports alone (React.lazy
+            // routes + LazyMotion async features in index.tsx). Pinning them to
+            // named chunks looked tidy but made Rollup wire the 'blog' chunk as
+            // a STATIC import of the entry (execution-order safety), which
+            // shipped 105KB of markdown libs to every homepage visitor.
           },
         },
       }

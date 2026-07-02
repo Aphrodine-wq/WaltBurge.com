@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Github, Star, GitFork, Award, ExternalLink, BookOpen, Code2, Cpu, Network, Lightbulb } from 'lucide-react';
 
 interface GitHubStats {

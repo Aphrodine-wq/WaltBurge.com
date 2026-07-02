@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { ArrowLeft, CheckCircle, AlertCircle, Send } from 'lucide-react';
 import { trackEvent } from '../lib/track';
 import { getUtm } from '../lib/leadContext';

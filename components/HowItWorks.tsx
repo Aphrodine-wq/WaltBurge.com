@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Phone, Hammer, KeyRound } from 'lucide-react';
 
 const STEPS = [

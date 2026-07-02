@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Calendar, Clock, Link2, Check } from 'lucide-react';
 import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { BlogPost } from '../types';
-import { getAdjacentPosts, getRelatedPosts } from '../lib/blog';
+import { getAdjacentPosts, getRelatedPosts, loadPostContent } from '../lib/blog';
 import { PostCard } from './PostCard';
 import { Comments } from './Comments';
 import { NavLinks } from './NavLinks';
@@ -64,6 +64,20 @@ const mdComponents: Components = {
 
 export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, onPostClick, onTagClick, onNavigate }) => {
   const [copied, setCopied] = useState(false);
+  // Post bodies stay out of the entry bundle (see lib/blog.ts) and load here,
+  // one small chunk per post. `undefined` = still loading; '' = no body yet.
+  const [body, setBody] = useState<string | undefined>(post.content);
+  useEffect(() => {
+    let cancelled = false;
+    if (post.content === undefined) {
+      loadPostContent(post.id).then((content) => {
+        if (!cancelled) setBody(content ?? '');
+      });
+    } else {
+      setBody(post.content);
+    }
+    return () => { cancelled = true; };
+  }, [post.id, post.content]);
   const { prev, next } = getAdjacentPosts(post.id);
   const related = getRelatedPosts(post, 3);
 
@@ -216,9 +230,9 @@ export const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ post, onBack, on
           transition={{ duration: 0.5, delay: 0.1 }}
           className="article-body"
         >
-          {post.content ? (
+          {body === undefined ? null : body ? (
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} components={mdComponents}>
-              {post.content}
+              {body}
             </ReactMarkdown>
           ) : (
             <p className="text-brand-secondary text-lg md:text-xl leading-relaxed italic">{post.excerpt}</p>

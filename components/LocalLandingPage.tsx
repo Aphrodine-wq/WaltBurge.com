@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
 import { LocalPage } from '../lib/local';
 import { getSystem } from '../lib/shop';

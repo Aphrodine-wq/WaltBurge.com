@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { engines, toolsByCategory, digital, AISystem } from '../lib/shop';
 import { NavLinks } from './NavLinks';

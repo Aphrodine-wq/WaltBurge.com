@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { AlertCircle, RotateCw } from 'lucide-react';
 
 interface Props {

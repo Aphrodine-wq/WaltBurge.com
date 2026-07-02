@@ -1,12 +1,14 @@
 import { BlogPost, BlogCategory } from '../types';
+import blogMeta from 'virtual:blog-meta';
 
-// Posts live as markdown files in /content/blog. Vite inlines them as raw
-// strings at build time, so the blog stays a static SPA — no CMS, no backend.
-const modules = import.meta.glob('../content/blog/*.md', {
+// Posts live as markdown files in /content/blog. The entry bundle only carries
+// their frontmatter (via the virtual:blog-meta plugin in vite.config.ts) —
+// inlining every body as an eager raw string put 388KB of markdown on the
+// homepage's critical path. Bodies load lazily, one chunk per post.
+const contentModules = import.meta.glob('../content/blog/*.md', {
   query: '?raw',
   import: 'default',
-  eager: true,
-}) as Record<string, string>;
+}) as Record<string, () => Promise<string>>;
 
 type FrontMatter = Record<string, string | string[] | boolean>;
 
@@ -46,11 +48,6 @@ function parseFrontmatter(raw: string): { data: FrontMatter; content: string } {
   return { data, content };
 }
 
-function computeReadTime(text: string): string {
-  const words = text.trim().split(/\s+/).filter(Boolean).length;
-  return `${Math.max(1, Math.round(words / 220))} min`;
-}
-
 function asString(v: string | string[] | boolean | undefined, fallback = ''): string {
   return typeof v === 'string' ? v : fallback;
 }
@@ -67,10 +64,9 @@ function asCategory(v: string | string[] | boolean | undefined): BlogCategory {
   return (CATEGORIES as string[]).includes(s) ? (s as BlogCategory) : 'AI';
 }
 
-function buildPost(path: string, raw: string): ParsedPost {
-  const { data, content } = parseFrontmatter(raw);
-  const slug = asString(data.slug) || path.split('/').pop()!.replace(/\.md$/, '');
-  const body = content.trim();
+function buildPost(file: string, header: string, readTime: string): ParsedPost {
+  const { data } = parseFrontmatter(header);
+  const slug = asString(data.slug) || file.replace(/\.md$/, '');
 
   return {
     draft: data.draft === true,
@@ -78,9 +74,9 @@ function buildPost(path: string, raw: string): ParsedPost {
       id: slug,
       title: asString(data.title, slug),
       excerpt: asString(data.excerpt),
-      content: body || undefined,
+      content: undefined, // bodies load lazily — see loadPostContent()
       date: asString(data.date),
-      readTime: asString(data.readTime) || (body ? computeReadTime(body) : ''),
+      readTime: asString(data.readTime) || readTime,
       category: asCategory(data.category),
       tags: Array.isArray(data.tags) ? data.tags : [],
       featured: data.featured === true,
@@ -89,13 +85,31 @@ function buildPost(path: string, raw: string): ParsedPost {
   };
 }
 
+// slug → source file, for resolving a post's lazy content chunk.
+const fileBySlug = new Map<string, string>();
+
 // Published posts, newest first. Drafts (unwritten stubs) stay hidden until
 // their frontmatter flips to draft: false.
-const all: BlogPost[] = Object.entries(modules)
-  .map(([path, raw]) => buildPost(path, raw))
+const all: BlogPost[] = blogMeta
+  .map(({ file, header, readTime }) => {
+    const parsed = buildPost(file, header, readTime);
+    fileBySlug.set(parsed.post.id, file);
+    return parsed;
+  })
   .filter(p => !p.draft)
   .map(p => p.post)
   .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+// Lazily fetch a post's markdown body (its own chunk, loaded on the detail
+// view only). Returns undefined when the post is a frontmatter-only stub.
+export async function loadPostContent(slug: string): Promise<string | undefined> {
+  const file = fileBySlug.get(slug);
+  const loader = file && contentModules[`../content/blog/${file}`];
+  if (!loader) return undefined;
+  const raw = await loader();
+  const body = parseFrontmatter(raw).content.trim();
+  return body || undefined;
+}
 
 export const posts = all;
 

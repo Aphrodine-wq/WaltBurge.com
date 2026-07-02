@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { SectionId } from '../types';
 import {
   Cpu, Globe, Database, Bot, Terminal, Code2, Cloud, Github,

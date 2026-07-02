@@ -34,10 +34,26 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Fonts — preconnect for speed -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Fonts — self-hosted variable fonts (was Google Fonts: two extra origins
+         of DNS+TLS+CSS render-blocking the first paint on mobile). Same files
+         Google served (Inter var + JetBrains Mono var, latin), zero visual change. -->
+    <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('/fonts/inter-var-latin.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 100 800;
+        font-display: swap;
+        src: url('/fonts/jbm-var-latin.woff2') format('woff2');
+      }
+    </style>
 
     <!-- Structured Data: Person -->
     <script type="application/ld+json">
@@ -290,6 +306,33 @@
     </script>
   </head>
   <body>
+    <!-- Splash — static HTML so it paints at first paint instead of after React
+         hydrates (the old React splash unmounted page content for 700ms and
+         pushed LCP past 6s on mobile). Same look/timing as the old component:
+         fade+rise in over 400ms, hold to 700ms, fade out 400ms. Homepage only. -->
+    <div id="splash" aria-hidden="true" style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#F8F5EE;opacity:1;transition:opacity .4s ease;">
+      <span style="font-family:'Inter',sans-serif;font-weight:900;font-size:1.875rem;letter-spacing:-0.05em;color:#1A1A1A;opacity:0;transform:translateY(8px);transition:opacity .4s cubic-bezier(.16,1,.3,1),transform .4s cubic-bezier(.16,1,.3,1);" id="splash-text">Walt Burge<span style="color:#2563EB;">.</span></span>
+    </div>
+    <script>
+      (function () {
+        var s = document.getElementById('splash');
+        if (!s) return;
+        // Parity with the old React splash: it only ever ran on the homepage.
+        if (location.pathname !== '/') { s.remove(); return; }
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          document.getElementById('splash-text').style.fontSize = '2.25rem';
+        }
+        requestAnimationFrame(function () {
+          var t = document.getElementById('splash-text');
+          t.style.opacity = '1';
+          t.style.transform = 'translateY(0)';
+        });
+        setTimeout(function () {
+          s.style.opacity = '0';
+          setTimeout(function () { s.remove(); }, 450);
+        }, 700);
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 
