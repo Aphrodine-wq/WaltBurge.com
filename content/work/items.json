@@ -72,7 +72,7 @@
     ],
     "imageUrl": "/assets/projects/mshomepros/cover.png",
     "images": [],
-    "link": "https://mshomepros.com",
+    "link": "https://mhpestimate.cloud",
     "status": "Live",
     "year": "2025",
     "featured": true,
@@ -455,25 +455,25 @@
     "title": "North Mississippi Home Pros",
     "kind": "client",
     "category": "Web",
-    "summary": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — 21-project curated gallery and lead capture.",
-    "description": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — 21-project curated gallery and lead capture.",
+    "summary": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — curated project gallery and estimate-request intake.",
+    "description": "A licensed contractor's WordPress site rebuilt as a fast custom Next.js brand site — curated project gallery and estimate-request intake.",
     "client": {
       "name": "North Mississippi Home Pros",
       "location": "Oxford, MS"
     },
-    "fullDescription": "North Mississippi Home Pros is a licensed contractor in Oxford, Mississippi whose public web presence was a dated WordPress install — slow, template-bound, and hard to keep current. The work: migrate the whole site to a custom Next.js build with a curated portfolio of their real projects, sharper brand and hero, and lead capture wired in. It's the public-facing half of a client relationship that also runs on the MsHomePros estimation platform.",
+    "fullDescription": "North Mississippi Home Pros is a licensed contractor in Oxford, Mississippi whose public web presence was a dated WordPress install — slow, template-bound, and hard to keep current. The work: rebuild the whole site as a custom Next.js build with a curated portfolio of their real projects across residential, commercial, and outdoor work, sharper brand and hero, and an estimate-request intake wired into their tooling. Delivered and staged — it replaces the WordPress site when the domain cuts over.",
     "challenge": "An aging WordPress site that didn't match the quality of the company's actual work — slow to load, locked to a template, and painful to update with new projects.",
-    "solution": "Migrated WordPress to a custom Next.js build: rebuilt header and hero, curated and audited all 21 portfolio projects into a clean gallery, added lead capture, and cut the pages that weren't earning their place.",
+    "solution": "Rebuilt WordPress as a custom Next.js site: new hero and brand treatment, a curated project gallery organized by residential, commercial, and outdoor work, and an estimate-request flow feeding their back office.",
     "features": [
-      "Full WordPress-to-Next.js migration",
-      "Curated 21-project portfolio gallery",
-      "Lead capture built in",
-      "Fast static delivery on Vercel"
+      "Full WordPress-to-Next.js rebuild",
+      "Curated project gallery — residential, commercial, outdoor",
+      "Estimate-request intake wired to their tooling",
+      "Fast static delivery"
     ],
     "techStack": [
       "Next.js",
       "TypeScript",
-      "Vercel"
+      "Tailwind CSS"
     ],
     "tags": [
       "case-study",
@@ -481,11 +481,14 @@
       "web"
     ],
     "imageUrl": "/assets/projects/northms-homepros/cover.png",
-    "images": [],
-    "link": "https://northmshomepros.com",
-    "status": "Live",
+    "images": [
+      "/assets/projects/northms-homepros/cover.png",
+      "/assets/projects/northms-homepros/projects-gallery.png",
+      "/assets/projects/northms-homepros/request-estimate.png"
+    ],
+    "status": "Beta",
     "year": "2026",
-    "seoTitle": "Case Study — Custom Next.js Site for North Mississippi Home Pros, Oxford MS",
-    "seoDescription": "How Walt Burge migrated North Mississippi Home Pros from WordPress to a custom Next.js brand site with a curated project gallery and lead capture — Oxford, MS."
+    "seoTitle": "Case Study — Custom Next.js Rebuild for North Mississippi Home Pros, Oxford MS",
+    "seoDescription": "How Walt Burge rebuilt North Mississippi Home Pros' WordPress site as a custom Next.js brand site with a curated project gallery and estimate-request intake — Oxford, MS."
   }
 ]
