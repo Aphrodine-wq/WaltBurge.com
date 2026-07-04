@@ -189,7 +189,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
               </p>
             </div>
 
-            {/* Challenge & Solution Grid */}
+            {/* Challenge & Solution Grid — only for items with real copy; no
+                stock filler standing in for a case study that wasn't written */}
+            {(project.challenge || project.solution) && (
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                
                {/* Challenge Card */}
@@ -218,7 +220,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                   <div className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isChallengeOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                     <div className="overflow-hidden">
                         <p className="text-brand-secondary leading-relaxed text-sm">
-                            {project.challenge || "Optimizing system performance under heavy load while maintaining data integrity."}
+                            {project.challenge}
                         </p>
                     </div>
                   </div>
@@ -250,12 +252,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
                   <div className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isSolutionOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                     <div className="overflow-hidden">
                         <p className="text-brand-secondary leading-relaxed text-sm">
-                            {project.solution || "Implemented custom architecture to bypass standard bottlenecks."}
+                            {project.solution}
                         </p>
                     </div>
                   </div>
                </div>
             </div>
+            )}
 
             {/* Key Features */}
             <div>

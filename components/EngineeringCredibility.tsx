@@ -1,5 +1,5 @@
 import React from 'react';
-import { m as motion } from 'framer-motion';
+
 import { SectionId } from '../types';
 
 interface EngineeringCredibilityProps {
@@ -26,24 +26,15 @@ export const EngineeringCredibility: React.FC<EngineeringCredibilityProps> = ({ 
     >
       <div className="max-w-7xl mx-auto grid md:grid-cols-[1.4fr_1fr] gap-12 md:gap-20 items-start">
         {/* Left — who's building it */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl"
-        >
-          <div className="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent mb-4">
-            Who builds it
-          </div>
+        <div className="max-w-2xl">
           <h2 className="text-4xl md:text-5xl font-black text-brand-primary tracking-tighter leading-[0.95]">
-            Not an agency &mdash; the engineer<span className="text-brand-accent">.</span>
+            Who you&rsquo;re actually hiring
           </h2>
           <p className="mt-6 text-lg text-brand-secondary leading-relaxed">
             I taught myself to code, trained a custom AI model end to end, and shipped 11 production
-            systems in the last seven months &mdash; including the software <span className="text-brand-primary font-semibold">MHP
-            Construction</span> runs in Oxford. Hire me and you get the person who writes the code, not a
-            sales rep or an account manager.
+            systems in the last seven months &mdash; including the estimating software{' '}
+            <span className="text-brand-primary font-semibold">MHP Construction</span> runs on in Oxford
+            today. I live here in Oxford &mdash; if we work together, you get my cell number, and I answer it.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-3">
@@ -60,16 +51,10 @@ export const EngineeringCredibility: React.FC<EngineeringCredibilityProps> = ({ 
               See the work &rarr;
             </button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Right — proof in numbers */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-3 gap-px border border-brand-border bg-brand-border w-full"
-        >
+        <div className="grid grid-cols-3 gap-px border border-brand-border bg-brand-border w-full">
           {stats.map((s) => (
             <div key={s.label} className="p-4 md:p-5 bg-brand-surface">
               <span className="block text-2xl md:text-4xl font-black text-brand-primary mb-1">{s.value}</span>
@@ -78,7 +63,7 @@ export const EngineeringCredibility: React.FC<EngineeringCredibilityProps> = ({ 
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

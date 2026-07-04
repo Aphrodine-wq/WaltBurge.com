@@ -9,6 +9,10 @@ import { Project } from '../types';
 // blog's `draft` frontmatter flag.
 export const workItems = (itemsData as Project[]).filter(w => !w.draft);
 
+// The full catalog including drafts — for the résumé, which showcases the
+// complete body of work even when the marketing portfolio displays a subset.
+export const allWorkItems = itemsData as Project[];
+
 export const workSlugs = workItems.map(w => w.slug!).filter(Boolean);
 
 // Builds vs client case studies — the two top-level groupings in the section.

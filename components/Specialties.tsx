@@ -1,6 +1,5 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import { HeartPulse, Scale, HardHat, Search, Wrench, RefreshCw } from 'lucide-react';
 import { SectionId } from '../types';
 
 // The positioning section: Walt Burge as an AI consultant specializing in three
@@ -8,7 +7,6 @@ import { SectionId } from '../types';
 // industry's painful job, the AI system that kills it, and the proof it's real.
 const specialties = [
   {
-    icon: HeartPulse,
     industry: 'Healthcare',
     promise: 'Fills your schedule',
     description:
@@ -17,7 +15,6 @@ const specialties = [
     proof: 'Running now for a Mississippi clinic.',
   },
   {
-    icon: Scale,
     industry: 'Law',
     promise: 'Never miss a case',
     description:
@@ -26,7 +23,6 @@ const specialties = [
     proof: 'Built on a live voice-agent setup.',
   },
   {
-    icon: HardHat,
     industry: 'Construction',
     promise: 'Win more bids',
     description:
@@ -37,9 +33,9 @@ const specialties = [
 ];
 
 const ladder = [
-  { icon: Search, step: 'Free audit', detail: 'Find the 3 jobs AI can take off your plate.' },
-  { icon: Wrench, step: 'Build & set up', detail: 'A working tool, shipped — not a slide deck.' },
-  { icon: RefreshCw, step: 'Keep it earning', detail: 'Monthly tuning so it keeps paying off.' },
+  { step: 'Free audit', detail: 'Find the three jobs software can take off your plate.' },
+  { step: 'Build & set up', detail: 'A working tool, shipped — not a slide deck.' },
+  { step: 'Keep it earning', detail: 'Monthly tuning so it keeps paying off.' },
 ];
 
 interface SpecialtiesProps {
@@ -70,12 +66,13 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             <span className="inline-block w-8 h-px bg-brand-accent" />
             Custom AI · Oxford, MS
           </span>
-          <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6 uppercase">
+          <h2 className="text-4xl md:text-6xl font-black text-brand-primary tracking-tighter mb-6">
             Built for businesses that <span className="text-brand-accent">live on the phone</span>
           </h2>
           <p className="text-lg text-brand-secondary max-w-2xl">
-            Clinic, firm, job site, or shop &mdash; if a missed call is a lost customer, I build the AI that
-            catches it, works every lead, and kills the busywork. Here&rsquo;s where I&rsquo;ve already proven it.
+            Clinic, firm, job site, or shop: if a missed call is a lost customer, I build the software
+            that catches the call, works the lead, and does the busywork. Here&rsquo;s where I&rsquo;ve
+            already proven it.
           </p>
         </motion.div>
 
@@ -90,14 +87,8 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
             <motion.div
               key={s.industry}
               variants={item}
-              className="group relative p-7 md:p-8 border border-brand-border bg-brand-surface hover:border-brand-accent transition-all duration-300 flex flex-col"
+              className="group relative p-7 md:p-8 border border-brand-border bg-brand-surface hover:border-brand-accent transition-colors duration-300 flex flex-col"
             >
-              {/* Accent edge wipes up on hover */}
-              <span className="absolute top-0 left-0 w-0.5 h-full bg-brand-accent origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
-              <div className="w-14 h-14 bg-brand-muted border border-brand-border p-3 mb-5 flex items-center justify-center group-hover:border-brand-accent/50 group-hover:scale-105 transition-all duration-300">
-                <s.icon className="w-8 h-8 text-brand-accent" />
-              </div>
-
               <h3 className="text-2xl font-black text-brand-primary tracking-tight">{s.industry}</h3>
               <p className="font-mono text-xs uppercase tracking-widest text-brand-accent mt-1 mb-4">
                 {s.promise}
@@ -106,20 +97,9 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
                 {s.description}
               </p>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {s.chips.map((c) => (
-                  <span
-                    key={c}
-                    className="text-xs px-3 py-1 bg-brand-muted border border-brand-border text-brand-secondary font-mono group-hover:border-brand-accent/50 group-hover:text-brand-accent transition-colors"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-
               <div className="pt-4 border-t border-brand-border">
                 <span className="font-mono text-[11px] uppercase tracking-wider text-brand-faint">
-                  {s.proof}
+                  {s.chips[s.chips.length - 1]} · {s.proof}
                 </span>
               </div>
             </motion.div>
@@ -140,10 +120,7 @@ export const Specialties: React.FC<SpecialtiesProps> = ({ onOpenMenu }) => {
                 key={l.step}
                 className="flex items-start gap-4 p-5 border border-brand-border bg-brand-surface"
               >
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="font-mono text-sm font-bold text-brand-accent">0{i + 1}</span>
-                  <l.icon className="w-5 h-5 text-brand-accent" />
-                </div>
+                <span className="font-mono text-sm font-bold text-brand-accent shrink-0">{i + 1}.</span>
                 <div>
                   <h4 className="font-bold text-brand-primary text-sm">{l.step}</h4>
                   <p className="text-xs text-brand-secondary leading-relaxed mt-1">{l.detail}</p>
