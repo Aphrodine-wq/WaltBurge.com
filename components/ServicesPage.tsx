@@ -98,6 +98,39 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ initialSlug, onBack,
           </p>
         </motion.div>
 
+        {/* Start here — the plain-English version before the full menu */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          className="mt-10 grid sm:grid-cols-3 gap-4"
+        >
+          {[
+            {
+              title: 'A website that brings you customers',
+              body: 'One flat price, live in about two weeks. You own it outright — no monthly ransom just to keep your own site.',
+            },
+            {
+              title: 'Keep it running & get found',
+              body: 'A flat monthly plan: hosting, updates, changes when you send them, and steady work on how you show up on Google.',
+            },
+            {
+              title: 'Never miss a call',
+              body: 'Online booking, lead capture, and phones that get answered — including texting back missed calls before the customer tries your competitor.',
+            },
+          ].map(card => (
+            <div key={card.title} className="p-5 bg-brand-surface border border-brand-border rounded-xl">
+              <h3 className="font-bold text-brand-primary tracking-tight leading-snug">{card.title}</h3>
+              <p className="mt-2 text-sm text-brand-secondary leading-relaxed">{card.body}</p>
+            </div>
+          ))}
+        </motion.div>
+        <p className="mt-6 text-sm text-brand-faint leading-relaxed max-w-2xl">
+          Everything below is the full menu for your industry — every price is a starting
+          point, quoted flat before work begins, half up front and the rest at delivery.
+          Not sure what you need? That's what the free call is for.
+        </p>
+
         {/* Industry switcher */}
         <div className="mt-8 -mx-5 md:mx-0 px-5 md:px-0 flex gap-2 overflow-x-auto pb-2 scrollbar-none">
           {menus.map(m => (

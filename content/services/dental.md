@@ -34,7 +34,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*FHIR R4, HL7 v2, DICOM. Real engineering for the systems that actually run a practice — not a Zapier shim.*
+*FHIR R4, HL7 v2, DICOM. Real engineering for the systems that actually run a practice — not duct-tape automation.*
 
 ### iii. Practice Management
 
@@ -184,7 +184,7 @@
 | Mailcow / Mail-in-a-Box (self-hosted email server) | $2,500 + |
 | Jellyfin / Plex (media server) | $1,000 + |
 | Self-Hosted Project Management (Plane, Vikunja, OpenProject) | $1,500 + |
-| Self-Hosted CRM (EspoCRM, SuiteCRM) | $2,000 + |
+| Your Own CRM — yours outright, no per-user monthly fees | $2,000 + |
 | Self-Hosted Analytics (Plausible, Umami — replace Google Analytics) | $1,000 + |
 | Home Lab Design & Build (rack, UPS, networking, hypervisor) | $7,500 + |
 
@@ -233,7 +233,7 @@
 | Mac Automator / Apple Script Workflows | $1,200 + |
 | Bash / Python Automation Library | $2,000 + |
 | Cron / Scheduled Job Library | $1,500 + |
-| Zapier / Make / n8n Setup (no-code automations) | $1,500 + |
+| Automation Setup — the busywork does itself (Zapier, Make, n8n) | $1,500 + |
 | Custom Voice Assistant (Alexa, Google, Siri Shortcuts) | $2,500 + |
 | Smart Office (lighting, climate, locks, A/V) | $3,500 + |
 | Home Assistant / OpenHAB IoT Build | $4,000 + |

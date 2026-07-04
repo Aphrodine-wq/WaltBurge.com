@@ -19,7 +19,7 @@ const KEY = 'wb_lead_ctx';
 // estimate note instead of only reading context once at mount.
 export const LEAD_CONTEXT_EVENT = 'wb:lead-context';
 const UTM_KEY = 'wb_utm';
-const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as const;
+const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as const;
 
 function session(): Storage | null {
   try {

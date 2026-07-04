@@ -2,13 +2,13 @@ import React from 'react';
 import { m as motion, useScroll, useTransform } from 'framer-motion';
 import { SectionId } from '../types';
 import { trackEvent } from '../lib/track';
+import { TerrainField } from './TerrainField';
 
 interface HeroProps {
-  onOpenResume: () => void;
   onBookCall: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
+export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -22,19 +22,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
       id={SectionId.HERO}
       className="relative min-h-screen flex flex-col items-center justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-brand-base"
     >
+      {/* Survey-drawing terrain — raw WebGL, sits behind the copy in the lower half. */}
+      <div className="absolute inset-x-0 bottom-0 h-[62%] pointer-events-none" aria-hidden="true">
+        <TerrainField />
+      </div>
+
       <motion.div
         style={{ y: y1, opacity }}
         className="relative z-10 flex flex-col items-start text-left px-6 md:px-8 max-w-5xl w-full mx-auto"
       >
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="font-mono text-[11px] tracking-[0.4em] text-brand-accent uppercase mb-8"
-        >
-          AI &amp; Software for Local Business · Oxford &amp; North Mississippi
-        </motion.span>
-
         {/* Mask reveal — the headline slides up from a clipped baseline on load. */}
         <div className="overflow-hidden pb-[0.12em] mb-8">
           <motion.h1
@@ -53,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="font-sans text-lg md:text-xl text-brand-secondary max-w-2xl leading-relaxed mb-12"
         >
-          Custom <span className="text-brand-primary font-semibold">AI and software</span> for local business. Owned by you, not rented.
+          Custom <span className="text-brand-primary font-semibold">software</span> for local business. Owned by you, not rented.
         </motion.p>
 
         <motion.div
@@ -81,22 +77,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume, onBookCall }) => {
           </button>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-3 gap-y-2 text-base font-medium text-brand-secondary"
-        >
-          <span>
-            Live in production for <span className="text-brand-primary font-semibold">MHP Construction</span>, Oxford.
-          </span>
-          <button
-            onClick={() => { trackEvent('cta_click', { location: 'hero', label: 'resume' }); onOpenResume(); }}
-            className="shrink-0 text-brand-accent hover:text-brand-accent-hover font-semibold transition-colors"
-          >
-            See the r&eacute;sum&eacute; &rarr;
-          </button>
-        </motion.div>
       </motion.div>
 
       {/* Anchored baseline rule — a structural mark, not a floating accent. */}

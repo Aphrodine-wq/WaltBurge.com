@@ -34,7 +34,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*FHIR R4, HL7 v2. Real engineering for the systems that actually run a practice — not a Zapier shim.*
+*FHIR R4, HL7 v2. Real engineering for the systems that actually run a practice — not duct-tape automation.*
 
 ### iii. Practice Management
 

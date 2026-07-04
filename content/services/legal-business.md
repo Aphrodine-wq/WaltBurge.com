@@ -20,16 +20,16 @@
 | Lead Capture & Quote System | $1,700 + |
 | Client / Customer Portal (secure messaging, document upload, e-signature) | $6,500 + |
 | Case / Order Status Tracker | $3,700 + |
-| E-Commerce Storefront | $6,500 + |
+| Online Store | $6,500 + |
 | Loyalty / Rewards System | $3,700 + |
 | Multi-Language / Bilingual Site | $1,600 + |
-| ADA / WCAG Accessibility Build | $1,400 + |
-| Blog / CMS Setup | $950 + |
+| Accessibility Upgrade (ADA compliance) | $1,400 + |
+| Blog Setup (edit it yourself, no developer needed) | $950 + |
 | Membership / Subscription Portal | $5,050 + |
-| Progressive Web App (PWA) | $4,200 + |
+| App-Style Website (installs on phones, no app store) | $4,200 + |
 | Interactive Quote / Estimate Calculator | $1,700 + |
 | Appointment Deposit / Pre-Pay System | $1,400 + |
-| Online Course / LMS Portal | $6,050 + |
+| Online Course Portal (sell or host training) | $6,050 + |
 | Customer Review / Testimonial Wall | $1,050 + |
 
 ### ii. Operations
@@ -48,7 +48,7 @@
 | Job Costing & Profitability Tracker | $3,700 + |
 | Digital Forms & Checklists (mobile) | $2,300 + |
 | Asset / Equipment Tracking | $2,800 + |
-| Custom Web App / SaaS Platform | $12,000 + |
+| Custom Software Platform (built from scratch) | $12,000 + |
 | White-Label Platform (license & resell under your brand) | $18,000 + |
 | Multi-Location / Franchise Rollout | $9,500 + |
 
@@ -56,7 +56,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*Real engineering for the systems that actually run a firm or a business — not a Zapier shim that breaks on Black Friday.*
+*Real engineering for the systems that actually run a firm or a business — not duct-tape automation that breaks on Black Friday.*
 
 ### iii. Accounting & Payments
 
@@ -236,7 +236,7 @@
 | Annual Security & Cybersecurity Training | $700 / yr + |
 | Penetration Testing (web app, internal network) | $7,700 + |
 | Zero Trust Architecture Build | $9,100 + |
-| SSO Rollout (Okta, Auth0, Cognito) | $6,200 + |
+| One-Login-For-Everything Setup (single sign-on) | $6,200 + |
 | 2FA / MFA Deployment (Authy, Duo, hardware keys) | $2,150 + |
 | Mobile Device Management (MDM — Jamf, Mosyle, Intune) | $4,850 + |
 | Endpoint Protection Rollout (CrowdStrike, SentinelOne) | $3,450 + |
@@ -281,7 +281,7 @@
 | Mailcow / Mail-in-a-Box (self-hosted email server) | $3,450 + |
 | Jellyfin / Plex (media server) | $1,400 + |
 | Self-Hosted Project Management (Plane, Vikunja, OpenProject) | $2,150 + |
-| Self-Hosted CRM (EspoCRM, SuiteCRM) | $2,800 + |
+| Your Own CRM — yours outright, no per-user monthly fees | $2,800 + |
 | Self-Hosted Analytics (Plausible, Umami — replace Google Analytics) | $1,400 + |
 | Home Lab Design & Build (rack, UPS, networking, hypervisor) | $10,450 + |
 
@@ -330,7 +330,7 @@
 | Mac Automator / Apple Script Workflows | $1,700 + |
 | Bash / Python Automation Library | $2,800 + |
 | Cron / Scheduled Job Library | $2,150 + |
-| Zapier / Make / n8n Setup (no-code automations) | $2,150 + |
+| Automation Setup — the busywork does itself (Zapier, Make, n8n) | $2,150 + |
 | Custom Voice Assistant (Alexa, Google, Siri Shortcuts) | $3,450 + |
 | Smart Office (lighting, climate, locks, A/V) | $4,850 + |
 | Home Assistant / OpenHAB IoT Build | $5,550 + |

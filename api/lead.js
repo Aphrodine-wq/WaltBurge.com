@@ -83,40 +83,38 @@ export default async function handler(req, res) {
   ].filter(Boolean);
   const notes = message + (context.length ? `\n\n---\n${context.join('\n')}` : '');
 
-  // 1) Persist — best-effort, only when configured.
+  // 1) Primary sink: the CRM. Creates a HOT lead and fires the speed-to-lead
+  //    phone push. Server-to-server with a shared secret; best-effort — email
+  //    below is the guaranteed path.
   let stored = false;
-  if (process.env.POSTGRES_URL) {
+  if (process.env.CRM_LEAD_SECRET) {
     try {
-      const { sql } = await import('@vercel/postgres');
-      await sql`
-        CREATE TABLE IF NOT EXISTS leads (
-          id           SERIAL PRIMARY KEY,
-          business     TEXT NOT NULL,
-          category     TEXT DEFAULT '',
-          market       TEXT DEFAULT '',
-          status       TEXT DEFAULT 'NEW',
-          stage        TEXT DEFAULT 'New',
-          phone        TEXT DEFAULT '',
-          email        TEXT DEFAULT '',
-          next_action  TEXT DEFAULT '',
-          notes        TEXT DEFAULT '',
-          created_at   TIMESTAMPTZ DEFAULT now(),
-          updated_at   TIMESTAMPTZ DEFAULT now()
-        );`;
-      await sql`
-        INSERT INTO leads (business, category, market, status, stage, phone, email, next_action, notes)
-        VALUES (
-          ${company || name},
-          ${vertical || 'inbound'},
-          ${utm.utm_campaign || 'inbound-web'},
-          'NEW', 'New',
-          ${phone}, ${email},
-          ${'Reply to ' + name},
-          ${notes}
-        );`;
-      stored = true;
+      const utmSource = clip(utm.utm_source, 60).toLowerCase().replace(/[^a-z0-9-]/g, '');
+      const source = (clip(utm.gclid, 10) !== '' || utmSource === 'google')
+        ? 'google-ads'
+        : utmSource
+          ? `ads-${utmSource}`
+          : 'waltburge.com';
+      const resp = await fetch(process.env.CRM_LEAD_URL || 'https://walt-crm.vercel.app/api/lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-lead-secret': process.env.CRM_LEAD_SECRET,
+        },
+        body: JSON.stringify({
+          business: company || name,
+          contactName: name,
+          phone,
+          email,
+          notes,
+          category: vertical || 'Inbound',
+          source,
+        }),
+      });
+      stored = resp.ok;
+      if (!resp.ok) console.error('[LEAD_CRM_ERROR]', resp.status, await resp.text().catch(() => ''));
     } catch (e) {
-      console.error('[LEAD_STORE_ERROR]', e.message);
+      console.error('[LEAD_CRM_ERROR]', e.message);
     }
   }
 

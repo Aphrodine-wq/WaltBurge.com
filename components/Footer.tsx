@@ -29,6 +29,9 @@ export const Footer: React.FC = () => {
                         <Phone size={15} />
                         (662) 292-5533
                     </a>
+                    <a href="/blog" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
+                        Blog
+                    </a>
                     <a href="/resume" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
                         Résumé
                     </a>
