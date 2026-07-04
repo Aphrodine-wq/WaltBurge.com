@@ -122,8 +122,11 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     const gl = canvas.getContext('webgl', {
       alpha: true,
       antialias: true,
-      // high-Hz friendly: no compositor sync stalls, no power-save throttling
-      desynchronized: true,
+      // NOT desynchronized: on Linux/X11 Chromium a desynchronized canvas can
+      // sit uncomposited (blank) until something forces a repaint — opening
+      // DevTools is exactly such a force, which is why the bug reads as "it
+      // only shows up after I inspect the page." Costs a bit of cursor
+      // latency; the dt-normalized tilt/spot lerp below hides it.
       powerPreference: 'high-performance',
       depth: false,
       stencil: false,
@@ -225,6 +228,11 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
+    // Belt-and-suspenders for the same uncomposited-canvas class of bug: font
+    // swap or a late layout shift can leave the first size read stale. One
+    // more pass after paint settles costs nothing and self-heals it.
+    window.addEventListener('load', resize, { once: true });
+    requestAnimationFrame(resize);
 
     const mouse = { x: 0, y: 0 };
     const tilt = { x: 0, y: 0 };
@@ -300,6 +308,7 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
         ro.disconnect();
         document.removeEventListener('visibilitychange', onVis);
         window.removeEventListener('mousemove', onMouse);
+        window.removeEventListener('load', resize);
         setRunning(false);
         gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteBuffer(tibo); gl.deleteProgram(prog);
       };
@@ -307,6 +316,7 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     return () => {
       ro.disconnect();
       window.removeEventListener('mousemove', onMouse);
+      window.removeEventListener('load', resize);
       gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteBuffer(tibo); gl.deleteProgram(prog);
     };
   }, []);
