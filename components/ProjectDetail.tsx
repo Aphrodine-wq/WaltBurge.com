@@ -3,7 +3,7 @@ import { Project } from '../types';
 import { TechIcon, CategoryIcon } from './Projects';
 import { kindLabel } from '../lib/work';
 import { NavLinks } from './NavLinks';
-import { ArrowLeft, ExternalLink, Github, CheckCircle, AlertTriangle, Lightbulb, Terminal, ChevronDown, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Github, CheckCircle, AlertTriangle, Lightbulb, Terminal, ChevronDown, ChevronLeft, ChevronRight, Lock, Play } from 'lucide-react';
 
 interface ProjectDetailProps {
   project: Project;
@@ -11,6 +11,45 @@ interface ProjectDetailProps {
   onTechClick: (tech: string) => void;
   onNavigate: (id: string) => void;
 }
+
+// Click-to-play YouTube facade — real thumbnail + play button until clicked,
+// so the hero never pays for an iframe/JS load it doesn't need yet.
+const VideoHero: React.FC<{ videoId: string; title: string; isPlaying: boolean; onPlay: () => void }> = ({ videoId, title, isPlaying, onPlay }) => {
+  const [thumbFailed, setThumbFailed] = useState(false);
+
+  if (isPlaying) {
+    return (
+      <iframe
+        className="absolute inset-0 w-full h-full z-10"
+        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
+        title={`${title} showcase video`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    );
+  }
+
+  return (
+    <button
+      onClick={onPlay}
+      aria-label={`Play ${title} showcase video`}
+      className="absolute inset-0 w-full h-full group/video cursor-pointer"
+    >
+      <img
+        src={`https://i.ytimg.com/vi/${videoId}/${thumbFailed ? 'hqdefault' : 'maxresdefault'}.jpg`}
+        onError={() => setThumbFailed(true)}
+        alt={`${title} showcase`}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/45 group-hover/video:bg-black/35 transition-colors" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 text-brand-primary shadow-xl group-hover/video:scale-110 transition-transform">
+          <Play size={28} className="ml-1" fill="currentColor" />
+        </div>
+      </div>
+    </button>
+  );
+};
 
 export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, onTechClick, onNavigate }) => {
   const challengeRef = useRef<HTMLDivElement>(null);
@@ -31,6 +70,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
   const [heroError, setHeroError] = useState(false);
   const hasImages = images.length > 0 && !heroError;
   const [currentSlide, setCurrentSlide] = useState(0);
+  const hasVideo = !!project.videoId;
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -104,72 +145,86 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, o
         <NavLinks onNavigate={onNavigate} />
       </div>
 
-      {/* Hero Banner Carousel */}
+      {/* Hero Banner — video showcase takes priority over the image carousel */}
       <div className="relative h-[42vh] md:h-[52vh] w-full overflow-hidden group bg-brand-muted">
-        {/* Flat scrim over images so the title stays readable — no gradient. */}
-        {hasImages && <div className="absolute inset-0 bg-black/45 z-10 pointer-events-none"></div>}
+        {hasVideo ? (
+          <VideoHero
+            videoId={project.videoId!}
+            title={project.title}
+            isPlaying={isVideoPlaying}
+            onPlay={() => setIsVideoPlaying(true)}
+          />
+        ) : (
+          <>
+            {/* Flat scrim over images so the title stays readable — no gradient. */}
+            {hasImages && <div className="absolute inset-0 bg-black/45 z-10 pointer-events-none"></div>}
 
-        {/* Hairline grid for the no-image case */}
-        {!hasImages && (
-          <div className="absolute inset-0 opacity-50 bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:24px_24px]" />
+            {/* Hairline grid for the no-image case */}
+            {!hasImages && (
+              <div className="absolute inset-0 opacity-50 bg-[linear-gradient(rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[size:24px_24px]" />
+            )}
+
+            {/* Images */}
+            {!heroError && images.map((img, index) => (
+                 <div
+                    key={index}
+                    className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 z-1' : 'opacity-0 z-0'}`}
+                 >
+                    <img
+                      src={img}
+                      alt={`${project.title} - Slide ${index + 1}`}
+                      onError={() => setHeroError(true)}
+                      className="w-full h-full object-cover"
+                    />
+                 </div>
+            ))}
+
+            {/* Navigation Controls */}
+            {images.length > 1 && (
+                <>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
+                    >
+                        <ChevronLeft size={20} className="md:w-6 md:h-6" />
+                    </button>
+                    <button
+                        onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
+                    >
+                        <ChevronRight size={20} className="md:w-6 md:h-6" />
+                    </button>
+
+                    {/* Dots */}
+                    <div className="absolute bottom-8 right-8 z-30 flex gap-2">
+                        {images.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentSlide(idx)}
+                                className={`h-2 transition-all duration-300 ${idx === currentSlide ? 'bg-brand-accent w-8' : 'bg-white/30 hover:bg-white/60 w-2'}`}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+          </>
         )}
 
-        {/* Images */}
-        {!heroError && images.map((img, index) => (
-             <div
-                key={index}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 z-1' : 'opacity-0 z-0'}`}
-             >
-                <img
-                  src={img}
-                  alt={`${project.title} - Slide ${index + 1}`}
-                  onError={() => setHeroError(true)}
-                  className="w-full h-full object-cover"
-                />
-             </div>
-        ))}
-
-        {/* Navigation Controls */}
-        {images.length > 1 && (
-            <>
-                <button 
-                    onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                    className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
-                >
-                    <ChevronLeft size={20} className="md:w-6 md:h-6" />
-                </button>
-                <button 
-                    onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                    className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/50 border border-white/10 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-brand-accent/20"
-                >
-                    <ChevronRight size={20} className="md:w-6 md:h-6" />
-                </button>
-
-                {/* Dots */}
-                <div className="absolute bottom-8 right-8 z-30 flex gap-2">
-                    {images.map((_, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setCurrentSlide(idx)}
-                            className={`h-2 transition-all duration-300 ${idx === currentSlide ? 'bg-brand-accent w-8' : 'bg-white/30 hover:bg-white/60 w-2'}`}
-                        />
-                    ))}
-                </div>
-            </>
-        )}
-
-        <div className="absolute bottom-0 left-0 w-full z-20 px-6 pb-10 md:pb-14 pointer-events-none">
-          <div className="max-w-7xl mx-auto">
-            <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent text-white text-xs font-bold uppercase tracking-wide">
-              <CategoryIcon category={project.category} />
-              {project.kind ? kindLabel[project.kind] : project.category}
+        {/* Title overlay — hidden once the video is playing so it doesn't cover the player controls */}
+        {!(hasVideo && isVideoPlaying) && (
+          <div className="absolute bottom-0 left-0 w-full z-20 px-6 pb-10 md:pb-14 pointer-events-none">
+            <div className="max-w-7xl mx-auto">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 bg-brand-accent text-white text-xs font-bold uppercase tracking-wide">
+                <CategoryIcon category={project.category} />
+                {project.kind ? kindLabel[project.kind] : project.category}
+              </div>
+              <h1 className={`text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 ${(hasImages || hasVideo) ? 'text-white' : 'text-brand-primary'}`}>{project.title}</h1>
+              <p className={`text-lg md:text-2xl max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none ${(hasImages || hasVideo) ? 'text-white/85' : 'text-brand-secondary'}`}>
+                {project.summary || project.description}
+              </p>
             </div>
-            <h1 className={`text-4xl md:text-7xl font-black tracking-tight mb-4 md:mb-6 ${hasImages ? 'text-white' : 'text-brand-primary'}`}>{project.title}</h1>
-            <p className={`text-lg md:text-2xl max-w-3xl font-light leading-relaxed line-clamp-3 md:line-clamp-none ${hasImages ? 'text-white/85' : 'text-brand-secondary'}`}>
-              {project.summary || project.description}
-            </p>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Content Grid */}

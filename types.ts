@@ -7,6 +7,7 @@ export interface Project {
   tags: string[];
   imageUrl: string;
   images?: string[]; // Multiple images for carousel
+  videoId?: string; // YouTube video ID — swaps the card thumbnail + hero for a playable showcase
   link?: string;        // Live Deployment URL
   repositoryUrl?: string; // Source Code / GitHub URL
   // New fields for detail page
