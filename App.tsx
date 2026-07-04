@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { Specialties } from './components/Specialties';
 import { HowItWorks } from './components/HowItWorks';
 import { WhyWaltBuilds } from './components/WhyWaltBuilds';
+import { Testimonials } from './components/Testimonials';
 import { RevenueCalculator } from './components/RevenueCalculator';
 import { EngineeringCredibility } from './components/EngineeringCredibility';
 import { Contact } from './components/Contact';
@@ -508,6 +509,7 @@ function App() {
               </section>
 
               <WhyWaltBuilds />
+              <Testimonials />
               <EngineeringCredibility onOpenResume={openResume} />
             </main>
             <Contact />

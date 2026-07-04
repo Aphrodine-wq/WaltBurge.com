@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { m as motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
-import { LocalPage } from '../lib/local';
+import { LocalPage, websitePages, townForSlug } from '../lib/local';
 import { getSystem } from '../lib/shop';
+import { workItems } from '../lib/work';
 import { NavLinks } from './NavLinks';
+import { Testimonials } from './Testimonials';
+
+// Portfolio pieces shown on the website-design town pages — real sites, not
+// the AI product cards the industry pages feature.
+const WEBSITE_WORK_SLUGS = ['lifebalanceoxford', 'mshomepros', 'fairtradeworker'];
 
 interface LocalLandingPageProps {
   page: LocalPage;
@@ -15,6 +21,10 @@ interface LocalLandingPageProps {
 export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack, onNavigate, onOpenSystem }) => {
   const [open, setOpen] = useState<number | null>(0);
   const featured = page.systemSlugs.map(getSystem).filter(Boolean) as NonNullable<ReturnType<typeof getSystem>>[];
+  const isWebsitePage = page.slug.startsWith('website-design-');
+  const town = townForSlug(page.slug);
+  const featuredWork = workItems.filter(w => WEBSITE_WORK_SLUGS.includes(w.slug ?? ''));
+  const siblingTowns = isWebsitePage ? websitePages.filter(p => p.slug !== page.slug) : [];
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -52,7 +62,7 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
         '@type': 'Service',
         name: page.h1,
         description: page.seoDescription,
-        provider: { '@type': 'Person', name: 'James Walton', url: 'https://waltburge.com' },
+        provider: { '@type': 'Organization', name: 'Walt Builds', url: 'https://waltburge.com' },
         areaServed: [
           { '@type': 'City', name: 'Oxford', containedInPlace: { '@type': 'State', name: 'Mississippi' } },
           { '@type': 'City', name: 'Tupelo' },
@@ -100,7 +110,7 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
         {/* Hero */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <span className="font-mono text-xs text-brand-accent uppercase tracking-[0.22em] flex items-center gap-3">
-            <span className="w-8 h-px bg-brand-accent" /> AI Consultant · Oxford, MS
+            <span className="w-8 h-px bg-brand-accent" /> {isWebsitePage ? `Website Design · ${town ?? 'North'}, MS` : 'AI Consultant · Oxford, MS'}
           </span>
           <h1 className="mt-4 text-4xl md:text-6xl font-black text-brand-primary tracking-tighter leading-[0.95]">
             {page.h1}<span className="text-brand-accent">.</span>
@@ -122,13 +132,25 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
           </div>
         </motion.div>
 
-        {/* Systems */}
+        {/* Featured: real websites on the town pages, AI systems on the industry pages */}
         <section className="mt-16">
           <div className="flex items-baseline gap-4 border-b border-brand-border pb-3">
-            <h2 className="text-xl md:text-2xl font-black text-brand-primary tracking-tight">What I build for {page.industry.toLowerCase()}</h2>
+            <h2 className="text-xl md:text-2xl font-black text-brand-primary tracking-tight">
+              {isWebsitePage ? 'Recent websites I’ve built' : `What I build for ${page.industry.toLowerCase()}`}
+            </h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-px bg-brand-border border border-brand-border mt-6">
-            {featured.map(s => (
+            {isWebsitePage ? featuredWork.map(w => (
+              <a
+                key={w.slug}
+                href={`/work/${w.slug}`}
+                className="group relative block text-left bg-brand-base p-6 hover:bg-brand-surface transition-colors"
+              >
+                <span className="absolute top-0 left-0 w-0.5 h-full bg-brand-accent origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
+                <h3 className="font-black text-brand-primary tracking-tight group-hover:text-brand-accent transition-colors">{w.title}</h3>
+                <p className="mt-2 text-brand-secondary text-[15px] leading-relaxed">{w.summary || w.description}</p>
+              </a>
+            )) : featured.map(s => (
               <button
                 key={s.slug}
                 onClick={() => onOpenSystem(s.slug)}
@@ -141,6 +163,8 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
             ))}
           </div>
         </section>
+
+        {isWebsitePage && <Testimonials />}
 
         {/* Local FAQ */}
         <section className="mt-16">
@@ -165,8 +189,10 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
 
         {/* CTA + links */}
         <div className="mt-16 pt-10 border-t border-brand-border">
-          <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight">Let's build something in Oxford.</h3>
-          <p className="mt-3 text-brand-secondary max-w-xl">Tell me the problem. The call and the estimate are free — and I'm right here in town.</p>
+          <h3 className="text-2xl md:text-3xl font-black text-brand-primary tracking-tight">Let's build something in {town ?? 'North Mississippi'}.</h3>
+          <p className="mt-3 text-brand-secondary max-w-xl">
+            Tell me the problem. The call and the estimate are free — and I'm {town === 'Oxford' ? 'right here in town' : 'just up the road in Oxford'}.
+          </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <button
               onClick={() => onNavigate('contact')}
@@ -182,15 +208,40 @@ export const LocalLandingPage: React.FC<LocalLandingPageProps> = ({ page, onBack
             </button>
           </div>
           <p className="mt-6 text-sm text-brand-secondary flex flex-wrap gap-x-6 gap-y-2">
-            <button onClick={() => onOpenSystem(featured[0]?.slug)} className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
-              Browse all AI systems <ArrowRight size={14} />
-            </button>
-            {page.servicesSlug && (
+            {isWebsitePage ? (
+              <a href="/work" className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
+                See all my work <ArrowRight size={14} />
+              </a>
+            ) : (
+              <button onClick={() => onOpenSystem(featured[0]?.slug)} className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
+                Browse all AI systems <ArrowRight size={14} />
+              </button>
+            )}
+            {isWebsitePage && (
+              <a href="/services" className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
+                See the full service menu <ArrowRight size={14} />
+              </a>
+            )}
+            {!isWebsitePage && page.servicesSlug && (
               <a href={`/services/${page.servicesSlug}`} className="inline-flex items-center gap-1.5 text-brand-accent font-semibold hover:underline">
                 See the full service menu <ArrowRight size={14} />
               </a>
             )}
           </p>
+
+          {/* Town cross-links keep the local pages one hop from each other for
+              crawlers and for visitors a county over. */}
+          {siblingTowns.length > 0 && (
+            <p className="mt-8 pt-6 border-t border-brand-border text-sm text-brand-secondary">
+              <span className="font-semibold text-brand-primary">Also building websites in: </span>
+              {siblingTowns.map((p, i) => (
+                <React.Fragment key={p.slug}>
+                  {i > 0 && ' · '}
+                  <a href={`/${p.slug}`} className="text-brand-accent hover:underline">{townForSlug(p.slug)}</a>
+                </React.Fragment>
+              ))}
+            </p>
+          )}
         </div>
       </div>
     </div>

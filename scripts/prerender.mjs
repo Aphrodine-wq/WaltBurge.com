@@ -246,16 +246,20 @@ const localPages = JSON.parse(readFileSync(path.join(ROOT, 'content', 'local', '
 for (const p of localPages) {
   const route = `/${p.slug}`;
   const town = townForSlug(p.slug);
+  // The business entity is Walt Builds everywhere (GBP, citations, schema);
+  // Walt Burge stays the founder Person. Website-design pages describe the
+  // website service, not the AI line.
+  const serviceLabel = p.slug.startsWith('website-design-') ? 'Website Design' : `AI for ${p.industry}`;
   const local = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    name: `Walt Burge — ${p.industry} AI${town ? `, ${town.name} MS` : ''}`,
+    name: `Walt Builds — ${serviceLabel}${town ? `, ${town.name} MS` : ''}`,
     description: p.seoDescription,
     url: `${ORIGIN}${route}`,
     telephone: '+1-662-292-5533',
     email: 'jamesburge.mcm@gmail.com',
     priceRange: '$$',
-    provider: AUTHOR,
+    founder: AUTHOR,
     address: {
       '@type': 'PostalAddress',
       addressLocality: town ? town.name : 'Oxford',
