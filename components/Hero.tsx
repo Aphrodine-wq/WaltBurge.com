@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
       className="relative min-h-screen flex flex-col items-center justify-start pt-28 md:justify-center md:pt-0 overflow-hidden bg-brand-base"
     >
       {/* Survey-drawing terrain — raw WebGL, sits behind the copy in the lower half. */}
-      <div className="absolute inset-x-0 bottom-0 h-[62%] pointer-events-none" aria-hidden="true">
+      <div className="absolute inset-x-0 bottom-0 h-[68%] pointer-events-none" aria-hidden="true">
         <TerrainField />
       </div>
 
@@ -79,9 +79,21 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
 
       </motion.div>
 
-      {/* Anchored baseline rule — a structural mark, not a floating accent. */}
-      <div className="absolute bottom-0 left-0 w-full">
+      {/* Title block — survey coordinates over the anchored baseline rule.
+          Real numbers: Oxford, MS. The terrain above is the drawing; this is
+          its caption. */}
+      <div className="absolute bottom-0 left-0 w-full pointer-events-none">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 1.1 }}
+            className="flex justify-between items-end pb-3 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.22em] text-brand-secondary"
+          >
+            <span>34.3665° N · 89.5192° W</span>
+            <span className="hidden sm:inline">Oxford, Mississippi · Elev 500 ft</span>
+            <span className="sm:hidden">Oxford, MS</span>
+          </motion.div>
           <div className="h-px bg-brand-border mb-12" />
         </div>
       </div>

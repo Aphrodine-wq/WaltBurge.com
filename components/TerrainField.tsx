@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * TerrainField — a wireframe survey-drawing landscape, rendered in raw WebGL.
- * Zero dependencies (~9KB). Ink/cobalt lines on the cream page, drifting slowly,
- * tilting a few degrees toward the cursor. Static frame under reduced motion;
- * paused while off-screen or in a hidden tab.
+ * TerrainField — a survey-drawing landscape, rendered in raw WebGL.
+ * Zero dependencies (~11KB). Ink/cobalt on the cream page, drifting slowly,
+ * tilting a few degrees toward the cursor. Three layers give it depth:
+ * the wireframe mesh, topographic contour lines cut through the same height
+ * field, and a cobalt surveyor's-lamp glow that follows the cursor. On load
+ * the drawing sketches itself in from the foreground toward the horizon.
+ * Static frame under reduced motion; paused while off-screen or hidden tab.
  */
 
 const VERT = `
@@ -63,19 +66,50 @@ void main() {
 }
 `;
 
-const FRAG = `
+// Fragment shader is assembled at init: contour-line width uses hardware
+// derivatives when the extension exists, a fixed width when it doesn't.
+const frag = (hasDeriv: boolean) => `
+${hasDeriv ? '#extension GL_OES_standard_derivatives : enable' : ''}
 precision mediump float;
 uniform vec3 uInk;
 uniform vec3 uCobalt;
+uniform float uMode;    // 0 = wireframe pass, 1 = contour pass
+uniform float uReveal;  // load sweep, foreground -> horizon, 0..1.2
+uniform vec2 uSpot;     // cursor spotlight in device px (y up); x < 0 = off
+uniform float uSpotR;   // spotlight radius in device px
 varying float vHeight;
 varying float vDepth;
 
 void main() {
   // ridges pick up cobalt; valleys stay ink
-  vec3 color = mix(uInk, uCobalt, smoothstep(0.40, 0.66, vHeight));
+  vec3 color = mix(uInk, uCobalt, smoothstep(0.42, 0.64, vHeight));
   // fade with distance (into the cream page) and slightly at the near edge
-  float alpha = (1.0 - smoothstep(0.55, 1.0, vDepth)) * smoothstep(0.0, 0.12, vDepth);
-  gl_FragColor = vec4(color, alpha * 0.5);
+  float fade = (1.0 - smoothstep(0.55, 1.0, vDepth)) * smoothstep(0.0, 0.12, vDepth);
+  // the drawing sketches itself in, front to back, on load
+  fade *= smoothstep(vDepth - 0.16, vDepth + 0.02, uReveal);
+
+  float alpha;
+  if (uMode < 0.5) {
+    alpha = fade * 0.30;
+  } else {
+    // topographic iso-lines cut through the height field at fixed elevations
+    float bands = vHeight * 14.0;
+    float t = abs(fract(bands + 0.5) - 0.5);
+    ${hasDeriv
+      ? 'float w = fwidth(bands);\n    float line = 1.0 - smoothstep(w * 0.7, w * 1.8, t);'
+      : 'float line = 1.0 - smoothstep(0.02, 0.07, t);'}
+    alpha = line * fade * 0.5;
+  }
+
+  // surveyor's lamp — a cobalt pool of light under the cursor
+  if (uSpot.x >= 0.0) {
+    float d = distance(gl_FragCoord.xy, uSpot) / uSpotR;
+    float g = exp(-d * d * 2.5);
+    color = mix(color, uCobalt, g * 0.55);
+    alpha *= 1.0 + g * 1.4;
+  }
+
+  gl_FragColor = vec4(color, alpha);
 }
 `;
 
@@ -102,6 +136,8 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     const COLS = coarse ? 72 : 120;
     const ROWS = coarse ? 44 : 70;
 
+    const deriv = gl.getExtension('OES_standard_derivatives');
+
     const compile = (type: number, src: string) => {
       const s = gl.createShader(type)!;
       gl.shaderSource(s, src);
@@ -112,7 +148,7 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     };
     const prog = gl.createProgram()!;
     gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, frag(!!deriv)));
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
       console.warn('[terrain] program link failed:', gl.getProgramInfoLog(prog));
@@ -133,6 +169,14 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     for (let c = 0; c < COLS; c++)
       for (let r = 0; r < ROWS - 1; r++) idx.push(r * COLS + c, (r + 1) * COLS + c);
     const indices = new Uint32Array(idx);
+    // triangle indices for the contour pass — same grid, filled
+    const tidx: number[] = [];
+    for (let r = 0; r < ROWS - 1; r++)
+      for (let c = 0; c < COLS - 1; c++) {
+        const i = r * COLS + c;
+        tidx.push(i, i + 1, i + COLS, i + 1, i + COLS + 1, i + COLS);
+      }
+    const triIndices = new Uint32Array(tidx);
     const ext = gl.getExtension('OES_element_index_uint'); // universal since ~2013
     if (!ext) { console.warn('[terrain] uint index extension missing'); return; }
 
@@ -142,6 +186,9 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     const ibo = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+    const tibo = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, tibo);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, triIndices, gl.STATIC_DRAW);
 
     const aGrid = gl.getAttribLocation(prog, 'aGrid');
     gl.enableVertexAttribArray(aGrid);
@@ -150,22 +197,29 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
     const uAspect = gl.getUniformLocation(prog, 'uAspect');
     const uTime = gl.getUniformLocation(prog, 'uTime');
     const uTilt = gl.getUniformLocation(prog, 'uTilt');
+    const uMode = gl.getUniformLocation(prog, 'uMode');
+    const uReveal = gl.getUniformLocation(prog, 'uReveal');
+    const uSpot = gl.getUniformLocation(prog, 'uSpot');
+    const uSpotR = gl.getUniformLocation(prog, 'uSpotR');
     gl.uniform3f(gl.getUniformLocation(prog, 'uInk'), 0.10, 0.10, 0.10); // #1A1A1A
     gl.uniform3f(gl.getUniformLocation(prog, 'uCobalt'), 0.145, 0.388, 0.922); // #2563EB
+    gl.uniform2f(uSpot, -1, -1);
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     // Size handling lives in a ResizeObserver — the render loop never touches
     // the DOM (clientWidth reads per frame force layout and murder high-Hz).
+    let dpr = 1;
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.75);
       const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
         gl.viewport(0, 0, w, h);
         gl.uniform1f(uAspect, w / h);
+        gl.uniform1f(uSpotR, h * 0.32);
       }
     };
     resize();
@@ -174,9 +228,16 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
 
     const mouse = { x: 0, y: 0 };
     const tilt = { x: 0, y: 0 };
+    const mousePx = { x: -1, y: -1 };
+    const spot = { x: -1, y: -1 };
     const onMouse = (e: MouseEvent) => {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+      // spotlight target in device px, y up (gl_FragCoord space)
+      const r = canvas.getBoundingClientRect();
+      mousePx.x = (e.clientX - r.left) * dpr;
+      mousePx.y = (r.height - (e.clientY - r.top)) * dpr;
+      if (spot.x < 0) { spot.x = mousePx.x; spot.y = mousePx.y; } // no fly-in on first move
     };
     if (!coarse && !reducedMotion) window.addEventListener('mousemove', onMouse, { passive: true });
 
@@ -193,9 +254,25 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
       const k = 1 - Math.exp(-dt * 0.0028);
       tilt.x += (mouse.x - tilt.x) * k;
       tilt.y += (-mouse.y * 0.6 - tilt.y) * k;
+      if (mousePx.x >= 0) {
+        const ks = 1 - Math.exp(-dt * 0.006);
+        spot.x += (mousePx.x - spot.x) * ks;
+        spot.y += (mousePx.y - spot.y) * ks;
+      }
+      // draw-in: ease-out sweep over ~1.6s, front of the field to the horizon
+      const tr = reducedMotion ? 1 : Math.min(1, (now - start) / 1600);
+      const reveal = 1.2 * (1 - Math.pow(1 - tr, 3));
       gl.uniform1f(uTime, (now - start) / 1000);
       gl.uniform2f(uTilt, tilt.x, tilt.y);
+      gl.uniform1f(uReveal, reveal);
+      gl.uniform2f(uSpot, spot.x, spot.y);
       gl.clear(gl.COLOR_BUFFER_BIT);
+      // contour fill first, wireframe over it
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, tibo);
+      gl.uniform1f(uMode, 1);
+      gl.drawElements(gl.TRIANGLES, triIndices.length, gl.UNSIGNED_INT, 0);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
+      gl.uniform1f(uMode, 0);
       gl.drawElements(gl.LINES, indices.length, gl.UNSIGNED_INT, 0);
       if (running) raf = requestAnimationFrame(frame);
     };
@@ -224,13 +301,13 @@ export const TerrainField: React.FC<{ className?: string }> = ({ className }) =>
         document.removeEventListener('visibilitychange', onVis);
         window.removeEventListener('mousemove', onMouse);
         setRunning(false);
-        gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteProgram(prog);
+        gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteBuffer(tibo); gl.deleteProgram(prog);
       };
     }
     return () => {
       ro.disconnect();
       window.removeEventListener('mousemove', onMouse);
-      gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteProgram(prog);
+      gl.deleteBuffer(vbo); gl.deleteBuffer(ibo); gl.deleteBuffer(tibo); gl.deleteProgram(prog);
     };
   }, []);
 
