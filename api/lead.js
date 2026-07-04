@@ -9,7 +9,6 @@
 // column, so the site and the CRM can later share one Postgres table — the CRM
 // hookup becomes a column copy, not a migration.
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyzgwdzk';
 const MAX = { name: 120, email: 200, phone: 40, company: 160, subject: 200, message: 5000, generic: 400 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -118,28 +117,25 @@ export default async function handler(req, res) {
     }
   }
 
-  // 2) Always forward to email — the guaranteed delivery path. Even if the DB
-  //    write failed or isn't wired yet, the lead lands in the inbox.
-  let emailed = false;
-  try {
-    const resp = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        company,
-        message: notes,
-        _subject: `[waltburge.com] ${subject}`,
-      }),
-    });
-    emailed = resp.ok;
-  } catch (e) {
-    console.error('[LEAD_EMAIL_ERROR]', e.message);
+  // 2) Backup path: if the CRM write failed, push the lead straight to the
+  //    phone via ntfy so it's never lost. (The CRM fires its own push on
+  //    success — this only runs when that path went dark.)
+  let pinged = false;
+  if (!stored && process.env.LEAD_NTFY_TOPIC) {
+    try {
+      const resp = await fetch(`https://ntfy.sh/${encodeURIComponent(process.env.LEAD_NTFY_TOPIC)}`, {
+        method: 'POST',
+        // Header values must be ASCII — no em dashes here.
+        headers: { Title: 'Site lead (CRM write FAILED) - log by hand', Priority: 'high', Tags: 'warning,moneybag' },
+        body: `${company || name} — ${phone || email}\n${notes.slice(0, 500)}`,
+      });
+      pinged = resp.ok;
+    } catch (e) {
+      console.error('[LEAD_NTFY_ERROR]', e.message);
+    }
   }
 
-  if (!stored && !emailed) {
+  if (!stored && !pinged) {
     res.status(502).json({
       ok: false,
       error: 'Could not send. Please email jamesburge.mcm@gmail.com directly.',
@@ -147,5 +143,5 @@ export default async function handler(req, res) {
     return;
   }
 
-  res.status(200).json({ ok: true, stored, emailed });
+  res.status(200).json({ ok: true, stored, pinged });
 }
