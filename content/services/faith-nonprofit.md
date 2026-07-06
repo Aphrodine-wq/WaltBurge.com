@@ -35,7 +35,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*Real engineering for the systems that actually run a business — not a Zapier shim that breaks on Black Friday.*
+*Real engineering for the systems that actually run a business — not duct-tape automation that breaks on Black Friday.*
 
 ### iii. Accounting & Payments
 
@@ -174,7 +174,7 @@
 | Annual Security Training | $400 / yr + |
 | Penetration Testing (web app, internal network) | $4,400 + |
 | Zero Trust Architecture Build | $5,200 + |
-| SSO Rollout (Okta, Auth0, Cognito) | $3,600 + |
+| One-Login-For-Everything Setup (single sign-on) | $3,600 + |
 | 2FA / MFA Deployment (Authy, Duo, hardware keys) | $1,200 + |
 | Mobile Device Management (MDM — Jamf, Mosyle, Intune) | $2,800 + |
 | Endpoint Protection Rollout (CrowdStrike, SentinelOne) | $2,000 + |
@@ -211,7 +211,7 @@
 | Mailcow / Mail-in-a-Box (self-hosted email server) | $2,000 + |
 | Jellyfin / Plex (media server) | $800 + |
 | Self-Hosted Project Management (Plane, Vikunja, OpenProject) | $1,200 + |
-| Self-Hosted CRM (EspoCRM, SuiteCRM) | $1,600 + |
+| Your Own CRM — yours outright, no per-user monthly fees | $1,600 + |
 | Self-Hosted Analytics (Plausible, Umami — replace Google Analytics) | $800 + |
 | Home Lab Design & Build (rack, UPS, networking, hypervisor) | $6,000 + |
 
@@ -260,7 +260,7 @@
 | Mac Automator / Apple Script Workflows | $950 + |
 | Bash / Python Automation Library | $1,600 + |
 | Cron / Scheduled Job Library | $1,200 + |
-| Zapier / Make / n8n Setup (no-code automations) | $1,200 + |
+| Automation Setup — the busywork does itself (Zapier, Make, n8n) | $1,200 + |
 | Custom Voice Assistant (Alexa, Google, Siri Shortcuts) | $2,000 + |
 | Smart Office (lighting, climate, locks, A/V) | $2,800 + |
 | Home Assistant / OpenHAB IoT Build | $3,200 + |

@@ -1,47 +1,35 @@
 [
   {
-    "id": "fairtradeworker",
-    "slug": "fairtradeworker",
-    "title": "FairTradeWorker",
-    "kind": "product",
+    "id": "lifebalanceoxford",
+    "slug": "lifebalanceoxford",
+    "title": "Life Balance Oxford",
+    "kind": "client",
     "category": "Web",
-    "summary": "Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.",
-    "description": "Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.",
-    "fullDescription": "FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across multiple repos — Next.js frontend, a Java/Spring Boot backend (ftw-svc) with STOMP WebSocket realtime, and a React Native mobile app.",
-    "challenge": "Building a marketplace that handles the full lifecycle — from job posting through bidding, contract signing, milestone-based payments, and dispute resolution — while keeping contractors honest and homeowners protected.",
-    "solution": "Three-tier architecture: homeowner posts job, contractor bids, subcontractor handles specialty work. QuickBooks handles all payment flows natively. ConstructionAI powers instant cost estimates so homeowners know what's fair before a single bid comes in.",
-    "features": [
-      "QuickBooks-native invoicing and payout",
-      "AI-powered cost estimation via ConstructionAI",
-      "Real-time bidding with STOMP WebSocket",
-      "Three-role system: homeowner, contractor, subcontractor",
-      "Mobile app with 30+ screens (React Native/Expo)",
-      "6 revenue streams including white-label licensing"
-    ],
+    "client": {
+      "name": "Life Balance Psychiatric Services",
+      "location": "Oxford, MS"
+    },
+    "summary": "Practice website for an Oxford psychiatric clinic — online booking, referrals, and new-client intake.",
+    "description": "Practice website for Life Balance Psychiatric Services in Oxford — online booking, referral routing, and new-client intake for a working clinic.",
+    "fullDescription": "Live practice website for Life Balance Psychiatric Services, a psychiatric and medication-assisted treatment clinic in Oxford, MS. Patients book online, referring providers have their own path, and new clients start intake from the homepage. Built to be calm, fast, and simple for people who are often reaching out on a hard day.",
     "techStack": [
-      "Next.js",
-      "TypeScript",
-      "Java",
-      "Spring Boot",
-      "React Native",
-      "PostgreSQL"
+      "React",
+      "Vite",
+      "Vercel"
     ],
     "tags": [
-      "marketplace",
-      "full-stack",
-      "construction"
+      "Healthcare",
+      "Client Work"
     ],
-    "imageUrl": "/assets/projects/fairtradeworker/fairtradeworker.png",
-    "images": [
-      "/assets/projects/fairtradeworker/fairtradeworker.png",
-      "/assets/projects/fairtradeworker/live-home.png"
-    ],
-    "link": "https://fairtradeworker.com",
+    "imageUrl": "/work/lifebalanceoxford.webp",
+    "link": "https://www.lifebalanceoxford.com",
     "status": "Live",
-    "year": "2025",
+    "year": "2026",
     "featured": true,
-    "seoTitle": "FairTradeWorker — Construction Marketplace with QuickBooks Payments",
-    "seoDescription": "A two-sided construction marketplace built by Walt Burge: QuickBooks-native payments, real-time bidding, and AI cost estimation across web and mobile."
+    "seoTitle": "Life Balance Oxford — client work | Walt Burge",
+    "seoDescription": "Live practice website for an Oxford, MS psychiatric clinic: online booking, referrals, and new-client intake.",
+    "challenge": "A clinic's website is often a patient's first step on a hard day. It has to be calm, legible, and get someone to a booked appointment with as little friction as possible — while giving referring providers and returning patients their own clear paths.",
+    "solution": "Three paths, no maze: book online, send a referral, or call — all reachable from the first screen. Fast, quiet React front end with the practice able to update content without a developer."
   },
   {
     "id": "mshomepros",
@@ -73,14 +61,89 @@
       "construction",
       "ai-powered"
     ],
-    "imageUrl": "/assets/projects/mshomepros/cover.png",
+    "imageUrl": "/work/mshomepros.webp",
     "images": [],
-    "link": "https://mhpestimate.cloud",
+    "link": "https://mshomepros.com",
     "status": "Live",
     "year": "2025",
     "featured": true,
     "seoTitle": "MsHomePros — AI Estimation & Proposals for Contractors",
     "seoDescription": "A contractor business platform built by Walt Burge: AI line-item estimating, professional proposals, and job tracking, running in production for a real Oxford, MS contractor."
+  },
+  {
+    "id": "fairtradeworker",
+    "slug": "fairtradeworker",
+    "title": "FairTradeWorker",
+    "kind": "product",
+    "category": "Web",
+    "summary": "Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.",
+    "description": "Two-sided construction marketplace with QuickBooks-native payments and AI-powered estimation.",
+    "fullDescription": "FairTradeWorker is a full-stack construction marketplace connecting homeowners with vetted contractors. Homeowners post jobs, contractors bid competitively, and the platform handles payments through QuickBooks Online integration. Built across multiple repos — Next.js frontend, a Java/Spring Boot backend (ftw-svc) with STOMP WebSocket realtime, and a React Native mobile app.",
+    "challenge": "Building a marketplace that handles the full lifecycle — from job posting through bidding, contract signing, milestone-based payments, and dispute resolution — while keeping contractors honest and homeowners protected.",
+    "solution": "Three-tier architecture: homeowner posts job, contractor bids, subcontractor handles specialty work. QuickBooks handles all payment flows natively. ConstructionAI powers instant cost estimates so homeowners know what's fair before a single bid comes in.",
+    "features": [
+      "QuickBooks-native invoicing and payout",
+      "AI-powered cost estimation via ConstructionAI",
+      "Real-time bidding with STOMP WebSocket",
+      "Three-role system: homeowner, contractor, subcontractor",
+      "Mobile app with 30+ screens (React Native/Expo)",
+      "6 revenue streams including white-label licensing"
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "React Native",
+      "PostgreSQL"
+    ],
+    "tags": [
+      "marketplace",
+      "full-stack",
+      "construction"
+    ],
+    "imageUrl": "/work/fairtradeworker.webp",
+    "images": [
+      "/assets/projects/fairtradeworker/fairtradeworker.png",
+      "/assets/projects/fairtradeworker/live-home.png"
+    ],
+    "link": "https://www.fairtradeworker.com",
+    "status": "Live",
+    "year": "2025",
+    "featured": true,
+    "seoTitle": "FairTradeWorker — Construction Marketplace with QuickBooks Payments",
+    "seoDescription": "A two-sided construction marketplace built by Walt Burge: QuickBooks-native payments, real-time bidding, and AI cost estimation across web and mobile."
+  },
+  {
+    "id": "g-rump",
+    "slug": "g-rump",
+    "title": "G-Rump",
+    "kind": "oss",
+    "category": "AI",
+    "summary": "macOS-native AI coding agent — multi-model, 100+ local tools, MCP integration. 54K lines of Swift.",
+    "description": "A native macOS AI coding agent: multi-model support, 100+ local developer tools, MCP integration, and ambient project awareness.",
+    "fullDescription": "G-Rump is a macOS-native AI coding agent written in Swift/SwiftUI — 54,000+ lines. It brings multi-model AI, more than 100 local development tools, 58 MCP presets, and six agent modes into a fast desktop app built for Mac developers. Public source on GitHub with a live product site.",
+    "techStack": [
+      "Swift",
+      "SwiftUI",
+      "MCP"
+    ],
+    "tags": [
+      "AI",
+      "Open Source",
+      "macOS"
+    ],
+    "imageUrl": "/work/g-rump.webp",
+    "videoId": "Xc9ltFfhB5w",
+    "link": "https://g-rump.vercel.app",
+    "repositoryUrl": "https://github.com/Aphrodine-wq/G-Rump",
+    "status": "Live",
+    "year": "2026",
+    "featured": true,
+    "seoTitle": "G-Rump — native AI coding agent for macOS | Walt Burge",
+    "seoDescription": "macOS-native AI coding agent: multi-model support, 100+ local tools, MCP integration. Open source, 54K lines of Swift.",
+    "challenge": "Most AI coding assistants live in a browser tab, bill per seat, and never touch the machine where the work actually happens. Mac developers wanted something native, fast, and private.",
+    "solution": "A SwiftUI desktop app: multi-model AI with 100+ local development tools, 58 MCP presets, and six agent modes — the agent works where the code lives instead of the other way around."
   },
   {
     "id": "constructionai",
@@ -118,7 +181,8 @@
     "year": "2025",
     "featured": true,
     "seoTitle": "ConstructionAI — A Fine-Tuned LLM for Cost Estimation",
-    "seoDescription": "A custom fine-tuned Llama model for construction cost estimation by Walt Burge — 18,000+ training examples, line-item breakdowns, deployed serverless at ~$0.002 per estimate."
+    "seoDescription": "A custom fine-tuned Llama model for construction cost estimation by Walt Burge — 18,000+ training examples, line-item breakdowns, deployed serverless at ~$0.002 per estimate.",
+    "draft": true
   },
   {
     "id": "ftw-mobile",
@@ -155,7 +219,8 @@
     "status": "Beta",
     "year": "2025",
     "seoTitle": "FTW Mobile — The Construction Marketplace, Native",
-    "seoDescription": "The FairTradeWorker marketplace as a React Native app by Walt Burge: three role experiences, 30+ screens, and real-time bidding over WebSocket."
+    "seoDescription": "The FairTradeWorker marketplace as a React Native app by Walt Burge: three role experiences, 30+ screens, and real-time bidding over WebSocket.",
+    "draft": true
   },
   {
     "id": "aeon",
@@ -188,7 +253,8 @@
     "status": "Beta",
     "year": "2026",
     "seoTitle": "AEON — Formal Verification & Security Analysis",
-    "seoDescription": "A 73-engine formal-verification and security-analysis platform by Walt Burge that proves code correct and hunts vulnerabilities before it ships."
+    "seoDescription": "A 73-engine formal-verification and security-analysis platform by Walt Burge that proves code correct and hunts vulnerabilities before it ships.",
+    "draft": true
   },
   {
     "id": "forge",
@@ -224,7 +290,8 @@
     "status": "Beta",
     "year": "2026",
     "seoTitle": "Forge — A Desktop Trainer for Custom AI Models",
-    "seoDescription": "An Electron desktop app by Walt Burge for fine-tuning custom LLMs on rented GPUs — provision, train, and monitor without touching a terminal."
+    "seoDescription": "An Electron desktop app by Walt Burge for fine-tuning custom LLMs on rented GPUs — provision, train, and monitor without touching a terminal.",
+    "draft": true
   },
   {
     "id": "engram",
@@ -262,7 +329,8 @@
     "status": "Live",
     "year": "2026",
     "seoTitle": "Engram — Open-Source, Local-First Screen Memory",
-    "seoDescription": "An MIT-licensed screen-memory tool by Walt Burge: on-device OCR, secret redaction, full-text search, and an MCP server — 100% local, nothing leaves your machine."
+    "seoDescription": "An MIT-licensed screen-memory tool by Walt Burge: on-device OCR, secret redaction, full-text search, and an MCP server — 100% local, nothing leaves your machine.",
+    "draft": true
   },
   {
     "id": "tessera",
@@ -300,7 +368,8 @@
     "status": "Beta",
     "year": "2026",
     "seoTitle": "Tessera — A Markdown-Native Language for AI Agents",
-    "seoDescription": "A programming language by Walt Burge where the markdown file is the agent — write in .t.md, verify formally with AEON before it runs, execute on real LLM backends."
+    "seoDescription": "A programming language by Walt Burge where the markdown file is the agent — write in .t.md, verify formally with AEON before it runs, execute on real LLM backends.",
+    "draft": true
   },
   {
     "id": "walt",
@@ -337,7 +406,8 @@
     "status": "Live",
     "year": "2025",
     "seoTitle": "W.A.L.T. — A Distributed AI Operating Layer",
-    "seoDescription": "A three-machine AI platform by Walt Burge: 20 AGI-inspired layers, screen understanding, 73-engine verification, and autonomous overnight execution."
+    "seoDescription": "A three-machine AI platform by Walt Burge: 20 AGI-inspired layers, screen understanding, 73-engine verification, and autonomous overnight execution.",
+    "draft": true
   },
   {
     "id": "twin-brain",
@@ -373,7 +443,8 @@
     "status": "Live",
     "year": "2026",
     "seoTitle": "Twin Brain — Persistent Memory for AI Agents",
-    "seoDescription": "An MCP server by Walt Burge that gives an AI assistant a persistent brain: capture decisions, semantic recall, and context that survives across every session."
+    "seoDescription": "An MCP server by Walt Burge that gives an AI assistant a persistent brain: capture decisions, semantic recall, and context that survives across every session.",
+    "draft": true
   },
   {
     "id": "mhp-construction",
@@ -411,7 +482,8 @@
     "status": "Live",
     "year": "2025",
     "seoTitle": "Case Study — AI Estimation for MHP Construction, Oxford MS",
-    "seoDescription": "How Walt Burge built and deployed a custom AI estimation platform for MHP Construction, a licensed contractor in Oxford, Mississippi — live in production."
+    "seoDescription": "How Walt Burge built and deployed a custom AI estimation platform for MHP Construction, a licensed contractor in Oxford, Mississippi — live in production.",
+    "draft": true
   },
   {
     "id": "compliant-intake-oxford",
@@ -450,7 +522,8 @@
     "status": "Live",
     "year": "2026",
     "seoTitle": "Case Study — HIPAA-Compliant Patient Intake, Oxford MS",
-    "seoDescription": "How Walt Burge rebuilt a behavioral-health practice's patient intake to be HIPAA and 42 CFR Part 2 compliant — killing a PHI leak and shipping a secure staff portal, in Oxford, MS."
+    "seoDescription": "How Walt Burge rebuilt a behavioral-health practice's patient intake to be HIPAA and 42 CFR Part 2 compliant — killing a PHI leak and shipping a secure staff portal, in Oxford, MS.",
+    "draft": true
   },
   {
     "id": "northms-homepros",
@@ -492,6 +565,7 @@
     "status": "Beta",
     "year": "2026",
     "seoTitle": "Case Study — Custom Next.js Rebuild for North Mississippi Home Pros, Oxford MS",
-    "seoDescription": "How Walt Burge rebuilt North Mississippi Home Pros' WordPress site as a custom Next.js brand site with a curated project gallery and estimate-request intake — Oxford, MS."
+    "seoDescription": "How Walt Burge rebuilt North Mississippi Home Pros' WordPress site as a custom Next.js brand site with a curated project gallery and estimate-request intake — Oxford, MS.",
+    "draft": true
   }
 ]

@@ -1,59 +1,41 @@
 import React from 'react';
-import { m as motion } from 'framer-motion';
-import { Phone, Hammer, KeyRound } from 'lucide-react';
 
 const STEPS = [
   {
-    n: '01',
-    icon: Phone,
     title: 'Tell me the problem',
-    body: "A free call — no pitch, no sales engineer. You tell me where you're bleeding time or losing people to a missed call. I tell you straight whether AI actually fixes it, or whether it doesn't.",
+    body: "A free call. You tell me where you're bleeding time or losing people to a missed call, and I tell you straight whether software fixes it. Sometimes the honest answer is that it doesn't — you'll hear that too.",
   },
   {
-    n: '02',
-    icon: Hammer,
-    title: 'I build it for you',
-    body: "Custom to how you already work, installed and tuned. Not a template you have to configure — a system built around your practice by the person who answers your call.",
+    title: 'I build it',
+    body: 'Custom to how you already work, installed and tuned. Not a template you have to configure yourself — I set it up, test it against your real day, and train whoever needs to use it.',
   },
   {
-    n: '03',
-    icon: KeyRound,
-    title: 'You own it',
-    body: "It's yours — no per-seat lock-in, no rented black box. It runs in your control and gets sharper the longer it works. The value compounds to you, not a vendor.",
+    title: 'It starts earning',
+    body: "Most tools pay for themselves on the first few caught calls or won bids. I stay reachable after launch — same phone number, same person — and tune it as your business changes.",
   },
 ];
 
-// Three-step process. Lowers the fear for conservative buyers who want to know
-// exactly what they're signing up for. Reused on the homepage and the
-// private-practice landing pages.
+// Three-step process, written like it'd be said across a counter. Deliberately
+// a plain numbered list, not another card grid — section shapes should vary.
 export const HowItWorks: React.FC = () => (
   <section id="how-it-works" className="py-20 md:py-28 px-4 md:px-6 bg-brand-base border-t border-brand-border/40">
     <div className="max-w-7xl mx-auto">
-      <div className="max-w-2xl mb-12 md:mb-16">
-        <div className="font-mono text-xs uppercase tracking-[0.2em] text-brand-accent mb-4">How it works</div>
-        <h2 className="text-4xl md:text-5xl font-black text-brand-primary tracking-tighter leading-[0.95]">
-          Three steps. No mystery<span className="text-brand-accent">.</span>
+      <div className="grid md:grid-cols-[1fr_1.6fr] gap-10 md:gap-20 items-start">
+        <h2 className="text-4xl md:text-5xl font-black text-brand-primary tracking-tighter leading-[0.95] md:sticky md:top-28">
+          How a project goes
         </h2>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-brand-border border border-brand-border">
-        {STEPS.map((s, i) => (
-          <motion.div
-            key={s.n}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.4, delay: i * 0.08, ease: 'easeOut' }}
-            className="bg-brand-base p-8 md:p-10"
-          >
-            <div className="flex items-center justify-between">
-              <s.icon size={24} className="text-brand-accent" />
-              <span className="font-mono text-sm text-brand-muted tracking-widest">{s.n}</span>
-            </div>
-            <h3 className="mt-6 text-xl font-display font-bold text-brand-primary tracking-tight">{s.title}</h3>
-            <p className="mt-3 text-brand-secondary leading-relaxed">{s.body}</p>
-          </motion.div>
-        ))}
+        <ol className="space-y-10 md:space-y-12">
+          {STEPS.map((s, i) => (
+            <li key={s.title} className="grid grid-cols-[auto_1fr] gap-5 md:gap-7">
+              <span className="font-mono text-lg font-bold text-brand-accent leading-7">{i + 1}.</span>
+              <div>
+                <h3 className="text-xl font-display font-bold text-brand-primary tracking-tight leading-7">{s.title}</h3>
+                <p className="mt-2 text-brand-secondary leading-relaxed max-w-xl">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   </section>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Mail, Phone, Github, ArrowLeft, ArrowUpRight, MapPin, Printer } from 'lucide-react';
-import { workItems } from '../lib/work';
+import { allWorkItems } from '../lib/work';
 import { NavLinks } from './NavLinks';
 import { Project } from '../types';
 import { trackEvent } from '../lib/track';
@@ -47,7 +47,7 @@ const FLAGSHIP: { id: string; proves: string }[] = [
 ];
 
 const flagshipProjects = FLAGSHIP
-  .map(f => ({ proves: f.proves, project: workItems.find(w => w.id === f.id) }))
+  .map(f => ({ proves: f.proves, project: allWorkItems.find(w => w.id === f.id) }))
   .filter((x): x is { proves: string; project: Project } => Boolean(x.project));
 
 export const ResumePage: React.FC<ResumePageProps> = ({ onBack, onNavigate, onProjectClick }) => {
@@ -102,7 +102,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onBack, onNavigate, onPr
             seven months ago; since then I've <span className="font-medium">trained a custom LLM</span> end to end —
             data curation, synthetic distillation, fine-tuning, and serverless deploy — built the
             <span className="font-medium"> tooling and agent systems</span> around it, and shipped
-            {' '}{workItems.length} production systems that put real AI in front of real users. I build the model and
+            {' '}11 production systems that put real AI in front of real users. I build the model and
             everything around it: when the thing I needed didn't exist, I built it.
           </p>
         </section>
@@ -162,7 +162,7 @@ export const ResumePage: React.FC<ResumePageProps> = ({ onBack, onNavigate, onPr
             onClick={() => onNavigate('projects')}
             className="print:hidden mt-5 font-mono text-[11px] uppercase tracking-wider text-brand-accent hover:underline"
           >
-            See all {workItems.length} projects →
+            See the portfolio →
           </button>
         </section>
 

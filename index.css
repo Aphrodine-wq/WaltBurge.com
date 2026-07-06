@@ -50,9 +50,18 @@
     color: rgb(var(--text-primary));
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    cursor: none;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Native cursor hides only while the custom dot is live (CustomCursor adds
+     .wb-cursor on its first mousemove) — never before, so the page is never
+     cursorless. Screen-only: the print stylesheet must keep cursor: auto. */
+  @media screen and (pointer: fine) {
+    html.wb-cursor,
+    html.wb-cursor * {
+      cursor: none;
+    }
   }
 
   /* Headings carry the card's voice: heavy grotesque, tight tracking — no serif */

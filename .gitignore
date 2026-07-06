@@ -34,3 +34,6 @@ content/blog/*.md
 content/services/*.md
 content/work/items.json
 content/local/pages.json
+
+.vercel
+.env*

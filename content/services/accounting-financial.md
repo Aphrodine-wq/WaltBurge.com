@@ -16,7 +16,7 @@
 | Landing Page (single, conversion-focused) | $450 + |
 | Consultation Booking | $650 + |
 | New Client Intake Form | $1,200 + |
-| E-Commerce Storefront | $4,650 + |
+| Online Store | $4,650 + |
 | Customer Portal (orders, accounts, history) | $4,000 + |
 | Tax Season Reminder & Workflow Engine | $2,650 + |
 
@@ -35,7 +35,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*Real engineering for the systems that actually run a business — not a Zapier shim that breaks on Black Friday.*
+*Real engineering for the systems that actually run a business — not duct-tape automation that breaks on Black Friday.*
 
 ### iii. Accounting & Payments
 
@@ -174,7 +174,7 @@
 | Annual Security Training | $500 / yr + |
 | Penetration Testing (web app, internal network) | $5,500 + |
 | Zero Trust Architecture Build | $6,500 + |
-| SSO Rollout (Okta, Auth0, Cognito) | $4,500 + |
+| One-Login-For-Everything Setup (single sign-on) | $4,500 + |
 | 2FA / MFA Deployment (Authy, Duo, hardware keys) | $1,500 + |
 | Mobile Device Management (MDM — Jamf, Mosyle, Intune) | $3,500 + |
 | Endpoint Protection Rollout (CrowdStrike, SentinelOne) | $2,500 + |
@@ -211,7 +211,7 @@
 | Mailcow / Mail-in-a-Box (self-hosted email server) | $2,500 + |
 | Jellyfin / Plex (media server) | $1,000 + |
 | Self-Hosted Project Management (Plane, Vikunja, OpenProject) | $1,500 + |
-| Self-Hosted CRM (EspoCRM, SuiteCRM) | $2,000 + |
+| Your Own CRM — yours outright, no per-user monthly fees | $2,000 + |
 | Self-Hosted Analytics (Plausible, Umami — replace Google Analytics) | $1,000 + |
 | Home Lab Design & Build (rack, UPS, networking, hypervisor) | $7,500 + |
 
@@ -260,7 +260,7 @@
 | Mac Automator / Apple Script Workflows | $1,200 + |
 | Bash / Python Automation Library | $2,000 + |
 | Cron / Scheduled Job Library | $1,500 + |
-| Zapier / Make / n8n Setup (no-code automations) | $1,500 + |
+| Automation Setup — the busywork does itself (Zapier, Make, n8n) | $1,500 + |
 | Custom Voice Assistant (Alexa, Google, Siri Shortcuts) | $2,500 + |
 | Smart Office (lighting, climate, locks, A/V) | $3,500 + |
 | Home Assistant / OpenHAB IoT Build | $4,000 + |

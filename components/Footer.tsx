@@ -1,21 +1,35 @@
 import React from 'react';
 import { Github, Facebook, Instagram, Mail, Phone } from 'lucide-react';
 import { trackEvent } from '../lib/track';
+import { websitePages, townForSlug } from '../lib/local';
 
 export const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
 
     return (
         <footer className="py-12 bg-brand-base border-t border-brand-border relative">
-            <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 flex flex-col gap-8 relative z-10">
+
+              {/* Service areas — the town pages' one permanent link from every page */}
+              <p className="text-sm text-brand-secondary text-center md:text-left">
+                  <span className="font-semibold text-brand-primary">Website design across North Mississippi: </span>
+                  {websitePages.map((p, i) => (
+                      <React.Fragment key={p.slug}>
+                          {i > 0 && ' · '}
+                          <a href={`/${p.slug}`} className="text-brand-accent hover:underline">{townForSlug(p.slug)}</a>
+                      </React.Fragment>
+                  ))}
+              </p>
+
+              <div className="flex flex-col md:flex-row justify-between items-center gap-8">
 
                 {/* Left: Brand & Copyright */}
                 <div className="flex flex-col items-center md:items-start gap-2">
                     <span className="font-display font-extrabold text-lg tracking-tight text-brand-primary">
-                        Walt Burge<span className="text-brand-accent">.</span>
+                        Walt Builds<span className="text-brand-accent">.</span>
                     </span>
                     <p className="text-xs text-brand-secondary font-mono">
-                        &copy; {currentYear} Walt Burge — built in Mississippi.
+                        &copy; {currentYear} Walt Builds — Walt Burge, Oxford, MS.
                     </p>
                 </div>
 
@@ -28,6 +42,9 @@ export const Footer: React.FC = () => {
                     <a href="tel:+16622925533" onClick={() => trackEvent('phone_click', { location: 'footer' })} className="flex items-center gap-2 text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
                         <Phone size={15} />
                         (662) 292-5533
+                    </a>
+                    <a href="/blog" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
+                        Blog
                     </a>
                     <a href="/resume" className="text-sm text-brand-secondary hover:text-brand-accent transition-colors font-mono">
                         Résumé
@@ -47,6 +64,7 @@ export const Footer: React.FC = () => {
                     </a>
                 </div>
 
+              </div>
             </div>
         </footer>
     );

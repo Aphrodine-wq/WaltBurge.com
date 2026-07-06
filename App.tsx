@@ -4,10 +4,10 @@ import { Hero } from './components/Hero';
 import { Specialties } from './components/Specialties';
 import { HowItWorks } from './components/HowItWorks';
 import { WhyWaltBuilds } from './components/WhyWaltBuilds';
+import { Testimonials } from './components/Testimonials';
 import { RevenueCalculator } from './components/RevenueCalculator';
 import { EngineeringCredibility } from './components/EngineeringCredibility';
 import { Contact } from './components/Contact';
-import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
@@ -479,7 +479,7 @@ function App() {
               {/* Services-first funnel: hook → who it's for → process → proof →
                   cost of doing nothing → risk reversal → objections → who builds
                   it (secondary trust) → book. */}
-              <Hero onOpenResume={openResume} onBookCall={() => goToSection(SectionId.CONTACT)} />
+              <Hero onBookCall={() => goToSection(SectionId.CONTACT)} />
 
               <Specialties onOpenMenu={() => openServices()} />
 
@@ -509,7 +509,7 @@ function App() {
               </section>
 
               <WhyWaltBuilds />
-              <FAQ />
+              <Testimonials />
               <EngineeringCredibility onOpenResume={openResume} />
             </main>
             <Contact />

@@ -22,3 +22,25 @@ export const localSlugs = localPages.map(p => p.slug);
 export function getLocalPage(slug: string): LocalPage | undefined {
   return localPages.find(p => p.slug === slug);
 }
+
+// The website-design town pages — the local-SEO set that footer/homepage
+// service-area links and town cross-links point at.
+export const websitePages = localPages.filter(p => p.slug.startsWith('website-design-'));
+
+// Town display names keyed by slug suffix. Suffix match (not regex) because
+// industry slugs also contain hyphens — same approach as scripts/prerender.mjs.
+const TOWN_NAMES: Record<string, string> = {
+  oxford: 'Oxford',
+  tupelo: 'Tupelo',
+  southaven: 'Southaven',
+  starkville: 'Starkville',
+  batesville: 'Batesville',
+  'new-albany': 'New Albany',
+};
+
+export function townForSlug(slug: string): string | null {
+  for (const key of Object.keys(TOWN_NAMES)) {
+    if (slug.endsWith(`-${key}-ms`)) return TOWN_NAMES[key];
+  }
+  return null;
+}

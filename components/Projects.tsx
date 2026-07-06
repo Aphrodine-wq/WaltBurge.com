@@ -5,7 +5,7 @@ import { workItems, kindLabel } from '../lib/work';
 import {
   Layers, Monitor, Gamepad, Terminal, Smartphone, Wrench, ArrowRight, ArrowUpRight, Github,
   Binary, Box, Cloud, Code2, Command, Cpu, Database, Hash, Layout, Lock, Power, Server, Zap, BrainCircuit,
-  X, Filter
+  X, Filter, Play
 } from 'lucide-react';
 
 // Re-exported as the catalog so existing references keep working. The data now
@@ -100,6 +100,35 @@ const AbstractProjectVisual = React.memo(({ project }: { project: Project }) => 
 
 const ProjectCardImage = React.memo(({ project }: { project: Project }) => {
   const [hasError, setHasError] = useState(false);
+  const [videoThumbFailed, setVideoThumbFailed] = useState(false);
+
+  // A YouTube showcase beats a static screenshot — use the real video
+  // thumbnail (falling back hqdefault -> imageUrl -> abstract) with a play affordance.
+  if (project.videoId && !videoThumbFailed) {
+    return (
+      <div className="relative w-full h-full">
+        <img
+          src={`https://i.ytimg.com/vi/${project.videoId}/maxresdefault.jpg`}
+          alt={`${project.title} video showcase`}
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            if (!e.currentTarget.src.includes('hqdefault')) {
+              e.currentTarget.src = `https://i.ytimg.com/vi/${project.videoId}/hqdefault.jpg`;
+            } else {
+              setVideoThumbFailed(true);
+            }
+          }}
+          className="w-full h-full object-cover transform scale-100 group-hover/card:scale-[1.03] transition-transform duration-500 ease-out"
+        />
+        <div className="absolute inset-0 bg-black/25 group-hover/card:bg-black/35 transition-colors flex items-center justify-center">
+          <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/90 text-brand-primary shadow-lg group-hover/card:scale-110 transition-transform">
+            <Play size={20} className="ml-0.5" fill="currentColor" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (hasError || !project.imageUrl) {
     return <AbstractProjectVisual project={project} />;

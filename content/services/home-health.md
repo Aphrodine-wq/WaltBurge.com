@@ -34,7 +34,7 @@
 
 ## SECTION TWO — Things we connect.
 
-*HL7 v2, FHIR R4, and the agency platforms that actually run home care — real engineering, not a Zapier shim.*
+*HL7 v2, FHIR R4, and the agency platforms that actually run home care — real engineering, not duct-tape automation.*
 
 ### iii. Agency & EHR Platforms
 
@@ -171,7 +171,7 @@
 | Nextcloud (file sync, calendar, contacts — replace Dropbox/G Drive) | $2,000 + |
 | Vaultwarden (self-hosted password manager — replace 1Password) | $750 + |
 | Self-Hosted Project Management (Plane, Vikunja, OpenProject) | $1,500 + |
-| Self-Hosted CRM (EspoCRM, SuiteCRM) | $2,000 + |
+| Your Own CRM — yours outright, no per-user monthly fees | $2,000 + |
 | Self-Hosted Analytics (Plausible, Umami — replace Google Analytics) | $1,000 + |
 
 ### Networking & Hardware
@@ -203,7 +203,7 @@
 | Browser Automation (Playwright, Puppeteer scripts) | $3,500 + |
 | Bash / Python Automation Library | $2,000 + |
 | Cron / Scheduled Job Library | $1,500 + |
-| Zapier / Make / n8n Setup (no-code automations) | $1,500 + |
+| Automation Setup — the busywork does itself (Zapier, Make, n8n) | $1,500 + |
 | Email Auto-Reply & Triage Engine | $2,000 + |
 | Calendar Bot (auto-scheduling) | $2,500 + |
 | Caregiver Recruiting / Applicant Pipeline | $4,500 + |

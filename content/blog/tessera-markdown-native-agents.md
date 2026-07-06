@@ -62,9 +62,8 @@ This is the same insight that made Obsidian's plugin ecosystem work: structure e
 
 ## It doesn't stand alone — and that's the point
 
-Tessera is the body. Around it live four neighbor systems, each useful on its own, each sharper in combination:
+Tessera is the body. Around it live three neighbor systems, each useful on its own, each sharper in combination:
 
-- **AEON** is the immune system — a 73-engine formal verifier that checks an agent before it runs.
 - **Synapse** is the brain — a knowledge graph with synaptic weighting, so an agent's `memory:semantic` writes and my personal Zettelkasten live in the same place.
 - **Obsidian / TheVault** is the soil — markdown notes where agents are written, scanned, and read.
 - **Ollama / Anthropic / LangChain / PyTorch** are the external cortex and hands — LLM calls, tools, learned models, all callable from inside substrate-typed code with effect tracking and graceful degradation.
@@ -73,7 +72,7 @@ No other agent framework I've seen does formal verification *before* the agent r
 
 ## Where it is now
 
-This post launched with nine substrates and thirty-three tests. As of `v0.1.0` it's **thirty substrates shipped and 316 tests green** — `logic`, `agent`, the full `memory:*` family, `prompt`, `tool`, `neural`, and a stack of cognitive-science substrates that used to be research code and are now first-class language features.
+This post launched with nine substrates and thirty-three tests. As of `v0.1.0` it's **thirty-one substrates shipped and 385 tests green** — `logic`, `agent`, the full `memory:*` family, `prompt`, `tool`, `neural`, and a stack of cognitive-science substrates that used to be research code and are now first-class language features.
 
 The most interesting additions are the ones that make an agent feel less like a script and more like a mind:
 
@@ -81,6 +80,6 @@ The most interesting additions are the ones that make an agent feel less like a 
 - **Auto-recall (RAG built into the runtime)** — any agent with a `memory:semantic` or `memory:episodic` block gets the relevant facts and recent events pulled into *every* prompt automatically. It remembers without being told to look.
 - **Auto-confidence routing** — reasoning substrates write their own confidence, and a dual-process layer reads it to route the next step fast or slow. The agent decides for itself when to think harder.
 
-It's still early and it's still moving fast, but it's no longer pre-alpha — it runs real agents today, verified by AEON before a single line executes.
+It's still early and it's still moving fast, but it's no longer pre-alpha — it runs real agents today, verified against its own local passes before a single line executes.
 
 The thesis hasn't changed: writing an agent should feel like writing a note. The compiler does the rest — there's just a lot more "rest" now.
