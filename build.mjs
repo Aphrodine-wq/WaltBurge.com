@@ -16,7 +16,7 @@ import { blogIndexPage } from './site/templates/blog-index.mjs';
 import { blogPostPage } from './site/templates/blog-post.mjs';
 import { workIndexPage } from './site/templates/work-index.mjs';
 import { workDetailPage } from './site/templates/work-detail.mjs';
-import { resumePage } from './site/templates/resume.mjs';
+import { resumePage, flagshipIds } from './site/templates/resume.mjs';
 import { servicesIndexPage, serviceDetailPage } from './site/templates/services.mjs';
 import { shopIndexPage, shopDetailPage } from './site/templates/shop.mjs';
 import { localPage } from './site/templates/local.mjs';
@@ -127,9 +127,11 @@ for (const post of posts) {
   built.push(writePage(blogPostPage({ post, prev, next, related: related(posts, post, 3) })));
 }
 
-// Work: index + one case study per non-draft item
+// Work: index (non-draft only) + case-study pages for non-draft items AND any
+// flagship item the résumé links to (so those links always resolve).
 built.push(writePage(workIndexPage({ workItems })));
-for (const w of workItems.filter((x) => !x.draft)) {
+const flagship = new Set(flagshipIds);
+for (const w of workItems.filter((x) => !x.draft || flagship.has(x.id))) {
   built.push(writePage(workDetailPage(w)));
 }
 

@@ -30,6 +30,10 @@ const FLAGSHIP = [
   { id: 'fairtradeworker', proves: 'AI shipped to real users — a two-sided marketplace where ConstructionAI prices jobs live, across Next.js web, a Java/Spring backend, and a React Native app.' },
 ];
 
+// Ids the résumé links to — build.mjs also emits /work pages for these even
+// when they're drafts, so the flagship links always resolve.
+export const flagshipIds = FLAGSHIP.map((f) => f.id);
+
 export function resumePage({ workItems }) {
   const byId = new Map(workItems.map((w) => [w.id, w]));
   const flagship = FLAGSHIP.map((f) => ({ ...f, project: byId.get(f.id) })).filter((x) => x.project);

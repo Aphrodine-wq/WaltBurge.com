@@ -3,6 +3,9 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/contact", "destination": "/#contact", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/m/:slug", "destination": "/api/m/:slug" },
     { "source": "/websites", "destination": "https://walt-crm.vercel.app/websites" },
