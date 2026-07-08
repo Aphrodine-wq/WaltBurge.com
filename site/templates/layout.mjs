@@ -66,9 +66,6 @@ export function layout(o) {
     <link rel="preload" href="/fonts/jbm-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/assets/site.css" />
 
-    <script type="importmap">
-      { "imports": { "three": "/vendor/three.module.js" } }
-    </script>
     <script src="/vendor/gsap.min.js" defer></script>
     <script src="/vendor/ScrollTrigger.min.js" defer></script>
     <script type="module" src="/assets/main.js"></script>
