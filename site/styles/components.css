@@ -72,39 +72,43 @@
 .btn--ghost:hover { border-color: var(--accent); }
 .btn--sm { padding: 0.6rem 1.15rem; font-size: 0.8rem; }
 
-/* ---- Hero ----------------------------------------------------------------- */
+/* ---- Hero — copy left, one clean 3D object (laptop) right ---------------- */
 .hero {
   position: relative; min-height: 100svh;
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: flex-start; padding-top: 7rem; overflow: hidden;
+  display: flex; align-items: center;
+  padding-block: 7rem 3rem; overflow: hidden;
   background: var(--base);
 }
-@media (min-width: 768px) { .hero { justify-content: center; padding-top: 0; } }
-
-/* Three.js terrain canvas — lower two-thirds, behind the copy */
-.hero__canvas {
-  position: absolute; inset-inline: 0; bottom: 0; height: 68%;
-  pointer-events: none; z-index: 0;
+.hero__grid {
+  display: grid; grid-template-columns: 1fr; gap: clamp(1rem, 4vw, 3rem);
+  align-items: center; width: 100%;
 }
-.hero__canvas canvas { width: 100% !important; height: 100% !important; }
+@media (min-width: 900px) {
+  .hero { padding-block: 0; }
+  .hero__grid { grid-template-columns: 1.05fr 0.95fr; }
+}
 
 .hero__inner {
-  position: relative; z-index: 10; width: 100%; max-width: 64rem;
-  margin-inline: auto; padding-inline: var(--gutter);
   display: flex; flex-direction: column; align-items: flex-start; text-align: left;
 }
-/* Soft cream scrim so the copy stays legible where it overlaps the terrain */
-.hero__inner::before {
-  content: ''; position: absolute; z-index: -1; inset: -3rem -2rem -4rem;
-  pointer-events: none;
-  background: radial-gradient(115% 75% at 22% 42%,
-    rgb(var(--bg-primary) / 0.92) 0%,
-    rgb(var(--bg-primary) / 0.72) 42%,
-    rgb(var(--bg-primary) / 0) 72%);
+
+/* The single object — the laptop canvas, with a soft contact shadow under it */
+.hero__object { position: relative; }
+.hero__canvas {
+  position: relative; width: 100%; aspect-ratio: 1 / 1;
+  max-height: 58vh; margin-inline: auto; pointer-events: none;
 }
+@media (min-width: 900px) { .hero__canvas { aspect-ratio: 4 / 3; max-height: 70vh; } }
+.hero__canvas canvas { width: 100% !important; height: 100% !important; }
+.hero__object::after {
+  content: ''; position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%);
+  width: 60%; height: 7%; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgb(26 26 26 / 0.15) 0%, rgb(26 26 26 / 0) 70%);
+}
+
 .hero__title {
   font-weight: 900; line-height: 0.95; letter-spacing: -0.04em;
-  font-size: clamp(2.75rem, 9vw, 6.5rem); margin-bottom: 2rem;
+  font-size: clamp(2.5rem, 6.5vw, 5rem); margin-bottom: 1.75rem;
 }
 .hero__title .dot { color: var(--accent); }
 /* mask-reveal: each line is its own clipped block, inner span slides up.
@@ -120,22 +124,11 @@
 .no-js .hero__inner { visibility: visible; }
 @media (prefers-reduced-motion: reduce) { .hero__inner { visibility: visible !important; } }
 .hero__sub {
-  font-size: clamp(1.05rem, 2.4vw, 1.35rem); color: var(--secondary);
-  max-width: 40rem; line-height: 1.6; margin-bottom: 3rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--secondary);
+  max-width: 32rem; line-height: 1.6; margin-bottom: 2.5rem;
 }
 .hero__sub strong { color: var(--ink); font-weight: 600; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 0.85rem; }
-
-/* Survey caption pinned to the hero baseline */
-.hero__caption { position: absolute; bottom: 0; left: 0; width: 100%; z-index: 10; pointer-events: none; }
-.hero__caption .row {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  padding-bottom: 0.75rem; font-family: var(--font-mono);
-  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--secondary);
-}
-.hero__caption .rule { height: 1px; background: var(--border); margin-bottom: 3rem; }
-.hero__caption .hide-sm { display: none; }
-@media (min-width: 640px) { .hero__caption .hide-sm { display: inline; } .hero__caption .only-sm { display: none; } }
 
 /* ---- Section heading ------------------------------------------------------ */
 .section__head { max-width: 46rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }

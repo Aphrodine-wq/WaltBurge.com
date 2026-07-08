@@ -52,26 +52,20 @@ export function homePage({ workItems = [] }) {
     <main id="top">
       <!-- HERO -->
       <section class="hero" id="hero">
-        <div class="hero__canvas" aria-hidden="true"></div>
-        <div class="hero__inner">
-          <h1 class="hero__title">
-            <span class="reveal-mask"><span>Never miss another</span></span>
-            <span class="reveal-mask"><span>customer<span class="dot">.</span></span></span>
-          </h1>
-          <p class="hero__sub">Custom <strong>software</strong> for local business. Owned by you, not rented.</p>
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="/#contact" data-cursor="hover">Book a free call</a>
-            <a class="btn btn--ghost" href="/#work" data-cursor="hover">See the work</a>
-          </div>
-        </div>
-        <div class="hero__caption">
-          <div class="wrap">
-            <div class="row">
-              <span>34.3665&deg; N &middot; 89.5192&deg; W</span>
-              <span class="hide-sm">Oxford, Mississippi &middot; Elev 500 ft</span>
-              <span class="only-sm">Oxford, MS</span>
+        <div class="hero__grid wrap">
+          <div class="hero__inner">
+            <h1 class="hero__title">
+              <span class="reveal-mask"><span>Never miss another</span></span>
+              <span class="reveal-mask"><span>customer<span class="dot">.</span></span></span>
+            </h1>
+            <p class="hero__sub">Custom <strong>software</strong> for local business. Owned by you, not rented.</p>
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="/#contact" data-cursor="hover">Book a free call</a>
+              <a class="btn btn--ghost" href="/#work" data-cursor="hover">See the work</a>
             </div>
-            <div class="rule"></div>
+          </div>
+          <div class="hero__object">
+            <div class="hero__canvas" aria-hidden="true"></div>
           </div>
         </div>
       </section>

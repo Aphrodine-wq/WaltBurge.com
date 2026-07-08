@@ -27,10 +27,10 @@ ready(async () => {
   const host = document.querySelector('.hero__canvas');
   if (host && hasWebGL()) {
     try {
-      const { initHeroTerrain } = await import('./three-hero.js');
-      initHeroTerrain(host);
+      const { initHero } = await import('./three-hero.js');
+      initHero(host);
     } catch (err) {
-      console.warn('[hero] terrain failed to init:', err);
+      console.warn('[hero] 3D object failed to init:', err);
     }
   }
 });
