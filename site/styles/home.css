@@ -1,0 +1,50 @@
+/* ============================================================================
+   Home-specific components — specialties grid, steps, work grid, proof stats.
+   ========================================================================== */
+
+/* 4-up specialties on wide screens */
+@media (min-width: 1000px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* Steps */
+.step { padding-top: 1.25rem; border-top: 1px solid var(--border); }
+.step__n { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--accent); }
+.step__t { font-size: 1.35rem; margin: 0.75rem 0 0.5rem; }
+.step__b { color: var(--secondary); }
+
+/* Selected work */
+.workgrid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .workgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .workgrid { grid-template-columns: repeat(3, 1fr); } }
+
+.workcard {
+  display: flex; flex-direction: column; background: var(--surface);
+  border: 1px solid var(--border); overflow: hidden;
+  transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+.workcard:hover { border-color: var(--accent); transform: translateY(-3px); }
+.workcard__media { aspect-ratio: 16 / 10; background: var(--muted); overflow: hidden; }
+.workcard__img { width: 100%; height: 100%; object-fit: cover; }
+.workcard__mono {
+  width: 100%; height: 100%; display: grid; place-items: center;
+  font-weight: 900; font-size: 3.5rem; color: rgb(var(--accent-color) / 0.22);
+  background:
+    linear-gradient(to right, rgb(var(--border-color)) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(to bottom, rgb(var(--border-color)) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--surface);
+}
+.workcard__body { padding: 1.35rem 1.4rem 1.6rem; }
+.workcard__meta { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.16em; color: var(--faint); text-transform: uppercase; }
+.workcard__title { font-size: 1.3rem; margin: 0.5rem 0 0.5rem; }
+.workcard__summary { color: var(--secondary); font-size: 0.92rem; line-height: 1.5; }
+.workcard__tags { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.workcard__tags span {
+  font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--secondary);
+  border: 1px solid var(--border); padding: 0.2rem 0.5rem;
+}
+
+/* Proof stats */
+.proofgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.proof { background: var(--base); padding: 1.5rem 1.4rem; }
+.proof__n { font-size: 2rem; font-weight: 900; letter-spacing: -0.03em; color: var(--ink); }
+.proof__l { color: var(--secondary); font-size: 0.85rem; margin-top: 0.35rem; line-height: 1.4; }

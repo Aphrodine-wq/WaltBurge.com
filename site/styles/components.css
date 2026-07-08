@@ -1,0 +1,171 @@
+/* ============================================================================
+   Components — nav, buttons, hero, sections, cards, footer, reveal.
+   ========================================================================== */
+
+/* ---- Custom cursor -------------------------------------------------------- */
+.cursor-dot, .cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  border-radius: 50%; pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.cursor-dot { width: 6px; height: 6px; background: var(--accent); }
+.cursor-ring {
+  width: 30px; height: 30px; border: 1px solid rgb(var(--accent-color) / 0.5);
+  transition: width 0.2s var(--ease-out), height 0.2s var(--ease-out),
+              background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+.cursor-ring.is-hover { width: 46px; height: 46px; background: rgb(var(--accent-color) / 0.08); border-color: var(--accent); }
+@media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+
+/* ---- Scroll progress ------------------------------------------------------ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+  transform: scaleX(0); transform-origin: 0 50%;
+  background: var(--accent); z-index: 100;
+}
+
+/* ---- Nav ------------------------------------------------------------------ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem var(--gutter);
+  transition: background-color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), backdrop-filter 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled {
+  background: rgb(var(--bg-primary) / 0.82);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom-color: rgb(var(--border-color) / 0.6);
+}
+.nav__brand { display: flex; align-items: baseline; gap: 0.5rem; font-weight: 800; letter-spacing: -0.02em; font-size: 1.05rem; }
+.nav__brand .dot { color: var(--accent); }
+.nav__links { display: none; align-items: center; gap: 1.75rem; }
+.nav__links a {
+  position: relative; font-size: 0.9rem; font-weight: 500; color: var(--secondary);
+  transition: color 0.2s var(--ease-out);
+}
+.nav__links a::after {
+  content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 0;
+  background: var(--accent); transition: width 0.25s var(--ease-out);
+}
+.nav__links a:hover { color: var(--ink); }
+.nav__links a:hover::after { width: 100%; }
+.nav__cta { display: none; }
+@media (min-width: 900px) {
+  .nav__links { display: flex; }
+  .nav__cta { display: inline-flex; }
+}
+
+/* ---- Buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.95rem 1.85rem; font-size: 0.86rem; font-weight: 600;
+  letter-spacing: 0.02em; border: 1px solid transparent;
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out),
+              border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--accent); color: #fff; }
+.btn--primary:hover { background: var(--accent-2); }
+.btn--ghost { background: var(--surface); color: var(--ink); border-color: var(--border); }
+.btn--ghost:hover { border-color: var(--accent); }
+.btn--sm { padding: 0.6rem 1.15rem; font-size: 0.8rem; }
+
+/* ---- Hero ----------------------------------------------------------------- */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start; padding-top: 7rem; overflow: hidden;
+  background: var(--base);
+}
+@media (min-width: 768px) { .hero { justify-content: center; padding-top: 0; } }
+
+/* Three.js terrain canvas — lower two-thirds, behind the copy */
+.hero__canvas {
+  position: absolute; inset-inline: 0; bottom: 0; height: 68%;
+  pointer-events: none; z-index: 0;
+}
+.hero__canvas canvas { width: 100% !important; height: 100% !important; }
+
+.hero__inner {
+  position: relative; z-index: 10; width: 100%; max-width: 64rem;
+  margin-inline: auto; padding-inline: var(--gutter);
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+}
+/* Soft cream scrim so the copy stays legible where it overlaps the terrain */
+.hero__inner::before {
+  content: ''; position: absolute; z-index: -1; inset: -3rem -2rem -4rem;
+  pointer-events: none;
+  background: radial-gradient(115% 75% at 22% 42%,
+    rgb(var(--bg-primary) / 0.92) 0%,
+    rgb(var(--bg-primary) / 0.72) 42%,
+    rgb(var(--bg-primary) / 0) 72%);
+}
+.hero__title {
+  font-weight: 900; line-height: 0.95; letter-spacing: -0.04em;
+  font-size: clamp(2.75rem, 9vw, 6.5rem); margin-bottom: 2rem;
+}
+.hero__title .dot { color: var(--accent); }
+/* mask-reveal: each line is its own clipped block, inner span slides up.
+   The hidden start is set by GSAP (fromTo, immediateRender) — never by a CSS
+   percentage transform, which pollutes GSAP's cached `y` and strands the line
+   at 115%. Pre-reveal we hide the hero copy (visibility, so layout is stable)
+   and re-show it the instant GSAP is wired; no-js / reduced-motion keep it
+   visible so nothing is ever stuck hidden. */
+.reveal-mask { display: block; overflow: hidden; padding-bottom: 0.12em; }
+.reveal-mask > span { display: block; }
+.js .hero__inner { visibility: hidden; }
+.js.gsap-ready .hero__inner,
+.no-js .hero__inner { visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .hero__inner { visibility: visible !important; } }
+.hero__sub {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem); color: var(--secondary);
+  max-width: 40rem; line-height: 1.6; margin-bottom: 3rem;
+}
+.hero__sub strong { color: var(--ink); font-weight: 600; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+
+/* Survey caption pinned to the hero baseline */
+.hero__caption { position: absolute; bottom: 0; left: 0; width: 100%; z-index: 10; pointer-events: none; }
+.hero__caption .row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  padding-bottom: 0.75rem; font-family: var(--font-mono);
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--secondary);
+}
+.hero__caption .rule { height: 1px; background: var(--border); margin-bottom: 3rem; }
+.hero__caption .hide-sm { display: none; }
+@media (min-width: 640px) { .hero__caption .hide-sm { display: inline; } .hero__caption .only-sm { display: none; } }
+
+/* ---- Section heading ------------------------------------------------------ */
+.section__head { max-width: 46rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.section__title { font-size: clamp(1.9rem, 4.5vw, 3rem); letter-spacing: -0.03em; margin-top: 0.9rem; }
+.section__lead { color: var(--secondary); font-size: 1.1rem; margin-top: 1.1rem; max-width: 40rem; }
+
+/* ---- Cards / grid --------------------------------------------------------- */
+.grid { display: grid; gap: 1.5rem; }
+@media (min-width: 640px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  position: relative; background: var(--surface); border: 1px solid var(--border);
+  padding: 1.75rem; transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card__kicker { font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); }
+.card__title { font-size: 1.2rem; margin: 0.6rem 0 0.5rem; }
+.card__body { color: var(--secondary); font-size: 0.95rem; }
+
+/* ---- Footer --------------------------------------------------------------- */
+.footer { border-top: 1px solid var(--border); padding-block: 3.5rem; background: var(--muted); }
+.footer__grid { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-start; }
+.footer a { color: var(--secondary); font-size: 0.9rem; transition: color 0.2s; }
+.footer a:hover { color: var(--accent); }
+.footer__meta { font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--faint); margin-top: 2.5rem; }
+
+/* ---- Reveal-on-scroll (GSAP sets .is-in; CSS is the fallback) ------------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out); }
+.reveal.is-in { opacity: 1; transform: none; }
+/* If JS never runs, don't leave content invisible */
+.no-js .reveal { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
