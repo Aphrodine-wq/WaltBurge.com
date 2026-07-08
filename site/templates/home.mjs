@@ -1,35 +1,55 @@
-// home.mjs — the homepage. Returns a page descriptor { title, description,
-// path, jsonLd, main } that build.mjs feeds to layout(). Services-first funnel:
-// hook → what I build → how it works → proof → cost of nothing → book.
+// home.mjs — the homepage. Motion-forward, low-text: hero object → marquee →
+// work (the proof) → a kinetic statement → an interactive service list →
+// animated numbers → book. Copy is deliberately terse; the feeling comes from
+// movement (see site/js/scroll.js).
 import { nav, footer, esc } from './layout.mjs';
 
-const SPECIALTIES = [
-  { k: 'Websites', t: 'Sites that actually sell', b: 'Fast, modern websites built on real engineering — not a page builder you rent forever. One flat price, yours to keep.' },
-  { k: 'AI receptionist', t: 'Never miss a call', b: 'A 24/7 AI front desk that answers, books, and follows up while you’re on the job. Every missed call is a missed customer.' },
-  { k: 'Automation', t: 'Kill the busywork', b: 'Lead follow-up, intake, scheduling, invoicing — wired together so the repetitive parts run themselves.' },
-  { k: 'Custom AI', t: 'Tools you own', b: 'Custom models and internal tools built for your business and installed on your terms. Bought, not subscribed.' },
+// What I do — one word, one line. The list is oversized + interactive, not a card grid.
+const DO = [
+  { n: '01', name: 'Websites', desc: 'Fast, modern, yours to keep.' },
+  { n: '02', name: 'AI receptionist', desc: 'Answers every call, 24/7.' },
+  { n: '03', name: 'Automation', desc: 'Kills the busywork for good.' },
+  { n: '04', name: 'Custom AI', desc: 'Built for you. Owned by you.' },
 ];
 
-const STEPS = [
-  { n: '01', t: 'Free call', b: 'We talk through where you’re losing time and leads. No pitch deck, no pressure — just a plan.' },
-  { n: '02', t: 'Flat quote', b: 'One clear price for the whole build. You know the number before anything starts.' },
-  { n: '03', t: 'Built to own', b: 'I build it, install it, and hand you the keys. It’s your asset — no monthly rent on your own tools.' },
+// Marquee tokens — repeated twice in markup for a seamless loop.
+const TICKER = ['Websites', 'AI receptionists', 'Automation', 'Custom AI', 'Owned, not rented'];
+
+const STATS = [
+  { num: 7, suffix: ' mo', label: 'self-taught to a shipped LLM' },
+  { num: 11, suffix: '', label: 'systems shipped, start to finish' },
+  { num: 100, suffix: '%', label: 'of what I build, you own' },
+  { text: '24/7', label: 'AI that answers when you can’t' },
 ];
 
-function workCard(w) {
+function workCard(w, i) {
   const tags = (w.tags || []).slice(0, 2).map((t) => `<span>${esc(t)}</span>`).join('');
   const media = w.imageUrl
-    ? `<img class="workcard__img" src="${esc(w.imageUrl)}" alt="${esc(w.title)}" loading="lazy" />`
+    ? `<img class="workcard__img" data-parallax src="${esc(w.imageUrl)}" alt="${esc(w.title)}" loading="lazy" />`
     : `<div class="workcard__mono" aria-hidden="true">${esc((w.title || '?').slice(0, 1))}</div>`;
-  return `        <a class="workcard reveal" href="/work/${esc(w.slug)}" data-cursor="hover">
-          <div class="workcard__media">${media}</div>
+  return `        <a class="workcard reveal" href="/work/${esc(w.slug)}" data-cursor="hover" style="--i:${i}">
+          <div class="workcard__media">${media}<span class="workcard__go">View &rarr;</span></div>
           <div class="workcard__body">
             <div class="workcard__meta"><span class="card__kicker">${esc(w.category || 'Work')}</span><span>${esc(w.year || '')}</span></div>
             <h3 class="workcard__title">${esc(w.title)}</h3>
-            <p class="workcard__summary">${esc(w.summary || w.description || '')}</p>
             <div class="workcard__tags">${tags}</div>
           </div>
         </a>`;
+}
+
+function tickerRun() {
+  return TICKER.map((t) => `<span class="mq__item">${esc(t)}</span><span class="mq__dot" aria-hidden="true">&bull;</span>`).join('');
+}
+
+function statTile(s) {
+  // Render the FINAL value so it's correct with JS off; count-up (scroll.js)
+  // resets to 0 on enter and animates up as progressive enhancement.
+  const val = s.money
+    ? `<span class="num" data-count="${s.num}" data-prefix="$">$${s.num}</span>`
+    : s.text
+      ? `<span class="num">${esc(s.text)}</span>`
+      : `<span class="num" data-count="${s.num}" data-suffix="${esc(s.suffix || '')}">${s.num}${esc(s.suffix || '')}</span>`;
+  return `          <div class="stat reveal"><span class="stat__num">${val}</span><span class="stat__label">${esc(s.label)}</span></div>`;
 }
 
 export function homePage({ workItems = [] }) {
@@ -60,61 +80,31 @@ export function homePage({ workItems = [] }) {
             </h1>
             <p class="hero__sub">Custom <strong>software</strong> for local business. Owned by you, not rented.</p>
             <div class="hero__cta">
-              <a class="btn btn--primary" href="/#contact" data-cursor="hover">Book a free call</a>
-              <a class="btn btn--ghost" href="/#work" data-cursor="hover">See the work</a>
+              <a class="btn btn--primary" data-magnetic href="/#contact" data-cursor="hover">Book a free call</a>
+              <a class="btn btn--ghost" data-magnetic href="/#work" data-cursor="hover">See the work</a>
             </div>
           </div>
           <div class="hero__object">
             <div class="hero__canvas" aria-hidden="true"></div>
           </div>
         </div>
+        <div class="hero__scroll" aria-hidden="true"><span>Scroll</span></div>
       </section>
 
-      <!-- WHAT I BUILD -->
-      <section class="section" id="services">
-        <div class="wrap">
-          <div class="section__head reveal">
-            <span class="eyebrow">What I build</span>
-            <h2 class="section__title">Four ways to stop leaving money on the table.</h2>
-            <p class="section__lead">Every business loses leads somewhere — a call that rang out, a form nobody answered, an afternoon spent on data entry. I build the piece that fixes it.</p>
-          </div>
-          <div class="grid grid--2 grid--4" data-stagger>
-            ${SPECIALTIES.map((s) => `<article class="card">
-              <div class="card__kicker">${esc(s.k)}</div>
-              <h3 class="card__title">${esc(s.t)}</h3>
-              <p class="card__body">${esc(s.b)}</p>
-            </article>`).join('\n            ')}
-          </div>
-          <div class="reveal" style="margin-top:2rem">
-            <a class="btn btn--ghost" href="/services" data-cursor="hover">See the full service menu</a>
-          </div>
+      <!-- MARQUEE -->
+      <section class="mq" aria-hidden="true">
+        <div class="mq__track" data-marquee>
+          <div class="mq__run">${tickerRun()}</div>
+          <div class="mq__run">${tickerRun()}</div>
         </div>
       </section>
 
-      <!-- HOW IT WORKS -->
-      <section class="section section--muted" id="how">
+      <!-- WORK — the proof -->
+      <section class="section work" id="work">
         <div class="wrap">
-          <div class="section__head reveal">
-            <span class="eyebrow">How it works</span>
-            <h2 class="section__title">Three steps. No jargon, no lock-in.</h2>
-          </div>
-          <div class="grid grid--3" data-stagger>
-            ${STEPS.map((s) => `<div class="step">
-              <div class="step__n">${esc(s.n)}</div>
-              <h3 class="step__t">${esc(s.t)}</h3>
-              <p class="step__b">${esc(s.b)}</p>
-            </div>`).join('\n            ')}
-          </div>
-        </div>
-      </section>
-
-      <!-- SELECTED WORK -->
-      <section class="section" id="work">
-        <div class="wrap">
-          <div class="section__head reveal">
-            <span class="eyebrow">Selected work</span>
-            <h2 class="section__title">Shipped, live, and earning.</h2>
-            <p class="section__lead">Real builds for real businesses — from a psychiatric clinic’s booking site to a two-sided construction marketplace.</p>
+          <div class="work__head">
+            <span class="eyebrow reveal">Selected work</span>
+            <h2 class="big reveal-lines"><span>Shipped, live,</span><span>and earning<span class="dot">.</span></span></h2>
           </div>
           <div class="workgrid">
 ${featured.map(workCard).join('\n')}
@@ -122,50 +112,51 @@ ${featured.map(workCard).join('\n')}
         </div>
       </section>
 
-      <!-- COST OF DOING NOTHING -->
-      <section class="section section--muted" id="cost">
-        <div class="wrap-narrow reveal" style="text-align:center">
-          <span class="eyebrow">The cost of doing nothing</span>
-          <h2 class="section__title" style="margin-inline:auto">A missed call is a customer who called your competitor next.</h2>
-          <p class="section__lead" style="margin-inline:auto">Most local businesses miss 1 in 4 calls. At a few hundred dollars a job, that’s real money walking out the door every week — quietly, without a single angry email to warn you.</p>
-          <div class="hero__cta" style="justify-content:center;margin-top:2rem">
-            <a class="btn btn--primary" href="/#contact" data-cursor="hover">Get the free call</a>
-            <a class="btn btn--ghost" href="/audit" data-cursor="hover">Free website audit</a>
-          </div>
+      <!-- STATEMENT -->
+      <section class="statement">
+        <div class="wrap">
+          <p class="statement__line reveal-lines">
+            <span>Every missed call is a</span>
+            <span>customer who called</span>
+            <span>someone else<span class="dot">.</span></span>
+          </p>
+          <a class="statement__cta" data-magnetic href="/#contact" data-cursor="hover">Fix that &rarr;</a>
         </div>
       </section>
 
-      <!-- WHY -->
-      <section class="section" id="why">
+      <!-- WHAT I DO — interactive, oversized, low-text -->
+      <section class="section do" id="do">
         <div class="wrap">
-          <div class="grid grid--2" style="align-items:center;gap:3rem">
-            <div class="reveal">
-              <span class="eyebrow">Why Walt Builds</span>
-              <h2 class="section__title">Built by someone who ran the job site.</h2>
-              <p class="section__lead">I came up in construction before I came up in code — so I build for how a working business actually runs, not how a demo looks. Everything I ship, you own. No rented platforms, no surprise price hikes on your own tools.</p>
-              <div style="margin-top:1.75rem">
-                <a class="btn btn--ghost" href="/resume" data-cursor="hover">See the r&eacute;sum&eacute;</a>
-              </div>
-            </div>
-            <div class="reveal proofgrid" data-reveal-delay="0.1">
-              <div class="proof"><div class="proof__n">7 mo</div><div class="proof__l">self-taught to shipping a custom LLM</div></div>
-              <div class="proof"><div class="proof__n">1 price</div><div class="proof__l">flat, up front, no deposit games</div></div>
-              <div class="proof"><div class="proof__n">100%</div><div class="proof__l">of what I build, you own</div></div>
-              <div class="proof"><div class="proof__n">24/7</div><div class="proof__l">AI that answers when you can’t</div></div>
-            </div>
+          <span class="eyebrow reveal">What I do</span>
+          <ul class="dolist">
+${DO.map((d) => `            <li class="doitem" data-cursor="hover">
+              <span class="doitem__idx">${d.n}</span>
+              <span class="doitem__name">${esc(d.name)}</span>
+              <span class="doitem__desc">${esc(d.desc)}</span>
+              <span class="doitem__arrow" aria-hidden="true">&rarr;</span>
+            </li>`).join('\n')}
+          </ul>
+          <a class="do__more reveal" href="/services" data-cursor="hover">Full menu &rarr;</a>
+        </div>
+      </section>
+
+      <!-- NUMBERS -->
+      <section class="section section--muted stats" id="why">
+        <div class="wrap">
+          <div class="statgrid" data-stagger>
+${STATS.map(statTile).join('\n')}
           </div>
         </div>
       </section>
 
       <!-- CONTACT -->
-      <section class="section section--muted" id="contact">
-        <div class="wrap-narrow reveal" style="text-align:center">
-          <span class="eyebrow">Book a free call</span>
-          <h2 class="section__title" style="margin-inline:auto">Tell me where you’re losing leads. I’ll tell you what I’d build.</h2>
-          <p class="section__lead" style="margin-inline:auto">First call and estimate are free. No pressure, no jargon — just a straight answer on whether I can help.</p>
-          <div class="hero__cta" style="justify-content:center;margin-top:2rem">
-            <a class="btn btn--primary" href="mailto:jamesburge.mcm@gmail.com" data-cursor="hover">Email me</a>
-            <a class="btn btn--ghost" href="tel:+16622925533" data-cursor="hover">(662) 292-5533</a>
+      <section class="section contact" id="contact">
+        <div class="wrap">
+          <h2 class="big reveal-lines"><span>Let’s build</span><span>something<span class="dot">.</span></span></h2>
+          <p class="contact__sub reveal">First call and estimate are free.</p>
+          <div class="contact__cta">
+            <a class="btn btn--primary" data-magnetic href="mailto:jamesburge.mcm@gmail.com" data-cursor="hover">Email me</a>
+            <a class="btn btn--ghost" data-magnetic href="tel:+16622925533" data-cursor="hover">(662) 292-5533</a>
           </div>
         </div>
       </section>
