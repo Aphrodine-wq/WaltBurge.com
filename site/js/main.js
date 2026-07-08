@@ -25,12 +25,12 @@ ready(async () => {
 
   // Three.js hero — only where a host exists and WebGL is available.
   const host = document.querySelector('.hero__canvas');
-  if (host && hasWebGL()) {
+  if (host) {
     try {
-      const { initHero } = await import('./three-hero.js');
+      const { initHero } = await import('./hero-signal.js');
       initHero(host);
     } catch (err) {
-      console.warn('[hero] 3D object failed to init:', err);
+      console.warn('[hero] signal canvas failed to init:', err);
     }
   }
 });
@@ -140,11 +140,4 @@ function initAuditForm() {
       setStatus('Could not send — email jamesburge.mcm@gmail.com', 'err');
     }
   });
-}
-
-function hasWebGL() {
-  try {
-    const c = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
-  } catch { return false; }
 }
