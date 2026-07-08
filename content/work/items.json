@@ -146,6 +146,36 @@
     "solution": "A SwiftUI desktop app: multi-model AI with 100+ local development tools, 58 MCP presets, and six agent modes — the agent works where the code lives instead of the other way around."
   },
   {
+    "id": "prime-proxy-co",
+    "slug": "prime-proxy-co",
+    "title": "Prime Proxy Co",
+    "kind": "product",
+    "category": "Web",
+    "summary": "Print-to-order storefront for proxy & playtest cards — decks, boxes, tokens, and a live custom-card designer.",
+    "description": "A print-to-order trading-card storefront for Magic, Pokémon, and Yu-Gi-Oh players — studio-grade proxies, ready-to-play decks, pre-packed boxes, and tokens.",
+    "fullDescription": "A print-to-order trading-card storefront for Magic, Pokémon, and Yu-Gi-Oh players — studio-grade proxies, ready-to-play decks, pre-packed boxes, tokens, and wall art, in matte or holo foil with bulk pricing built in. Shoppers paste a decklist to fill a whole order in one pass, or design a custom card from a photo or AI-generated art live in the browser. A Deck-of-the-Month club keeps players coming back. Next.js storefront with a react-three-fiber hero, Stripe checkout, and a Neon-backed catalog.",
+    "techStack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "react-three-fiber",
+      "Stripe",
+      "Neon"
+    ],
+    "tags": [
+      "E-commerce",
+      "3D"
+    ],
+    "imageUrl": "/work/prime-proxy-co.jpg",
+    "link": "https://www.primeproxyco.com",
+    "status": "Live",
+    "year": "2026",
+    "featured": true,
+    "seoTitle": "Prime Proxy Co — Print-to-Order Proxy & Playtest Cards",
+    "seoDescription": "A print-to-order storefront for proxy and playtest trading cards — decks, boxes, tokens, and a live custom-card designer. Built by Walt Burge with Next.js, react-three-fiber, and Stripe."
+  },
+  {
     "id": "constructionai",
     "slug": "constructionai",
     "title": "ConstructionAI",
