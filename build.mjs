@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync, rea
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { layout } from './site/templates/layout.mjs';
+import { layout, nav, footer } from './site/templates/layout.mjs';
 import { homePage } from './site/templates/home.mjs';
 import { blogIndexPage } from './site/templates/blog-index.mjs';
 import { blogPostPage } from './site/templates/blog-post.mjs';
@@ -118,21 +118,26 @@ const { posts, sections } = loadPosts(ROOT);
 
 // ── 6. render routes ─────────────────────────────────────────────────────────
 const built = [];
+const lastmodByRoute = new Map(); // route → YYYY-MM-DD; sitemap falls back to build date
 built.push(writePage(homePage({ workItems })));
 
 // Blog: index + one page per post
 built.push(writePage(blogIndexPage({ posts, sections })));
 for (const post of posts) {
   const { prev, next } = adjacent(posts, post.id);
-  built.push(writePage(blogPostPage({ post, prev, next, related: related(posts, post, 3) })));
+  const route = writePage(blogPostPage({ post, prev, next, related: related(posts, post, 3) }));
+  built.push(route);
+  if (post.date) lastmodByRoute.set(route, post.updated || post.date);
 }
 
-// Work: index (non-draft only) + case-study pages for non-draft items AND any
-// flagship item the résumé links to (so those links always resolve).
+// Work: index (non-draft only) + case-study pages for non-draft items. Draft
+// items the résumé links to are still built (so links resolve) but noindexed
+// and kept out of the sitemap.
 built.push(writePage(workIndexPage({ workItems })));
 const flagship = new Set(flagshipIds);
-for (const w of workItems.filter((x) => !x.draft || flagship.has(x.id))) {
-  built.push(writePage(workDetailPage(w)));
+for (const w of workItems) {
+  if (!w.draft) built.push(writePage(workDetailPage(w)));
+  else if (flagship.has(w.id)) writePage({ ...workDetailPage(w), robots: 'noindex, follow' });
 }
 
 // Résumé
@@ -158,14 +163,35 @@ for (const page of localPages) {
 for (const vertical of VERTICALS) built.push(writePage(practicePage({ vertical, getSystem: shop.getSystem })));
 built.push(writePage(auditPage()));
 
-// ── 7. sitemap (accurate — generated from exactly what we built) ─────────────
+// ── 7. custom 404 (Vercel serves 404.html automatically for static sites) ────
+writeFileSync(
+  join(OUT, '404.html'),
+  layout({
+    title: 'Page Not Found | Walt Burge',
+    description: "This page doesn't exist.",
+    path: '/404',
+    robots: 'noindex, follow',
+    main: `${nav()}
+    <main class="section" style="padding-top:11rem;min-height:60vh">
+      <div class="wrap">
+        <span class="eyebrow">404</span>
+        <h1 class="section__title">This page doesn't exist<span class="dot">.</span></h1>
+        <p class="section__lead" style="margin-top:1rem">The link is broken or the page moved.</p>
+        <p style="margin-top:2rem"><a class="btn btn--primary" href="/">Back to the homepage</a></p>
+      </div>
+    </main>
+${footer()}`,
+  }),
+);
+
+// ── 8. sitemap (accurate — generated from exactly what we built) ─────────────
 const ORIGIN = 'https://waltburge.com';
 const today = new Date().toISOString().slice(0, 10);
 const sitemap =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +
   `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   built
-    .map((route) => `  <url>\n    <loc>${ORIGIN}${route === '/' ? '/' : route}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`)
+    .map((route) => `  <url>\n    <loc>${ORIGIN}${route === '/' ? '/' : route}</loc>\n    <lastmod>${lastmodByRoute.get(route) || today}</lastmod>\n  </url>`)
     .join('\n') +
   `\n</urlset>\n`;
 writeFileSync(join(OUT, 'sitemap.xml'), sitemap);

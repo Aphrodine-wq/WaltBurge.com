@@ -88,6 +88,8 @@ export function loadPosts(root) {
         title: asStr(data.title, slug),
         excerpt: asStr(data.excerpt),
         date: asStr(data.date),
+        updated: asStr(data.updated),
+        ogImage: asStr(data.ogImage),
         readTime: asStr(data.readTime) || estimateReadTime(body),
         category: asCategory(data.category),
         tags: Array.isArray(data.tags) ? data.tags : [],

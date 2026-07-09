@@ -58,7 +58,9 @@ export function homePage({ workItems = [] }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
+    '@id': 'https://waltburge.com/#business',
     name: 'Walt Builds',
+    parentOrganization: { '@id': 'https://waltburge.com/#org' },
     founder: { '@type': 'Person', name: 'Walt Burge', url: 'https://waltburge.com' },
     description: 'Websites, automations, and custom AI for local business in Oxford and North Mississippi.',
     url: 'https://waltburge.com/',

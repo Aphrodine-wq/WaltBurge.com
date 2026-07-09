@@ -10,6 +10,30 @@ export function esc(s = '') {
     .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// Site-wide identity nodes, on every page. Organization is the brand
+// ("Walt Builds"), founded by the person ("Walt Burge") — templates link to
+// these via @id instead of redefining the entity.
+const SITE_JSONLD = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${ORIGIN}/#org`,
+    name: 'Walt Builds',
+    url: `${ORIGIN}/`,
+    logo: `${ORIGIN}/favicon.png`,
+    founder: { '@type': 'Person', name: 'Walt Burge', jobTitle: 'AI Developer', url: `${ORIGIN}/` },
+    sameAs: ['https://github.com/Aphrodine-wq', 'https://www.stratasoftwaregroup.com'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${ORIGIN}/#website`,
+    name: 'Walt Builds',
+    url: `${ORIGIN}/`,
+    publisher: { '@id': `${ORIGIN}/#org` },
+  },
+];
+
 /**
  * @param {object} o
  * @param {string} o.title            full <title>
@@ -17,6 +41,8 @@ export function esc(s = '') {
  * @param {string} o.path             route path, e.g. "/blog" ("/" for home)
  * @param {string} [o.ogTitle]
  * @param {string} [o.ogDescription]
+ * @param {string} [o.ogImage]        absolute URL for og/twitter image (defaults to the global card)
+ * @param {string} [o.robots]         robots directive (defaults to "index, follow")
  * @param {object|object[]} [o.jsonLd] JSON-LD block(s)
  * @param {string} [o.bodyClass]
  * @param {string} o.main             inner HTML for <body> (nav/main/footer)
@@ -25,7 +51,9 @@ export function layout(o) {
   const url = `${ORIGIN}${o.path === '/' ? '/' : o.path}`;
   const ogTitle = o.ogTitle || o.title;
   const ogDesc = o.ogDescription || o.description;
-  const ld = o.jsonLd ? (Array.isArray(o.jsonLd) ? o.jsonLd : [o.jsonLd]) : [];
+  const ogImage = o.ogImage || `${ORIGIN}/og-image.png`;
+  const robots = o.robots || 'index, follow';
+  const ld = [...SITE_JSONLD, ...(o.jsonLd ? (Array.isArray(o.jsonLd) ? o.jsonLd : [o.jsonLd]) : [])];
   const ldBlocks = ld
     .map((obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`)
     .join('\n    ');
@@ -40,16 +68,17 @@ export function layout(o) {
     <meta name="description" content="${esc(o.description)}" />
     <meta name="author" content="Walt Burge" />
     <meta name="theme-color" content="#F8F5EE" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="${robots}" />
     <link rel="canonical" href="${url}" />
 
     <meta property="og:type" content="${o.ogType || 'website'}" />
     <meta property="og:url" content="${url}" />
     <meta property="og:title" content="${esc(ogTitle)}" />
     <meta property="og:description" content="${esc(ogDesc)}" />
-    <meta property="og:image" content="${ORIGIN}/og-image.png" />
+    <meta property="og:image" content="${ogImage}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${esc(ogTitle)}" />
     <meta property="og:site_name" content="Walt Burge" />
     <meta property="og:locale" content="en_US" />
 
@@ -57,7 +86,7 @@ export function layout(o) {
     <meta name="twitter:url" content="${url}" />
     <meta name="twitter:title" content="${esc(ogTitle)}" />
     <meta name="twitter:description" content="${esc(ogDesc)}" />
-    <meta name="twitter:image" content="${ORIGIN}/og-image.png" />
+    <meta name="twitter:image" content="${ogImage}" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

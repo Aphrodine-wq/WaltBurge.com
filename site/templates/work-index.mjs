@@ -44,6 +44,16 @@ ${footer()}`;
       '@type': 'CollectionPage',
       name: 'Selected Work',
       url: 'https://waltburge.com/work',
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: items.length,
+        itemListElement: items.map((w, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: w.title,
+          url: `https://waltburge.com/work/${w.slug}`,
+        })),
+      },
     },
     main,
   };

@@ -77,6 +77,12 @@ ${footer()}`;
       name: 'The Build Log',
       url: 'https://waltburge.com/blog',
       author: { '@type': 'Person', name: 'Walt Burge', url: 'https://waltburge.com' },
+      blogPost: posts.map((p) => ({
+        '@type': 'BlogPosting',
+        headline: p.title,
+        url: `https://waltburge.com/blog/${p.slug}`,
+        ...(p.date ? { datePublished: p.date } : {}),
+      })),
     },
     main,
   };

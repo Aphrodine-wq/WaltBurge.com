@@ -31,7 +31,22 @@ ${footer()}`;
     description: 'Full Walt Builds service menu: websites, automations, integrations, and custom AI systems, priced and built to own. Healthcare, law, construction, and more — Oxford, MS.',
     path: '/services',
     ogTitle: 'Service Menu — Walt Burge',
-    jsonLd: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Service Menu', url: `${ORIGIN}/services` },
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Service Menu',
+      url: `${ORIGIN}/services`,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: menus.length,
+        itemListElement: menus.map((m, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: `${m.industry} Software & AI Services`,
+          url: `${ORIGIN}/services/${m.slug}`,
+        })),
+      },
+    },
     main,
   };
 }

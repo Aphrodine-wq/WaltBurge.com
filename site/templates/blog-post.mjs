@@ -75,6 +75,8 @@ ${relatedSection}
     </main>
 ${footer()}`;
 
+  const postImage = post.ogImage ? `${ORIGIN}${post.ogImage}` : `${ORIGIN}/og-image.png`;
+
   return {
     title: `${post.title}${SUFFIX}`,
     description: post.excerpt,
@@ -82,6 +84,7 @@ ${footer()}`;
     ogType: 'article',
     ogTitle: post.title,
     ogDescription: post.excerpt,
+    ogImage: postImage,
     jsonLd: [
       {
         '@context': 'https://schema.org',
@@ -90,12 +93,12 @@ ${footer()}`;
         description: post.excerpt,
         url,
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-        ...(post.date ? { datePublished: post.date, dateModified: post.date } : {}),
+        ...(post.date ? { datePublished: post.date, dateModified: post.updated || post.date } : {}),
         articleSection: post.category,
         keywords: post.tags.join(', '),
         author: { '@type': 'Person', name: post.author, url: ORIGIN },
         publisher: { '@type': 'Person', name: 'Walt Burge', url: ORIGIN },
-        image: `${ORIGIN}/og-image.png`,
+        image: postImage,
       },
       {
         '@context': 'https://schema.org',

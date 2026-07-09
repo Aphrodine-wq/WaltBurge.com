@@ -59,7 +59,25 @@ ${footer()}`;
     description: 'Productized AI systems built and installed for your business: AI receptionists, intake, estimating, document drafting, and more. Walt Builds, Oxford MS.',
     path: '/shop',
     ogTitle: 'Shop — AI Systems You Can Buy',
-    jsonLd: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'AI Systems', url: `${ORIGIN}/shop` },
+    jsonLd: (() => {
+      const all = [...engines, ...toolsByCategory.flatMap((t) => t.items), ...digital];
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'AI Systems',
+        url: `${ORIGIN}/shop`,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: all.length,
+          itemListElement: all.map((s, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: s.name,
+            url: `${ORIGIN}/shop/${s.slug}`,
+          })),
+        },
+      };
+    })(),
     main,
   };
 }

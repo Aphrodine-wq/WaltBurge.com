@@ -97,15 +97,31 @@ ${footer()}`;
     description: w.seoDescription || w.summary || w.description || '',
     path: route,
     ogTitle: w.title,
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://waltburge.com/' },
-        { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://waltburge.com/work' },
-        { '@type': 'ListItem', position: 3, name: w.title, item: `https://waltburge.com${route}` },
-      ],
-    },
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        '@id': `https://waltburge.com${route}#work`,
+        name: w.title,
+        headline: w.seoTitle || w.title,
+        description: w.seoDescription || w.summary || w.description || '',
+        url: `https://waltburge.com${route}`,
+        creator: { '@id': 'https://waltburge.com/#org' },
+        ...(w.year ? { dateCreated: String(w.year) } : {}),
+        ...(Array.isArray(w.techStack) && w.techStack.length ? { keywords: w.techStack.join(', ') } : {}),
+        ...(w.imageUrl ? { image: `https://waltburge.com${w.imageUrl}` } : {}),
+        ...(w.link ? { sameAs: w.link } : {}),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://waltburge.com/' },
+          { '@type': 'ListItem', position: 2, name: 'Work', item: 'https://waltburge.com/work' },
+          { '@type': 'ListItem', position: 3, name: w.title, item: `https://waltburge.com${route}` },
+        ],
+      },
+    ],
     main,
   };
 }
