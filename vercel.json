@@ -3,6 +3,9 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/audit.js": { "maxDuration": 60 }
+  },
   "redirects": [
     { "source": "/contact", "destination": "/#contact", "permanent": false }
   ],

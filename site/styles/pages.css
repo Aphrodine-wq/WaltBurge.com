@@ -227,6 +227,24 @@
 .audit__status { font-size: 0.9rem; min-height: 1.2rem; }
 .audit__status.is-ok { color: #15803d; }
 .audit__status.is-err { color: #b91c1c; }
+.audit__submit:disabled { opacity: 0.6; cursor: wait; }
+
+/* ---- Audit instant results ---- */
+.audit__results { margin-top: 3.5rem; border-top: 1px solid var(--border); padding-top: 2.5rem; }
+.audit__results-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+.audit__scores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 30rem; margin: 1.75rem 0 2.25rem; }
+.scorecard { background: var(--surface); border: 1px solid var(--border); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.scorecard__num { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.025em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1; }
+.scorecard__label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); }
+.audit__gaps { list-style: none; padding: 0; margin: 0 0 2.25rem; display: flex; flex-direction: column; }
+.gap { display: flex; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.gap:first-child { border-top: 1px solid var(--border); }
+.gap__sev { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.25rem 0.5rem; border: 1px solid var(--border); color: var(--secondary); flex-shrink: 0; margin-top: 0.15rem; }
+.gap__sev--high { border-color: var(--accent); color: var(--accent); }
+.gap__title { font-weight: 700; }
+.gap__detail { color: var(--secondary); line-height: 1.6; margin-top: 0.25rem; }
+.audit__cta { background: var(--surface); border: 1px solid var(--border); padding: clamp(1.5rem, 4vw, 2.25rem); display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
+.audit__cta-lead { color: var(--secondary); line-height: 1.65; max-width: 44rem; margin: 0; }
 
 /* ---- Print (résumé → clean PDF) ------------------------------------------- */
 @media print {
