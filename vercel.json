@@ -7,7 +7,9 @@
     "api/audit.js": { "maxDuration": 60 }
   },
   "redirects": [
-    { "source": "/contact", "destination": "/#contact", "permanent": false }
+    { "source": "/blog/:slug*", "destination": "https://waltbuilds.com/notes/:slug*", "permanent": true },
+    { "source": "/", "destination": "https://waltbuilds.com/", "permanent": true },
+    { "source": "/contact", "destination": "https://waltbuilds.com/contact", "permanent": true }
   ],
   "rewrites": [
     { "source": "/m/:slug", "destination": "/api/m/:slug" },
