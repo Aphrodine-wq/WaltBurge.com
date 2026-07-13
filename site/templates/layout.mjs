@@ -22,7 +22,7 @@ const SITE_JSONLD = [
     url: `${ORIGIN}/`,
     logo: `${ORIGIN}/favicon.png`,
     founder: { '@type': 'Person', name: 'Walt Burge', jobTitle: 'AI Developer', url: `${ORIGIN}/` },
-    sameAs: ['https://github.com/Aphrodine-wq', 'https://www.stratasoftwaregroup.com'],
+    sameAs: ['https://github.com/Aphrodine-wq', 'https://www.stratasoftwaregroup.com', 'https://waltbuilds.com'],
   },
   {
     '@context': 'https://schema.org',
@@ -149,6 +149,7 @@ export function footer() {
             <a href="mailto:jamesburge.mcm@gmail.com">Email</a>
             <a href="tel:+16622925533">(662) 292-5533</a>
             <a href="https://github.com/Aphrodine-wq" rel="noopener">GitHub</a>
+            <a href="https://waltbuilds.com" rel="noopener">Walt Builds</a>
           </div>
         </nav>
       </div>
